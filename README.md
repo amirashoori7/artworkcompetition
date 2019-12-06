@@ -2,9 +2,9 @@
 Artwork Competition web application built with django
 
 ## Demo screenshots
-![image]https://github.com/amirashoori7/artworkcompetition/blob/master/demo/demo1.png
-![image]https://github.com/amirashoori7/artworkcompetition/blob/master/demo/demo2.png
-![image]https://github.com/amirashoori7/artworkcompetition/blob/master/demo/demo3.png
+![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo1.png)
+![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo2.png)
+![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo3.png)
 
 ## Getting started
 create python virtual environment
