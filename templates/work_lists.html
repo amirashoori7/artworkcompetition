@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Mathart Project{% endblock %}
+{% block nav-artworks %}<a class="nav-link active" href="{% url 'artwork:work_lists' %}">Artworks <span class="sr-only">(current)</span></a>{% endblock%}
+{% block content %}
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h2>Artwork Lists</h2>
+  </div>
+  <div class="row">
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">School</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Name</th>
+      <th scope="col">Work Title</th>
+      <th scope="col">Email</th>
+      <th scope="col">Age</th>
+      <th scope="col">Grade</th>
+      <th scope="col">WorkFile</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for work in works %}
+   <tr>
+     <th scope="row">{{ work.id }}</th>
+     <td>{{ work.school }}</td>
+     <td>{{ work.surname }}</td>
+     <td>{{ work.firstname }}</td>
+     <td>{{ work.worktitle }}</td>
+     <td>{{ work.email }}</td>
+     <td>{{ work.age }}</td>
+     <td>{{ work.learnergrade }}</td>
+     <td width="150" height="150"><img src='{{ work.workfile }}'></td>
+   </tr>
+   {% endfor %}
+ </tbody>
+</table>
+</main>
+
+{% endblock %}

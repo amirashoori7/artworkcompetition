@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Mathart Project{% endblock %}
+{% block nav-home %}<a class="nav-link active" href="{% url 'artwork:index' %}">Home <span class="sr-only">(current)</span></a>{% endblock%}
+{% block content %}
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h2>Welcome to Mathart Competition</h1>
+    <p class="lead">We have recieved the following amount of works:</p>
+    <ul>
+        <li><strong>Works:</strong>{{ num_works }}</li>
+        <li><strong>Schools:</strong>{{ num_schools }}</li>
+    </ul>
+  </div>
+</main>
+{% endblock %}
