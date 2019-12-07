@@ -5,6 +5,8 @@ Artwork Competition web application built with django
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo1.png)
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo2.png)
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo3.png)
+![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/REST_API.png)
+
 
 ## Getting started
 create python virtual environment
@@ -20,6 +22,7 @@ source bin/activate
 all the required packages are included in the requirements.txt file and you can install all of them at once
 ```bash
 pip install django
+pip install djangorestframework
 pip install pillow
 pip install psycopg2-binary
 pip install python-dateutil
