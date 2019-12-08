@@ -1,22 +1,39 @@
 html,
 body {
   height: 100%;
-}
-
-body {
-
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  font-family: sans-serif !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px white;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 11px;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
 
 .container {
   max-width: 960px;
 }
 
-.lh-condensed { line-height: 1.25; }
+.lh-condensed {
+  line-height: 1.25;
+}
 
 .form-signin {
   width: 100%;
@@ -24,9 +41,11 @@ body {
   padding: 15px;
   margin: auto;
 }
+
 .form-signin .checkbox {
   font-weight: 400;
 }
+
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;
@@ -34,16 +53,160 @@ body {
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+canvas {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+#main-body {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  /* background: #174c66; */
+  border: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#main-frame {
+  position: absolute;
+  width: 80%;
+  height: 90%;
+  left: 10%;
+  top: 5%;
+  border-radius: 33px;
+  box-shadow: 0px 0px 99px -33px rgb(54, 100, 122);
+  background: rgba(255, 255, 255, 0);
+  overflow: hidden;
+}
+
+.menu-items-holder {
+  position: absolute;
+  width: 100%;
+  height: 71px;
+  padding: 0;
+  margin: 0;
+  background: white;
+  top: 0;
+}
+
+.menu-items-holder.bottom {
+  bottom: 0;
+  top: unset;
+}
+
+.menu-items {
+  list-style: none;
+  display: flex;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+}
+
+.menu-items-holder.bottom ul {
+  bottom: 0;
+}
+
+.menu-items-holder.bottom ul li {
+  bottom: 0;
+  border-bottom: none !important;
+  padding: 0 22px 11px 22px !important;
+  border-radius: 22px 22px 0 0 !important;
+  border-top: 1px solid rgb(175, 208, 233) !important;
+  /* background: linear-gradient(to bottom, white, transparent, transparent) !important; */
+}
+
+.menu-items-holder.bottom ul li:hover {
+  box-shadow: 0px -11px 22px -22px rgb(54, 100, 122);
+}
+
+.menu-items-holder.bottom ul li img {
+  top: 11px;
+}
+
+.menu-items li:not(.search-form-holder) {
+  margin: 0 11px;
+  border-bottom: 1px solid rgb(175, 208, 233);
+  padding: 11px 22px 0px 22px;
+  border-radius: 0 0 22px 22px;
+  cursor: pointer;
+  display: flex;
+  -webkit-transition: transform .2s ease-in, box-shadow .2s ease-in;
+  -moz-transition: transform .2s ease-in, box-shadow .2s ease-in;
+  -o-transition: transform .2s ease-in, box-shadow .2s ease-in;
+  -ms-transition: transform .2s ease-in, box-shadow .2s ease-in;
+  transition: transform .2s ease-in, box-shadow .2s ease-in;
+  /* background: linear-gradient(0deg, white, transparent); */
+}
+
+.menu-items li:not(.search-form-holder):hover {
+  box-shadow: 0px 11px 22px -22px rgb(54, 100, 122);
+  transform: scale(1.1);
+}
+
+.menu-items li img {
+  width: 22px;
+  display: inline-block;
+  padding: 3px;
+}
+
+.menu-items li span {
+  color: #174c66;
+  display: inline-block;
+  padding: 11px;
+  line-height: 22px;
+  font-size: 19px;
+}
+
+#sign-up::before {
+  content: 'Free Entry';
+  color: #174c66;
+  margin-top: -12px;
+  margin-left: -27px;
+  background-image: url(../img/icons/star.svg);
+  background-position: left top;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  z-index: 1;
+  position: absolute;
+  width: 113px;
+  height: 33px;
+  padding-left: 27px;
+  font-weight: bold;
+}
+
+.page-content {
+  height: calc(100% - 142px);
+  margin: 71px 0 71px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgba(22, 77, 122, .9);
+  color: white;
+}
+
+.search-form-holder {
+  margin: 0px 11px;
+  padding: 11px 33px 7px 33px;
 }

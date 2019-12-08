@@ -9,14 +9,20 @@ from .models import Artwork, School
 from .forms import EntryForm
 from django.http import HttpResponse
 
+
 def index(request):
+    context = {}
+    return render(request, 'index.html', context)
+
+
+def home(request):
     num_works = Artwork.objects.all().count()
     num_schools = School.objects.all().count()
     context = {
         'num_works': num_works,
-        'num_schools': num_schools,
-    }
-    return render(request, 'index.html', context)
+        'num_schools': num_schools}
+    return render(request, 'home.html', context)
+
 
 def about(request):
     context = {}
@@ -42,9 +48,11 @@ def work_lists(request):
                     'works':works})
     '''
 
+
 def work_detail(request, id, surname):
     work = get_object_or_404(Artwork, id=id, surname=surname)
     return render('works/work_detail.html', {'work': work})
+
 
 def entry_form(request):
     schools = School.objects.all()
