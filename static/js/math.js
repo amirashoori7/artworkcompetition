@@ -7,17 +7,16 @@ function windowLayoutFitSize() {
 	$("#main-body").height($(window).height())
 }
 function loadContent(liItem) {
-	$("div#page-content").hide()
+	$("div.page-content").hide()
 	var url = ""
 	// if (target.is("li")) {
 	url = $(liItem).attr("data-href")
 	// } else
 	// 	url = liItem
 	$("div.page-content").load(url, function () {
-		$("div#page-content").show()
-	})
-	$("div.page-content").load(url, function () {
-		$("div#page-content").show()
+		$("div.page-content").fadeIn()
+		TweenMax.fromTo(".page-content", 1, { scaleY: 0, scaleX: 0, rotation: -180 }, 
+		{ scaleY: 1, scaleX: 1, rotation: 0, transformOrigin: "center" })
 	})
 }
 $(window).bind('resize', function () {
