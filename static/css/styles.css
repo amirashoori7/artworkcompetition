@@ -27,6 +27,16 @@ body {
   height: 11px;
 }
 
+.content {
+  width: inherit;
+  height: inherit;
+}
+
+#universe {
+  width: 100%;
+  height: 100%;
+}
+
 .container {
   max-width: 960px;
 }
@@ -88,15 +98,13 @@ canvas {
   border: none;
   z-index: 1;
   overflow: hidden;
+  background-image: radial-gradient(1600px at 70% 120%, rgba(33, 39, 80, 1) 10%, #020409 100%);
 }
 
 #main-frame {
   position: absolute;
-  width: 80%;
-  height: 90%;
-  left: 10%;
-  top: 5%;
-  border-radius: 33px;
+  width: 100%;
+  height: 100%;
   box-shadow: 0px 0px 99px -33px rgb(54, 100, 122);
   background: rgba(255, 255, 255, 0);
   overflow: hidden;
@@ -105,11 +113,10 @@ canvas {
 .menu-items-holder {
   position: absolute;
   width: 100%;
-  height: 71px;
   padding: 0;
   margin: 0;
-  background: white;
   top: 0;
+  display: grid;
 }
 
 .menu-items-holder.bottom {
@@ -120,8 +127,7 @@ canvas {
 .menu-items {
   list-style: none;
   display: flex;
-  position: absolute;
-  margin: auto;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -149,16 +155,16 @@ canvas {
 .menu-items li:not(.search-form-holder) {
   margin: 0 11px;
   border-bottom: 1px solid rgb(175, 208, 233);
-  padding: 11px 22px 0px 22px;
+  padding: 0px 22px 0px 22px;
   border-radius: 0 0 22px 22px;
   cursor: pointer;
-  display: flex;
   -webkit-transition: transform .2s ease-in, box-shadow .2s ease-in;
   -moz-transition: transform .2s ease-in, box-shadow .2s ease-in;
   -o-transition: transform .2s ease-in, box-shadow .2s ease-in;
   -ms-transition: transform .2s ease-in, box-shadow .2s ease-in;
   transition: transform .2s ease-in, box-shadow .2s ease-in;
-  /* background: linear-gradient(0deg, white, transparent); */
+  height: 33px;
+  background: white;
 }
 
 .menu-items li:not(.search-form-holder):hover {
@@ -176,7 +182,7 @@ canvas {
   color: #174c66;
   display: inline-block;
   padding: 11px;
-  line-height: 22px;
+  line-height: 7px;
   font-size: 19px;
 }
 
@@ -198,24 +204,17 @@ canvas {
 }
 
 .page-content {
-  height: calc(100% - 142px);
-  margin: 71px 0 71px 0;
   overflow-x: hidden;
   overflow-y: auto;
-  background: rgba(22, 77, 122, .9);
   color: white;
 }
 
 .search-form-holder {
   margin: 0px 11px;
-  padding: 11px 33px 7px 33px;
+  padding: 0;
 }
 
 .page-content-area-bg {
-  background: url(../img/calcbg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: opacity(0.33) invert(1);
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -225,4 +224,10 @@ canvas {
 .page-content-area {
   height: 100%;
   width: 100%;
+}
+
+.page-content {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
