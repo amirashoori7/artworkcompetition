@@ -12,87 +12,121 @@
     <!-- progressbar -->
     <ul id="progressbar">
       <li class="active">Personal Info</li>
-      <li>Upload Documents</li>
-      <li>Security Questions</li>
+      <li>School Information</li>
+      <li>Upload Artwork</li>
     </ul>
     <!-- fieldsets -->
     <fieldset>
-      <h3>Bio</h3>
       <h4 class="mb-3">Personal Information</h4>
       <div class="row">
         <div class="col-md-6 mb-3">
-          <lable for="firstname">First Name</lable>
+          <label for="firstname">First Name</label>
           <input type="text" class="form-control" id="firstname" placeholder="" value="" required>
         </div>
         <div class="col-md-6 mb-3">
-          <lable for="surname">Surname</lable>
+          <label for="surname">Surname</label>
           <input type="text" class="form-control" id="surname" placeholder="" value="" required>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <lable for="email">email</lable>
+        <div class="col-md-6 mb-3">
+          <label for="dob">Date of Birth</label>
+          <input type="date" class="form-control" id="dob" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="email">email</label>
           <input type="email" class="form-control" id="email" placeholder="you@example.com" value="" required>
         </div>
-        <div class="col-md-4 mb-3">
-          <lable for="parentname">Parent Name</lable>
+      </div><br />
+      <h4 class="mb-3">Gaurdian Information</h4>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="parentname">Parent Name</label>
           <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
         </div>
-        <div class="col-md-4 mb-3">
-          <lable for="parentphone">Parent Phone</lable>
+        <div class="col-md-6 mb-3">
+          <label for="parentphone">Phone Number</label>
+          <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="parentname">Email</label>
+          <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="parentphone">Phone Number</label>
           <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
         </div>
       </div>
       <button type="button" class="next action-button">Next</button>
     </fieldset>
-    
+
     <fieldset>
-      <h3>Create Security Questions</h3>
-      <h6>Please update your account with security questions</h6>
-      <div class="form-group">
-        <select class="product_select">
-          <option data-display="1. Choose A Question">1. Choose A Question</option>
-          <option>2. Choose A Question</option>
-          <option>3. Choose A Question</option>
-        </select>
+      <h6>School Information</h6>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="school">School</label>
+          <select class="custem-select d-block w-100" id="school" required>
+            <option value="">Choose...</option>
+            {% for school in schools %}
+            <option>{{ school.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="learnergrade">Learner Grade</label>
+          <input type="number" class="form-control" id="learnergrade" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="teachername">Teacher Name</label>
+          <input type="text" class="form-control" id="teachername" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="teacheremail">Teacher Email</label>
+          <input type="email" class="form-control" id="teacheremail" placeholder="you@example.com" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="teacherphone">Teacher Phone</label>
+          <input type="tel" class="form-control" id="teacherphone" placeholder="" value="" required>
+        </div>
       </div>
-      <div class="form-group fg_2">
-        <input type="text" class="form-control" placeholder="Anwser here:">
-      </div>
-      <div class="form-group">
-        <select class="product_select">
-          <option data-display="1. Choose A Question">1. Choose A Question</option>
-          <option>2. Choose A Question</option>
-          <option>3. Choose A Question</option>
-        </select>
-      </div>
-      <div class="form-group fg_3">
-        <input type="text" class="form-control" placeholder="Anwser here:">
-      </div>
+
       <button type="button" class="action-button previous previous_button">Back</button>
-      <a href="#" class="action-button">Finish</a>
+      <button type="button" class="next action-button">Continue</button>
     </fieldset>
 
     <fieldset>
-      <h4>Verify Your Identity</h4>
-      <h6>Please upload any of these documents to verify your Identity.</h6>
-      <div class="passport">
-        <h4>Govt. ID card <br>PassPort <br>Driving License.</h4>
-        <a href="#" class="don_icon"><i class="ion-android-done"></i></a>
-      </div>
-      <div class="input-group">
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="upload">
-          <label class="custom-file-label" for="upload"><i class="ion-android-cloud-outline"></i>Choose file</label>
+      <h4 class="mb-3">Artwork Information</h4>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="surname">Work Title</label>
+          <input type="text" class="form-control" id="worktilte" placeholder="" value="" required>
         </div>
       </div>
-      <ul class="file_added">
-        <li>File Added:</li>
-        <li><a href="#"><i class="ion-paperclip"></i>national_id_card.png</a></li>
-        <li><a href="#"><i class="ion-paperclip"></i>national_id_card_back.png</a></li>
-      </ul>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="workfile">Upload Work File</label>
+          <input type="file" class="form-control" id="workfile" placeholder="" value="" required>
+        </div>
+      </div>
+      <h4 class="mb-3">Please answer the following questions:</h4>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="question1">Question1</label>
+          <textarea class="form-control" id="question1" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="question1">Question2</label>
+          <textarea class="form-control" id="question1" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="question1">Question3</label>
+          <textarea class="form-control" id="question1" rows="3"></textarea>
+        </div>
+      </div>
       <button type="button" class="action-button previous previous_button">Back</button>
-      <button type="button" class="next action-button">Continue</button>
+      <button type="button" class="next action-button">Finish</button>
     </fieldset>
   </form>
 </section>

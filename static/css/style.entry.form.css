@@ -7,6 +7,7 @@
   z-index: 1;
 }
 
+
 .multi_step_form #msform .tittle {
   text-align: center;
   padding-bottom: 11px;
@@ -14,7 +15,7 @@
 
 .multi_step_form #msform fieldset {
   border: 0;
-  padding: 20px 105px 0;
+  padding: 33px 99px;
   position: relative;
   width: 100%;
   left: 0;
@@ -25,160 +26,9 @@
   display: none;
 }
 
-.multi_step_form #msform fieldset .intl-tel-input {
-  display: block;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  outline: none;
-}
 
-.multi_step_form #msform fieldset .intl-tel-input .flag-container .selected-flag {
-  padding: 0 20px;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  outline: none;
-  width: 65px;
-}
-
-.multi_step_form #msform fieldset #phone {
-  padding-left: 80px;
-}
-
-.multi_step_form #msform fieldset .form-group {
-  padding: 0 10px;
-}
-
-.multi_step_form #msform fieldset .fg_2,
-.multi_step_form #msform fieldset .fg_3 {
-  padding-top: 10px;
-  display: block;
-  overflow: hidden;
-}
-
-.multi_step_form #msform fieldset .fg_3 {
-  padding-bottom: 70px;
-}
-
-.multi_step_form #msform fieldset .form-control,
-.multi_step_form #msform fieldset .product_select {
-  border-radius: 3px;
-  border: 1px solid #d8e1e7;
-  padding: 0 20px;
-  font: 400 15px/48px "Roboto", sans-serif;
-  color: #5f6771;
-  box-shadow: none;
-  outline: none;
-  width: 100%;
-}
-
-.multi_step_form #msform fieldset .form-control:hover,
-.multi_step_form #msform fieldset .form-control:focus,
-.multi_step_form #msform fieldset .product_select:hover,
-.multi_step_form #msform fieldset .product_select:focus {
-  border-color: rgb(22, 77, 122);
-}
-
-.multi_step_form #msform fieldset .form-control:focus.placeholder,
-.multi_step_form #msform fieldset .product_select:focus.placeholder {
-  color: transparent;
-}
-
-.multi_step_form #msform fieldset .form-control:focus:-moz-placeholder,
-.multi_step_form #msform fieldset .product_select:focus:-moz-placeholder {
-  color: transparent;
-}
-
-.multi_step_form #msform fieldset .form-control:focus::-moz-placeholder,
-.multi_step_form #msform fieldset .product_select:focus::-moz-placeholder {
-  color: transparent;
-}
-
-.multi_step_form #msform fieldset .form-control:focus::-webkit-input-placeholder,
-.multi_step_form #msform fieldset .product_select:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-
-.multi_step_form #msform fieldset .product_select:after {
-  display: none;
-}
-
-.multi_step_form #msform fieldset .product_select:before {
-  content: "\f35f";
-  position: absolute;
-  top: 0;
-  right: 20px;
-  font: normal normal normal 24px/48px Ionicons;
-  color: #5f6771;
-}
-
-.multi_step_form #msform fieldset .product_select .list {
-  width: 100%;
-}
-
-.multi_step_form #msform fieldset .code_group {
-  margin-bottom: 60px;
-}
-
-.multi_step_form #msform fieldset .code_group .form-control {
-  border: 0;
-  border-bottom: 1px solid #a1a7ac;
-  border-radius: 0;
-  display: inline-block;
-  width: 30px;
-  font-size: 30px;
-  color: #5f6771;
-  padding: 0;
-  margin-right: 7px;
-  text-align: center;
-  line-height: 1;
-}
-
-.multi_step_form #msform fieldset .passport {
-  margin-top: -10px;
-  padding-bottom: 30px;
-  position: relative;
-}
-
-.multi_step_form #msform fieldset .input-group {
-  padding-bottom: 40px;
-}
-
-.multi_step_form #msform fieldset .input-group .custom-file {
-  width: 100%;
-  height: auto;
-}
-
-.multi_step_form #msform fieldset .input-group .custom-file .custom-file-label {
-  width: 168px;
-  border-radius: 5px;
-  cursor: pointer;
-  font: 700 14px/40px "Roboto", sans-serif;
-  border: 1px solid #99a2a8;
-  text-align: center;
-  transition: all 300ms linear 0s;
-  color: #5f6771;
-}
-
-.multi_step_form #msform fieldset .input-group .custom-file .custom-file-label i {
-  font-size: 20px;
-  padding-right: 10px;
-}
-
-.multi_step_form #msform fieldset .input-group .custom-file .custom-file-label:hover,
-.multi_step_form #msform fieldset .input-group .custom-file .custom-file-label:focus {
-  background: rgb(22, 77, 122);
-  border-color: rgb(22, 77, 122);
-  color: #fff;
-}
-
-.multi_step_form #msform fieldset .input-group .custom-file input {
-  display: none;
-}
 
 .multi_step_form #msform #progressbar {
-  margin-bottom: 30px;
   overflow: hidden;
 }
 
@@ -221,13 +71,9 @@
   content: " ";
   width: 50px;
   height: 50px;
-  background: url('../img/icons/user.svg');
-  background-repeat: no-repeat;
-  background-size: 66%;
-  background-position: center;
   line-height: 50px;
   display: block;
-  background: #eaf0f4;
+  background-color: #eaf0f4;
   border-radius: 50%;
   margin: 0 auto 10px auto;
 }
@@ -236,7 +82,7 @@
   content: '';
   width: 100%;
   height: 10px;
-  background: #eaf0f4;
+  background-color: #eaf0f4;
   position: absolute;
   left: -50%;
   top: 21px;
@@ -253,7 +99,7 @@
 
 .multi_step_form #msform #progressbar li.active:before,
 .multi_step_form #msform #progressbar li.active:after {
-  background: rgb(22, 77, 122);
+  background-color: rgb(22, 77, 122);
   border: 1px solid white;
 }
 
@@ -265,28 +111,31 @@
   cursor: pointer;
   min-width: 130px;
   font: 700 14px/40px "Roboto", sans-serif;
-  border: 1px solid #4183bb;
   margin: 0 5px;
   text-transform: uppercase;
   display: inline-block;
+  -webkit-transition: background .2s ease-in, color .2s ease-in;
+  -moz-transition: background .2s ease-in, color .2s ease-in;
+  -o-transition: background .2s ease-in, color .2s ease-in;
+  -ms-transition: background .2s ease-in, color .2s ease-in;
+  transition: background .2s ease-in, color .2s ease-in;
 }
 
 .multi_step_form #msform .action-button:hover,
 .multi_step_form #msform .action-button:focus {
   background: white;
-  border-color: white;
   color: rgb(22, 77, 122);
 }
 
 .multi_step_form #msform .previous_button {
   background: transparent;
-  color: #99a2a8;
-  border-color: #99a2a8;
+  color: white;
+  border: 1px solid rgb(13, 39, 55);
+  box-shadow: none;
 }
 
 .multi_step_form #msform .previous_button:hover,
 .multi_step_form #msform .previous_button:focus {
-  background: #405867;
-  border-color: #405867;
+  background: rgb(13, 39, 55);
   color: #fff;
 }
