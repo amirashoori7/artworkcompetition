@@ -210,3 +210,19 @@ canvas {
   margin: 0px 11px;
   padding: 11px 33px 7px 33px;
 }
+
+.page-content-area-bg {
+  background: url(../img/calcbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: opacity(0.33) invert(1);
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+}
+
+.page-content-area {
+  height: 100%;
+  width: 100%;
+}
