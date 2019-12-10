@@ -1,0 +1,23 @@
+.action-button {
+  color: white;
+  background: linear-gradient(0deg, #040506, #151827);
+  border: 0 none;
+  border-radius: 11px;
+  cursor: pointer;
+  min-width: 130px;
+  font: 700 14px/40px "Roboto", sans-serif;
+  margin: 0 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  -webkit-transition: background .2s ease-in, color .2s ease-in;
+  -moz-transition: background .2s ease-in, color .2s ease-in;
+  -o-transition: background .2s ease-in, color .2s ease-in;
+  -ms-transition: background .2s ease-in, color .2s ease-in;
+  transition: background .2s ease-in, color .2s ease-in;
+}
+
+.action-button:hover,
+.action-button:focus {
+  background: linear-gradient(45deg, #164d7a, #6a88a0);
+  color: rgb(255, 255, 255);
+}

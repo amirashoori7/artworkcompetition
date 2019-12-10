@@ -1,67 +1,64 @@
 <!-- Multi step form -->
-<link href="static/css/style.entry.form.css" rel="stylesheet">
-<link href="static/css/nice-select.min.css" rel="stylesheet">
-<script src="static/js/jquery/jquery.easing.min.js"></script>
-<script src="static/js/jquery/jquery.nice-select.min.js"></script>
 <section class="multi_step_form">
-  <form id="msform">
+  <form id="msform" class="form-general-style">
     <!-- Tittle -->
-    <div class="tittle">
+    <div class="form-title">
       <h2>Entry Form</h2>
+      <ul id="progressbar">
+        <li class="active">Personal Info</li>
+        <li>School Information</li>
+        <li>Upload Artwork</li>
+      </ul>
     </div>
-    <!-- progressbar -->
-    <ul id="progressbar">
-      <li class="active">Personal Info</li>
-      <li>School Information</li>
-      <li>Upload Artwork</li>
-    </ul>
+
     <!-- fieldsets -->
     <fieldset>
-      <h4 class="mb-3">Personal Information</h4>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="firstname">First Name</label>
-          <input type="text" class="form-control" id="firstname" placeholder="" value="" required>
+      <div class="form-section" data-title="Personal Information">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" id="surname" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="dob">Date of Birth</label>
+            <input type="date" class="form-control" id="dob" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="email">email</label>
+            <input type="email" class="form-control" id="email" placeholder="you@example.com" value="" required>
+          </div>
         </div>
-        <div class="col-md-6 mb-3">
-          <label for="surname">Surname</label>
-          <input type="text" class="form-control" id="surname" placeholder="" value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="dob">Date of Birth</label>
-          <input type="date" class="form-control" id="dob" placeholder="" value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="email">email</label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com" value="" required>
-        </div>
-      </div><br />
-      <h4 class="mb-3">Gaurdian Information</h4>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="parentname">Parent Name</label>
-          <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="parentphone">Phone Number</label>
-          <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="parentname">Email</label>
-          <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="parentphone">Phone Number</label>
-          <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
+      </div>
+      <div class="form-section" data-title="Gaurdian Information">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="parentname">Parent Name</label>
+            <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="parentphone">Phone Number</label>
+            <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="parentname">Email</label>
+            <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
+          </div>
+          <div class="col-md-6">
+            <label for="parentphone">Phone Number</label>
+            <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
+          </div>
         </div>
       </div>
       <button type="button" class="next action-button">Next</button>
     </fieldset>
-
     <fieldset>
       <h6>School Information</h6>
       <div class="row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6">
           <label for="school">School</label>
           <select class="custem-select d-block w-100" id="school" required>
             <option value="">Choose...</option>
@@ -70,19 +67,19 @@
             {% endfor %}
           </select>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6">
           <label for="learnergrade">Learner Grade</label>
           <input type="number" class="form-control" id="learnergrade" placeholder="" value="" required>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6">
           <label for="teachername">Teacher Name</label>
           <input type="text" class="form-control" id="teachername" placeholder="" value="" required>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6">
           <label for="teacheremail">Teacher Email</label>
           <input type="email" class="form-control" id="teacheremail" placeholder="you@example.com" value="" required>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6">
           <label for="teacherphone">Teacher Phone</label>
           <input type="tel" class="form-control" id="teacherphone" placeholder="" value="" required>
         </div>
@@ -91,36 +88,35 @@
       <button type="button" class="action-button previous previous_button">Back</button>
       <button type="button" class="next action-button">Continue</button>
     </fieldset>
-
     <fieldset>
       <h4 class="mb-3">Artwork Information</h4>
       <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
           <label for="surname">Work Title</label>
           <input type="text" class="form-control" id="worktilte" placeholder="" value="" required>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
           <label for="workfile">Upload Work File</label>
           <input type="file" class="form-control" id="workfile" placeholder="" value="" required>
         </div>
       </div>
       <h4 class="mb-3">Please answer the following questions:</h4>
       <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
           <label for="question1">Question1</label>
           <textarea class="form-control" id="question1" rows="3"></textarea>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
           <label for="question1">Question2</label>
           <textarea class="form-control" id="question1" rows="3"></textarea>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
           <label for="question1">Question3</label>
           <textarea class="form-control" id="question1" rows="3"></textarea>
         </div>

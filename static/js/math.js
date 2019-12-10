@@ -13,17 +13,11 @@ function windowLayoutFitSize() {
 	if ($(window).width() < $(window).height()) {
 		isHorizontal = false;
 	}
-	$(".menu-items").each(function () {
-		$(this).css("left", (frameWidth - $(this).width()) / 2)
-	})
 }
 function loadContent(liItem) {
 	$("div.page-content").hide()
 	var url = ""
-	// if (target.is("li")) {
 	url = $(liItem).attr("data-href")
-	// } else
-	// 	url = liItem
 	$("div.page-content").load(url, function () {
 		$("div.page-content").fadeIn()
 		TweenMax.fromTo(".page-content", 1, { scaleY: 0, scaleX: 0, rotation: -180 },

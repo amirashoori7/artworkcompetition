@@ -10,14 +10,19 @@
   <title>{% block title %}{% endblock title %}</title>
   <link href="{% static 'css/bootstrap/bootstrap.css' %}" rel="stylesheet">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'css/form.style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/nice-select.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/buttons.style.css' %}" rel="stylesheet">
+
+  <script src="{% static 'js/jquery/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/GSAP/TweenMax.min.js' %}"></script>
+  <script src="{% static 'js/jquery/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'js/jquery/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'js/math.js' %}"></script>
 </head>
-<script src="{% static 'js/jquery/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/GSAP/TweenMax.min.js' %}"></script>
-<script src="{% static 'js/math.js' %}"></script>
 
 <body>
-
   <main role="main" class="container">
     <div id="main-body">
       <canvas id="universe"></canvas>
@@ -27,44 +32,35 @@
           <ul class="menu-items menu-top">
             <li class="menu-item" id="home" data-href="{% url 'artwork:home' %}"><img
                 src="static/img/icons/home.svg"><span>Home</span></li>
-            <li class="menu-item" id="about-us"><a href="{% url 'artwork:index' %}"></a><img
-                src="static/img/icons/profile.svg"><span>About Us</span></li>
-            <li class="menu-item" id="gallery"><a href="{% url 'artwork:index' %}"></a><img
+            <li class="menu-item" id="about-us" data-href="{% url 'artwork:index' %}"><img
+                src="static/img/icons/profile.svg"><span>About</span></li>
+            <li class="menu-item" id="gallery" data-href="{% url 'artwork:index' %}"><img
                 src="static/img/icons/art-gallery.svg"><span>Gallery</span></li>
-            <li class="menu-item" id="contact-us"><a href="{% url 'artwork:index' %}"></a><img
-                src="static/img/icons/contact.svg"><a href="{% url 'artwork:index' %}"></a><span>Contact Us</span></li>
-            <li class="search-form-holder">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </li>
-          </ul>
-        </div>
-        <div class="menu-items-holder bottom">
-          <ul class="menu-items bottom">
+            <li class="menu-item" id="contact-us" data-href="{% url 'artwork:index' %}"><img
+                src="static/img/icons/contact.svg"><span>Contact Us</span></li>
             <li class="menu-item" id="sign-up" data-href="{% url 'artwork:entry_form' %}"><img
                 src="static/img/icons/trophy.svg"><span>Sign Up</span></li>
-            <li class="menu-item" id="rules"><a href="{% url 'artwork:index' %}"></a><img
+            <li class="menu-item" id="rules" data-href="{% url 'artwork:index' %}"><img
                 src="static/img/icons/document.svg"><span>Rules</span></li>
-            <li class="menu-item" id="history"><a href="{% url 'artwork:index' %}"></a><img
-                src="static/img/icons/history.svg"><span>History</span></li>
-            <li class="menu-item" id="resource"><a href="{% url 'artwork:index' %}"></a><img
+            <li class="menu-item" id="resource" data-href="{% url 'artwork:index' %}"><img
                 src="static/img/icons/select.svg"><span>Resource</span></li>
-            <li class="menu-item" id="faq"><a href="{% url 'artwork:index' %}"></a><img
+            <li class="menu-item" id="faq" data-href="{% url 'artwork:index' %}"><img
                 src="static/img/icons/information.svg"><span>FAQ's</span></li>
           </ul>
         </div>
         <div class="page-content">{% block content %}</div>
       </div>
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2019 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
     </div>
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-      <p class="mb-1">&copy; 2019 Company Name</p>
-      <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacy</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Support</a></li>
-      </ul>
-    </footer>
-     {% endblock %}
- </main>
+    {% endblock %}
+  </main>
 </body>
 
 </html>
