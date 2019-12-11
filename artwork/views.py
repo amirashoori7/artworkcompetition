@@ -42,8 +42,8 @@ def work_lists(request):
                     'works':works})
     '''
 
-def work_details(request, id, surname):
-    work = get_object_or_404(Artwork, id=id, surname=surname)
+def work_details(request, id):
+    work = get_object_or_404(Artwork, id=id)
     context = {'work': work}
     return render(request, 'work_details.html', context)
 

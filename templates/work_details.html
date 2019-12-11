@@ -1,109 +1,110 @@
 {% extends "base_dash.html" %}
 {% block title %}Artwork Details{% endblock %}
+{% block nav-details %}<a class="nav-link active" href="{% url 'artwork:work_details' work.id %}">Work Details<span class="sr-only">(current)</span></a>{% endblock%}
+
 
 {% block content %}
 <main role="main" class="container">
   <div class="jumbotron">
-    <h2>Please fill in the following form to Submit your work:</h1>
+    <h2>Artwork {{ work.worktitle }} By {{ work.surname }}</h1>
     <p class="lead"></p>
   </div>
   <div class="row">
     <div class="col-md-10 offset-md-1">
-      <form action="{% url 'artwork:entry_form' %}" method="post" class="needs-validation" novalidate>
+        <h4 class="mb-3">Artwork Information</h4>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <lable for="workfile">Work File</lable>
+            <img type="file" class="img-fluid" id="workfile" src="{{ work.workfile.url }}">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <lable for="surname">Work Title</lable>
+            <input type="text" class="form-control" id="worktilte" placeholder="" value="{{ work.worktitle }}">
+          </div>
+        </div><br>
         <h4 class="mb-3">Personal Information</h4>
         <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
             <lable for="firstname">First Name</lable>
-            <input type="text" class="form-control" id="firstname" placeholder="" value="" required>
+            <input type="text" class="form-control" id="firstname" placeholder="" value="{{ work.firstname }}" required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
             <lable for="surname">Surname</lable>
-            <input type="text" class="form-control" id="surname" placeholder="" value="" required>
+            <input type="text" class="form-control" id="surname" placeholder="" value="{{ form.surname }}" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <lable for="Age">Age</lable>
+            <input type="text" class="form-control" id="surname" placeholder="" value="{{ form.age }}" required>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-3">
             <lable for="email">email</lable>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com" value="" required>
+            <input type="email" class="form-control" id="email" value="{{ work.email }}" required>
           </div>
           <div class="col-md-4 mb-3">
             <lable for="parentname">Parent Name</lable>
-            <input type="text" class="form-control" id="parentname" placeholder="" value="" required>
+            <input type="text" class="form-control" id="parentname" value="{{ work.parentname }}" required>
           </div>
           <div class="col-md-4 mb-3">
             <lable for="parentphone">Parent Phone</lable>
-            <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
+            <input type="tel" class="form-control" id="parentphone" value="{{ work.parentphone }}" required>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-3">
             <lable for="school">School</lable>
             <select class="custem-select d-block w-100" id="school" required>
-              <option value="">Choose...</option>
-              {% for school in schools %}
-              <option>{{ school.name }}<option>
-              {% endfor %}
+              <option value=""></option>
+              <option>{{ work.school.name }}<option>
             </select>
           </div>
           <div class="col-md-4 mb-3">
             <lable for="teachername">Teacher Name</lable>
-            <input type="text" class="form-control" id="teachername" placeholder="" value="" required>
+            <input type="text" class="form-control" id="teachername" value="{{ work.teachername }}" required>
           </div>
           <div class="col-md-4 mb-3">
             <lable for="teacheremail">Teacher Email</lable>
-            <input type="email" class="form-control" id="teacheremail" placeholder="you@example.com" value="" required>
+            <input type="email" class="form-control" id="teacheremail" value="{{ work.teacheremail }}" required>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-3">
             <lable for="dob">Date of Birth</lable>
-            <input type="date" class="form-control" id="dob" placeholder="" value="" required>
+            <input type="date" class="form-control" id="dob" value="{{ work.dob }}" required>
           </div>
           <div class="col-md-4 mb-3">
             <lable for="learnergrade">Learner Grade</lable>
-            <input type="number" class="form-control" id="learnergrade" placeholder="" value="" required>
+            <input type="number" class="form-control" id="learnergrade" value="{{ work.learnergrade }}" required>
           </div>
           <div class="col-md-4 mb-3">
             <lable for="teacherphone">Teacher Phone</lable>
-            <input type="tel" class="form-control" id="teacherphone" placeholder="" value="" required>
+            <input type="tel" class="form-control" id="teacherphone" value="{{ work.teacherphone }}" required>
           </div>
         </div><br>
-        <h4 class="mb-3">Artwork Information</h4>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <lable for="workfile">Upload Work File</lable>
-            <input type="file" class="form-control" id="workfile" placeholder="" value="" required>
-          </div>
-          <div class="col-md-8 mb-3">
-            <lable for="surname">Work Title</lable>
-            <input type="text" class="form-control" id="worktilte" placeholder="" value="" required>
-          </div>
-        </div><br>
-        <h4 class="mb-3">Please answer the following questions:</h4>
+        <h4 class="mb-3">Answers:</h4>
         <div class="row">
           <div class="col-md-12 mb-3">
             <lable for="question1">Question1</lable>
-            <textarea class="form-control" id="question1" rows="5"></textarea>
+            <textarea class="form-control" id="question1" rows="5">{{ work.question1 }}</textarea>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 mb-3">
             <lable for="question1">Question1</lable>
-            <textarea class="form-control" id="question1" rows="5"></textarea>
+            <textarea class="form-control" id="question1" rows="5">{{ work.question2 }}</textarea>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 mb-3">
             <lable for="question1">Question1</lable>
-            <textarea class="form-control" id="question1" rows="5"></textarea>
+            <textarea class="form-control" id="question1" rows="5">{{ work.question3 }}</textarea>
           </div>
         </div>
         <div class="col text-center">
-        <button class="btn btn-primary btn-lg" type="submit">
-          Submit
-        </button>
       </div>
-      </form>
     </div>
   </div>
 </main>
