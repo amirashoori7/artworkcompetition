@@ -64,7 +64,7 @@ body {
   font-size: 16px;
 }
 
-.form-signin .form-control:focus {
+/* .form-signin .form-control:focus {
   z-index: 2;
 }
 
@@ -78,7 +78,7 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
+} */
 
 canvas {
   position: absolute;
@@ -191,23 +191,26 @@ canvas {
   overflow-x: hidden;
   overflow-y: auto;
   color: white;
-  padding: 0 11px;
+  border-radius: 22px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(22, 77, 122);
 }
 
 .page-content-area-bg {
   height: 100%;
   width: 100%;
   z-index: -1;
+  background: url(../img/calcbg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
   position: absolute;
+  filter: blur(2px) invert(1);
+  opacity: .3;
 }
 
 .page-content-area {
   height: 100%;
   width: 100%;
-}
-
-.page-content {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
