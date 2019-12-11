@@ -19,6 +19,7 @@
       <th scope="col">Age</th>
       <th scope="col">Grade</th>
       <th scope="col">WorkFile</th>
+      <th scope="col"><th>
     </tr>
   </thead>
   <tbody>
@@ -32,11 +33,14 @@
      <td>{{ work.email }}</td>
      <td>{{ work.age }}</td>
      <td>{{ work.learnergrade }}</td>
-     <td width="150" height="150"><img src='{{ work.workfile }}'></td>
+     <td width="150" height="150">
+       <img height=100 width=100 src='{{ work.workfile.url }}'>
+     </td>
+     <td><a href="{% url 'artwork:work_details' work.id %}">Details</td>
    </tr>
    {% endfor %}
  </tbody>
-</table>
+</table><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}">
 </main>
 
 {% endblock %}
