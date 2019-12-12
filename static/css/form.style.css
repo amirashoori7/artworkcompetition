@@ -75,12 +75,11 @@
 }
 
 
-
-.multi_step_form #msform #progressbar {
+#progressbar {
   overflow: hidden;
 }
 
-.multi_step_form #msform #progressbar li {
+#progressbar li {
   list-style-type: none;
   color: #99a2a8;
   font-size: 9px;
@@ -90,21 +89,21 @@
   font: 500 13px/1 "Roboto", sans-serif;
 }
 
-.multi_step_form #msform #progressbar li:nth-child(1):before {
+#progressbar li:nth-child(1):before {
   background: url('../img/icons/user.svg') rgb(11, 14, 30);
   background-position: center;
   background-size: 66%;
   background-repeat: no-repeat;
 }
 
-.multi_step_form #msform #progressbar li:nth-child(2):before {
+#progressbar li:nth-child(2):before {
   background: url('../img/icons/university.svg') rgb(11, 14, 30);
   background-position: center;
   background-size: 66%;
   background-repeat: no-repeat;
 }
 
-.multi_step_form #msform #progressbar li:nth-child(3):before {
+#progressbar li:nth-child(3):before {
   background: url('../img/icons/artwork.svg') rgb(11, 14, 30);
   background-position: center;
   background-size: 66%;
@@ -112,7 +111,7 @@
 
 }
 
-.multi_step_form #msform #progressbar li:before {
+#progressbar li:before {
   content: " ";
   width: 50px;
   height: 50px;
@@ -123,7 +122,7 @@
   margin: 0 auto 10px auto;
 }
 
-.multi_step_form #msform #progressbar li:after {
+#progressbar li:after {
   content: '';
   width: 100%;
   height: 10px;
@@ -134,28 +133,81 @@
   z-index: -1;
 }
 
-.multi_step_form #msform #progressbar li:last-child:after {
+#progressbar li:last-child:after {
   width: 150%;
 }
 
-.multi_step_form #msform #progressbar li.active {
+#progressbar li.active {
   color: white;
 }
 
-.multi_step_form #msform #progressbar li.active:before,
-.multi_step_form #msform #progressbar li.active:after {
+#progressbar li.active:before,
+#progressbar li.active:after {
   background-color: rgb(11, 14, 30);
 }
 
-.multi_step_form #msform .previous_button {
+.previous_button {
   background: transparent;
   color: white;
   border: 1px solid rgb(13, 39, 55);
   box-shadow: none;
 }
 
-.multi_step_form #msform .previous_button:hover,
-.multi_step_form #msform .previous_button:focus {
+.previous_button:hover,
+.previous_button:focus {
   color: #fff;
   background: linear-gradient(45deg, #164d7a, #6a88a0);
+}
+
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+#schoolInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  width: 100%;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #6f6f6f;
+  width: 100%;
+  overflow: auto;
+  z-index: 1;
+  border-radius: 11px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
 }

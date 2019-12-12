@@ -1,3 +1,4 @@
+var tweenMenuShow
 function windowLayoutFitSize() {
 	$("#main-body").width($(window).width())
 	$("#main-body").height($(window).height())
@@ -19,6 +20,7 @@ function loadContent(liItem) {
 	var url = ""
 	url = $(liItem).attr("data-href")
 	$("div.page-content").load(url, function () {
+		tweenMenuShow.reverse()
 		$("div.page-content").fadeIn()
 		TweenMax.fromTo(".page-content", 1, { scaleY: 0, scaleX: 0, rotation: -180 },
 			{ scaleY: 1, scaleX: 1, rotation: 0, transformOrigin: "center" })
@@ -29,6 +31,22 @@ $(window).bind('resize', function () {
 });
 
 $(document).ready(function () {
+	$(".menu-icon").load("static/img/icons/menu.svg", function () {
+		var tlMenu = new TimelineLite({
+			paused: true
+		});
+		tweenMenuShow = tlMenu.from(".menu-items-holder", .5, {
+			top: "-100%",
+			transformOrigin: "top"
+		});
+		tweenMenuShow.reverse()
+		$(this).on("click", function () {
+			if (tweenMenuShow.reversed())
+				tweenMenuShow.play()
+			else
+				tweenMenuShow.reverse()
+		})
+	})
 	windowLayoutFitSize()
 });
 
@@ -334,4 +352,24 @@ function loadUniverseBG() {
 		canva.setAttribute('width', width);
 		canva.setAttribute('height', height);
 	}
+}
+
+function dropDownFunction() {
+  $("#schoolDropdown").toggleClass("show");
+}
+
+function filterFunction() {
+  var input, filter, a, i;
+  input = $("#schoolInput");
+  filter = input.val().toUpperCase();
+  div = $("#schoolDropdown");
+  a = div.find("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
 }
