@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'artwork',
     'phone_field',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [
