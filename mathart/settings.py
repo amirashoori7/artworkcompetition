@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'artwork',
     'evaluation',
     'rest_framework',
-    'phone_field',
+    'phonenumber_field',
     'multiselectfield',
 ]
 
