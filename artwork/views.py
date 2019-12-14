@@ -5,6 +5,7 @@ and then routing requests with an appropriate response.
 '''
 
 from django.shortcuts import render, get_object_or_404
+from django.views import View
 from .models import Artwork, School
 from .forms import EntryForm
 from django.http import HttpResponse
@@ -32,8 +33,7 @@ def about(request):
 def work_lists(request):
     works = Artwork.objects.all()
     context = {'works': works}
-    return render(request,
-                  'work_lists.html', context)
+    return render(request, 'work_lists.html', context)
     '''
     school = None
     schools = School.objects.all()
@@ -48,10 +48,11 @@ def work_lists(request):
                     'works':works})
     '''
 
+def work_details(request, id):
+    work = get_object_or_404(Artwork, id=id)
+    context = {'work': work}
+    return render(request, 'work_details.html', context)
 
-def work_detail(request, id, surname):
-    work = get_object_or_404(Artwork, id=id, surname=surname)
-    return render('works/work_detail.html', {'work': work})
 
 
 def entry_form(request):

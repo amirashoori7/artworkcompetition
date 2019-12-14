@@ -2,6 +2,8 @@ from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import *
 from phone_field import PhoneField
+from django.urls import reverse
+#from evaluation import models
 
 class School(models.Model):
     name = models.CharField(max_length=200, db_index=True)
@@ -38,6 +40,9 @@ class Artwork(models.Model):
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
     submitted = models.DateTimeField(auto_now_add=True)
+    #evald1-a = models.ForeignKey(EvalD1-A, on_delete=models.CASCADE)
+    #evald1-b = models.ForeignKey(EvalD1-B, on_delete=models.CASCADE)
+    #evald1-c = models.ForeignKey(EvalD1-C, on_delete=models.CASCADE)
 
     class Meta:
         #unique_together = ['surname', 'email']
@@ -52,7 +57,7 @@ class Artwork(models.Model):
 
     #define the returened url when the submit button hit
     def get_absolute_url(self):
-        return reverse('mathart:index')#or thanks for submitting url
+        return "work_details/{self.id}"
 
     def __str__(self):
         return '%s %s' % (self.surname, self.firstname)

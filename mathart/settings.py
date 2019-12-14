@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account',#account.apps.AccountConfig
-    'rest_framework',
     'artwork',
+    'evaluation',
+    'rest_framework',
     'phone_field',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [
