@@ -1,7 +1,7 @@
 from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import *
-from phone_field import PhoneField
+from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse
 #from evaluation import models
 
@@ -29,11 +29,11 @@ class Artwork(models.Model):
     dob = models.DateField(null=True)
     age = models.IntegerField(editable=False, null=True)
     parentname = models.CharField(blank=True, max_length=200)
-    parentphone = PhoneField(blank=True, max_length=18)
+    parentphone = PhoneNumberField(blank=True)
     parentemail = models.EmailField(blank=True, max_length=300)
     learnergrade = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
     teachername = models.CharField(blank=True, max_length=300)
-    teacherphone = PhoneField(blank=True, max_length=18)
+    teacherphone = PhoneNumberField(blank=True)
     teacheremail = models.EmailField(blank=True, max_length=300)
     testimonial = models.BooleanField(default=False)
     question1 = models.TextField(blank=True)
