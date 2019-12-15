@@ -4,7 +4,7 @@ Artwork Competition web application built with django
 ## Demo screenshots
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo1.png)
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo2.png)
-![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/demo3.png)
+![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/work_lists.png)
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/REST_API.png)
 
 
