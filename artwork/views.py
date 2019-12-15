@@ -63,10 +63,10 @@ def signup_page(request):
 
 def entry_form(request):
     schools = School.objects.all()
-    form = EntryForm(request.POST or None)
+    form = EntryForm(request.POST,request.FILES or None)
     if(request.method =='POST'): 
-#         if form.is_valid():
-        form.save()
+        if form.is_valid():
+            form.save()
         return JsonResponse({'success':True})
 #         else:
 #             return JsonResponse({'error':form.errors})

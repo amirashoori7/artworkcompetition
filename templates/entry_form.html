@@ -68,11 +68,10 @@
           <div class="dropdown">
             <!-- <button onclick="dropDownFunction()" class="dropbtn">School</button> -->
             <input type="text" class="form-control school-input" placeholder="Search.." onclick="dropDownFunction()"
-              id="schools" name="school" onkeyup="filterFunction()">
+              id="schools" name="school" autocomplete="false" onkeyup="filterFunction()">
             <div id="schoolDropdown" class="dropdown-content">
-              <!-- <input type="text" placeholder="Search.." id="schoolInput" onkeyup="filterFunction()"> -->
               {% for school in schools %}
-              <a href="#">{{ school.name }}</a>
+              <a href="#" onclick="$('#schools').val($(this).html());dropDownFunction();">{{ school.name }}</a>
               {% endfor %}
             </div>
           </div>
