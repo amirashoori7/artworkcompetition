@@ -227,7 +227,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  /* background: rgb(22, 77, 122); */
+  background: rgb(22, 77, 122);
 }
 
 .page-content-area-bg {

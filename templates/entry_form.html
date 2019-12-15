@@ -68,7 +68,7 @@
           <div class="dropdown">
             <!-- <button onclick="dropDownFunction()" class="dropbtn">School</button> -->
             <input type="text" class="form-control school-input" placeholder="Search.." onclick="dropDownFunction()"
-              id="schools" name="school" autocomplete="false" onkeyup="filterFunction()">
+              id="school" name="school" autocomplete="off" onkeyup="filterFunction()">
             <div id="schoolDropdown" class="dropdown-content">
               {% for school in schools %}
               <a href="#" onclick="$('#schools').val($(this).html());dropDownFunction();">{{ school.name }}</a>

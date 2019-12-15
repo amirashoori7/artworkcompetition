@@ -67,9 +67,9 @@ def entry_form(request):
     if(request.method =='POST'): 
         if form.is_valid():
             form.save()
-        return JsonResponse({'success':True})
-#         else:
-#             return JsonResponse({'error':form.errors})
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'error':form.errors})
     else:
         context = {'form': form, 'schools': schools}
         return render(request, 'entry_form.html', context)
