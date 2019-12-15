@@ -39,6 +39,7 @@
 .form-section input:focus {
   background: #00000066;
   border: none;
+  color: white;
 }
 
 .form-section::after {
@@ -175,7 +176,7 @@
   background-color: #3e8e41;
 }
 
-#schoolInput {
+.school-input {
   box-sizing: border-box;
   background-image: url('searchicon.png');
   background-position: 14px 12px;

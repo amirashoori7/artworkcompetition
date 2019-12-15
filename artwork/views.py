@@ -9,6 +9,7 @@ from django.views import View
 from .models import Artwork, School
 from .forms import EntryForm
 from django.http import HttpResponse
+from django.http.response import JsonResponse
 
 
 def index(request):
@@ -48,18 +49,28 @@ def work_lists(request):
                     'works':works})
     '''
 
+
 def work_details(request, id):
     work = get_object_or_404(Artwork, id=id)
     context = {'work': work}
     return render(request, 'work_details.html', context)
 
 
+def signup_page(request):
+    context = {}
+    return render(request, 'signup_page.html', context)
+
 
 def entry_form(request):
     schools = School.objects.all()
     form = EntryForm(request.POST or None)
-    if form.is_valid():
+    if(request.method =='POST'): 
+#         if form.is_valid():
         form.save()
+        return JsonResponse({'success':True})
+#         else:
+#             return JsonResponse({'error':form.errors})
+    else:
+        context = {'form': form, 'schools': schools}
+        return render(request, 'entry_form.html', context)
 
-    context = {'form': form, 'schools': schools}
-    return render(request, 'entry_form.html', context)

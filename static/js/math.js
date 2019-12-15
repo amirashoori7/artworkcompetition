@@ -360,7 +360,7 @@ function dropDownFunction() {
 
 function filterFunction() {
   var input, filter, a, i;
-  input = $("#schoolInput");
+  input = $(".school-input");
   filter = input.val().toUpperCase();
   div = $("#schoolDropdown");
   a = div.find("a");

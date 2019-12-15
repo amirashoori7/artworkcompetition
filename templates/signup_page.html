@@ -1,0 +1,42 @@
+<!-- Multi step form -->
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "{% url 'artwork:entry_form' %}",
+            success: function (response) {
+                $(".multi_step_form").html(response);
+                $('#msform').on('submit', function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        data: $('#msform').serialize(),
+                        type: "POST",
+                        url: "{% url 'artwork:entry_form' %}",
+                        success: function (response) {
+                            if (response['success']) {
+                                alert("<div class='alert alert-success'> Succesfully sent feedback, thank you!</div > ");
+                            }
+                            if (response['error']) {
+                                alert("<div class='alert alert-danger'>" +
+                                    response['error'] + "</div>");
+                                console.log(response['error'])
+                            }
+                            alert(1)
+                        },
+                        error: function (request, status, error) {
+                            console.log(request.responseText);
+                        }
+                    })
+                });
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+        });
+        // $("#msform").submit(function (event) {
+        //     event.preventDefault();
+
+        // });
+    })
+</script>
+<section class="multi_step_form">
+</section>

@@ -11,3 +11,5 @@ class EntryForm(forms.ModelForm):
                   'parentphone', 'learnergrade', 'teachername',
                   'teacheremail', 'teacherphone', 'testimonial',
                   'question1', 'question2', 'question3']
+        labels = {'firstname': 'First Name'}
+
