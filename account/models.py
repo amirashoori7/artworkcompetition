@@ -1,7 +1,6 @@
 from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import *
-from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse
 
 ROLES = (
@@ -14,7 +13,7 @@ class UserProfile(models.Model):
     name = models.CharField(max_length=100)
     login = models.CharField(max_length=50)
     password = models.CharField(max_length=100)
-    phone = PhoneNumberField(blank=True, null=True)
+    phone = models.CharField(blank=True, null=True, max_length=100)
     email = models.EmailField(max_length=100)
     role = models.CharField(max_length=1, choices=ROLES)
 
