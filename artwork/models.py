@@ -38,11 +38,11 @@ class Artwork(models.Model):
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
     submitted = models.DateTimeField(auto_now_add=True)
-    evald1a = models.ForeignKey('evaluation.EvalD1A',
+    evald1a = models.ForeignKey('evaluation.EvalD1A', blank=True,
                                  null=True, on_delete=models.CASCADE)
-    evald1b = models.ForeignKey('evaluation.EvalD1B',
+    evald1b = models.ForeignKey('evaluation.EvalD1B', blank=True,
                                  null=True, on_delete=models.CASCADE)
-    evald1c = models.ForeignKey('evaluation.EvalD1C',
+    evald1c = models.ForeignKey('evaluation.EvalD1C', blank=True,
                                  null=True, on_delete=models.CASCADE)
 
     class Meta:
