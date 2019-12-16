@@ -1,9 +1,7 @@
 from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import *
-from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse
-#from evaluation import models
 
 class School(models.Model):
     name = models.CharField(max_length=200, db_index=True)
@@ -29,20 +27,23 @@ class Artwork(models.Model):
     dob = models.DateField(null=True)
     age = models.IntegerField(editable=False, null=True)
     parentname = models.CharField(blank=True, max_length=200)
-    parentphone = PhoneNumberField(blank=True)
+    parentphone = models.CharField(blank=True, null=True, max_length=100)
     parentemail = models.EmailField(blank=True, max_length=100)
     learnergrade = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
     teachername = models.CharField(blank=True, max_length=300)
-    teacherphone = PhoneNumberField(blank=True)
+    teacherphone = models.CharField(blank=True, null=True, max_length=100)
     teacheremail = models.EmailField(blank=True, max_length=100)
     testimonial = models.BooleanField(default=False)
     question1 = models.TextField(blank=True)
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
     submitted = models.DateTimeField(auto_now_add=True)
-    #evald1-a = models.ForeignKey(EvalD1-A, on_delete=models.CASCADE)
-    #evald1-b = models.ForeignKey(EvalD1-B, on_delete=models.CASCADE)
-    #evald1-c = models.ForeignKey(EvalD1-C, on_delete=models.CASCADE)
+    evald1a = models.ForeignKey('evaluation.EvalD1A',
+                                 null=True, on_delete=models.CASCADE)
+    evald1b = models.ForeignKey('evaluation.EvalD1B',
+                                 null=True, on_delete=models.CASCADE)
+    evald1c = models.ForeignKey('evaluation.EvalD1C',
+                                 null=True, on_delete=models.CASCADE)
 
     class Meta:
         #unique_together = ['surname', 'email']
