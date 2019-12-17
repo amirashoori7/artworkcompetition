@@ -55,4 +55,6 @@ def entry_form(request):
         form.save()
 
     context = {'form': form, 'schools': schools}
+    #after form is saved, return render must redirect to form success #temp
+    #i will fix it later, like i'm going to do for eval forms
     return render(request, 'entry_form.html', context)
