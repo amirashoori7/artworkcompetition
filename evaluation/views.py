@@ -4,6 +4,14 @@ from artwork.models import Artwork
 from .import models
 from .import forms
 
+def evalpage(request, id):
+    work = get_object_or_404(Artwork, id)
+    eval = EvalD1A.objects.filter(work_id=id)
+    if not eval.exists():
+        form = FormD1A()
+    context = {'eval':eval, 'work':work}
+    return render(request, 'evalstat.html', context)
+
 def create_evald1a(request, id):
     work = get_object_or_404(Artwork, id=id)
     form = FormD1A(request.POST or None)
