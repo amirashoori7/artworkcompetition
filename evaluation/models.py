@@ -1,17 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
+from account.models import ProjectUser
 from django.db import models
 from datetime import *
-
-VALIDATE_SUBMISSION = (
-    ('ACCEPT', 'work submission is accepted'),
-    ('REJECT', 'work submission is rejected'),
-    ('REVISE', 'work submission must be revised')
-)
-QUALITY_SIFT = (
-    ('IN', 'work in'),
-    ('OUT', 'work out'),
-    ('MAYBE', 'maybe work in')
-)
 
 WEIGHT = (
     ('5', 'Excellent'),
@@ -63,38 +53,50 @@ MATH = (
     ('40', 'Vector Calculus')
 )
 
-class EvalD1A(models.Model):
-    biodetails = models.CharField(choices=VALIDATE_SUBMISSION,
-                                  max_length=50, blank=True, null=True)
-    picview = models.CharField(choices=VALIDATE_SUBMISSION,
-                               max_length=50, blank=True, null=True)
-    paragraphsview = models.CharField(choices=VALIDATE_SUBMISSION,
-                                      max_length=50, blank=True, null=True)
-    comment = models.TextField(blank=True, max_length=200)
-
-class EvalD1B(models.Model):
-    workpicq = models.CharField(choices=QUALITY_SIFT,
-                                max_length=50, blank=True, null=True)
-    answersq = models.CharField(choices=QUALITY_SIFT,
-                                max_length=50, blank=True, null=True)
-    originq = models.CharField(choices=QUALITY_SIFT,
-                               max_length=50, blank=True, null=True)
+class D1A(models.Model):
+    imgq = models.IntegerField(blank=True, null=True)
+    answersq = models.IntegerField(blank=True, null=True)
+    originq = models.IntegerField(blank=True, null=True)
     revisit = models.BooleanField(default=False)
-    comment = models.TextField(blank=True, max_length=200)
+    comment = models.TextField(blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-class EvalD1C(models.Model):
-    qualitysift = models.CharField(choices=QUALITY_SIFT,
-                                   max_length=50, blank=True, null=True)
-    comment = models.TextField(blank=True, max_length=200)
+class D1B(models.Model):
+    workis = models.IntegerField(blank=True, null=True)
+    comment = models.TextField(blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-class EvalD2(models.Model):
+class D2(models.Model):
     math = ArrayField(
         models.CharField(choices=MATH, max_length=50, blank=True, null=True),
     )
-    q1 = models.IntegerField(choices=WEIGHT)
-    q2 = models.IntegerField(choices=WEIGHT)
-    q3 = models.IntegerField(choices=WEIGHT)
-    q4 = models.IntegerField(choices=WEIGHT)
-    score = models.IntegerField(blank=True)
+    q1 = models.IntegerField(blank=True, null=True)
+    q2 = models.IntegerField(blank=True, null=True)
+    q3 = models.IntegerField(blank=True, null=True)
+    q4 = models.IntegerField(blank=True, null=True)
+    score = models.FloatField(null=True, blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    #def save(self):
+    def save(self, *args, **kwargs):
+        self.score = self.q1+self.q2+self.q3+self.q4
+        super(D2, self).save(*args, **kwargs)
+
+class D3(models.Model):
+    q1 = models.IntegerField(blank=True, null=True)
+    q2 = models.IntegerField(blank=True, null=True)
+    q3 = models.IntegerField(blank=True, null=True)
+    q4 = models.IntegerField(blank=True, null=True)
+    score = models.FloatField(null=True, blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.score = self.q1+self.q2+self.q3+self.q4
+        super(D2, self).save(*args, **kwargs)
