@@ -63,6 +63,13 @@ class D1A(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        permissions = (
+            ('create_D1A', 'can create D1A'),
+            ('update_D1A', 'can update D1A'),
+            ('view_D1A', 'can view D1A'),
+        )
+
 class D1B(models.Model):
     workis = models.IntegerField(blank=True, null=True)
     comment = models.TextField(blank=True)
