@@ -9,8 +9,6 @@ class School(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'school'
-        verbose_name_plural= 'schools'
 
     def __str__(self):
         return self.name
@@ -38,11 +36,14 @@ class Artwork(models.Model):
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
     submitted = models.DateTimeField(auto_now_add=True)
-    evald1a = models.OneToOneField('evaluation.EvalD1A', blank=True,
+    status = models.IntegerField()
+    d1a = models.OneToOneField('evaluation.D1A', blank=True,
                                     null=True, on_delete=models.CASCADE)
-    evald1b = models.ForeignKey('evaluation.EvalD1B', blank=True,
+    d1b = models.ForeignKey('evaluation.D1B', blank=True,
                                  null=True, on_delete=models.CASCADE)
-    evald1c = models.ForeignKey('evaluation.EvalD1C', blank=True,
+    d2 = models.ForeignKey('evaluation.D2', blank=True,
+                                 null=True, on_delete=models.CASCADE)
+    d3 = models.ForeignKey('evaluation.D3', blank=True,
                                  null=True, on_delete=models.CASCADE)
 
     class Meta:
@@ -54,6 +55,7 @@ class Artwork(models.Model):
         today = date.today()
         delta = relativedelta(today, self.dob)
         self.age = delta.years
+        self.status = 1
         super(Artwork, self).save(*args, **kwargs)
 
     #define the returened url when the submit button hit
