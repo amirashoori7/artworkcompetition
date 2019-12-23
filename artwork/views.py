@@ -74,3 +74,7 @@ def entry_form(request):
         context = {'form': form, 'schools': schools}
         return render(request, 'entry_form.html', context)
 
+    context = {'form': form, 'schools': schools}
+    #after form is saved, return render must redirect to form success template
+    #i will fix it later, like i'm going to do for eval forms
+    return render(request, 'entry_form.html', context)

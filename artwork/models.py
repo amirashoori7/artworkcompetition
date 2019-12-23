@@ -2,7 +2,6 @@ from django.db import models
 from dateutil.relativedelta import relativedelta
 from datetime import *
 from django.urls import reverse
-#from evaluation import models
 
 class School(models.Model):
     name = models.CharField(max_length=200, db_index=True)
@@ -10,8 +9,6 @@ class School(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'school'
-        verbose_name_plural= 'schools'
 
     def __str__(self):
         return self.name
@@ -39,9 +36,15 @@ class Artwork(models.Model):
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
     submitted = models.DateTimeField(auto_now_add=True)
-    #evald1-a = models.ForeignKey(EvalD1-A, on_delete=models.CASCADE)
-    #evald1-b = models.ForeignKey(EvalD1-B, on_delete=models.CASCADE)
-    #evald1-c = models.ForeignKey(EvalD1-C, on_delete=models.CASCADE)
+    status = models.IntegerField()
+    d1a = models.OneToOneField('evaluation.D1A', blank=True,
+                                    null=True, on_delete=models.CASCADE)
+    d1b = models.ForeignKey('evaluation.D1B', blank=True,
+                                 null=True, on_delete=models.CASCADE)
+    d2 = models.ForeignKey('evaluation.D2', blank=True,
+                                 null=True, on_delete=models.CASCADE)
+    d3 = models.ForeignKey('evaluation.D3', blank=True,
+                                 null=True, on_delete=models.CASCADE)
 
     class Meta:
         #unique_together = ['surname', 'email']
@@ -52,6 +55,7 @@ class Artwork(models.Model):
         today = date.today()
         delta = relativedelta(today, self.dob)
         self.age = delta.years
+        self.status = 1
         super(Artwork, self).save(*args, **kwargs)
 
     #define the returened url when the submit button hit

@@ -1,17 +1,7 @@
+from django.contrib.postgres.fields import ArrayField
+from account.models import ProjectUser
 from django.db import models
-from multiselectfield import MultiSelectField
 from datetime import *
-
-VALIDATE_SUBMISSION = (
-    ('ACCEPT', 'work submission is accepted'),
-    ('REJECT', 'work submission is rejected'),
-    ('REVISE', 'work submission must be revised')
-)
-QUALITY_SIFT = (
-    ('IN', 'work in'),
-    ('OUT', 'work out'),
-    ('MAYBE', 'maybe work in')
-)
 
 WEIGHT = (
     ('5', 'Excellent'),
@@ -21,72 +11,99 @@ WEIGHT = (
     ('1', 'None')
 )
 MATH = (
-    ('2DGR', '2 Dimensional Geometric Relationships'),
-    ('3DGR', '3 Dimensional Geometric Relationships'),
-    ('AC', 'Accuracy and Percision'),
-    ('AG', 'Analytical Geometry'),
-    ('ANTISYM', 'Antisymmetry'),
-    ('AMATH', 'Applied Mathematics'),
-    ('ASYM', 'Asymmetry'),
-    ('CAL', 'Calculation'),
-    ('CONG', 'Congruency'),
-    ('COOSYS', 'Coordinating System'),
-    ('COUNT', 'Counting'),
-    ('CURVES', 'Curves'),
-    ('EQU', ' Equation'),
-    ('ETHMATH', 'Ethnomathematics'),
-    ('FIBO', 'Fibonacci'),
-    ('FMATH', 'Formulate, Mathematical Symbols'),
-    ('FRACT', 'Fractals'),
-    ('GRT', 'Golden Ratio'),
-    ('GEQU', 'Graph Equations'),
-    ('GRPH', 'Graphs'),
-    ('INFT', 'Infinity'),
-    ('MTHK', 'Mathematical Thinking'),
-    ('COSM', 'Mathematics in the Cosmos'),
-    ('MSUM', 'Measurement'),
-    ('LINE', 'Linearity'),
-    ('NUM', 'Numbers'),
-    ('PTT', 'Patterns'),
-    ('PLGO', 'Planar Geometrical Objects'),
-    ('PSOL', 'Problem Solving'),
-    ('PRF', 'Proof'),
-    ('PROP', 'Proportions'),
-    ('PYTT', 'Pythagorean Theorem'),
-    ('RFMA', 'Reflection on Math Anxiety'),
-    ('RFHM', 'Reference to History of Math'),
-    ('RFME', 'Reflection on Mathematics Education'),
-    ('SEQ', 'Sequences'),
-    ('SING', 'Singualarity'),
-    ('SYMM', 'Symmetry'),
-    ('TESS', 'Tessellation'),
-    ('VCAL', 'Vector Calculus')
+    ('1', '2 Dimensional Geometric Relationships'),
+    ('2', '3 Dimensional Geometric Relationships'),
+    ('3', 'Accuracy and Percision'),
+    ('4', 'Analytical Geometry'),
+    ('5', 'Antisymmetry'),
+    ('6', 'Applied Mathematics'),
+    ('7', 'Asymmetry'),
+    ('8', 'Calculation'),
+    ('9', 'Congruency'),
+    ('10', 'Coordinating System'),
+    ('11', 'Counting'),
+    ('12', 'Curves'),
+    ('13', ' Equation'),
+    ('14', 'Ethnomathematics'),
+    ('15', 'Fibonacci'),
+    ('16', 'Formulate, Mathematical Symbols'),
+    ('17', 'Fractals'),
+    ('18', 'Golden Ratio'),
+    ('19', 'Graph Equations'),
+    ('20', 'Graphs'),
+    ('21', 'Infinity'),
+    ('22', 'Mathematical Thinking'),
+    ('23', 'Mathematics in the Cosmos'),
+    ('24', 'Measurement'),
+    ('25', 'Linearity'),
+    ('26', 'Numbers'),
+    ('27', 'Patterns'),
+    ('28', 'Planar Geometrical Objects'),
+    ('29', 'Problem Solving'),
+    ('30', 'Proof'),
+    ('31', 'Proportions'),
+    ('32', 'Pythagorean Theorem'),
+    ('33', 'Reflection on Math Anxiety'),
+    ('34', 'Reference to History of Math'),
+    ('35', 'Reflection on Mathematics Education'),
+    ('36', 'Sequences'),
+    ('37', 'Singualarity'),
+    ('38', 'Symmetry'),
+    ('39', 'Tessellation'),
+    ('40', 'Vector Calculus')
 )
 
-class EvalD1A(models.Model):
-    biodetails = MultiSelectField(choices=VALIDATE_SUBMISSION, max_choices=1)
-    picview = MultiSelectField(choices=VALIDATE_SUBMISSION, max_choices=1)
-    paragraphsview = MultiSelectField(choices=VALIDATE_SUBMISSION,
-                                      max_choices=1)
-    comment = models.TextField(blank=True, max_length=200)
-
-class EvalD1B(models.Model):
-    workpicq = MultiSelectField(choices=QUALITY_SIFT, max_choices=1)
-    answersq = MultiSelectField(choices=QUALITY_SIFT, max_choices=1)
-    originq = MultiSelectField(choices=QUALITY_SIFT, max_choices=1)
+class D1A(models.Model):
+    imgq = models.IntegerField(blank=True, null=True)
+    answersq = models.IntegerField(blank=True, null=True)
+    originq = models.IntegerField(blank=True, null=True)
     revisit = models.BooleanField(default=False)
-    comment = models.TextField(blank=True, max_length=200)
+    comment = models.TextField(blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-class EvalD1C(models.Model):
-    qualitysift = MultiSelectField(choices=QUALITY_SIFT, max_choices=1)
-    comment = models.TextField(blank=True, max_length=200)
+    class Meta:
+        permissions = (
+            ('create_D1A', 'can create D1A'),
+            ('update_D1A', 'can update D1A'),
+            ('view_D1A', 'can view D1A'),
+        )
 
-class EvalD2(models.Model):
-    math = MultiSelectField(choices=MATH, max_choices=45)
-    q1 = MultiSelectField(choices=WEIGHT, max_choices=1)
-    q2 = MultiSelectField(choices=WEIGHT, max_choices=1)
-    q3 = MultiSelectField(choices=WEIGHT, max_choices=1)
-    q4 = MultiSelectField(choices=WEIGHT, max_choices=1)
-    score = models.IntegerField(blank=True, max_length=20)
+class D1B(models.Model):
+    workis = models.IntegerField(blank=True, null=True)
+    comment = models.TextField(blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    #def save(self):
+class D2(models.Model):
+    math = ArrayField(
+        models.CharField(choices=MATH, max_length=50, blank=True, null=True),
+    )
+    q1 = models.IntegerField(blank=True, null=True)
+    q2 = models.IntegerField(blank=True, null=True)
+    q3 = models.IntegerField(blank=True, null=True)
+    q4 = models.IntegerField(blank=True, null=True)
+    score = models.FloatField(null=True, blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.score = self.q1+self.q2+self.q3+self.q4
+        super(D2, self).save(*args, **kwargs)
+
+class D3(models.Model):
+    q1 = models.IntegerField(blank=True, null=True)
+    q2 = models.IntegerField(blank=True, null=True)
+    q3 = models.IntegerField(blank=True, null=True)
+    q4 = models.IntegerField(blank=True, null=True)
+    score = models.FloatField(null=True, blank=True)
+    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.score = self.q1+self.q2+self.q3+self.q4
+        super(D2, self).save(*args, **kwargs)
