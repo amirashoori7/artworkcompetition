@@ -14,30 +14,34 @@ class School(models.Model):
         return self.name
 
 class Artwork(models.Model):
-    worktitle = models.CharField(max_length=300)
+    firstname = models.CharField(max_length=200)
+    surname = models.CharField(max_length=200, db_index=True)
+    email = models.EmailField(max_length=100)
+    dob = models.DateField(null=True)
+    age = models.IntegerField(editable=False, null=True)
+    cellphone = models.CharField(blank=True, null=True, max_length=100)
+    learnergrade = models.CharField(blank=True, null=True, max_length=100)
+    bioapproved = models.BooleanField(default=False)
+    parentname = models.CharField(blank=True, max_length=200)
+    parentphone = models.CharField(blank=True, null=True, max_length=100)
+    parentemail = models.EmailField(blank=True, max_length=100)
     school = models.ForeignKey(School,
                                related_name='artworks',
                                on_delete=models.CASCADE)
-    surname = models.CharField(max_length=200, db_index=True)
-    firstname = models.CharField(max_length=200)
-    workfile = models.ImageField(upload_to='works')
-    email = models.CharField(max_length=200)
-    dob = models.DateField(null=True)
-    age = models.IntegerField(editable=False, null=True)
-    parentname = models.CharField(blank=True, max_length=200)
-    parentphone = models.CharField(blank=True, max_length=200)
-    parentemail = models.CharField(blank=True, max_length=200)
-    learnergrade = models.CharField(blank=True, max_length=50)
     teachername = models.CharField(blank=True, max_length=300)
-    teacherphone = models.CharField(blank=True, max_length=200)
-    teacheremail = models.CharField(blank=True, max_length=200)
+    teacherphone = models.CharField(blank=True, null=True, max_length=100)
+    teacheremail = models.EmailField(blank=True, max_length=100)
+    worktitle = models.CharField(max_length=300)
+    workfile = models.ImageField(upload_to='works')
+    workapproved = models.BooleanField(default=False)
     testimonial = models.BooleanField(default=False)
     question1 = models.TextField(blank=True)
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
+    qapproved = models.BooleanField(default=False)
     submitted = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField()
-    d1a = models.OneToOneField('evaluation.D1A', blank=True,
+    d1a = models.ForeignKey('evaluation.D1A', blank=True,
                                     null=True, on_delete=models.CASCADE)
     d1b = models.ForeignKey('evaluation.D1B', blank=True,
                                  null=True, on_delete=models.CASCADE)
