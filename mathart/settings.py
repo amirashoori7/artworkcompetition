@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'account.ProjectUser'
-AUTHENTICATION_BACKENDS = ('backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	'NAME': 'mathart',
-	'USER': 'postgres',
-	'PASSWORD': 'root',
+	'NAME': 'mathartamirs',
+	'USER': 'mathartuser',
+	'PASSWORD': 'mathartuser',
 	'HOST':	'localhost',
 	'PORT': '5432',
     }
