@@ -78,9 +78,9 @@
 							placeholder="Search.." onclick="dropDownFunction()" id="school"
 							name="school" autocomplete="off" onkeyup="filterFunction()">
 						<div id="schoolDropdown" class="dropdown-content">
-							{% for school in schools %} <a href="#"
-								onclick="$('#schools').val($(this).html());dropDownFunction();">{{
-								school.name }}</a> {% endfor %}
+							{% for school in schools %}
+              <a onclick="$('#school').val($(this).html());dropDownFunction();">{{ school.name }}<a>
+              {% endfor %}
 						</div>
 					</div>
 				</div>
