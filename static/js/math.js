@@ -7,10 +7,6 @@ function windowLayoutFitSize() {
 	var frameWidth = frameHeight + (frameHeight * 13 / 21)
 	$(".page-content").width(frameWidth)
 	$(".page-content").height(frameHeight)
-	$(".page-content").css({
-		"left": ($(window).width() - $(".page-content").width()) / 2 + "px",
-		"top": ($(window).height() - $(".page-content").height()) / 2 + "px"
-	})
 	if ($(window).width() < $(window).height()) {
 		isHorizontal = false;
 	}
@@ -23,7 +19,15 @@ function loadContent(liItem) {
 		tweenMenuShow.reverse()
 		$("div.page-content").fadeIn()
 		TweenMax.fromTo(".page-content", 1, { scaleY: 0, scaleX: 0, rotation: -180 },
-			{ scaleY: 1, scaleX: 1, rotation: 0, transformOrigin: "center" })
+			{ 
+			scaleY: 1, 
+			scaleX: 1, 
+			rotation: 0, 
+			left: ($(window).width() - $(".page-content").width()) / 2, 
+			top: ($(window).height() - $(".page-content").height()) / 2 + "px", 
+			transformOrigin: "center" 
+		})
+			
 	})
 }
 $(window).bind('resize', function () {

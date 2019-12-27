@@ -1,160 +1,112 @@
-<form id="msform" method="POST"
-	class="needs-validation form-general-style"
-	enctype="multipart/form-data">
-	{% csrf_token %}
-	<!-- Tittle -->
-	<div class="form-title">
-		<h2>Entry Form</h2>
-		<ul id="progressbar">
-			<li class="active">Personal Info</li>
-			<li>School Information</li>
-			<li>Upload Artwork</li>
-		</ul>
-	</div>
-
-	<!-- fieldsets -->
-	<fieldset>
-		<div class="form-section" data-title="Personal Information">
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+		<form action="{% url 'artwork:entry_form' %}" method="post"
+			class="needs-validation" novalidate>
+			{% csrf_token %}
+			<h4 class="mb-3">Personal Information</h4>
 			<div class="row">
-				<div class="col-md-6">
-					<label for="firstname">First Name</label> <input type="text"
-						class="form-control" id="firstname" name="firstname"
-						placeholder="" value='{{form.firstname.value|default_if_none:""}}'
-						required>
-				</div>
-				<div class="col-md-6">
-					<label for="surname">Surname</label> <input type="text"
-						class="form-control" id="surname" name="surname" placeholder=""
-						value='{{form.surename.value|default_if_none:""}}' required>
-				</div>
-				<div class="col-md-6">
-					<label for="dob">Date of Birth</label> <input type="date"
-						class="form-control" id="dob" name="dob" placeholder=""
-						value='{{form.dob.value|default_if_none:""}}' required>
-				</div>
-				<div class="col-md-6">
-					<label for="email">email</label> <input type="email"
-						class="form-control" id="email" name="email"
-						placeholder="you@example.com"
-						value='{{form.email.value|default_if_none:""}}' required>
-				</div>
-			</div>
-		</div>
-		<div class="form-section" data-title="Gaurdian Information">
-			<div class="row">
-				<div class="col-md-6">
-					<label for="parentname">Parent Name</label> <input type="text"
-						class="form-control" name="parentname" id="parentname"
-						placeholder=""
-						value='{{form.parentname.value|default_if_none:""}}' required>
-				</div>
-				<div class="col-md-6">
-					<label for="parentphone">Phone Number</label> <input type="tel"
-						class="form-control" name="parentphone" id="parentphone"
-						placeholder=""
-						value='{{form.parentphone.value|default_if_none:""}}' required>
-				</div>
-				<div class="col-md-6">
-					<label for="parentemail">Email</label> <input type="text"
-						class="form-control" name="parentemail" id="parentemail"
+				<div class="col-md-6 mb-3">
+					<lable for="firstname">First Name</lable>
+					<input type="text" class="form-control" id="firstname"
 						placeholder="" value="" required>
 				</div>
-				<!-- <div class="col-md-6">
-            <label for="parentphone">Phone Number</label>
-            <input type="tel" class="form-control" id="parentphone" placeholder="" value="" required>
-          </div> -->
-			</div>
-		</div>
-		<!-- <button type="button" class="next action-button">Next</button>
-  </fieldset>
-  <fieldset> -->
-		<div class="form-section" data-title="School Information">
-			<div class="row">
-				<div class="col-md-6">
-					<label for="school">School</label>
-					<div class="dropdown">
-						<!-- <button onclick="dropDownFunction()" class="dropbtn">School</button> -->
-						<input type="text" class="form-control school-input"
-							placeholder="Search.." onclick="dropDownFunction()" id="school"
-							name="school" autocomplete="off" onkeyup="filterFunction()">
-						<div id="schoolDropdown" class="dropdown-content">
-							{% for school in schools %}
-              <a onclick="$('#school').val($(this).html());dropDownFunction();">{{ school.name }}<a>
-              {% endfor %}
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<label for="learnergrade">Learner Grade</label> <input
-						type="number" class="form-control" id="learnergrade"
-						placeholder="" value="" required>
-				</div>
-			</div>
-		</div>
-		<div class="form-section" data-title="Teacher Information">
-			<div class="row">
-				<div class="col-md-6">
-					<label for="teachername">Teacher Name</label> <input type="text"
-						class="form-control" id="teachername" placeholder="" value=""
-						required>
-				</div>
-				<div class="col-md-6">
-					<label for="teacheremail">Teacher Email</label> <input type="email"
-						class="form-control" id="teacheremail"
-						placeholder="you@example.com" value="" required>
-				</div>
-				<div class="col-md-6">
-					<label for="teacherphone">Teacher Phone</label> <input type="tel"
-						class="form-control" id="teacherphone" placeholder="" value=""
-						required>
-				</div>
-			</div>
-		</div>
-		<!-- <button type="button" class="action-button previous previous_button">Back</button>
-    <button type="button" class="next action-button">Continue</button> -->
-		<!-- </fieldset>
-  <fieldset> -->
-		<div class="form-section" data-title="Artwork Submission">
-			<div class="row">
-				<div class="col-md-12">
-					<label for="worktitle">Title</label> <input type="text"
-						class="form-control" id="worktitle" name="worktitle"
-						placeholder="" value="" required>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<label for="workfile">Upload Work File</label> <input type="file"
-						class="form-control" id="workfile" name="workfile" placeholder=""
+				<div class="col-md-6 mb-3">
+					<lable for="surname">Surname</lable>
+					<input type="text" class="form-control" id="surname" placeholder=""
 						value="" required>
 				</div>
 			</div>
-		</div>
-		<div class="form-section" data-title="Questions">
 			<div class="row">
-				<div class="col-md-12">
-					<label for="question1">Question1</label>
-					<textarea class="form-control" id="question1" name="question1"
-						rows="3"></textarea>
+				<div class="col-md-4 mb-3">
+					<lable for="email">Email</lable>
+					<input type="email" class="form-control" id="email" name="email"
+						placeholder="you@example.com" value="" required>
+				</div>
+				<div class="col-md-4 mb-3">
+					<lable for="parentname">Parent Name</lable>
+					<input type="text" class="form-control" id="parentname" name="parentname"
+						placeholder="" value="" required>
+				</div>
+				<div class="col-md-4 mb-3">
+					<lable for="parentphone">Parent Phone</lable>
+					<input type="tel" class="form-control" id="parentphone" name="parentphone"
+						placeholder="" value="" required>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
-					<label for="question2">Question2</label>
-					<textarea class="form-control" id="question2" name="question2"
-						rows="3"></textarea>
+				<div class="col-md-4 mb-3">
+					<lable for="school">School</lable>
+					<select class="custem-select d-block w-100" id="school" name="school" required>
+						<option value="">Choose...</option> {% for school in schools %}
+						<option value="{{ school.name }}">{{ school.name }}{% endfor %}
+					</select>
+				</div>
+				<div class="col-md-4 mb-3">
+					<lable for="teachername">Teacher Name</lable>
+					<input type="text" class="form-control" id="teachername" name="teachername"
+						placeholder="" value="" required>
+				</div>
+				<div class="col-md-4 mb-3">
+					<lable for="teacheremail">Teacher Email</lable>
+					<input type="email" class="form-control" id="teacheremail" name="teachermail"
+						placeholder="you@example.com" value="" required>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
-					<label for="question3">Question3</label>
-					<textarea class="form-control" id="question3" name="question3"
-						rows="3"></textarea>
+				<div class="col-md-4 mb-3">
+					<lable for="dob">Date of Birth</lable>
+					<input type="date" class="form-control" id="dob" placeholder="" name="dob"
+						value="" required>
+				</div>
+				<div class="col-md-4 mb-3">
+					<lable for="learnergrade">Learner Grade</lable>
+					<input type="number" class="form-control" id="learnergrade" name="learnergrade"
+						placeholder="" value="" required>
+				</div>
+				<div class="col-md-4 mb-3">
+					<lable for="teacherphone">Teacher Phone</lable>
+					<input type="tel" class="form-control" id="teacherphone" name="teacherphone"
+						placeholder="" value="" required>
 				</div>
 			</div>
-		</div>
-		<!-- <button type="button" class="action-button previous previous_button">Back</button> -->
-		<button type="submit" class="action-button">Finish</button>
-	</fieldset>
-</form>
-<script src="static/js/entry.form.js"></script>
+			<br>
+			<h4 class="mb-3">Artwork Information</h4>
+			<div class="row">
+				<div class="col-md-4 mb-3">
+					<lable for="workfile">Upload Work File</lable>
+					<input type="file" class="form-control" id="workfile" name="workfile"
+						placeholder="" value="" required>
+				</div>
+				<div class="col-md-8 mb-3">
+					<lable for="surname">Work Title</lable>
+					<input type="text" class="form-control" id="worktilte" name="worktitle"
+						placeholder="" value="" required>
+				</div>
+			</div>
+			<br>
+			<h4 class="mb-3">Please answer the following questions:</h4>
+			<div class="row">
+				<div class="col-md-12 mb-3">
+					<lable for="question1">Question 1</lable>
+					<textarea class="form-control" id="question1" name="question1" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 mb-3">
+					<lable for="question2">Question 2</lable>
+					<textarea class="form-control" id="question2" name="question2" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 mb-3">
+					<lable for="question3">Question 3</lable>
+					<textarea class="form-control" id="question3" name="question3" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="col text-center">
+				<button class="btn btn-primary btn-lg" type="submit">
+					Submit</button>
+			</div>
+		</form>
+	</div>
+</div>

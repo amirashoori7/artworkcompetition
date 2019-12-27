@@ -6,10 +6,8 @@ from django.urls import reverse
 class School(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     address = models.CharField(max_length=500)
-
     class Meta:
         ordering = ('name',)
-
     def __str__(self):
         return self.name
 
