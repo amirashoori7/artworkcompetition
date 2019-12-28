@@ -49,12 +49,17 @@ def work_details(request, id):
 
 
 def entry_form(request):
-    schools = School.objects.all()
-    form = EntryForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+    #schools = School.objects.all()
+    if request.method == 'POST':
+        form = EntryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Thank you")
+        else:
+            print (form.errors)
+            return HttpResponse("Form Not Valid")
+    else:
+        form = EntryForm()
 
-    context = {'form': form, 'schools': schools}
-    #after form is saved, return render must redirect to form success template
-    #i will fix it later, like i'm going to do for eval forms
+    context = {'form': form}
     return render(request, 'entry_form.html', context)
