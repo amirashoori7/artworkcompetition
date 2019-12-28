@@ -9,7 +9,6 @@ class EntryForm(forms.ModelForm):
                   'school', 'workfile', 'email',
                   'dob', 'parentname', 'parentemail',
                   'parentphone', 'learnergrade', 'teachername',
-                  'teacheremail', 'teacherphone', 'testimonial',
+                  'teacheremail', 'teacherphone', 'cellphone',
                   'question1', 'question2', 'question3']
-        labels = {'firstname': 'First Name'}
 

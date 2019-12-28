@@ -42,7 +42,6 @@ class Migration(migrations.Migration):
                 ('teachername', models.CharField(blank=True, max_length=300)),
                 ('teacherphone', models.CharField(blank=True, max_length=100, null=True)),
                 ('teacheremail', models.EmailField(blank=True, max_length=100)),
-                ('testimonial', models.BooleanField(default=False)),
                 ('question1', models.TextField(blank=True)),
                 ('question2', models.TextField(blank=True)),
                 ('question3', models.TextField(blank=True)),

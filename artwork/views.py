@@ -65,9 +65,9 @@ def entry_form(request):
     schools = School.objects.all()
     form = EntryForm(request.POST or None)
     if(request.method =='POST'): 
-#         if form.is_valid():
-        form.save()
-        context = {'form': form, 'schools': schools, 'JsonResponse' : JsonResponse({'success':True})}
+        if form.is_valid():
+            form.save()
+            context = {'form': form, 'schools': schools}
 #         else:
 #             context = {'form': form, 'schools': schools, 'JsonResponse' : JsonResponse({'error':form.errors})}
     else:
