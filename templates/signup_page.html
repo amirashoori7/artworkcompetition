@@ -12,14 +12,14 @@
                         type: "POST",
                         url: "{% url 'artwork:entry_form' %}",
                         success: function (response) {
-                            if (response['success']) {
-                                alert("<div class='alert alert-success'> Succesfully sent feedback, thank you!</div > ");
-                            }
-                            if (response['error']) {
-                                alert("<div class='alert alert-danger'>" +
-                                    response['error'] + "</div>");
-                                console.log(response['error'])
-                            }
+//                             if (response['success']) {
+//                                 alert("<div class='alert alert-success'> Succesfully sent feedback, thank you!</div > ");
+//                             }
+//                             if (response['error']) {
+//                                 alert("<div class='alert alert-danger'>" +
+//                                     response['error'] + "</div>");
+                                console.log(response)
+//                             }
                             alert(1)
                         },
                         error: function (request, status, error) {

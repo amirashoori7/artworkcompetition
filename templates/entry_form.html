@@ -44,7 +44,7 @@
 				<div class="col-md-4 mb-3">
 					<lable for="school">School</lable>
 					<select class="custem-select d-block w-100" id="school" name="school" required>
-						<option value="">Choose...</option> {% for school in schools %}
+						<option value="">Choose...</option> {% for school in school %}
 						<option value="{{ school.name }}">{{ school.name }}{% endfor %}
 					</select>
 				</div>

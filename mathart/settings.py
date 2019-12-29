@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'account',#account.apps.AccountConfig
     'artwork',
     'evaluation',
+    'django_postgres_dropdb',
     'rest_framework',
 ]
 
