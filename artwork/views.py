@@ -63,7 +63,7 @@ def signup_page(request):
 
 def entry_form(request):
 # <<<<<<< HEAD
-#     schools = School.objects.all()
+    schools = School.objects.all()
 #     form = EntryForm(request.POST or None)
 #     if(request.method =='POST'): 
 #         if form.is_valid():
@@ -85,6 +85,5 @@ def entry_form(request):
 #             return HttpResponse("Form Not Valid")
     else:
         form = EntryForm()
-    context = {'form': form}
-# >>>>>>> master
+    context = {'form': form, 'schools': schools}
     return render(request, 'entry_form.html', context)

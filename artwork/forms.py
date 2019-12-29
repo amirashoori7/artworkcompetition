@@ -2,7 +2,7 @@ from django import forms
 from .models import Artwork, School
 
 class EntryForm(forms.ModelForm):
-    school = forms.ModelChoiceField(
+    schools = forms.ModelChoiceField(
         queryset=School.objects.all(),
         to_field_name="name"
     )

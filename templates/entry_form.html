@@ -23,8 +23,8 @@
 						placeholder="you@example.com" value="" required>
 				</div>
 				<div class="col-md-6 mb-3">
-					<lable for="parentname">Cellphone</lable>
-					<input type="text" class="form-control" id="parentname" name="parentname"
+					<lable for="cellphone">Cellphone</lable>
+					<input type="text" class="form-control" id="cellphone" name="cellphone"
 						placeholder="" value="" required>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 				<div class="col-md-4 mb-3">
 					<lable for="school">School</lable>
 					<select class="custem-select d-block w-100" id="school" name="school" required>
-						<option value="">Choose...</option> {% for school in school %}
+						<option value="">Choose...</option> {% for school in schools %}
 						<option value="{{ school.name }}">{{ school.name }}{% endfor %}
 					</select>
 				</div>
