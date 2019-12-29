@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'account.ProjectUser'
-AUTHENTICATION_BACKENDS = ('backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
