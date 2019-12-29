@@ -62,14 +62,29 @@ def signup_page(request):
 
 
 def entry_form(request):
-    schools = School.objects.all()
-    form = EntryForm(request.POST or None)
-    if(request.method =='POST'): 
+# <<<<<<< HEAD
+#     schools = School.objects.all()
+#     form = EntryForm(request.POST or None)
+#     if(request.method =='POST'): 
+#         if form.is_valid():
+#             form.save()
+#             context = {'form': form, 'schools': schools}
+#          else:
+#              context = {'form': form, 'schools': schools, 'JsonResponse' : JsonResponse({'error':form.errors})}
+#     else:
+#         context = {'form': form, 'schools': schools}
+# =======
+    #schools = School.objects.all()
+    if request.method == 'POST':
+        form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            context = {'form': form, 'schools': schools}
-#         else:
-#             context = {'form': form, 'schools': schools, 'JsonResponse' : JsonResponse({'error':form.errors})}
+#             return HttpResponse("Thank you")
+        else:
+            print (form.errors)
+#             return HttpResponse("Form Not Valid")
     else:
-        context = {'form': form, 'schools': schools}
+        form = EntryForm()
+    context = {'form': form}
+# >>>>>>> master
     return render(request, 'entry_form.html', context)
