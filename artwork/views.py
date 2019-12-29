@@ -54,7 +54,10 @@ def entry_form(request):
         form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponse("Thank you")
+            surname = form.cleaned_data['surname']
+            work = get_object_or_404(Artwork, surname=surname)
+            return render(request, 'submitted.html', {'work': work})
+            #return HttpResponse("Thank you")
         else:
             print (form.errors)
             return HttpResponse("Form Not Valid")
