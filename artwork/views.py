@@ -35,19 +35,6 @@ def work_lists(request):
     works = Artwork.objects.all()
     context = {'works': works}
     return render(request, 'work_lists.html', context)
-    '''
-    school = None
-    schools = School.objects.all()
-    works = Artwork.objects.all()
-    if school:
-        school = get_object_or_404(School)
-        works = works.filter(school=school)
-    return render(request,
-                  'works/list.html',
-                   {'school':school,
-                    'schools':schools,
-                    'works':works})
-    '''
 
 
 def work_details(request, id):
@@ -62,28 +49,12 @@ def signup_page(request):
 
 
 def entry_form(request):
-# <<<<<<< HEAD
-    schools = School.objects.all()
-#     form = EntryForm(request.POST or None)
-#     if(request.method =='POST'): 
-#         if form.is_valid():
-#             form.save()
-#             context = {'form': form, 'schools': schools}
-#          else:
-#              context = {'form': form, 'schools': schools, 'JsonResponse' : JsonResponse({'error':form.errors})}
-#     else:
-#         context = {'form': form, 'schools': schools}
-# =======
-    #schools = School.objects.all()
     if request.method == 'POST':
         form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-#             return HttpResponse("Thank you")
-        else:
-            print (form.errors)
-#             return HttpResponse("Form Not Valid")
     else:
         form = EntryForm()
+    schools = School.objects.all()
     context = {'form': form, 'schools': schools}
     return render(request, 'entry_form.html', context)

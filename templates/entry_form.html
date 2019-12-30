@@ -1,79 +1,122 @@
 <div class="row">
 	<div class="col-md-10 offset-md-1">
-		<form action="{% url 'artwork:entry_form' %}" method="post"
-			class="needs-validation" novalidate>
-			{% csrf_token %}
+		<form action="" method="post" id="entry-form-id"
+			class="needs-validation" novalidate enctype="multipart/form-data"
+			onsubmit="return submitEntryForm()">
+			{% csrf_token %} 
+			{% if form.errors %} 
+				{% for field in form %} 
+				{% for error in field.errors %}
+			<div class="alert alert-danger">
+				<strong>{{ error|escape }}</strong>
+			</div>
+				{% endfor %}
+				{% endfor %}
+			{% for error in form.non_field_errors %}
+			<div class="alert alert-danger">
+				<strong>{{ error|escape }}</strong>
+			</div>
+			{% endfor %} 
+			{% endif %}
+			<div class="error-message-box-container">
+				<div class="error-message-box">{{form.error|default_if_none:''
+					}}</div>
+			</div>
+			<div class="success-message-box-container">
+				<div class="success-message-box"></div>
+			</div>
 			<h4 class="mb-3">Personal Information</h4>
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<lable for="firstname">First Name</lable>
-					<input type="text" class="form-control" id="firstname" name="firstname"
-						placeholder="" value="" required>
+					<input type="text" class="form-control" id="firstname"
+						name="firstname" placeholder=""
+						value="{{ form.instance.firstname|default_if_none:'' }}" required>
 				</div>
 				<div class="col-md-6 mb-3">
 					<lable for="surname">Surname</lable>
-					<input type="text" class="form-control" id="surname" name="surname" placeholder=""
-						value="" required>
+					<input type="text" class="form-control" id="surname" name="surname"
+						placeholder=""
+						value="{{ form.instance.surname|default_if_none:'' }}" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<lable for="email">Email</lable>
 					<input type="email" class="form-control" id="email" name="email"
-						placeholder="you@example.com" value="" required>
+						placeholder="you@example.com"
+						value="{{ form.instance.email|default_if_none:'' }}" required>
 				</div>
 				<div class="col-md-6 mb-3">
 					<lable for="cellphone">Cellphone</lable>
-					<input type="text" class="form-control" id="cellphone" name="cellphone"
-						placeholder="" value="" required>
+					<input type="text" class="form-control" id="cellphone"
+						name="cellphone" placeholder=""
+						value="{{ form.instance.cellphone|default_if_none:'' }}" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<lable for="parentname">Parent Name</lable>
-					<input type="text" class="form-control" id="parentname" name="parentname"
-						placeholder="" value="" required>
+					<input type="text" class="form-control" id="parentname"
+						name="parentname" placeholder=""
+						value="{{ form.instance.parentname|default_if_none:'' }}" required>
 				</div>
 				<div class="col-md-6 mb-3">
 					<lable for="parentphone">Parent Phone</lable>
-					<input type="tel" class="form-control" id="parentphone" name="parentphone"
-						placeholder="" value="" required>
+					<input type="tel" class="form-control" id="parentphone"
+						name="parentphone" placeholder=""
+						value="{{ form.instance.parentphone|default_if_none:'' }}"
+						required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4 mb-3">
-					<lable for="school">School</lable>
-					<select class="custem-select d-block w-100" id="school" name="school" required>
-						<option value="">Choose...</option> {% for school in schools %}
-						<option value="{{ school.name }}">{{ school.name }}{% endfor %}
+					<lable for="school-dropdown">School</lable>
+					<input type="hidden" name="school" id="school"
+						value="{{ form.instance.school|default_if_none:'' }}" required>
+					<select class="custem-select d-block w-100" id="school-dropdown"
+						onchange="$('#school').val($('#school-dropdown').val())">
+						<option value="">Choose...</option> 
+						{% for sch in schools %}
+						<option value="{{ sch.name }}">{{ sch.name }} 
+						{% endfor %}
 					</select>
 				</div>
 				<div class="col-md-4 mb-3">
 					<lable for="teachername">Teacher Name</lable>
-					<input type="text" class="form-control" id="teachername" name="teachername"
-						placeholder="" value="" required>
+					<input type="text" class="form-control" id="teachername"
+						name="teachername" placeholder=""
+						value="{{ form.instance.teachername|default_if_none:'' }}"
+						required>
 				</div>
 				<div class="col-md-4 mb-3">
 					<lable for="teacheremail">Teacher Email</lable>
-					<input type="email" class="form-control" id="teacheremail" name="teachermail"
-						placeholder="you@example.com" value="" required>
+					<input type="email" class="form-control" id="teacheremail"
+						name="teachermail" placeholder="you@example.com"
+						value="{{ form.instance.teacheremail|default_if_none:'' }}"
+						required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4 mb-3">
 					<lable for="dob">Date of Birth</lable>
-					<input type="date" class="form-control" id="dob" placeholder="" name="dob"
-						value="" required>
+					<input type="date" class="form-control" id="dob" placeholder=""
+						name="dob" value="{{ form.instance.dob|default_if_none:'' }}"
+						required>
 				</div>
 				<div class="col-md-4 mb-3">
 					<lable for="learnergrade">Learner Grade</lable>
-					<input type="number" class="form-control" id="learnergrade" name="learnergrade"
-						placeholder="" value="" required>
+					<input type="number" class="form-control" id="learnergrade"
+						name="learnergrade" placeholder=""
+						value="{{ form.instance.learnergrade|default_if_none:'' }}"
+						required>
 				</div>
 				<div class="col-md-4 mb-3">
 					<lable for="teacherphone">Teacher Phone</lable>
-					<input type="tel" class="form-control" id="teacherphone" name="teacherphone"
-						placeholder="" value="" required>
+					<input type="tel" class="form-control" id="teacherphone"
+						name="teacherphone" placeholder=""
+						value="{{ form.instance.teacherphone|default_if_none:'' }}"
+						required>
 				</div>
 			</div>
 			<br>
@@ -81,13 +124,15 @@
 			<div class="row">
 				<div class="col-md-4 mb-3">
 					<lable for="workfile">Upload Work File</lable>
-					<input type="file" class="form-control" id="workfile" name="workfile"
-						placeholder="" value="" required>
+					<input type="file" class="form-control" id="workfile"
+						name="workfile" placeholder=""
+						value="{{ form.instance.workfile|default_if_none:'' }}" required>
 				</div>
 				<div class="col-md-8 mb-3">
 					<lable for="surname">Work Title</lable>
-					<input type="text" class="form-control" id="worktilte" name="worktitle"
-						placeholder="" value="" required>
+					<input type="text" class="form-control" id="worktitle"
+						name="worktitle" placeholder=""
+						value="{{ form.instance.worktitle|default_if_none:'' }}" required>
 				</div>
 			</div>
 			<br>
@@ -95,19 +140,22 @@
 			<div class="row">
 				<div class="col-md-12 mb-3">
 					<lable for="question1">Question 1</lable>
-					<textarea class="form-control" id="question1" name="question1" rows="5"></textarea>
+					<textarea class="form-control" id="question1" name="question1"
+						rows="5">{{ form.instance.question1|default_if_none:'' }}</textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 mb-3">
 					<lable for="question2">Question 2</lable>
-					<textarea class="form-control" id="question2" name="question2" rows="5"></textarea>
+					<textarea class="form-control" id="question2" name="question2"
+						rows="5">{{ form.instance.question2|default_if_none:'' }}</textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 mb-3">
 					<lable for="question3">Question 3</lable>
-					<textarea class="form-control" id="question3" name="question3" rows="5"></textarea>
+					<textarea class="form-control" id="question3" name="question3"
+						rows="5">{{ form.instance.question3|default_if_none:'' }}</textarea>
 				</div>
 			</div>
 			<div class="col text-center">

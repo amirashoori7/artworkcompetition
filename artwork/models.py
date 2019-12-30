@@ -12,7 +12,7 @@ class School(models.Model):
         return self.name
 
 class Artwork(models.Model):
-    firstname = models.CharField(max_length=200)
+    firstname = models.CharField(max_length=200, default='AMS')
     surname = models.CharField(max_length=200, db_index=True)
     email = models.CharField(blank=True, null=True, max_length=100)
     dob = models.DateField(blank=True, null=True)
@@ -23,9 +23,6 @@ class Artwork(models.Model):
     parentname = models.CharField(blank=True, max_length=200)
     parentphone = models.CharField(blank=True, null=True, max_length=100)
     parentemail = models.CharField(blank=True, null=True, max_length=100)
-#     school = models.ForeignKey(School,
-#                                related_name='artworks',
-#                                on_delete=models.CASCADE)
     school = models.CharField(blank=True, null=True, max_length=100)
     teachername = models.CharField(blank=True, max_length=300)
     teacherphone = models.CharField(blank=True, null=True, max_length=100)
@@ -66,6 +63,7 @@ class Artwork(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.surname, self.firstname)
+    
 
 '''
 #Custom Object Manager

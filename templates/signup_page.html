@@ -1,42 +1,61 @@
 <!-- Multi step form -->
 <script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "{% url 'artwork:entry_form' %}",
-            success: function (response) {
-                $(".multi_step_form").html(response);
-                $('#msform').on('submit', function (event) {
-                    event.preventDefault();
-                    $.ajax({
-                        data: $('#msform').serialize(),
-                        type: "POST",
-                        url: "{% url 'artwork:entry_form' %}",
-                        success: function (response) {
-//                             if (response['success']) {
-//                                 alert("<div class='alert alert-success'> Succesfully sent feedback, thank you!</div > ");
-//                             }
-//                             if (response['error']) {
-//                                 alert("<div class='alert alert-danger'>" +
-//                                     response['error'] + "</div>");
-                                console.log(response)
-//                             }
-                            alert(1)
-                        },
-                        error: function (request, status, error) {
-                            console.log(request.responseText);
-                        }
-                    })
-                });
-            },
-            error: function (request, status, error) {
-                console.log(request.responseText);
-            }
-        });
-        // $("#msform").submit(function (event) {
-        //     event.preventDefault();
+	$(document).ready(function() {
+		$.ajax({
+			url : "{% url 'artwork:entry_form' %}",
+			success : function(response) {
+				$(".multi_step_form").html(response);
+				console.log(response)
+			},
+			error : function(request, status, error) {
+				console.log(request.responseText);
+			}
+		});
+	})
 
-        // });
-    })
+	function submitEntryForm() {
+		console.log($('#entry-form-id').serialize())
+		$.ajax({
+			data : $('#entry-form-id').serialize(),
+			type : "POST",
+			url : "{% url 'artwork:entry_form' %}",
+			beforeSend : function(xhr, settings) {
+				function getCookie(name) {
+					var cookieValue = null;
+					if (document.cookie && document.cookie != '') {
+						var cookies = document.cookie.split(';');
+						for (var i = 0; i < cookies.length; i++) {
+							var cookie = $.trim(cookies[i]);
+							if (cookie.substring(0, name.length + 1) == (name + '=')) {
+								cookieValue = decodeURIComponent(cookie
+										.substring(name.length + 1));
+								break;
+							}
+						}
+					}
+					return cookieValue;
+				}
+				if (!(/^http:.*/.test(settings.url) || /^https:.*/
+						.test(settings.url))) {
+					xhr.setRequestHeader("X-CSRFToken",
+							getCookie('csrftoken'));
+				}
+			},
+			success : function(response) {
+				$(".multi_step_form").html(response);
+// 				$("#school").val($('#school').val());
+				return false;
+			},
+			error : function(request, status, error) {
+				console.log(request.responseText);
+				return false;
+			},
+			complete : function(response) {
+				$(".multi_step_form").html(response);
+				return false;
+			}
+		})
+		return false;
+	}
 </script>
-<section class="multi_step_form">
-</section>
+<section class="multi_step_form"></section>

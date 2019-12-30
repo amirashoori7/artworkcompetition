@@ -54,7 +54,7 @@
   font-weight: bold;
 }
 
-.multi_step_form #msform {
+.multi_step_form #entry-form-id {
   text-align: center;
   position: relative;
   margin: 0 auto;
@@ -62,7 +62,7 @@
 }
 
 
-.multi_step_form #msform fieldset {
+.multi_step_form #entry-form-id fieldset {
   border: 0;
   padding: 33px 22px;
   position: relative;
@@ -71,7 +71,7 @@
   right: 0;
 }
 
-.multi_step_form #msform fieldset:not(:first-of-type) {
+.multi_step_form #entry-form-id fieldset:not(:first-of-type) {
   display: none;
 }
 
