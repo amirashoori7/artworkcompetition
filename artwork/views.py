@@ -54,7 +54,7 @@ def entry_form(request):
         if form.is_valid():
             form = form.save()
             returnedform = get_object_or_404(form)
-        return JsonResponse(returnedform)
+            return JsonResponse(returnedform)
     else:
         #dropdown values
         schools = School.objects.all()
