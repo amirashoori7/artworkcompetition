@@ -1,36 +1,34 @@
 <!-- Multi step form -->
 <script>
-	$(document).ready(
-			function() {
-				$.ajax({
-					url : "{% url 'artwork:entry_form' %}",
-					success : function(response) {
-						$(".multi_step_form").html(response);
-						$('#buttonSubmit').click(
-								function(event) {
-									event.preventDefault();
-									submitEntryForm()
-								});
-					},
-					error : function(request, status, error) {
-						console.log(request.responseText);
-					}
+	$(document).ready(function() {
+		$.ajax({
+			url : "{% url 'artwork:entry_form' %}",
+			success : function(response) {
+				$(".multi_step_form").html(response);
+				$('#entry-form-id').submit(function(event) {
+					event.preventDefault();
+					submitEntryForm()
 				});
-			})
+			},
+			error : function(request, status, error) {
+				console.log(request.responseText);
+			}
+		});
+	})
 
 	function submitEntryForm() {
-		var form = $('#fentry-form-id')[0];
+		var form = $('#entry-form-id')[0];
 		$("#buttonSubmit").prop("disabled", true);
-        var data = new FormData(form);
+		var data = new FormData(form);
 		$
 				.ajax({
-					type: "POST",
-		            enctype: 'multipart/form-data',
-		            data: data,
-		            processData: false,
-		            contentType: false,
-		            cache: false,
-		            timeout: 60000,
+					type : "POST",
+					enctype : 'multipart/form-data',
+					data : data,
+					processData : false,
+					contentType : false,
+					cache : false,
+					timeout : 60000,
 					url : "{% url 'artwork:entry_form' %}",
 					beforeSend : function(xhr, settings) {
 						function getCookie(name) {
@@ -55,20 +53,17 @@
 						}
 					},
 					success : function(response) {
-						console.log("SUBMITTED ENTRY FORM " + response)
 						$(".multi_step_form").html(response);
-						// 				$("#school").val($('#school').val());
+						$('#entry-form-id').submit(function(event) {
+							event.preventDefault();
+							submitEntryForm()
+						});
 					},
 					error : function(request, status, error) {
 						console.log(request.responseText);
 					},
 					complete : function(response) {
-						$(".multi_step_form").html(response);
-						$('#buttonSubmit').click(
-								function(event) {
-									event.preventDefault();
-									submitEntryForm()
-								});
+						$("#buttonSubmit").prop("disabled", false);
 					}
 				})
 	}

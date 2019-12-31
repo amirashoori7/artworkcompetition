@@ -50,16 +50,15 @@ def signup_page(request):
 
 def entry_form(request):
     if request.POST:
-        form = EntryForm(request.POST,request.FILES)
+        form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            surname = form.cleaned_data['surname']
-            work = get_object_or_404(Artwork, surname=surname)
+            work = get_object_or_404(Artwork)
             return render(request, 'submitted.html', {'work': work})
-            #return HttpResponse("Thank you")
         else:
             print (form.errors)
             return HttpResponse("Form Not Valid")
     schools = School.objects.all()
+    form = EntryForm()   
     context = {'form': form, 'schools': schools}
     return render(request, 'entry_form.html', context)
