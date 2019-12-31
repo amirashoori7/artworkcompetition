@@ -9,7 +9,7 @@ class SchoolAdmin(admin.ModelAdmin):
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
     list_display = ['surname', 'firstname', 'worktitle',
-                     'school', 'dob', 'age',
+                     'school', 'dob',
                       'parentname', 'teachername']
     list_filter = ['surname', 'school', 'worktitle']
     #list_editable = ['']

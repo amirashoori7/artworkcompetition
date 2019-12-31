@@ -35,7 +35,7 @@ def work_lists(request):
     works = Artwork.objects.all()
     context = {'works': works}
     return render(request, 'work_lists.html', context)
-
+ 
 
 def work_details(request, id):
     work = get_object_or_404(Artwork, id=id)
@@ -49,8 +49,8 @@ def signup_page(request):
 
 
 def entry_form(request):
-    if request.method == 'POST':
-        form = EntryForm(request.POST, request.FILES)
+    if request.POST:
+        form = EntryForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
     else:
