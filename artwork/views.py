@@ -49,14 +49,28 @@ def signup_page(request):
 
 
 def entry_form(request):
-    form = EntryForm(request.POST, request.FILES)
-    if request.POST:
+        #schools = School.objects.all()
+    if request.method == 'POST':
+        form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
-            form = form.save()
-            returnedform = get_object_or_404(form)
-            return JsonResponse(returnedform)
+            form.save()
+            surname = form.cleaned_data['surname']
+            work = get_object_or_404(Artwork, surname=surname)
+            return render(request, 'submitted.html', {'work': work})
+            #return HttpResponse("Thank you")
+        else:
+            print (form.errors)
+            return HttpResponse("Form Not Valid")
     else:
-        #dropdown values
-        schools = School.objects.all()
-        context = {'form': form, 'schools': schools}
-        return render(request, 'entry_form.html', context)
+        form = EntryForm()
+#     form = EntryForm(request.POST, request.FILES)
+#     if request.POST:
+#         if form.is_valid():
+#             form = form.save()
+#             returnedform = get_object_or_404(form)
+#             return JsonResponse(returnedform)
+#     else:
+#         #dropdown values
+#         schools = School.objects.all()
+#         context = {'form': form, 'schools': schools}
+#         return render(request, 'entry_form.html', context)
