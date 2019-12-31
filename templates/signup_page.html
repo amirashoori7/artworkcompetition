@@ -54,13 +54,14 @@
 					},
 					success : function(response) {
 						$(".multi_step_form").html(response);
+						console.log("SUCCESS >>>> "+response);
 						$('#entry-form-id').submit(function(event) {
 							event.preventDefault();
 							submitEntryForm()
 						});
 					},
 					error : function(request, status, error) {
-						console.log(request.responseText);
+						console.log("ERROR >>>> "+request.responseText);
 					},
 					complete : function(response) {
 						$("#buttonSubmit").prop("disabled", false);
