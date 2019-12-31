@@ -53,8 +53,13 @@ def entry_form(request):
         form = EntryForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-    else:
-        form = EntryForm()
+            surname = form.cleaned_data['surname']
+            work = get_object_or_404(Artwork, surname=surname)
+            return render(request, 'submitted.html', {'work': work})
+            #return HttpResponse("Thank you")
+        else:
+            print (form.errors)
+            return HttpResponse("Form Not Valid")
     schools = School.objects.all()
     context = {'form': form, 'schools': schools}
     return render(request, 'entry_form.html', context)
