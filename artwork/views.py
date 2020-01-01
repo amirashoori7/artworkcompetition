@@ -10,6 +10,7 @@ from .models import Artwork, School
 from .forms import EntryForm
 from django.http import HttpResponse
 from django.http.response import JsonResponse
+import json
 
 
 def index(request):
@@ -49,18 +50,21 @@ def signup_page(request):
 
 
 def entry_form(request):
-        #schools = School.objects.all()
-    if request.method == 'POST':
+    schools = School.objects.all()
+    if request.method == 'POST' or request.is_ajax():
         form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            surname = form.cleaned_data['surname']
-            work = get_object_or_404(Artwork, surname=surname)
-            return render(request, 'submitted.html', {'work': work})
-            #return HttpResponse("Thank you")
+            form = form.save()
         else:
             print (form.errors)
-            return HttpResponse("Form Not Valid")
+        return JsonResponse(json.dumps(form),
+            content_type="application/json")
+#             surname = form.cleaned_data['surname']
+#             work = get_object_or_404(Artwork, surname=surname)
+            #return HttpResponse("Thank you")
+#         else:
+#             print (form.errors)
+#             return HttpResponse("Form Not Valid")
     else:
         form = EntryForm()
 #     form = EntryForm(request.POST, request.FILES)
@@ -72,5 +76,5 @@ def entry_form(request):
 #     else:
 #         #dropdown values
 #         schools = School.objects.all()
-#         context = {'form': form, 'schools': schools}
-#         return render(request, 'entry_form.html', context)
+        context = {'form': form, 'schools': schools}
+        return render(request, 'entry_form.html', context)

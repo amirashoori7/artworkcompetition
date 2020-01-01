@@ -53,18 +53,20 @@
 						}
 					},
 					success : function(response) {
-						$(".multi_step_form").html(response);
-						console.log("SUCCESS >>>> "+response);
+						console.log("SUCCESS >>>> "+response)
+						$(".multi_step_form").html(response)
 						$('#entry-form-id').submit(function(event) {
 							event.preventDefault();
 							submitEntryForm()
 						});
 					},
-					error : function(request, status, error) {
-						console.log("ERROR >>>> "+request.responseText);
-					},
+					error : function(xhr,errmsg,err) {
+				        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+				        console.log(xhr); // provide a bit more info about the error to the console
+				    },
 					complete : function(response) {
-						$("#buttonSubmit").prop("disabled", false);
+						$("#buttonSubmit").prop("disabled", false)
+						return -1
 					}
 				})
 	}

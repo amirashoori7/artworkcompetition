@@ -13,7 +13,7 @@ class EntryForm(forms.ModelForm):
     class Meta:
         model = Artwork
         # fields = '__all__'
-        fields = ['worktitle', 'surname', 'firstname',
+        fields = ['worktitle', 'surname', 'firstname', 'id',
                   'school', 'workfile', 'email',
                   'dob', 'parentname', 'parentemail',
                   'parentphone', 'learnergrade', 'teachername',
