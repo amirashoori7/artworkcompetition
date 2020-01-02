@@ -53,17 +53,14 @@
 						}
 					},
 					success : function(response) {
-						console.log("SUCCESS >>>> "+response)
-						$(".multi_step_form").html(response)
-						$('#entry-form-id').submit(function(event) {
-							event.preventDefault();
-							submitEntryForm()
-						});
+						console.log(response)
+						$("#id").val(response.id)
+						toggleMessageBox(response.result, false)
 					},
-					error : function(xhr,errmsg,err) {
-				        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-				        console.log(xhr); // provide a bit more info about the error to the console
-				    },
+					error : function(xhr, errmsg, err) {
+						console.log(xhr.status + ": " + xhr.responseText)
+						toggleMessageBox(xhr.responseText, true)
+					},
 					complete : function(response) {
 						$("#buttonSubmit").prop("disabled", false)
 						return -1

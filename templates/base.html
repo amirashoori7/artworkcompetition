@@ -25,17 +25,17 @@
 <body>
 	<main role="main" class="container">
 	<div id="main-body">
-		<div class="error-message-box-container">
-			<div class="error-message-box"></div>
-		</div>
-		<div class="success-message-box-container">
-			<div class="success-message-box"></div>
-		</div>
 		<canvas id="universe"></canvas>
 		<!-- <img src="static/img/icons/sitting.svg" class="background-sitting"> -->
 		<div id="main-frame">
 			<div class="menu-icon"></div>
-
+			<div class="message-box-container">
+				<div class="message-box error-message-box"></div>
+				<div class="message-box success-message-box"></div>
+				<div class="return-button" onclick="toggleMessageBox(null, null)">
+				
+				</div>
+			</div>
 			<div class="menu-items-holder">
 				<ul class="menu-items menu-top">
 					<li class="menu-item" id="home"

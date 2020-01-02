@@ -11,6 +11,7 @@ function windowLayoutFitSize() {
 		isHorizontal = false;
 	}
 }
+
 function loadContent(liItem) {
 	$("div.page-content").hide()
 	var url = ""
@@ -38,11 +39,11 @@ $(document).ready(function () {
 	$(".menu-icon").load("static/img/icons/menu.svg", function () {
 		var tlMenu = new TimelineLite({
 			paused: true
-		});
+		})
 		tweenMenuShow = tlMenu.from(".menu-items-holder", .5, {
 			top: "-100%",
 			transformOrigin: "top"
-		});
+		})
 		tweenMenuShow.reverse()
 		$(this).on("click", function () {
 			if (tweenMenuShow.reversed())
@@ -52,44 +53,45 @@ $(document).ready(function () {
 		})
 	})
 	windowLayoutFitSize()
-});
+	loadUniverseBG()
+})
 
-$(window).on("load",
-	function () {
-		$(".menu-item").attr("onclick", "loadContent(this)")
-		// loadBackgroundAnimParticles()
-		loadUniverseBG()
-	})
+
+$(window).on("load", function () {
+	$(".menu-item").attr("onclick", "loadContent(this)")
+	// loadBackgroundAnimParticles()
+	toggleMessageBox(null, null)
+})
 
 function loadBackgroundAnimParticles() {
 	var canvas, ctx, w, h;
 
-	var h = $(window).height();
-	var w = $(window).width();
+	var h = $(window).height()
+	var w = $(window).width()
 
-	var canvas = document.createElement('canvas');
-	document.body.appendChild(canvas);
-	canvas.width = w;
-	canvas.height = h;
-	ctx = canvas.getContext('2d');
+	var canvas = document.createElement('canvas')
+	document.body.appendChild(canvas)
+	canvas.width = w
+	canvas.height = h
+	ctx = canvas.getContext('2d')
 
 	function paintCanvas() {
-		ctx.fillStyle = "rgba(22,77,122,1)";
-		ctx.fillRect(0, 0, w, h);
+		ctx.fillStyle = "rgba(22,77,122,1)"
+		ctx.fillRect(0, 0, w, h)
 	}
 
 
 	function particle(r, off, c) {
-		this.x = Math.random() * w;
-		this.y = Math.random() * h;
-		this.r = r;
-		this.offset = Math.random() * 50 + off;
+		this.x = Math.random() * w
+		this.y = Math.random() * h
+		this.r = r
+		this.offset = Math.random() * 50 + off
 		this.color = "rgba(255,255,255," + c + ")"
 		this.draw = function () {
-			ctx.fillStyle = this.color;
-			ctx.beginPath();
-			ctx.arc(this.x, this.y, this.r, Math.PI * 2, false);
-			ctx.fill();
+			ctx.fillStyle = this.color
+			ctx.beginPath()
+			ctx.arc(this.x, this.y, this.r, Math.PI * 2, false)
+			ctx.fill()
 		}
 
 	}
@@ -98,31 +100,31 @@ function loadBackgroundAnimParticles() {
 		layer_2 = [],
 		layer_3 = [];
 
-	var layer_1_num = 33;
-	var layer_2_num = 66;
-	var layer_3_num = 99;
+	var layer_1_num = 33
+	var layer_2_num = 66
+	var layer_3_num = 99
 
 
 	for (i = 0; i < layer_1_num; i++) {
-		layer_1.push(new particle(4, 11, 1));
+		layer_1.push(new particle(4, 11, 1))
 
 	}
 	for (i = 0; i < layer_2_num; i++) {
-		layer_2.push(new particle(2.5, 33, 1));
+		layer_2.push(new particle(2.5, 33, 1))
 	}
 	for (i = 0; i < layer_3_num; i++) {
-		layer_3.push(new particle(1, 66, 1));
+		layer_3.push(new particle(1, 66, 1))
 	}
 
 	function draw() {
 		for (i = 0; i < layer_1.length; i++) {
-			var p = layer_1[i];
-			p.draw();
-			update(p);
-			checkBounds(p);
+			var p = layer_1[i]
+			p.draw()
+			update(p)
+			checkBounds(p)
 			for (var j = i + 1; j < layer_3.length; j++) {
-				p2 = layer_3[j];
-				distance(p, p2, w * 1.5);
+				p2 = layer_3[j]
+				distance(p, p2, w * 1.5)
 			}
 
 		}
@@ -200,8 +202,8 @@ function loadBackgroundAnimParticles() {
 		requestAnimationFrame(animate);
 	}
 	// setInterval(function(){
-	// 	paintCanvas();
-	// 	draw();
+	// paintCanvas();
+	// draw();
 	// },30);
 	animate();
 }
@@ -302,7 +304,7 @@ function loadUniverseBG() {
 				universe.fillStyle = 'rgba(' + cometColor + ',' + this.opacity + ')';
 				universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false);
 
-				//comet tail
+				// comet tail
 				for (var i = 0; i < 30; i++) {
 					universe.fillStyle = 'rgba(' + cometColor + ',' + (this.opacity - (this.opacity / 20) * i) + ')';
 					universe.rect(this.x - this.dx / 4 * i, this.y - this.dy / 4 * i - 2, 2, 2);
@@ -366,14 +368,50 @@ function filterFunction() {
   var input, filter, a, i;
   input = $(".school-input");
   filter = input.val().toUpperCase();
-  div = $("#schoolDropdown");
+  div = $("#schoolDropdown")
   a = div.find("a");
   for (i = 0; i < a.length; i++) {
     txtValue = a[i].textContent || a[i].innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
+      a[i].style.display = ""
     } else {
-      a[i].style.display = "none";
+      a[i].style.display = "none"
     }
   }
+}
+
+
+var messageBoxTween;
+function toggleMessageBox(messageText, isError) {
+	if(messageText == null || messageBoxTween==null || !messageBoxTween.reversed()) {
+// THE FIRST TOGGLE AND WHEN BOX IS HIDDEN
+		$(".error-message-box").html("")
+		$(".success-message-box").html("")
+		var tl = new TimelineLite({paused: true})
+		messageBoxTween = tl.to(".message-box-container", .6, {
+			opacity: 1, 
+			width: "88%", 
+			height: "88%",
+			top: "5.5%",
+			left: "5.5%"
+		}).to(".message-box", .6, {
+			opacity: 1,
+			width: $(".page-content").width(),
+			top: parseInt($(".page-content").css("top")) + ($(".page-content").height() / 2) - ($(".message-box").height() / 2)
+		})
+		messageBoxTween.reverse()
+	} else {
+		// SHOWS ERROR MESSAGE
+		if(isError){
+			$(".error-message-box").html(messageText)
+			$(".success-message-box").html("")
+			$(".success-message-box").fadeOut()
+		} else {
+			// SHOWS SUCCESS MESSAGE
+			$(".error-message-box").html("")
+			$(".error-message-box").fadeOut()
+			$(".success-message-box").html(messageText)
+		}
+		messageBoxTween.play()
+	}
 }

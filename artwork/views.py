@@ -11,6 +11,7 @@ from .forms import EntryForm
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 import json
+from django.core import serializers
 
 
 def index(request):
@@ -51,14 +52,32 @@ def signup_page(request):
 
 def entry_form(request):
     schools = School.objects.all()
-    if request.method == 'POST' or request.is_ajax():
+    if request.method == 'POST':
+        response_data = {}
         form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save()
+            response_data['result'] = 'The entry form submission is successful!'
+            response_data['id'] = form.id
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
         else:
-            print (form.errors)
-        return JsonResponse(json.dumps(form),
-            content_type="application/json")
+            print(form.errors)
+            return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),
+                content_type="application/json")
+    
+    
+            
+#     if request.method == 'POST' and request.is_ajax():
+#         form = EntryForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             data = json.dumps(form)
+#             data = serializers.serialize('form', [ data, ])
+#         context = {'form': form, 'schools': schools}
+#         return JsonResponse({"form": form})
+#         else: 
+#             return JsonResponse({"form": data}, status=400)
 #             surname = form.cleaned_data['surname']
 #             work = get_object_or_404(Artwork, surname=surname)
             #return HttpResponse("Thank you")
