@@ -57,43 +57,15 @@ def entry_form(request):
         form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save()
-            response_data['result'] = 'The entry form submission is successful!'
+            response_data['successResult'] = 'The entry form submission is successful!'
             response_data['id'] = form.id
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            print(form.errors)
-            return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),
+            response_data['errorResult'] = form.errors.as_json(True)
+            return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
-    
-    
-            
-#     if request.method == 'POST' and request.is_ajax():
-#         form = EntryForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             data = json.dumps(form)
-#             data = serializers.serialize('form', [ data, ])
-#         context = {'form': form, 'schools': schools}
-#         return JsonResponse({"form": form})
-#         else: 
-#             return JsonResponse({"form": data}, status=400)
-#             surname = form.cleaned_data['surname']
-#             work = get_object_or_404(Artwork, surname=surname)
-            #return HttpResponse("Thank you")
-#         else:
-#             print (form.errors)
-#             return HttpResponse("Form Not Valid")
     else:
         form = EntryForm()
-#     form = EntryForm(request.POST, request.FILES)
-#     if request.POST:
-#         if form.is_valid():
-#             form = form.save()
-#             returnedform = get_object_or_404(form)
-#             return JsonResponse(returnedform)
-#     else:
-#         #dropdown values
-#         schools = School.objects.all()
         context = {'form': form, 'schools': schools}
         return render(request, 'entry_form.html', context)

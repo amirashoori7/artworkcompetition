@@ -54,8 +54,19 @@
 					},
 					success : function(response) {
 						console.log(response)
-						$("#id").val(response.id)
-						toggleMessageBox(response.result, false)
+						if (response.successResult != null) {
+							$("#id").val(response.id)
+							toggleMessageBox(response.successResult, false)
+						} else if (response.errorResult != null) {
+							$("#id").val(0)
+							var errorList = $("<ul/>");
+							Object.keys(JSON.parse(response.errorResult)).forEach(
+								function(key, value) {
+									$('<li/>').text("* "+key).appendTo(errorList)
+							})
+							toggleMessageBox("<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
+									+$('<div>').append(errorList.clone()).html(), true)
+						}
 					},
 					error : function(xhr, errmsg, err) {
 						console.log(xhr.status + ": " + xhr.responseText)

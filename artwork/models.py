@@ -15,8 +15,8 @@ class School(models.Model):
 
 
 class Artwork(models.Model):
-    firstname = models.CharField(blank=True, null=True, max_length=200)
-    surname = models.CharField(blank=True, null=True, max_length=200)
+    firstname = models.CharField(max_length=200)
+    surname = models.CharField(max_length=200)
     email = models.CharField(blank=True, null=True, max_length=100)
     dob = models.DateField(blank=True, null=True)
     cellphone = models.CharField(blank=True, null=True, max_length=100)
@@ -25,7 +25,7 @@ class Artwork(models.Model):
     parentname = models.CharField(blank=True, max_length=200)
     parentphone = models.CharField(blank=True, null=True, max_length=100)
     parentemail = models.CharField(blank=True, null=True, max_length=100)
-    school = models.CharField(blank=True, null=True, max_length=100)
+    school = models.CharField(max_length=100)
     teachername = models.CharField(blank=True, max_length=300)
     teacherphone = models.CharField(blank=True, null=True, max_length=100)
     teacheremail = models.CharField(blank=True, null=True, max_length=100)

@@ -54,6 +54,7 @@ $(document).ready(function () {
 	})
 	windowLayoutFitSize()
 	loadUniverseBG()
+	$(".return-button").load("static/img/icons/close.svg")
 })
 
 
@@ -383,35 +384,43 @@ function filterFunction() {
 
 var messageBoxTween;
 function toggleMessageBox(messageText, isError) {
-	if(messageText == null || messageBoxTween==null || !messageBoxTween.reversed()) {
+	var tl = new TimelineLite({paused: true})
+	if(messageText == null || messageBoxTween==null) {
 // THE FIRST TOGGLE AND WHEN BOX IS HIDDEN
 		$(".error-message-box").html("")
 		$(".success-message-box").html("")
-		var tl = new TimelineLite({paused: true})
-		messageBoxTween = tl.to(".message-box-container", .6, {
+		if(messageBoxTween != null && !messageBoxTween.reversed()){
+			messageBoxTween.reverse()
+			return
+		}
+		messageBoxTween = tl.to(".message-box-container", .3, {
 			opacity: 1, 
 			width: "88%", 
 			height: "88%",
 			top: "5.5%",
 			left: "5.5%"
-		}).to(".message-box", .6, {
-			opacity: 1,
-			width: $(".page-content").width(),
-			top: parseInt($(".page-content").css("top")) + ($(".page-content").height() / 2) - ($(".message-box").height() / 2)
 		})
 		messageBoxTween.reverse()
 	} else {
 		// SHOWS ERROR MESSAGE
+		$(".message-box").fadeIn()
+		$(".message-box-container").removeClass("red")
 		if(isError){
 			$(".error-message-box").html(messageText)
 			$(".success-message-box").html("")
 			$(".success-message-box").fadeOut()
+			$(".message-box-container").addClass("red")
 		} else {
-			// SHOWS SUCCESS MESSAGE
+		// SHOWS SUCCESS MESSAGE
 			$(".error-message-box").html("")
 			$(".error-message-box").fadeOut()
 			$(".success-message-box").html(messageText)
 		}
+		TweenLite.to(".message-box", .6, {
+			opacity: 1,
+			width: $(".page-content").width(),
+			top: parseInt($(".page-content").css("top")) + (($(".message-box").height()) / 2)
+		})
 		messageBoxTween.play()
 	}
 }
