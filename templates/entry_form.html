@@ -1,144 +1,194 @@
+<script src="static/js/cropper_jsmin.js"></script>
+<script type="text/javascript">
+	cropper.start(document.getElementById("cropCanvas"), 1);
+	$("#cropCanvas").width($(".page-content").width())
+	$("#cropCanvas").height($("#cropCanvas").height()* 2/3)
+	function handleFileSelect() {
+		var file = document.getElementById("workfile").files[0];
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			var data = event.target.result;
+			cropper.showImage(data);
+		};
+		reader.readAsDataURL(file);
+	}
+</script>
+<div class="form-title">
+	<h2>Entry Form</h2>
+	<h6>
+		<strong>Step 1)</strong> Fill the registration form please. <br /> <strong>Step
+			2)</strong> upload a photo of your artwork. <br /> <strong>Step 3)</strong>
+		Answer 3 questions. <br /> <strong>Step 4)</strong> Check the receipt
+		posted to your email address.
+	</h6>
+</div>
 <div class="row">
 	<div class="col-md-10 offset-md-1">
-		<form method="post" id="entry-form-id" action="/" class="needs-validation"
+		<form method="post" id="entry-form-id" action="/"
+			class="needs-validation form-general-style"
 			enctype="multipart/form-data" novalidate>
-			<h4 class="mb-3">Personal Information</h4>
-			{% csrf_token %}
-			<input type="text" name="id" id="id" value="{{ form.instance.firstname|default_if_none:'' }}">
-			<div class="row">
-				<div class="col-md-6 mb-3">
-					<lable for="firstname">First Name</lable>
-					<input type="text" class="form-control" id="firstname"
-						name="firstname" placeholder=""
-						value="{{ form.instance.firstname|default_if_none:'' }}" required>
+			{% csrf_token %} <input type="hidden" name="id" id="id"
+				value="{{ form.instance.firstname|default_if_none:'' }}">
+			<div class="form-section" data-title="Personal Information">
+				<div class="row">
+					<div class="col-md-6">
+						<lable for="firstname">First Name</lable>
+						<input type="text" class="form-control" id="firstname"
+							name="firstname" placeholder=""
+							value="{{ form.instance.firstname|default_if_none:'' }}" required>
+					</div>
+					<div class="col-md-6">
+						<lable for="surname">Surname</lable>
+						<input type="text" class="form-control" id="surname"
+							name="surname" placeholder=""
+							value="{{ form.instance.surname|default_if_none:'' }}" required>
+					</div>
 				</div>
-				<div class="col-md-6 mb-3">
-					<lable for="surname">Surname</lable>
-					<input type="text" class="form-control" id="surname" name="surname"
-						placeholder=""
-						value="{{ form.instance.surname|default_if_none:'' }}" required>
+				<div class="row">
+					<div class="col-md-4">
+						<lable for="dob">Date of Birth</lable>
+						<input type="date" class="form-control" id="dob" placeholder=""
+							name="dob" value="{{ form.instance.dob|default_if_none:'' }}"
+							required>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 mb-3">
-					<lable for="email">Email</lable>
-					<input type="email" class="form-control" id="email" name="email"
-						placeholder="you@example.com"
-						value="{{ form.instance.email|default_if_none:'' }}" required>
-				</div>
-				<div class="col-md-6 mb-3">
-					<lable for="cellphone">Cellphone</lable>
-					<input type="text" class="form-control" id="cellphone"
-						name="cellphone" placeholder=""
-						value="{{ form.instance.cellphone|default_if_none:'' }}" required>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 mb-3">
-					<lable for="parentname">Parent Name</lable>
-					<input type="text" class="form-control" id="parentname"
-						name="parentname" placeholder=""
-						value="{{ form.instance.parentname|default_if_none:'' }}" required>
-				</div>
-				<div class="col-md-6 mb-3">
-					<lable for="parentphone">Parent Phone</lable>
-					<input type="tel" class="form-control" id="parentphone"
-						name="parentphone" placeholder=""
-						value="{{ form.instance.parentphone|default_if_none:'' }}"
-						required>
+				<div class="row">
+					<div class="col-md-6">
+						<lable for="email">Email</lable>
+						<input type="email" class="form-control" id="email" name="email"
+							placeholder="you@example.com"
+							value="{{ form.instance.email|default_if_none:'' }}" required>
+					</div>
+					<div class="col-md-6">
+						<lable for="cellphone">Cellphone</lable>
+						<input type="text" class="form-control" id="cellphone"
+							name="cellphone" placeholder=""
+							value="{{ form.instance.cellphone|default_if_none:'' }}" required>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4 mb-3">
-					<lable for="school-dropdown">School</lable>
-					<input type="hidden" name="school" id="school"
-						value="{{ form.instance.school|default_if_none:'' }}" required>
-					<select class="custem-select d-block w-100" id="school-dropdown"
-						onchange="$('#school').val($('#school-dropdown').val())">
-						<option value="">Choose...</option> {% for sch in schools %}
-						<option value="{{ sch.name }}">{{ sch.name }} {% endfor	%}
-					</select>
+			<div class="form-section" data-title="Guardian (Parent) Information">
+				<div class="row">
+					<div class="col-md-6">
+						<lable for="parentname">Guardian (Parent) Full-Name</lable>
+						<input type="text" class="form-control" id="parentname"
+							name="parentname" placeholder=""
+							value="{{ form.instance.parentname|default_if_none:'' }}"
+							required>
+					</div>
+					<div class="col-md-6">
+						<lable for="parentphone">Guardian (Parent)'s Phone Number</lable>
+						<input type="tel" class="form-control" id="parentphone"
+							name="parentphone" placeholder=""
+							value="{{ form.instance.parentphone|default_if_none:'' }}"
+							required>
+					</div>
 				</div>
-				<div class="col-md-4 mb-3">
-					<lable for="teachername">Teacher Name</lable>
-					<input type="text" class="form-control" id="teachername"
-						name="teachername" placeholder=""
-						value="{{ form.instance.teachername|default_if_none:'' }}"
-						required>
-				</div>
-				<div class="col-md-4 mb-3">
-					<lable for="teacheremail">Teacher Email</lable>
-					<input type="email" class="form-control" id="teacheremail"
-						name="teachermail" placeholder="you@example.com"
-						value="{{ form.instance.teacheremail|default_if_none:'' }}"
-						required>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 mb-3">
-					<lable for="dob">Date of Birth</lable>
-					<input type="date" class="form-control" id="dob" placeholder=""
-						name="dob" value="{{ form.instance.dob|default_if_none:'' }}"
-						required>
-				</div>
-				<div class="col-md-4 mb-3">
-					<lable for="learnergrade">Learner Grade</lable>
-					<input type="number" class="form-control" id="learnergrade"
-						name="learnergrade" placeholder=""
-						value="{{ form.instance.learnergrade|default_if_none:'' }}"
-						required>
-				</div>
-				<div class="col-md-4 mb-3">
-					<lable for="teacherphone">Teacher Phone</lable>
-					<input type="tel" class="form-control" id="teacherphone"
-						name="teacherphone" placeholder=""
-						value="{{ form.instance.teacherphone|default_if_none:'' }}"
-						required>
+				<div class="row">
+					<div class="col-md-6">
+						<lable for="parentemail">Guardian (Parent)'s Email Address</lable>
+						<input type="text" class="form-control" id="parentemail"
+							name="parentemail" placeholder=""
+							value="{{ form.instance.parentemail|default_if_none:'' }}"
+							required>
+					</div>
 				</div>
 			</div>
-			<br>
-			<h4 class="mb-3">Artwork Information</h4>
-			<div class="row">
-				<div class="col-md-4 mb-3">
-					<lable for="workfile">Upload Work File</lable>
-					<input type="file" class="form-control" id="workfile"
-						name="workfile" placeholder=""
-						value="{{ form.instance.workfile|default_if_none:'' }}" required>
-					<img src="{{ form.instance.workfile|default_if_none:'#' }}"
-						width="48px" height="48px">
+			<div class="form-section" data-title="School Information">
+				<div class="row">
+					<div class="col-md-4">
+						<lable for="school-dropdown">School</lable>
+						<input type="hidden" name="school" id="school"
+							value="{{ form.instance.school|default_if_none:'' }}" required>
+						<select class="custem-select d-block w-100" id="school-dropdown"
+							onchange="$('#school').val($('#school-dropdown').val())">
+							<option value="">Choose...</option> {% for sch in schools %}
+							<option value="{{ sch.name }}">{{ sch.name }} {% endfor %}
+						</select>
+					</div>
+					<div class="col-md-4">
+						<lable for="teachername">Teacher Name</lable>
+						<input type="text" class="form-control" id="teachername"
+							name="teachername" placeholder=""
+							value="{{ form.instance.teachername|default_if_none:'' }}"
+							required>
+					</div>
+					<div class="col-md-4">
+						<lable for="teacheremail">Teacher Email</lable>
+						<input type="email" class="form-control" id="teacheremail"
+							name="teachermail" placeholder="you@example.com"
+							value="{{ form.instance.teacheremail|default_if_none:'' }}"
+							required>
+					</div>
 				</div>
-				<div class="col-md-8 mb-3">
-					<lable for="surname">Work Title</lable>
-					<input type="text" class="form-control" id="worktitle"
-						name="worktitle" placeholder=""
-						value="{{ form.instance.worktitle|default_if_none:'' }}" required>
+				<div class="row">
+					<div class="col-md-4">
+						<lable for="learnergrade">Learner Grade</lable>
+						<input type="number" class="form-control" id="learnergrade"
+							name="learnergrade" placeholder=""
+							value="{{ form.instance.learnergrade|default_if_none:'' }}"
+							required>
+					</div>
+					<div class="col-md-4">
+						<lable for="teacherphone">Teacher Phone</lable>
+						<input type="tel" class="form-control" id="teacherphone"
+							name="teacherphone" placeholder=""
+							value="{{ form.instance.teacherphone|default_if_none:'' }}"
+							required>
+					</div>
 				</div>
 			</div>
-			<br>
-			<h4 class="mb-3">Please answer the following questions:</h4>
-			<div class="row">
-				<div class="col-md-12 mb-3">
-					<lable for="question1">Question 1</lable>
-					<textarea class="form-control" id="question1" name="question1"
-						rows="5">{{ form.instance.question1|default_if_none:'' }}</textarea>
+			<div class="form-section" data-title="Step 2) Upload my artwork">
+				<div class="row">
+					<div class="col-md-4">
+						<lable for="workfile">Upload Work File</lable>
+						<input type="file" class="form-control" id="workfile"
+							name="workfile" placeholder=""
+							value="{{ form.instance.workfile|default_if_none:'' }}"
+							onchange="handleFileSelect()" required>
+						<!-- 						<img src="{{ form.instance.workfile|default_if_none:'#' }}" -->
+						<!-- 							width="48px" height="48px"> -->
+					</div>
+					<div class="col-md-8">
+						<lable for="surname">Work Title</lable>
+						<input type="text" class="form-control" id="worktitle"
+							name="worktitle" placeholder=""
+							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12" class="crop-canvas-class">
+						<canvas id="cropCanvas"></canvas>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12 mb-3">
-					<lable for="question2">Question 2</lable>
-					<textarea class="form-control" id="question2" name="question2"
-						rows="5">{{ form.instance.question2|default_if_none:'' }}</textarea>
+			<div class="form-section" data-title="Step 3) Answering questions">
+				<div class="row">
+					<div class="col-md-6">
+						<lable for="question1">Question 1: What Mathematics did
+						you use in your artwork? Explain your answer.</lable>
+						<textarea class="form-control" id="question1" name="question1"
+							rows="5">{{ form.instance.question1|default_if_none:'' }}</textarea>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 mb-3">
-					<lable for="question3">Question 3</lable>
-					<textarea class="form-control" id="question3" name="question3"
-						rows="5">{{ form.instance.question3|default_if_none:'' }}</textarea>
+				<div class="row">
+					<div class="col-md-6">
+						<lable for="question2">Question 2: How did you use
+						creativity to connect Mathematics with "My Universe" to make your
+						artwork?</lable>
+						<textarea class="form-control" id="question2" name="question2"
+							rows="5">{{ form.instance.question2|default_if_none:'' }}</textarea>
+					</div>
+					<div class="col-md-6">
+						<lable for="question3">Question 3: Do you think creativity
+						could be used to teach Mathematics? Explain your answer</lable>
+						<textarea class="form-control" id="question3" name="question3"
+							rows="5">{{ form.instance.question3|default_if_none:'' }}</textarea>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-12 text-center">
-				<button class="" type="submit" id="buttonSubmit">Submit</button>
+				<button class="action-button" type="submit" id="buttonSubmit">Submit</button>
 			</div>
 		</form>
 	</div>

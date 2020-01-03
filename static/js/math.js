@@ -222,9 +222,9 @@ function loadUniverseBG() {
 	var circleRadius;
 	var circleCenter;
 	var first = true;
-	var giantColor = '180,184,240';
-	var starColor = '226,225,142';
-	var cometColor = '226,225,224';
+	var cometColor = '180,184,240';
+	var giantColor = '226,225,142';
+	var starColor = '226,225,224';
 	var canva = document.getElementById('universe');
 	var stars = [];
 
