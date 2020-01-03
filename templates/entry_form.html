@@ -1,7 +1,7 @@
 <script src="static/js/cropper_jsmin.js"></script>
 <script type="text/javascript">
 	cropper.start(document.getElementById("cropCanvas"), 1);
-	$("#cropCanvas").width($(".page-content").width())
+	$("#cropCanvas").width($(".page-content").width()* 2/3)
 	$("#cropCanvas").height($("#cropCanvas").height()* 2/3)
 	function handleFileSelect() {
 		var file = document.getElementById("workfile").files[0];
@@ -29,7 +29,7 @@
 			enctype="multipart/form-data" novalidate>
 			{% csrf_token %} <input type="hidden" name="id" id="id"
 				value="{{ form.instance.firstname|default_if_none:'' }}">
-			<div class="form-section" data-title="Personal Information">
+			<div class="form-section" data-title="Step 1) Personal Information">
 				<div class="row">
 					<div class="col-md-6">
 						<lable for="firstname">First Name</lable>
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-section" data-title="Guardian (Parent) Information">
+			<div class="form-section" data-title="Step 1) Guardian (Parent) Information">
 				<div class="row">
 					<div class="col-md-6">
 						<lable for="parentname">Guardian (Parent) Full-Name</lable>
@@ -94,7 +94,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-section" data-title="School Information">
+			<div class="form-section" data-title="Step 1) School Information">
 				<div class="row">
 					<div class="col-md-4">
 						<lable for="school-dropdown">School</lable>
@@ -157,7 +157,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12" class="crop-canvas-class">
+					<div class="col-md-12 crop-canvas-class">
 						<canvas id="cropCanvas"></canvas>
 					</div>
 				</div>
@@ -169,6 +169,11 @@
 						you use in your artwork? Explain your answer.</lable>
 						<textarea class="form-control" id="question1" name="question1"
 							rows="5">{{ form.instance.question1|default_if_none:'' }}</textarea>
+					</div>
+					<div class="col-md-6">
+						<lable for="formulafile">Formula File</lable>
+						<input type="file" class="form-control" id="formulafile"
+							name="formulafile" placeholder="" required>
 					</div>
 				</div>
 				<div class="row">
