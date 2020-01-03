@@ -1,70 +1,96 @@
-<script src="static/js/cropper.js"></script>
+<script src="static/js/croppie.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" crossorigin="anonymous">
+<link rel="stylesheet" href="static/css/croppie.css" crossorigin="anonymous">
 <script type="text/javascript">
 	var Cropper = window.Cropper;
-
-	function handleFileSelect() {
-		var file = document.getElementById("workfile").files[0];
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			var data = event.target.result;
-			var container = document.querySelector('.img-container');
-			var image = container.getElementsByTagName('img').item(0);
-			var dataX = 0;
-			var dataY = 0;
-			var dataHeight = 600;
-			var dataWidth = 300;
-			var dataScaleX = document.getElementById('dataScaleX');
-			var dataScaleY = document.getElementById('dataScaleY');
-
-			var options = {
-				aspectRatio : 16 / 9,
-				ready : function(e) {
-					console.log(e.type);
-				},
-				cropstart : function(e) {
-					console.log(e.type, e.detail.action);
-				},
-				cropmove : function(e) {
-					console.log(e.type, e.detail.action);
-				},
-				cropend : function(e) {
-					console.log(e.type, e.detail.action);
-				},
-				crop : function(e) {
-					var dataE = e.detail;
-					console.log(e.type);
-					dataX.value = Math.round(dataE.x);
-					dataY.value = Math.round(dataE.y);
-					dataHeight.value = Math.round(dataE.height);
-					dataWidth.value = Math.round(dataE.width);
-				},
-				zoom : function(e) {
-					console.log(e.type, e.detail.ratio);
-				}
-			};
-			var cropper = new Cropper(image, options);
-			var originalImageURL = image.src;
-			var uploadedImageType = 'image/jpeg';
-			var uploadedImageURL;
-
-			var file;
-	        fr.readAsDataURL(files[0]);
-			if (cropper && files.length) {
-				if (/^image\/\w+/.test(file.type)) {
-		            $('#artwork-image-elem').attr("src", file.result)
-					uploadedImageType = file.type
-					uploadedImageName = file.name
-					cropper.destroy()
-					cropper = new Cropper(image, options)
-				} else {
-					window.alert('Please choose an image file.');
-				}
-			}
-		};
-		reader.readAsDataURL(file);
-		console.log(file.size)
+	var aspectRatio = 1.414 //A4 paper
+	
+	
+	function createCroppie() {
+		$("#main-cropper")
+				.append("<span>Use the scroll wheel of your mouse to resize the image</span>");
+		var basic = $('#main-cropper').croppie({
+			viewport : {
+				width : $(".form-section").width() * 6/7,
+				height : $(".form-section").width() * 6/14
+			},
+			boundary : {
+				width : $(".form-section").width(),
+				height : $(".form-section").width() / 2
+			},
+			showZoomer : true
+		});
+// 		basic.croppie('bind', {
+// 			url : 'images/NMMU_logo.png'
+// 		});
 	}
+
+	function readFile(input) {
+		var filesToUploads = document.getElementById('workfile').files;
+        var file = filesToUploads[0];
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var image = new Image();
+				var img = document.createElement("img");
+                img.src = e.target.result;
+ 
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+ 
+                var MAX_WIDTH = 400;
+                var MAX_HEIGHT = 400;
+                var width = img.width;
+                var height = img.height;
+ 
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+ 
+                dataurl = canvas.toDataURL(file.type);
+				$('#main-cropper').croppie('bind', {
+					url : e.target.result
+				})
+				$('#croppedImage').attr('src', dataurl)
+			}
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			swal("Sorry - you're browser doesn't support the FileReader API");
+		}
+	}
+
+	$("#workfile").change(function() {
+		$("#main-cropper").empty();
+		createCroppie();
+		readFile(this);
+	});
+
+	$('#cropIcon').on('click',
+			function(ev) {
+				$('#main-cropper').croppie('result', {
+					type : 'canvas',
+					size : 'viewport',
+					format : 'jpeg'
+				}).then(function(resp) {
+							$("#croppedImage").attr('src', resp)
+							$("#icon").val($("#croppedImage").attr('src'))
+						});
+				$("#main-cropper").empty()
+			});
+
 </script>
 <div class="form-title">
 	<h2>Entry Form</h2>
@@ -120,6 +146,16 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+<!-- 			PARENT INFO -->
+
+
+
+
+
 			<div class="form-section"
 				data-title="Step 1) Guardian (Parent) Information">
 				<div class="row">
@@ -148,6 +184,16 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+<!-- 			SCHOOL -->
+
+
+
+
+
 			<div class="form-section" data-title="Step 1) My School">
 				<div class="row">
 					<div class="col-md-6">
@@ -177,6 +223,16 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+<!-- 			GRADE -->
+			
+			
+			
+			
+			
 			<div class="form-section" data-title="Step 1) My Grade">
 				<div class="row">
 					<div class="col-md-2">
@@ -215,6 +271,15 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+<!-- 			TEACHER'S INFO -->
+
+
+
+
 			<div class="form-section" data-title="Step 1) My Teacher">
 				<div class="row">
 					<div class="col-md-4">
@@ -227,7 +292,7 @@
 					<div class="col-md-4">
 						<lable for="teacheremail">Teacher Email</lable>
 						<input type="email" class="form-control" id="teacheremail"
-							name="teachermail" placeholder="you@example.com"
+							name="teacheremail" placeholder="you@example.com"
 							value="{{ form.instance.teacheremail|default_if_none:'' }}"
 							required>
 					</div>
@@ -240,16 +305,29 @@
 					</div>
 				</div>
 			</div>
+			
+
+
+
+			
+<!-- 			UPLOAD ARTWORK -->
+
+
+
+
 			<div class="form-section" data-title="Step 2) Upload my artwork">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-4" id="iconDiv">
 						<lable for="workfile">Upload Work File</lable>
 						<input type="file" class="form-control" id="workfile"
-							name="workfile" placeholder=""
+							name="workfile" placeholder="" value="Browse"
 							value="{{ form.instance.workfile|default_if_none:'' }}"
-							onchange="handleFileSelect()" required>
-						<!-- 						<img src="{{ form.instance.workfile|default_if_none:'#' }}" -->
-						<!-- 							width="48px" height="48px"> -->
+							 accept="image/*" required>
+						<div id="main-cropper"></div>
+						<div id="iconCropDiv">
+							<img id="croppedImage" src="" alt="" />
+						</div>
+						<button class="cropIcon" id="cropIcon">Crop</button>
 					</div>
 					<div class="col-md-8">
 						<lable for="surname">Work Title</lable>

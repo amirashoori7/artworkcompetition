@@ -390,6 +390,11 @@ function toggleMessageBox(messageText, isError) {
 		$(".error-message-box").html("")
 		$(".success-message-box").html("")
 		if(messageBoxTween != null && !messageBoxTween.reversed()){
+			TweenLite.to(".message-box", .3, {
+				opacity: 1,
+				width: 0,
+				top: 0
+			})
 			messageBoxTween.reverse()
 			return
 		}
