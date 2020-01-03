@@ -1,16 +1,69 @@
-<script src="static/js/cropper_jsmin.js"></script>
+<script src="static/js/cropper.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" crossorigin="anonymous">
 <script type="text/javascript">
-	cropper.start(document.getElementById("cropCanvas"), 1);
-	$("#cropCanvas").width($(".page-content").width()* 2/3)
-	$("#cropCanvas").height($("#cropCanvas").height()* 2/3)
+	var Cropper = window.Cropper;
+
 	function handleFileSelect() {
 		var file = document.getElementById("workfile").files[0];
 		var reader = new FileReader();
 		reader.onload = function(event) {
 			var data = event.target.result;
-			cropper.showImage(data);
+			var container = document.querySelector('.img-container');
+			var image = container.getElementsByTagName('img').item(0);
+			var dataX = 0;
+			var dataY = 0;
+			var dataHeight = 600;
+			var dataWidth = 300;
+			var dataScaleX = document.getElementById('dataScaleX');
+			var dataScaleY = document.getElementById('dataScaleY');
+
+			var options = {
+				aspectRatio : 16 / 9,
+				ready : function(e) {
+					console.log(e.type);
+				},
+				cropstart : function(e) {
+					console.log(e.type, e.detail.action);
+				},
+				cropmove : function(e) {
+					console.log(e.type, e.detail.action);
+				},
+				cropend : function(e) {
+					console.log(e.type, e.detail.action);
+				},
+				crop : function(e) {
+					var dataE = e.detail;
+					console.log(e.type);
+					dataX.value = Math.round(dataE.x);
+					dataY.value = Math.round(dataE.y);
+					dataHeight.value = Math.round(dataE.height);
+					dataWidth.value = Math.round(dataE.width);
+				},
+				zoom : function(e) {
+					console.log(e.type, e.detail.ratio);
+				}
+			};
+			var cropper = new Cropper(image, options);
+			var originalImageURL = image.src;
+			var uploadedImageType = 'image/jpeg';
+			var uploadedImageURL;
+
+			var file;
+	        fr.readAsDataURL(files[0]);
+			if (cropper && files.length) {
+				if (/^image\/\w+/.test(file.type)) {
+		            $('#artwork-image-elem').attr("src", file.result)
+					uploadedImageType = file.type
+					uploadedImageName = file.name
+					cropper.destroy()
+					cropper = new Cropper(image, options)
+				} else {
+					window.alert('Please choose an image file.');
+				}
+			}
 		};
 		reader.readAsDataURL(file);
+		console.log(file.size)
 	}
 </script>
 <div class="form-title">
@@ -67,7 +120,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-section" data-title="Step 1) Guardian (Parent) Information">
+			<div class="form-section"
+				data-title="Step 1) Guardian (Parent) Information">
 				<div class="row">
 					<div class="col-md-6">
 						<lable for="parentname">Guardian (Parent) Full-Name</lable>
@@ -94,9 +148,24 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-section" data-title="Step 1) School Information">
+			<div class="form-section" data-title="Step 1) My School">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-6">
+						<lable for="states-dropdown">State (Province)</lable>
+						<select class="custem-select d-block w-100" id="states-dropdown"
+							onchange="alert('state dropdown')">
+							<option value="0">Eastern Cape</option>
+							<option value="1">Free State</option>
+							<option value="2">Gauteng</option>
+							<option value="3">KwaZulu-Natal</option>
+							<option value="4">Limpopo</option>
+							<option value="5">Mpumalanga</option>
+							<option value="6">North West</option>
+							<option value="7">Northern Cape</option>
+							<option value="8">Western Cape</option>
+						</select>
+					</div>
+					<div class="col-md-6">
 						<lable for="school-dropdown">School</lable>
 						<input type="hidden" name="school" id="school"
 							value="{{ form.instance.school|default_if_none:'' }}" required>
@@ -106,6 +175,48 @@
 							<option value="{{ sch.name }}">{{ sch.name }} {% endfor %}
 						</select>
 					</div>
+				</div>
+			</div>
+			<div class="form-section" data-title="Step 1) My Grade">
+				<div class="row">
+					<div class="col-md-2">
+						<lable for="learnergrade7">Grade 7</lable>
+						<input type="hidden" class="form-control" id="currentlearnergrade"
+							placeholder=""
+							value="{{ form.instance.learnergrade|default_if_none:'' }}"
+							required> <input type="radio" class="form-control"
+							id="learnergrade" name="learnergrade" placeholder=""
+							value="Grade 7">
+					</div>
+					<div class="col-md-2">
+						<lable for="learnergrade8">Grade 8</lable>
+						<input type="radio" class="form-control" id="learnergrade8"
+							name="learnergrade" placeholder="" value="Grade 8">
+					</div>
+					<div class="col-md-2">
+						<lable for="learnergrade9">Grade 9</lable>
+						<input type="radio" class="form-control" id="learnergrade9"
+							name="learnergrade" placeholder="" value="Grade 9">
+					</div>
+					<div class="col-md-2">
+						<lable for="learnergrade10">Grade 10</lable>
+						<input type="radio" class="form-control" id="learnergrade10"
+							name="learnergrade" placeholder="" value="Grade 10">
+					</div>
+					<div class="col-md-2">
+						<lable for="learnergrade11">Grade 11</lable>
+						<input type="radio" class="form-control" id="learnergrade11"
+							name="learnergrade" placeholder="" value="Grade 11">
+					</div>
+					<div class="col-md-2">
+						<lable for="learnergrade12">Grade 12</lable>
+						<input type="radio" class="form-control" id="learnergrade12"
+							name="learnergrade" placeholder="" value="Grade 12">
+					</div>
+				</div>
+			</div>
+			<div class="form-section" data-title="Step 1) My Teacher">
+				<div class="row">
 					<div class="col-md-4">
 						<lable for="teachername">Teacher Name</lable>
 						<input type="text" class="form-control" id="teachername"
@@ -118,15 +229,6 @@
 						<input type="email" class="form-control" id="teacheremail"
 							name="teachermail" placeholder="you@example.com"
 							value="{{ form.instance.teacheremail|default_if_none:'' }}"
-							required>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<lable for="learnergrade">Learner Grade</lable>
-						<input type="number" class="form-control" id="learnergrade"
-							name="learnergrade" placeholder=""
-							value="{{ form.instance.learnergrade|default_if_none:'' }}"
 							required>
 					</div>
 					<div class="col-md-4">
@@ -158,7 +260,25 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 crop-canvas-class">
-						<canvas id="cropCanvas"></canvas>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" data-method="zoom"
+								data-option="0.1" title="Zoom In">
+								<span class="docs-tooltip" data-toggle="tooltip"
+									title="cropper.zoom(0.1)"> <span
+									class="fa fa-search-plus"></span>
+								</span>
+							</button>
+							<button type="button" class="btn btn-primary" data-method="zoom"
+								data-option="-0.1" title="Zoom Out">
+								<span class="docs-tooltip" data-toggle="tooltip"
+									title="cropper.zoom(-0.1)"> <span
+									class="fa fa-search-minus"></span>
+								</span>
+							</button>
+						</div>
+						<div class="img-container">
+							<img src="" alt="Picture" id="artwork-image-elem">
+						</div>
 					</div>
 				</div>
 			</div>

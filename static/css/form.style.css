@@ -29,6 +29,9 @@
 	background: #2c2f4a;
 }
 
+.form-section .col-md-2 {
+	text-align: center;
+}
 .form-section label {
 	font-size: 14px;
 	margin-bottom: 0px;
