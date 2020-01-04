@@ -6,9 +6,19 @@
 			success : function(response) {
 				$(".multi_step_form").html(response);
 				$('#entry-form-id').submit(function(event) {
-					event.preventDefault();
+					event.preventDefault()
 					submitEntryForm()
-				});
+				})
+				var maxYear = 2008, minYear = 2003
+				var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+				while (maxYear >= minYear) {
+					$("<option/>").val(maxYear).text(maxYear).appendTo("#yearDropDown")
+					maxYear = maxYear - 1
+				} 
+				for (var i = 1; i < 32; i++)
+					$("<option/>").val(i).text(i).appendTo("#dayDropDown")
+				for (var i = 1; i < 13; i++)
+					$("<option/>").val(i).text(month[i-1]).appendTo("#monthDropDown")
 			},
 			error : function(request, status, error) {
 				console.log(request.responseText);

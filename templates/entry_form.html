@@ -1,18 +1,21 @@
 <script src="static/js/croppie.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" crossorigin="anonymous">
-<link rel="stylesheet" href="static/css/croppie.css" crossorigin="anonymous">
-<script type="text/javascript">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="static/css/croppie.css"
+	crossorigin="anonymous">
+	<script type="text/javascript">
 	var Cropper = window.Cropper;
 	var aspectRatio = 1.414 //A4 paper
-	
-	
+
 	function createCroppie() {
 		$("#main-cropper")
-				.append("<span>Use the scroll wheel of your mouse to resize the image</span>");
+				.append(
+						"<span>Use the scroll wheel of your mouse to resize the image</span>");
 		var basic = $('#main-cropper').croppie({
 			viewport : {
-				width : $(".form-section").width() * 6/7,
-				height : $(".form-section").width() * 6/14
+				width : $(".form-section").width() * 6 / 7,
+				height : $(".form-section").width() * 6 / 14
 			},
 			boundary : {
 				width : $(".form-section").width(),
@@ -20,47 +23,48 @@
 			},
 			showZoomer : true
 		});
-// 		basic.croppie('bind', {
-// 			url : 'images/NMMU_logo.png'
-// 		});
+		// 		basic.croppie('bind', {
+		// 			url : 'images/NMMU_logo.png'
+		// 		});
 	}
 
 	function readFile(input) {
 		var filesToUploads = document.getElementById('workfile').files;
-        var file = filesToUploads[0];
+		$("#cropIcon").fadeIn()
+		var file = filesToUploads[0];
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				var image = new Image();
 				var img = document.createElement("img");
-                img.src = e.target.result;
- 
-                var canvas = document.createElement("canvas");
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0);
- 
-                var MAX_WIDTH = 400;
-                var MAX_HEIGHT = 400;
-                var width = img.width;
-                var height = img.height;
- 
-                if (width > height) {
-                    if (width > MAX_WIDTH) {
-                        height *= MAX_WIDTH / width;
-                        width = MAX_WIDTH;
-                    }
-                } else {
-                    if (height > MAX_HEIGHT) {
-                        width *= MAX_HEIGHT / height;
-                        height = MAX_HEIGHT;
-                    }
-                }
-                canvas.width = width;
-                canvas.height = height;
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0, width, height);
- 
-                dataurl = canvas.toDataURL(file.type);
+				img.src = e.target.result;
+
+				var canvas = document.createElement("canvas");
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0);
+
+				var MAX_WIDTH = 400;
+				var MAX_HEIGHT = 400;
+				var width = img.width;
+				var height = img.height;
+
+				if (width > height) {
+					if (width > MAX_WIDTH) {
+						height *= MAX_WIDTH / width;
+						width = MAX_WIDTH;
+					}
+				} else {
+					if (height > MAX_HEIGHT) {
+						width *= MAX_HEIGHT / height;
+						height = MAX_HEIGHT;
+					}
+				}
+				canvas.width = width;
+				canvas.height = height;
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0, width, height);
+
+				dataurl = canvas.toDataURL(file.type);
 				$('#main-cropper').croppie('bind', {
 					url : e.target.result
 				})
@@ -68,7 +72,7 @@
 			}
 			reader.readAsDataURL(input.files[0]);
 		} else {
-			swal("Sorry - you're browser doesn't support the FileReader API");
+			toggleMessageBox("Sorry - you're browser doesn't support the FileReader API", true);
 		}
 	}
 
@@ -78,19 +82,17 @@
 		readFile(this);
 	});
 
-	$('#cropIcon').on('click',
-			function(ev) {
-				$('#main-cropper').croppie('result', {
-					type : 'canvas',
-					size : 'viewport',
-					format : 'jpeg'
-				}).then(function(resp) {
-							$("#croppedImage").attr('src', resp)
-							$("#icon").val($("#croppedImage").attr('src'))
-						});
-				$("#main-cropper").empty()
-			});
-
+	$('#cropIcon').on('click', function(ev) {
+		$('#main-cropper').croppie('result', {
+			type : 'canvas',
+			size : 'viewport',
+			format : 'jpeg'
+		}).then(function(resp) {
+			$("#croppedImage").attr('src', resp)
+			$("#icon").val($("#croppedImage").attr('src'))
+		});
+		$("#main-cropper").empty()
+	});
 </script>
 <div class="form-title">
 	<h2>Entry Form</h2>
@@ -123,12 +125,25 @@
 							value="{{ form.instance.surname|default_if_none:'' }}" required>
 					</div>
 				</div>
+				<h6>Date of Birth</h6>
 				<div class="row">
 					<div class="col-md-4">
-						<lable for="dob">Date of Birth</lable>
-						<input type="date" class="form-control" id="dob" placeholder=""
+						<input type="hidden" class="form-control" id="dob" placeholder=""
 							name="dob" value="{{ form.instance.dob|default_if_none:'' }}"
 							required>
+						<lable for="yearDropDown">Year</lable>
+						<select id="yearDropDown" class="form-control">
+						</select>
+					</div>
+					<div class="col-md-4">
+						<lable for="monthDropDown">Month</lable>
+						<select id="monthDropDown" class="form-control">
+						</select>
+					</div>
+					<div class="col-md-4">
+						<lable for="dayDropDown">Day</lable>
+						<select id="dayDropDown" class="form-control">
+						</select>
 					</div>
 				</div>
 				<div class="row">
@@ -146,11 +161,11 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-<!-- 			PARENT INFO -->
+
+
+
+
+			<!-- 			PARENT INFO -->
 
 
 
@@ -184,11 +199,11 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-<!-- 			SCHOOL -->
+
+
+
+
+			<!-- 			SCHOOL -->
 
 
 
@@ -198,7 +213,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<lable for="states-dropdown">State (Province)</lable>
-						<select class="custem-select d-block w-100" id="states-dropdown"
+						<select class="form-control" id="states-dropdown"
 							onchange="alert('state dropdown')">
 							<option value="0">Eastern Cape</option>
 							<option value="1">Free State</option>
@@ -215,7 +230,7 @@
 						<lable for="school-dropdown">School</lable>
 						<input type="hidden" name="school" id="school"
 							value="{{ form.instance.school|default_if_none:'' }}" required>
-						<select class="custem-select d-block w-100" id="school-dropdown"
+						<select class="form-control" id="school-dropdown"
 							onchange="$('#school').val($('#school-dropdown').val())">
 							<option value="">Choose...</option> {% for sch in schools %}
 							<option value="{{ sch.name }}">{{ sch.name }} {% endfor %}
@@ -223,16 +238,16 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-<!-- 			GRADE -->
-			
-			
-			
-			
-			
+
+
+
+
+			<!-- 			GRADE -->
+
+
+
+
+
 			<div class="form-section" data-title="Step 1) My Grade">
 				<div class="row">
 					<div class="col-md-2">
@@ -271,11 +286,13 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-<!-- 			TEACHER'S INFO -->
+
+
+
+
+
+			<!-- 			TEACHER'S INFO -->
+
 
 
 
@@ -305,12 +322,13 @@
 					</div>
 				</div>
 			</div>
-			
 
 
 
-			
-<!-- 			UPLOAD ARTWORK -->
+
+
+			<!-- 			UPLOAD ARTWORK -->
+
 
 
 
@@ -322,12 +340,12 @@
 						<input type="file" class="form-control" id="workfile"
 							name="workfile" placeholder="" value="Browse"
 							value="{{ form.instance.workfile|default_if_none:'' }}"
-							 accept="image/*" required>
+							accept="image/*" required>
 						<div id="main-cropper"></div>
 						<div id="iconCropDiv">
 							<img id="croppedImage" src="" alt="" />
 						</div>
-						<button class="cropIcon" id="cropIcon">Crop</button>
+						<button class="cropIcon" id="cropIcon" style="display: none">Crop</button>
 					</div>
 					<div class="col-md-8">
 						<lable for="surname">Work Title</lable>
@@ -336,30 +354,18 @@
 							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 crop-canvas-class">
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary" data-method="zoom"
-								data-option="0.1" title="Zoom In">
-								<span class="docs-tooltip" data-toggle="tooltip"
-									title="cropper.zoom(0.1)"> <span
-									class="fa fa-search-plus"></span>
-								</span>
-							</button>
-							<button type="button" class="btn btn-primary" data-method="zoom"
-								data-option="-0.1" title="Zoom Out">
-								<span class="docs-tooltip" data-toggle="tooltip"
-									title="cropper.zoom(-0.1)"> <span
-									class="fa fa-search-minus"></span>
-								</span>
-							</button>
-						</div>
-						<div class="img-container">
-							<img src="" alt="Picture" id="artwork-image-elem">
-						</div>
-					</div>
-				</div>
 			</div>
+
+
+
+
+
+			<!-- 			QUESTIONS -->
+
+
+
+
+
 			<div class="form-section" data-title="Step 3) Answering questions">
 				<div class="row">
 					<div class="col-md-6">

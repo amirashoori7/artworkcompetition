@@ -16,10 +16,6 @@
 	line-height: 33px;
 }
 
-.crop-canvas-class {
-	min-height: 600px;
-}
-
 .form-section {
 	border-radius: 22px;
 	padding: 22px;
@@ -37,7 +33,7 @@
 	margin-bottom: 0px;
 }
 
-.form-section input {
+.form-section input, .form-section select {
 	margin-bottom: 7px;
 	background: #1b1c2c;
 	border: none;
@@ -50,7 +46,8 @@
 	color: #bbbbbb;
 }
 
-.form-section input:focus {
+.form-section input:focus, 
+.form-section select:focus {
 	background: #00000066;
 	border: none;
 	color: white;
