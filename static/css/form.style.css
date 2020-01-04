@@ -22,32 +22,34 @@
 	margin-bottom: 33px;
 	text-align: left;
 	position: relative;
-	background: #2c2f4a;
+	box-shadow: 11px 11px 11px -11px white, inset -11px -11px 11px -11px
+		white, -11px -11px 11px -11px #d3e2ec, inset 11px 11px 11px -11px
+		#d3e2ec;
 }
 
 .form-section .col-md-2 {
 	text-align: center;
 }
+
 .form-section label {
 	font-size: 14px;
 	margin-bottom: 0px;
 }
 
-.form-section input, .form-section select {
+.form-section input, .form-section select, .form-input {
 	margin-bottom: 7px;
+	background-color: #1b1c2c;
 	background: #1b1c2c;
 	border: none;
 	border-bottom: 2px solid #8aa5d6;
 	border-radius: 7px;
-	color: white;
 }
 
 .form-section input::placeholder {
 	color: #bbbbbb;
 }
 
-.form-section input:focus, 
-.form-section select:focus {
+.form-section input:focus, .form-section select:focus {
 	background: #00000066;
 	border: none;
 	color: white;
@@ -61,7 +63,7 @@
 	top: -11px;
 	left: 22px;
 	pointer-events: none;
-	color: #ffffff;
+	color: #162830;
 	font-weight: bold;
 }
 
@@ -81,26 +83,6 @@
 	right: 0;
 }
 
-.multi_step_form
- 
-#entry-form-id
- 
-fieldset
-:not
- 
-(
-:first-of-type
- 
-)
-{
-display
-:
- 
-none
-;
-
-
-}
 #progressbar {
 	overflow: hidden;
 }

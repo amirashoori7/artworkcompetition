@@ -84,10 +84,10 @@ html, body {
 
 .error-message-box {
 	background: rgba(252, 227, 232, 0.95);
-    border: 2px solid rgb(264, 3, 33);
-    font-size: 17px;
-    text-align: left;
-    color: black;
+	border: 2px solid rgb(264, 3, 33);
+	font-size: 17px;
+	text-align: left;
+	color: black;
 }
 
 .error-message-box ul {
@@ -95,9 +95,9 @@ html, body {
 }
 
 .success-message-box {
-    background: rgba(225, 244, 227, 0.95);
-    border: 2px solid #2eda08;
-    color: #517813;
+	background: rgba(225, 244, 227, 0.95);
+	border: 2px solid #2eda08;
+	color: #517813;
 }
 
 .menu-icon {
@@ -144,40 +144,6 @@ html, body {
 	line-height: 1.25;
 }
 
-.form-signin {
-	width: 100%;
-	max-width: 330px;
-	padding: 15px;
-	margin: auto;
-}
-
-.form-signin .checkbox {
-	font-weight: 400;
-}
-
-.form-signin .form-control {
-	position: relative;
-	box-sizing: border-box;
-	height: auto;
-	padding: 10px;
-	font-size: 16px;
-}
-
-/* .form-signin .form-control:focus {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-} */
 canvas {
 	position: absolute;
 	left: 0;
@@ -220,13 +186,17 @@ canvas {
 
 .menu-items-holder {
 	position: absolute;
-	padding: 0;
+	padding: 33px 11px;
 	margin: 0;
 	top: 111px;
-	display: grid;
 	bottom: 0;
 	z-index: 21;
-	right: 0;
+	left: 0;
+	top: 1.25%;
+	transform: matrix(1, 0, 0, 1, 0, 0);
+	background: linear-gradient(to right, #eff4fa, #f6fbff, #c7e4ea);
+	border-radius: 0 22px 0 0;
+	box-shadow: 0px 11px 22px -11px #2e5781;
 }
 
 .menu-items {
@@ -236,9 +206,8 @@ canvas {
 }
 
 .menu-items li {
-	margin: 22px 22px;
-	border-bottom: 1px solid rgb(175, 208, 233);
-	padding: 0px 22px 0px 22px;
+	margin: 22px;
+	padding: 0px 33px 0 11px;
 	border-radius: 22px;
 	cursor: pointer;
 	-webkit-transition: transform .2s ease-in, box-shadow .2s ease-in;
@@ -246,17 +215,17 @@ canvas {
 	-o-transition: transform .2s ease-in, box-shadow .2s ease-in;
 	-ms-transition: transform .2s ease-in, box-shadow .2s ease-in;
 	transition: transform .2s ease-in, box-shadow .2s ease-in;
-	height: 33px;
-	background: white;
+	height: 44px;
 }
 
-.menu-items li:hover {
-	box-shadow: 0px 11px 22px -22px rgb(54, 100, 122);
+.menu-items li:hover, .menu-items li.active {
+	box-shadow: -7px -7px 7px -7px #b0c6d4, 7px 7px 7px -7px #ffffff, inset
+		7px 7px 7px -7px #b0c6d4, inset -7px -7px 7px -7px #ffffff;
 	transform: scale(1.1);
 }
 
 .menu-items li img {
-	width: 22px;
+	width: 33px;
 	display: inline-block;
 	padding: 3px;
 }
@@ -264,8 +233,8 @@ canvas {
 .menu-items li span {
 	color: #174c66;
 	display: inline-block;
-	padding: 11px;
-	line-height: 7px;
+	padding: 11px 22px;
+	line-height: 22px;
 	font-size: 19px;
 }
 
@@ -289,24 +258,27 @@ canvas {
 .page-content {
 	overflow-x: hidden;
 	overflow-y: auto;
-	color: white;
-	border-radius: 22px;
+	color: black;
+	border-radius: 0 22px;
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: rgb(22, 77, 122);
+	padding-left: 44px;
+	perspective: 400px;
+	box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px
+		#aeb5d1;
 }
 
 .page-content-area-bg {
-	height: 100%;
-	width: 100%;
-	z-index: -1;
-	background: url(../img/brainBG.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	position: absolute;
-	/* filter: blur(2px) invert(1); */
-	opacity: .3;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background: url(../img/BG.jpg);
+    position: absolute;
+    opacity: .2;
+    filter: blur(7px);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .page-content-area {

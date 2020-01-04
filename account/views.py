@@ -26,7 +26,7 @@ def userlogin(request):
                 return HttpResponse('Invalid login')
     else:
         form = LoginForm()
-
+ 
     context = {'form': form}
     return render(request, 'login.html', context)
 '''

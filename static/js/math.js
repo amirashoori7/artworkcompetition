@@ -15,19 +15,26 @@ function windowLayoutFitSize() {
 function loadContent(liItem) {
 	$("div.page-content").hide()
 	var url = ""
+	$(".menu-item").removeClass("active")
+	$(liItem).addClass("active")
+	$("#login-div").load('/account/login/')
 	url = $(liItem).attr("data-href")
-	$("div.page-content").load(url, function () {
-		tweenMenuShow.reverse()
-		$("div.page-content").fadeIn()
-		TweenMax.fromTo(".page-content", 1, { scaleY: 0, scaleX: 0, rotation: -180 },
-			{ 
-			scaleY: 1, 
-			scaleX: 1,
-			rotation: 0,
-			left: ($(window).width() - $(".page-content").width()) / 2,
-			top: ($(window).height() - $(".page-content").height()) / 2 + "px",
-			transformOrigin: "center"
+	$(".page-content").load(url, function () {
+// tweenMenuShow.reverse()
+		$(".page-content").prepend($("<div/>").addClass("page-content-area-bg"))
+		$(".page-content").fadeIn()
+		var tl = new TimelineLite({paused: true})
+		tl.to(".page-content", .6, { 
+			rotationY: -180, 
+			top: "5%",
+			transformOrigin: "left" })
+		.to(".page-content", 1, { 
+			left: $(".menu-items-holder").width() - 33,
+			top: "5%",
+			rotationY: 0,
+			transformOrigin: "left"
 		})
+		tl.play()
 			
 	})
 }
@@ -37,22 +44,26 @@ $(window).bind('resize', function () {
 })
 
 $(document).ready(function () {
-	$(".menu-icon").load("static/img/icons/menu.svg", function () {
-		var tlMenu = new TimelineLite({
-			paused: true
-		})
-		tweenMenuShow = tlMenu.from(".menu-items-holder", .5, {
-			top: "-100%",
-			transformOrigin: "top"
-		})
-		tweenMenuShow.reverse()
-		$(this).on("click", function () {
-			if (tweenMenuShow.reversed())
-				tweenMenuShow.play()
-			else
-				tweenMenuShow.reverse()
-		})
-	})
+// $(".menu-icon").load("static/img/icons/menu.svg", function () {
+// var tlMenu = new TimelineLite({
+// paused: true
+// })
+// tweenMenuShow = tlMenu.to(".menu-items-holder", .5, {
+// top: "-100%",
+// transformOrigin: "top"
+// })
+// tweenMenuShow.reverse()
+// $(this).on("click", function () {
+// if (tweenMenuShow.reversed())
+// tweenMenuShow.play()
+// else
+// tweenMenuShow.reverse()
+// })
+// })
+// TweenLite.to(".menu-items-holder", .5, {
+// top: "-100%",
+// transformOrigin: "top"
+// })
 	windowLayoutFitSize()
 	loadUniverseBG()
 	$(".return-button").load("static/img/icons/close.svg")
@@ -61,6 +72,7 @@ $(document).ready(function () {
 
 $(window).on("load", function () {
 	$(".menu-item").attr("onclick", "loadContent(this)")
+	loadContent($("<li/>").attr("data-href", "/home/"))
 	toggleMessageBox(null, null)
 })
 
@@ -249,7 +261,7 @@ function toggleMessageBox(messageText, isError) {
 			TweenLite.to(".message-box", .3, {
 				opacity: 1,
 				width: 0,
-				top: 0
+				top: 22
 			})
 			messageBoxTween.reverse()
 			return
@@ -284,7 +296,7 @@ function toggleMessageBox(messageText, isError) {
 		TweenLite.to(".message-box", .6, {
 			opacity: 1,
 			width: $(".page-content").width(),
-			top: parseInt($(".message-box-container").css("top")) + ($(".message-box").height() / 2)
+			top: 22
 		})
 		messageBoxTween.play()
 	}

@@ -1,27 +1,13 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Page</title>
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-  </head>
-  <body>
-<form action="{% url 'account:login' %}" method="post" class="form-signin" >
-  <img class="mb-4" src="" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required autofocus>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-  {% csrf_token %}
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<form action="{% url 'account:login' %}" method="post"
+	class="form-signin form-general-style">
+	<div class="form-section" data-title="Login">
+		<img class="mb-4" src="" alt="" width="72" height="72">
+		<label for="inputEmail">Email address</label> <input
+			type="email" id="inputEmail" name="username" class="form-control form-input"
+			placeholder="Email address" required autofocus> <label
+			for="inputPassword">Password</label> <input
+			type="password" id="inputPassword" name="password"
+			class="form-control form-input" placeholder="Password" required> {% csrf_token %}
+		<button class="action-button" type="submit">Sign in</button>
+	</div>
 </form>
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  </body>
-</html>
