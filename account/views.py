@@ -1,10 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from .backends import EmailAuthBackend
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
-def user_login(request):
+'''
+#this is custom test login view, which is replaced by using django auth_views
+
+def userlogin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -22,5 +26,7 @@ def user_login(request):
                 return HttpResponse('Invalid login')
     else:
         form = LoginForm()
+
     context = {'form': form}
     return render(request, 'login.html', context)
+'''

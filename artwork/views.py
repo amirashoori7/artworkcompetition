@@ -32,6 +32,11 @@ def about(request):
     context = {}
     return render(request, 'pages/about.html', context)
 
+#this dash index is the same as work_lists, i declared for login redirect
+def dashindex(request):
+    works = Artwork.objects.all()
+    context = {'works': works}
+    return render(request, 'dashindex.html', context)
 
 def work_lists(request):
     works = Artwork.objects.all()

@@ -46,6 +46,10 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'account.ProjectUser'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
+LOGIN_REDIRECT_URL = 'artwork:dashindex'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
