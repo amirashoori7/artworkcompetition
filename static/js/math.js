@@ -23,17 +23,17 @@ function loadContent(liItem) {
 // tweenMenuShow.reverse()
 		$(".page-content").prepend($("<div/>").addClass("page-content-area-bg"))
 		$(".page-content").fadeIn()
-		var tl = new TimelineLite({paused: true})
-		tl.to(".page-content", .6, { 
+		var tl = new TimelineLite({paused: true,ease: Power4.easeOut})
+		tl.to(".page-content", 1, { 
 			rotationY: -180, 
 			top: "5%",
 			transformOrigin: "left" })
-		.to(".page-content", 1, { 
+		.to(".page-content", 1.2, { 
 			left: $(".menu-items-holder").width() - 33,
 			top: "5%",
 			rotationY: 0,
 			transformOrigin: "left"
-		})
+		}, "-= .6")
 		tl.play()
 			
 	})
@@ -44,35 +44,15 @@ $(window).bind('resize', function () {
 })
 
 $(document).ready(function () {
-// $(".menu-icon").load("static/img/icons/menu.svg", function () {
-// var tlMenu = new TimelineLite({
-// paused: true
-// })
-// tweenMenuShow = tlMenu.to(".menu-items-holder", .5, {
-// top: "-100%",
-// transformOrigin: "top"
-// })
-// tweenMenuShow.reverse()
-// $(this).on("click", function () {
-// if (tweenMenuShow.reversed())
-// tweenMenuShow.play()
-// else
-// tweenMenuShow.reverse()
-// })
-// })
-// TweenLite.to(".menu-items-holder", .5, {
-// top: "-100%",
-// transformOrigin: "top"
-// })
 	windowLayoutFitSize()
-	loadUniverseBG()
+//	loadUniverseBG()
 	$(".return-button").load("static/img/icons/close.svg")
 })
 
 
 $(window).on("load", function () {
 	$(".menu-item").attr("onclick", "loadContent(this)")
-	loadContent($("<li/>").attr("data-href", "/home/"))
+	loadContent($("<li/>").attr("data-href", "/dashindex"))
 	toggleMessageBox(null, null)
 })
 
@@ -300,4 +280,17 @@ function toggleMessageBox(messageText, isError) {
 		})
 		messageBoxTween.play()
 	}
+}
+
+function showDialogPage(element, url){
+	$(".dialog-popup-content").remove()
+	$(".page-content").append($("<div/>").addClass("dialog-popup-content"))
+	TweenLite.from(".dialog-popup-content", 1, {width: "0", height: "0", transformOrigin: "left", defaultEase: Power4.easeOut})
+	$(".dialog-popup-content").load(url, function(){
+		$(this).append($("<div/>").addClass("close-button").on("click",function(){
+			$(".dialog-popup-content").fadeOut()
+		}))
+		$(this).find(".close-button").load('static/img/icons/close.svg')
+	})
+	return -1
 }

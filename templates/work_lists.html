@@ -29,7 +29,7 @@
      <td>
        <img class="img-thumbnail" height="100" width="100" src='{{ work.workfileCropped }}'>
      </td>
-     <td><a href="{% url 'artwork:work_details' work.id %}">Details</td>
+     <td><a href="#" onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">Details</td>
    </tr>
    {% endfor %}
  </tbody>
