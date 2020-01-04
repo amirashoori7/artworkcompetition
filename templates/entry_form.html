@@ -4,7 +4,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="static/css/croppie.css"
 	crossorigin="anonymous">
-	<script type="text/javascript">
+<script type="text/javascript">
 	var Cropper = window.Cropper;
 	var aspectRatio = 1.414 //A4 paper
 
@@ -72,7 +72,9 @@
 			}
 			reader.readAsDataURL(input.files[0]);
 		} else {
-			toggleMessageBox("Sorry - you're browser doesn't support the FileReader API", true);
+			toggleMessageBox(
+					"Sorry - you're browser doesn't support the FileReader API",
+					true);
 		}
 	}
 
@@ -89,9 +91,11 @@
 			format : 'jpeg'
 		}).then(function(resp) {
 			$("#croppedImage").attr('src', resp)
-			$("#icon").val($("#croppedImage").attr('src'))
+			$("#workfileCropped").val(resp)
+			return false
 		});
 		$("#main-cropper").empty()
+		return false
 	});
 </script>
 <div class="form-title">
@@ -110,6 +114,16 @@
 			enctype="multipart/form-data" novalidate>
 			{% csrf_token %} <input type="hidden" name="id" id="id"
 				value="{{ form.instance.firstname|default_if_none:'' }}">
+
+
+
+
+			<!-- 				BIO  -->
+
+
+
+
+
 			<div class="form-section" data-title="Step 1) Personal Information">
 				<div class="row">
 					<div class="col-md-6">
@@ -344,6 +358,10 @@
 						<div id="main-cropper"></div>
 						<div id="iconCropDiv">
 							<img id="croppedImage" src="" alt="" />
+							<input type="text" class="form-control" id="workfileCropped"
+							name="workfileCropped" placeholder="" value="Browse"
+							value="{{ form.instance.workfileCropped|default_if_none:'' }}"
+							required>
 						</div>
 						<button class="cropIcon" id="cropIcon" style="display: none">Crop</button>
 					</div>
@@ -376,8 +394,10 @@
 					</div>
 					<div class="col-md-6">
 						<lable for="formulafile">Formula File</lable>
-						<input type="file" class="form-control" id="formulafile"
-							name="formulafile" placeholder="" required>
+						<input type="file" class="form-control" id="workformulafile"
+							name="workformulafile" placeholder="" value="Browse"
+							value="{{ form.instance.workformulafile|default_if_none:'' }}"
+							accept="image/*" required>
 					</div>
 				</div>
 				<div class="row">

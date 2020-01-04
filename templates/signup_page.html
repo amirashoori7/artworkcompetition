@@ -61,9 +61,9 @@
 							xhr.setRequestHeader("X-CSRFToken",
 									getCookie('csrftoken'));
 						}
+						$("#dob").val($("#monthDropDown").val()+"/"+$("#dayDropDown").val()+"/"+$("#yearDropDown").val())
 					},
 					success : function(response) {
-						console.log(response)
 						if (response.successResult != null) {
 							$("#id").val(response.id)
 							toggleMessageBox(response.successResult, false)

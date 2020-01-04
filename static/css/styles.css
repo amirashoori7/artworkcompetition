@@ -83,10 +83,11 @@ html, body {
 }
 
 .error-message-box {
-	background: rgba(164, 3, 33, 0.95);
-	border: 2px solid rgb(264, 3, 33);
-	font-size: 17px;
-	text-align: left;
+	background: rgba(252, 227, 232, 0.95);
+    border: 2px solid rgb(264, 3, 33);
+    font-size: 17px;
+    text-align: left;
+    color: black;
 }
 
 .error-message-box ul {
@@ -94,8 +95,9 @@ html, body {
 }
 
 .success-message-box {
-	background: rgba(1, 82, 10, 0.95);
-	border: 2px solid #2eda08;
+    background: rgba(225, 244, 227, 0.95);
+    border: 2px solid #2eda08;
+    color: #517813;
 }
 
 .menu-icon {
