@@ -1,46 +1,61 @@
-{% extends "base_dash.html" %}
+{% extends "basedash.html" %}
 {% block title %}Mathart Project{% endblock %}
-{% block nav-artworks %}<a class="nav-link active" href="{% url 'artwork:work_lists' %}">Artworks <span class="sr-only">(current)</span></a>{% endblock%}
-{% block content %}
-<main role="main" class="container">
-  <div class="jumbotron">
-    <h2>Artwork Lists</h2>
-  </div>
-  <div class="row">
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">School</th>
-      <th scope="col">Surname</th>
-      <th scope="col">Name</th>
-      <th scope="col">Work Title</th>
-      <th scope="col">Email</th>
-      <th scope="col">Age</th>
-      <th scope="col">Grade</th>
-      <th scope="col">WorkFile</th>
-      <th scope="col"><th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for work in works %}
-   <tr>
-     <th scope="row">{{ work.id }}</th>
-     <td>{{ work.school }}</td>
-     <td>{{ work.surname }}</td>
-     <td>{{ work.firstname }}</td>
-     <td>{{ work.worktitle }}</td>
-     <td>{{ work.email }}</td>
-     <td>{{ work.age }}</td>
-     <td>{{ work.learnergrade }}</td>
-     <td>
-       <img class="img-thumbnail" height="100" width="100" src='{{ work.workfile.url }}'>
-     </td>
-     <td><a href="{% url 'artwork:work_details' work.id %}">Details</td>
-   </tr>
-   {% endfor %}
- </tbody>
-</table><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}">
-</main>
+{% block nav-dashindex %}
+  <a class="nav-link active" href="{% url 'artwork:dashindex' %}">
+    <span data-feather="home"></span>
+    Worklists <span class="sr-only">(current)</span>
+  </a>{% endblock %}
 
-{% endblock %}
+  {% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Worklists</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">School</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Name</th>
+          <th scope="col">Work Title</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Grade</th>
+          <th scope="col">WorkFile</th>
+          <th scope="col"><th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for work in works %}
+       <tr>
+         <th scope="row">{{ work.id }}</th>
+         <td>{{ work.school }}</td>
+         <td>{{ work.surname }}</td>
+         <td>{{ work.firstname }}</td>
+         <td>{{ work.worktitle }}</td>
+         <td>{{ work.email }}</td>
+         <td>{{ work.age }}</td>
+         <td>{{ work.learnergrade }}</td>
+         <td>
+           <img class="img-thumbnail" height="100" width="100" src='{{ work.workfile.url }}'>
+         </td>
+         <td><a href="{% url 'artwork:work_details' work.id %}">Details</td>
+       </tr>
+       {% endfor %}
+     </tbody>
+    </table><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}">
+    </main>
+
+    {% endblock %}
