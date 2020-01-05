@@ -44,7 +44,7 @@
 						src="static/img/icons/home.svg"><span>Home</span></li>
 					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:work_lists' %}"><img
-						src="static/img/icons/profile.svg"><span>worklist</span></li>
+						src="static/img/icons/document.svg"><span>Admin</span></li>
 					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:index' %}"><img
 						src="static/img/icons/profile.svg"><span>About</span></li>
@@ -54,18 +54,9 @@
 					<li class="menu-item" id="sign-up"
 						data-href="{% url 'artwork:signup_page' %}"><img
 						src="static/img/icons/trophy.svg"><span>Sign Up</span></li>
-					<!-- 					<li class="menu-item" id="rules" -->
-					<!-- 						data-href="{% url 'artwork:index' %}"><img -->
-					<!-- 						src="static/img/icons/document.svg"><span>Rules</span></li> -->
-					<!-- 					<li class="menu-item" id="resource" -->
-					<!-- 						data-href="{% url 'artwork:index' %}"><img -->
-					<!-- 						src="static/img/icons/select.svg"><span>Resource</span></li> -->
 					<li class="menu-item" id="contact-us"
 						data-href="{% url 'artwork:index' %}"><img
 						src="static/img/icons/contact.svg"><span>Contact Us</span></li>
-<!-- 					<li class="menu-item" id="faq" -->
-<!-- 						data-href="{% url 'artwork:index' %}"><img -->
-<!-- 						src="static/img/icons/information.svg"><span>FAQ's</span></li> -->
 				</ul>
 			</div>
 			<div class="page-content">{% block content %}</div>

@@ -31,6 +31,9 @@ html, body {
 	height: inherit;
 }
 
+.row {
+	margin: 0;
+}
 .message-box-container {
 	position: fixed;
 	color: white;
@@ -95,12 +98,16 @@ html, body {
 
 .page-content>div {
 	position: absolute;
-	top: 22px;
+	top: 0;
 	bottom: 0;
 	right: 22px;
 	overflow-y: auto;
 	overflow-x: hidden;
-	left: 66px;
+	left: 0;
+}
+
+.page-content-area{
+	padding: 11px 22px;
 }
 
 .error-message-box {
@@ -259,23 +266,6 @@ canvas {
 	font-size: 19px;
 }
 
-/* #sign-up::before { */
-/* 	content: 'Free Entry'; */
-/* 	color: #174c66; */
-/* 	margin-top: -12px; */
-/* 	margin-left: -27px; */
-/* 	background-image: url(../img/icons/star.svg); */
-/* 	background-position: left top; */
-/* 	background-size: 22px 22px; */
-/* 	background-repeat: no-repeat; */
-/* 	z-index: 1; */
-/* 	position: absolute; */
-/* 	width: 113px; */
-/* 	height: 33px; */
-/* 	padding-left: 27px; */
-/* 	font-weight: bold; */
-/* } */
-
 .page-content {
     overflow: hidden;
 	color: black;
@@ -283,7 +273,7 @@ canvas {
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding-left: 44px;
+	margin-left: 22px;
 	perspective: 400px;
 	box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px
 		#aeb5d1;
@@ -296,6 +286,8 @@ canvas {
 	background: url(../img/BG.jpg);
 	position: absolute;
 	opacity: .2;
+	top: 0;
+	left: 0;
 	filter: blur(7px);
 	background-repeat: no-repeat;
 	background-size: cover;

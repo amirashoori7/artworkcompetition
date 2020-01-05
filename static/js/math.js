@@ -20,21 +20,22 @@ function loadContent(liItem) {
 	$("#login-div").load('/account/login/')
 	url = $(liItem).attr("data-href")
 	var tl = new TimelineLite({paused: true,ease: Power4.easeOut})
-	tl.to(".page-content, .page-content-area", 1, { 
+	tl.to(".page-content", 1, { 
 		rotationY: -180, 
 		top: "5%",
 		transformOrigin: "left" })
-	.to(".page-content, .page-content-area", 1.3, { 
-		left: $(".menu-items-holder").width() - 11,
+	.to(".page-content", 1.3, { 
+		left: $(".menu-items-holder").width(),
 		rotationY: 0,
 		transformOrigin: "left"
 	}, "-= .6")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-	$(".page-content").load(url, function () {
+	$(".page-content").load(url, function (response) {
 		$(".page-content").fadeIn()	
+		$(".page-content").html("")
 		$(".page-content").prepend($("<div/>").addClass("page-content-area"))
-//		$(".page-content-area").html()
+		$(".page-content-area").html(response)
 		$(".page-content").prepend($("<div/>").addClass("page-content-area-bg"))
 		tl.play()
 	})

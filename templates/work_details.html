@@ -1,117 +1,38 @@
 <div>
-	<h1 class="h5">Artwork {{ work.worktitle }} By {{ work.surname }}</h5>
+	<h2>Artwork "{{ work.worktitle }}"</h2>
+	<h4>By {{ work.surname }}, {{ work.firstname }}</h4>
+	<h6>{{ work.learnergrade }}, School {{ work.school }}. Teacher: {{ work.teachername }}</h6>
+	<h6>Born in {{ work.dob }}</h6>
+	<h6>Email: {{ work.email }}<h6>
+	<h6>Parent: {{ work.parentname }}, Cell:  {{ work.parentphone }}<h6>
 </div>
 <div class="row">
-	<div class="col-md-10 offset-md-1">
-		<h4 class="mb-3">Artwork Information</h4>
-		<div class="row">
-			<div class="col-md-12 mb-3">
-				<lable for="workfile">Work File</lable>
-				<img type="file" class="img-fluid" id="workfile"
-					src="{{ work.workfile.url }}">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 mb-3">
-				<lable for="surname">Work Title</lable>
-				<input type="text" class="form-control" id="worktilte"
-					placeholder="" value="{{ work.worktitle }}">
-			</div>
-		</div>
-		<br>
-		<h4 class="mb-3">Personal Information</h4>
-		<div class="row">
-			<div class="col-md-4 mb-3">
-				<lable for="firstname">First Name</lable>
-				<input type="text" class="form-control" id="firstname"
-					placeholder="" value="{{ work.firstname }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="surname">Surname</lable>
-				<input type="text" class="form-control" id="surname" placeholder=""
-					value="{{ form.surname }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="Age">Age</lable>
-				<input type="text" class="form-control" id="surname" placeholder=""
-					value="{{ form.age }}" required>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 mb-3">
-				<lable for="email">email</lable>
-				<input type="email" class="form-control" id="email"
-					value="{{ work.email }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="parentname">Parent Name</lable>
-				<input type="text" class="form-control" id="parentname"
-					value="{{ work.parentname }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="parentphone">Parent Phone</lable>
-				<input type="tel" class="form-control" id="parentphone"
-					value="{{ work.parentphone }}" required>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 mb-3">
-				<lable for="school">School</lable>
-				<select class="custem-select d-block w-100" id="school" required>
-					<option value=""></option>
-					<option>{{ work.school.name }}
-					<option>
-				</select>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="teachername">Teacher Name</lable>
-				<input type="text" class="form-control" id="teachername"
-					value="{{ work.teachername }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="teacheremail">Teacher Email</lable>
-				<input type="email" class="form-control" id="teacheremail"
-					value="{{ work.teacheremail }}" required>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 mb-3">
-				<lable for="dob">Date of Birth</lable>
-				<input type="date" class="form-control" id="dob"
-					value="{{ work.dob }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="learnergrade">Learner Grade</lable>
-				<input type="number" class="form-control" id="learnergrade"
-					value="{{ work.learnergrade }}" required>
-			</div>
-			<div class="col-md-4 mb-3">
-				<lable for="teacherphone">Teacher Phone</lable>
-				<input type="tel" class="form-control" id="teacherphone"
-					value="{{ work.teacherphone }}" required>
-			</div>
-		</div>
-		<br>
-		<h4 class="mb-3">Answers:</h4>
-		<div class="row">
-			<div class="col-md-12 mb-3">
-				<lable for="question1">Question1</lable>
-				<textarea class="form-control" id="question1" rows="5">{{ work.question1 }}</textarea>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 mb-3">
-				<lable for="question1">Question1</lable>
-				<textarea class="form-control" id="question1" rows="5">{{ work.question2 }}</textarea>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 mb-3">
-				<lable for="question1">Question1</lable>
-				<textarea class="form-control" id="question1" rows="5">{{ work.question3 }}</textarea>
-			</div>
-		</div>
-		<div class="col text-center"></div>
+	<div class="col-md-12">
+		<img type="file" class="img-fluid" id="workfile"
+			src="{{ work.workfileCropped }}">
 	</div>
 </div>
-
+<div class="row">
+	<div class="col-md-4">
+		<lable for="teachername">Teacher</lable>
+		 {{ work.teacheremail }}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<lable for="question1">Question1</lable>
+		{{ work.question1 }}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<lable for="question1">Question1</lable>
+		{{ work.question2 }}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<lable for="question1">Question1</lable>
+		{{ work.question3 }}
+	</div>
+</div>
