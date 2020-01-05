@@ -259,22 +259,22 @@ canvas {
 	font-size: 19px;
 }
 
-#sign-up::before {
-	content: 'Free Entry';
-	color: #174c66;
-	margin-top: -12px;
-	margin-left: -27px;
-	background-image: url(../img/icons/star.svg);
-	background-position: left top;
-	background-size: 22px 22px;
-	background-repeat: no-repeat;
-	z-index: 1;
-	position: absolute;
-	width: 113px;
-	height: 33px;
-	padding-left: 27px;
-	font-weight: bold;
-}
+/* #sign-up::before { */
+/* 	content: 'Free Entry'; */
+/* 	color: #174c66; */
+/* 	margin-top: -12px; */
+/* 	margin-left: -27px; */
+/* 	background-image: url(../img/icons/star.svg); */
+/* 	background-position: left top; */
+/* 	background-size: 22px 22px; */
+/* 	background-repeat: no-repeat; */
+/* 	z-index: 1; */
+/* 	position: absolute; */
+/* 	width: 113px; */
+/* 	height: 33px; */
+/* 	padding-left: 27px; */
+/* 	font-weight: bold; */
+/* } */
 
 .page-content {
     overflow: hidden;

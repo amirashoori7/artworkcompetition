@@ -19,23 +19,24 @@ function loadContent(liItem) {
 	$(liItem).addClass("active")
 	$("#login-div").load('/account/login/')
 	url = $(liItem).attr("data-href")
+	var tl = new TimelineLite({paused: true,ease: Power4.easeOut})
+	tl.to(".page-content, .page-content-area", 1, { 
+		rotationY: -180, 
+		top: "5%",
+		transformOrigin: "left" })
+	.to(".page-content, .page-content-area", 1.3, { 
+		left: $(".menu-items-holder").width() - 11,
+		rotationY: 0,
+		transformOrigin: "left"
+	}, "-= .6")
+	$(".page-content-area-bg").remove()
+	$(".page-content-area").remove()
 	$(".page-content").load(url, function () {
-// tweenMenuShow.reverse()
+		$(".page-content").fadeIn()	
+		$(".page-content").prepend($("<div/>").addClass("page-content-area"))
+//		$(".page-content-area").html()
 		$(".page-content").prepend($("<div/>").addClass("page-content-area-bg"))
-		$(".page-content").fadeIn()
-		var tl = new TimelineLite({paused: true,ease: Power4.easeOut})
-		tl.to(".page-content", 1, { 
-			rotationY: -180, 
-			top: "5%",
-			transformOrigin: "left" })
-		.to(".page-content", 1.2, { 
-			left: $(".menu-items-holder").width() - 33,
-			top: "5%",
-			rotationY: 0,
-			transformOrigin: "left"
-		}, "-= .6")
 		tl.play()
-			
 	})
 }
 
@@ -45,7 +46,7 @@ $(window).bind('resize', function () {
 
 $(document).ready(function () {
 	windowLayoutFitSize()
-//	loadUniverseBG()
+// loadUniverseBG()
 	$(".return-button").load("static/img/icons/close.svg")
 })
 
