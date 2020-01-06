@@ -46,7 +46,7 @@ class Artwork(models.Model):
     worktitle = models.CharField(blank=False, null=True, max_length=300)
     workfile = models.FileField(upload_to='works')
     workfileCropped = models.TextField(blank=False, default="", null=False)
-    workformulafile = models.FileField(null=True, blank='True',upload_to='formula')
+    workformulafile = models.FileField(null=True, blank='True',upload_to='formulas')
     workapproved = models.BooleanField(default=False)
     question1 = models.TextField(blank=False)
     question2 = models.TextField(blank=False)

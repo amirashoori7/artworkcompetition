@@ -45,6 +45,10 @@
 	border-radius: 7px;
 }
 
+.form-input[type=radio], .form-input[type=checkbox] {
+	cursor: pointer;
+}
+
 .form-section input::placeholder {
 	color: #bbbbbb;
 }

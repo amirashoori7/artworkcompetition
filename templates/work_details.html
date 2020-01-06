@@ -1,38 +1,164 @@
-<div>
-	<h2>Artwork "{{ work.worktitle }}"</h2>
-	<h4>By {{ work.surname }}, {{ work.firstname }}</h4>
-	<h6>{{ work.learnergrade }}, School {{ work.school }}. Teacher: {{ work.teachername }}</h6>
-	<h6>Born in {{ work.dob }}</h6>
-	<h6>Email: {{ work.email }}<h6>
-	<h6>Parent: {{ work.parentname }}, Cell:  {{ work.parentphone }}<h6>
-</div>
-<div class="row">
+<div class="row report-section">
 	<div class="col-md-12">
 		<img type="file" class="img-fluid" id="workfile"
-			src="{{ work.workfileCropped }}">
+			src="{{ work.workfile.url }}">
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-4">
-		<lable for="teachername">Teacher</lable>
-		 {{ work.teacheremail }}
-	</div>
-</div>
-<div class="row">
 	<div class="col-md-12">
-		<lable for="question1">Question1</lable>
-		{{ work.question1 }}
+		<h3>
+			<strong>Artwork </strong>"{{ work.worktitle }}"
+		</h3>
 	</div>
-</div>
-<div class="row">
 	<div class="col-md-12">
-		<lable for="question1">Question1</lable>
-		{{ work.question2 }}
+		<h5>
+			<strong>By </strong>{{ work.surname }}, {{ work.firstname }}
+		</h5>
 	</div>
 </div>
-<div class="row">
+<div class="row report-section">
+	<div class="col-md-6">
+		<h6>
+			<strong>Born in </strong>{{ work.dob }}
+		</h6>
+		<h6>
+			<strong>Email </strong>{{ work.email }}, <strong>Cell </strong>{{work.cellphone}}
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<h6>
+			{{ work.learnergrade }}, <strong>School</strong> {{ work.school }}.
+		</h6>
+		<h6>
+			<strong>Teacher</strong> {{ work.teachername }}, <strong>Email</strong>
+			{{ work.teacheremail }}
+		</h6>
+	</div>
 	<div class="col-md-12">
-		<lable for="question1">Question1</lable>
-		{{ work.question3 }}
+		<h6>
+			<strong>Parent</strong> {{ work.parentname }}, <strong>Cell</strong>
+			{{ work.parentphone }}
+			<h6>
 	</div>
 </div>
+
+
+<div class="row report-section">
+	<div class="col-md-6">
+		<h6>
+			<strong>Question 1: What Mathematics did you use in your
+				artwork?</strong>
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<span id="answer1">{{ work.question1 }}</span>
+	</div>
+	<div class="col-md-6">
+		<h6>
+			<strong>Question 2: How did you use creativity to connect
+				Mathematics with "My Universe" to make your artwork?</strong>
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<span id="answer2">{{ work.question2 }}</span>
+	</div>
+	<div class="col-md-6">
+		<h6>
+			<strong>Question 3: Do you think creativity could be used to
+				teach Mathematics?</strong>
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<span id="answer3">{{ work.question3 }}</span>
+	</div>
+</div>
+
+{%if work.status == 0 %}
+<form method="post" id="" action="/"
+	class="needs-validation form-general-style"
+	enctype="multipart/form-data" novalidate>
+	<div class="row form-section" data-title="Validate the entry format">
+		<div class="col-md-4">
+			<label for="bioapproved">Bio is acceptable</strong> <input
+				type="checkbox" name="bioapproved" id="bioapproved"
+				value="{{ work.bioapproved }}" class="form-control form-input">
+				<input type="hidden" name="id" id="id" value="{{ work.id }}"
+				class="form-control form-input">
+		</div>
+		<div class="col-md-4">
+			<label for="bioapproved">Artwork is uploaded properly</strong> <input
+				type="checkbox" name="bioapproved" id="bioapproved"
+				class="form-control form-input" value="{{ work.bioapproved }}">
+		</div>
+		<div class="col-md-4">
+			<label for="bioapproved">Questions are answered</strong> <input
+				type="checkbox" name="bioapproved" id="bioapproved"
+				value="{{ work.workapproved }}" class="form-control form-input">
+		</div>
+	</div>
+	<div class="row form-section" data-title="Decision">
+		<div class="col-md-4">
+			<button class="action-button green"
+				onclick="alert('update status to 3')">Approve</button>
+		</div>
+		<div class="col-md-4">
+			<button class="action-button orange"
+				onclick="alert('update status to 1, email to the user, and revise -- hide it for now')">Requires
+				Revision</button>
+		</div>
+		<div class="col-md-4">
+			<button class="action-button red"
+				onclick="alert('update status to 2, visibility to 0')">Reject</button>
+		</div>
+	</div>
+</form>
+
+
+
+<!-- 	FORM D1-a -->
+
+
+
+{%elif work.status == 3 %}
+<form method="post" id="" action="/"
+	class="needs-validation form-general-style"
+	enctype="multipart/form-data" novalidate>
+	<div class="row form-section" data-title="Decision">
+		<div class="col-md-12">
+			<button class="action-button green" id="buttonSubmit">Submit</button>
+		</div>
+	</div>
+</form>
+
+
+
+<!-- 	FORM D2 -->
+
+
+
+{%elif work.status == 5 %}
+<form method="post" id="" action="/"
+	class="needs-validation form-general-style"
+	enctype="multipart/form-data" novalidate>
+	FORM D2
+	<div class="row form-section" data-title="Decision">
+		<div class="col-md-6">
+			<button class="action-button green" id="buttonSubmit">Submit</button>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<button class="action-button red"
+			onclick="alert('update status to 6, visibility to 0')">Reject</button>
+
+	</div>
+</form>
+{%elif work.status == 5 %}
+<form method="post" id="" action="/"
+	class="needs-validation form-general-style"
+	enctype="multipart/form-data" novalidate>
+	FORM D3
+	<div class="row form-section" data-title="Decision">
+		<div class="col-md-12">
+			<button class="action-button green" id="buttonSubmit">Submit</button>
+		</div>
+	</div>
+</form>
+{%endif%}

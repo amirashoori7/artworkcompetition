@@ -355,8 +355,8 @@
 						<div id="main-cropper"></div>
 						<div id="iconCropDiv">
 							<img id="croppedImage" src="" alt="" />
-							<input type="text" class="form-control form-input" id="workfileCropped"
-							name="workfileCropped" placeholder="" value="Browse"
+							<input type="hidden" class="form-control form-input" id="workfileCropped"
+							name="workfileCropped" placeholder="" value=""
 							value="{{ form.instance.workfileCropped|default_if_none:'' }}"
 							required>
 						</div>

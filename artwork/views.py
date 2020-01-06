@@ -5,13 +5,10 @@ and then routing requests with an appropriate response.
 '''
 
 from django.shortcuts import render, get_object_or_404
-from django.views import View
 from .models import Artwork, School
 from .forms import EntryForm
 from django.http import HttpResponse
-from django.http.response import JsonResponse
 import json
-from django.core import serializers
 
 
 def index(request):
