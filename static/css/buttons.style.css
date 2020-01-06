@@ -19,7 +19,7 @@
 
 .action-button.green {
 	background: linear-gradient(0deg, #098c1f, #23af0a);
-    color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 
 .action-button.green:hover {
@@ -45,33 +45,23 @@
 	color: white;
 }
 
-.action-button:hover, .action-button:focus {
-	background: linear-gradient(45deg, #164d7a, #6a88a0);
-	color: rgb(255, 255, 255);
-}
-
 .action-button-large {
-	background: linear-gradient(0deg, #c37514, #ffc800);
+	background: linear-gradient(0deg, #fefefe, #e3f4fa);
 	border: 0 none;
 	border-radius: 11px;
 	cursor: pointer;
 	min-width: 130px;
 	margin: 0 5px;
 	text-transform: uppercase;
-	-webkit-transition: transform .1s ease-in, box-shadow .1s ease-in;
-	-moz-transition: transform .1s ease-in, box-shadow .1s ease-in;
-	-o-transition: transform .1s ease-in, box-shadow .1s ease-in;
-	-ms-transition: transform .1s ease-in, box-shadow .1s ease-in;
-	transition: transform .1s ease-in, box-shadow .1s ease-in;
+	-webkit-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	-moz-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	-o-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	-ms-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	transition: transform .2s ease-in, box-shadow .2s ease-in;
 	width: 66%;
 	height: 66px;
-	box-shadow: 0px 11px 33px -22px #f6bc03;
-	border: 1px solid #da8502;
-}
-
-.action-button-large:hover, .action-button-large:focus {
-	transform: scale(1.02);
-	box-shadow: 0px 11px 22px -22px #f6bc03;
+	box-shadow: -7px -7px 7px -7px #b0c6d4, 7px 7px 7px -7px #ffffff, inset
+		7px 7px 7px -7px #b0c6d4, inset -7px -7px 7px -7px #ffffff;
 }
 
 .action-button-large img {
@@ -94,4 +84,10 @@
 .action-button.orange:hover, .action-button.orange:focus {
 	background: linear-gradient(0, #e95109, #ff7600);
 	color: rgb(0, 0, 0);
+}
+
+.action-button-large:hover, .action-button-large:focus {
+	transform: scale(1.02);
+	background: linear-gradient(0deg, #fefefe, #e3f4fa);
+	box-shadow: none;
 }
