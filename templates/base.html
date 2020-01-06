@@ -13,6 +13,7 @@
 <link href="{% static 'css/nice-select.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/buttons.style.css' %}" rel="stylesheet">
 <link href="{% static 'css/form.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/table.style.css' %}" rel="stylesheet">
 
 <script src="{% static 'js/jquery/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
@@ -37,7 +38,12 @@
 				</div>
 			</div>
 			<div class="menu-items-holder">
+				{% if user.is_authenticated %}
+				<p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+				{% else %}
 				<div id="login-div"></div>
+				{% endif %}
+
 				<ul class="menu-items menu-top">
 					<li class="menu-item" id="home"
 						data-href="{% url 'artwork:home' %}"><img
@@ -49,7 +55,7 @@
 						data-href="{% url 'artwork:index' %}"><img
 						src="static/img/icons/profile.svg"><span>About</span></li>
 					<li class="menu-item" id="gallery"
-						data-href="{% url 'artwork:index' %}"><img
+						data-href="{% url 'artwork:gallery' %}"><img
 						src="static/img/icons/art-gallery.svg"><span>Gallery</span></li>
 					<li class="menu-item" id="sign-up"
 						data-href="{% url 'artwork:signup_page' %}"><img

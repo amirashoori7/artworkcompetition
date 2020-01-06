@@ -27,13 +27,11 @@ def home(request):
 
 def about(request):
     context = {}
-    return render(request, 'pages/about.html', context)
+    return render(request, 'about.html', context)
 
-#this dash index is the same as work_lists, i declared for login redirect
-def dashindex(request):
-    works = Artwork.objects.all()
-    context = {'works': works}
-    return render(request, 'dashindex.html', context)
+def gallery(request):
+    context = {}
+    return render(request, 'gallery.html', context)
 
 def work_lists(request):
     works = Artwork.objects.all()

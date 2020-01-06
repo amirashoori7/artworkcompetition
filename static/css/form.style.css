@@ -87,6 +87,10 @@
 	right: 0;
 }
 
+.multi_strp_form {
+	padding: 55px 0;
+}
+
 #progressbar {
 	overflow: hidden;
 }

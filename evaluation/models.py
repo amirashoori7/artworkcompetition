@@ -77,10 +77,9 @@ class D1B(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class D2(models.Model):
-    math = ArrayField(
-        models.CharField(choices=MATH, max_length=50, blank=True, null=True),
-    )
+    math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True),)
     q1 = models.IntegerField(blank=True, null=True)
     q2 = models.IntegerField(blank=True, null=True)
     q3 = models.IntegerField(blank=True, null=True)
@@ -93,6 +92,7 @@ class D2(models.Model):
     def save(self, *args, **kwargs):
         self.score = self.q1+self.q2+self.q3+self.q4
         super(D2, self).save(*args, **kwargs)
+
 
 class D3(models.Model):
     q1 = models.IntegerField(blank=True, null=True)

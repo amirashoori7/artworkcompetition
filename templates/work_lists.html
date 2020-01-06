@@ -1,38 +1,72 @@
-  <div class="">
-    <h2>Artwork List</h2>
-  </div>
-  <div class="row">
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">School</th>
-      <th scope="col">Surname</th>
-      <th scope="col">Name</th>
-      <th scope="col">Work Title</th>
-      <th scope="col">Email</th>
-      <th scope="col">Grade</th>
-      <th scope="col">WorkFile</th>
-      <th scope="col"><th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for work in works %}
-   <tr>
-     <th scope="row">{{ work.id }}</th>
-     <td>{{ work.school }}</td>
-     <td>{{ work.surname }}</td>
-     <td>{{ work.firstname }}</td>
-     <td>{{ work.worktitle }}</td>
-     <td>{{ work.email }}</td>
-     <td>{{ work.learnergrade }}</td>
-     <td>
-       <img class="img-thumbnail" height="100" width="100" src='{{ work.workfileCropped }}'>
-     </td>
-     <td><a href="#" onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">Details</td>
-   </tr>
-   {% endfor %}
- </tbody>
-</table><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}"><a href="{{ work.get_absolute_url }}">
-</main>
 
+<div class="">
+	<h2>Artwork List</h2>
+</div>
+<table class="table table-general-style">
+	<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">Full Name</th>
+			<th scope="col">Title</th>
+			<th scope="col">Email</th>
+			<th scope="col">Grade</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for work in works %}
+		<tr class="row-hover" onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
+			<th scope="row">{{ work.id }}</th>
+			<td>{{ work.surname }}, {{ work.firstname }}</td>
+			<td>{{ work.worktitle }}
+				<div class="artwork-thumbnail">
+					<img class="img-thumbnail" height="100" width="100"
+						src='{{ work.workfile.url }}'>
+				</div>
+			</td>
+			<td>{{ work.email }}</td>
+			<td>{{ work.learnergrade }}</td>
+			<td>{{ work.status }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<script>
+setTimeout(function(){
+	$("tr.row-hover").each(function() {
+		$(this).mouseenter(function() {
+			TweenLite.to($(this).find(".artwork-thumbnail"), .2, {
+				scaleY: 2,
+				scaleX: 2,
+				"z-index": 11,
+				opacity: 1,
+				transformOrigin: "center"
+			})
+			TweenLite.to($(this), .2, {
+				scale: 1.02,
+				"z-index": 10,
+				transformOrigin: "center",
+				"box-shadow": "black 0px 0px 33px" 
+			})
+		})
+		$(this).mouseleave(function(){
+			TweenLite.to($(this).find(".artwork-thumbnail"), .2 , {
+				scaleY: 1,
+				scaleX: 1,
+				opacity: 0,
+				"z-index": 1,
+				transformOrigin: "center"
+			})
+			TweenLite.to($(this), .2, {
+				scale: 1,
+				"z-index": 1,
+				transformOrigin: "center",
+				"box-shadow": "none" 
+			})
+		})
+		$(this).click(function(){
+			
+		})
+	})
+}, 200)
+</script>

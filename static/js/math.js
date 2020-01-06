@@ -52,7 +52,7 @@ $(document).ready(function () {
 
 $(window).on("load", function () {
 	$(".menu-item").attr("onclick", "loadContent(this)")
-	loadContent($("<li/>").attr("data-href", "/dashindex"))
+	loadContent($("<li/>").attr("data-href", "/home/"))
 	toggleMessageBox(null, null)
 })
 
