@@ -26,7 +26,7 @@
 			</td>
 			<td>{{ work.email }}</td>
 			<td>{{ work.learnergrade }}</td>
-			<td>{{ work.status }}</td>
+			<td>{{ work.get_status_display }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
@@ -46,7 +46,7 @@ setTimeout(function(){
 				scale: 1.02,
 				"z-index": 10,
 				transformOrigin: "center",
-				"box-shadow": "black 0px 0px 33px" 
+				"box-shadow": "black 0px 0px 33px"
 			})
 		})
 		$(this).mouseleave(function(){
@@ -61,11 +61,11 @@ setTimeout(function(){
 				scale: 1,
 				"z-index": 1,
 				transformOrigin: "center",
-				"box-shadow": "none" 
+				"box-shadow": "none"
 			})
 		})
 		$(this).click(function(){
-			
+
 		})
 	})
 }, 200)
