@@ -138,7 +138,7 @@ function showDialogPage(element, url){
 	TweenLite.from(".dialog-popup-content", 1, {right: "100%", transformOrigin: "left", defaultEase: Power4.easeOut})
 	$(".dialog-popup-content").load(url, function(){
 		$(this).append($("<div/>").addClass("close-button").on("click",function(){
-			TweenLite.to(".dialog-popup-content", 1, {left: "100%", transformOrigin: "right", defaultEase: Power4.easeOut})
+			TweenLite.to(".dialog-popup-content", 1, {right: "100%", left: "-100%", transformOrigin: "right", defaultEase: Power4.easeOut})
 		}))
 		$(this).find(".close-button").load('static/img/icons/close.svg')
 	})

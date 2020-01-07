@@ -97,15 +97,6 @@ html, body {
 	cursor: pointer;
 }
 
-/* .page-content>div { */
-/* 	position: absolute; */
-/* 	top: 0; */
-/* 	bottom: 0; */
-/* 	right: 0; */
-/* 	overflow-y: auto; */
-/* 	overflow-x: hidden; */
-/* 	left: 0; */
-/* } */
 .page-content-area {
 	padding: 11px 22px;
 }
@@ -313,4 +304,87 @@ canvas {
 	background: #f8fdff;
 	padding: 11px;
 	border-radius: 33px;
+}
+
+@
+-webkit-keyframes zoom-roll-top { 50% {
+	transform: rotateX(-10deg) translateZ(-200px);
+}
+
+100%
+{
+transform
+:
+rotateX
+(0)
+translateZ
+(0);
+}
+}
+@
+-webkit-keyframes zoom-roll-middle { 50% {
+	transform: rotateX(-10deg) translateZ(-200px);
+}
+
+100%
+{
+transform
+:
+rotateX
+(0)
+translateZ
+(0);
+}
+}
+@
+-webkit-keyframes zoom-roll-bottom { 50% {
+	transform: rotateX(-10deg) translateZ(-200px);
+}
+
+100%
+{
+transform
+:
+rotateX
+(0)
+translateZ
+(0);
+}
+}
+@
+-moz-keyframes zoom-roll-top { 50% {
+	transform: rotateX(-10deg) translateZ(-200px);
+}
+
+100%
+{
+transform
+:
+rotateX
+(0)
+translateZ
+(0);
+}
+}
+@
+-moz-keyframes zoom-roll-middle { 50% {
+	transform: rotateX(-10deg) translateZ(-200px);
+}
+100%
+{
+transform:rotateX(0) translateZ(0);
+}
+}
+@
+-moz-keyframes zoom-roll-bottom { 50% {
+	transform: rotateX(-10deg) translateZ(-200px);
+}
+100%
+{
+transform
+rotateX
+(0)
+translateZ
+(0);
+}
 }

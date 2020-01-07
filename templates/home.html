@@ -1,91 +1,94 @@
 <style>
-	.landing-page-content {
-		position: absolute;
-		text-align: center;
-		border-radius: 21px;
-	}
+.landing-page-content {
+	position: absolute;
+	text-align: center;
+	border-radius: 21px;
+	border: 1px solid white;
+}
 
-	.div-21 {
-		height: 100%;
-		width: 61.76%;
-		padding: 21px;
-	}
+.div-21 {
+	height: 100%;
+	width: 61.76%;
+	padding: 21px;
+}
 
-	.div-21 ul,
-	.div-5 ul {
-		list-style: none;
-		height: 100%;
-		display: table;
-	}
+.div-21 ul, .div-5 ul {
+	list-style: none;
+	height: 100%;
+	display: table;
+}
 
-	.div-21 ul li {
-		height: 33%;
-		display: table-row;
-	}
+.div-21 ul li {
+	height: 33%;
+	display: table-row;
+}
 
-	.div-13 {
-		left: 61.76%;
-		width: calc(100% - 61.76%);
-		height: calc(100% - 38.09%);
-		padding: 13px;
-	}
+.div-13 {
+	left: 61.76%;
+	width: calc(100% - 61.76%);
+	height: calc(100% - 38.09%);
+	padding: 13px;
+}
 
-	.div-8 {
-		right: 0;
-		bottom: 0;
-		top: calc(100% - 38.09%);
-		left: 76.46%;
-		padding: 8px;
-	}
+.div-8 {
+	right: 0;
+	bottom: 0;
+	top: calc(100% - 38.09%);
+	left: 76.46%;
+	padding: 8px;
+}
 
-	.div-5 {
-		left: 61.76%;
-		right: 0;
-		bottom: 0;
-		width: 14.70%;
-		padding: 5px;
-	}
+.div-5 {
+	left: 61.76%;
+	right: 0;
+	bottom: 0;
+	width: 14.70%;
+	padding: 5px;
+}
 
-	#my-universe-logo {
-		width: 271px;
-		filter: drop-shadow(0px 0px 17px #e79ab4);
-	}
+#my-universe-logo {
+	width: 271px;
+	filter: drop-shadow(0px 0px 17px #e79ab4);
+}
 </style>
-<div class="page-content-area">
-	<!-- 34 * 21 -->
-	<div class="landing-page-content div-21">
-		<ul>
-			<li>
-				<h1>The GMMDC National MathArt Competition 2020</h1>
-			</li>
-			<li>
-				<!-- <img src="/static/img/myuinverse.png" id="my-universe-logo"> -->
-				<h2>My Universe</h2>
-			</li>
-			<li>
-				<button onclick="loadContent(this)" data-href="{% url 'artwork:signup_page' %}"
-					class="action-button action-button-large"><img src="static/img/icons/trophy.svg"><span>Sign Up Now</span></button>
-			</li>
-		</ul>
-		<!-- <h1>The GMMDC National MathArt Competition 2020</h1>
+<!-- 34 * 21 -->
+<div class="landing-page-content div-21">
+	<ul>
+		<li>
+			<h1>The GMMDC National MathArt Competition 2020</h1>
+		</li>
+		<li>
+			<!-- <img src="/static/img/myuinverse.png" id="my-universe-logo"> -->
+			<h2>My Universe</h2>
+		</li>
+		<li>
+			<button onclick="loadContent(this)"
+				data-href="{% url 'artwork:signup_page' %}"
+				class="action-button action-button-large">
+				<img src="static/img/icons/trophy.svg"><span>Sign Up
+					Now</span>
+			</button>
+		</li>
+	</ul>
+	<!-- <h1>The GMMDC National MathArt Competition 2020</h1>
 		<h2>My Universe</h2>
 		<button onclick="loadContent(this)" data-href="{% url 'artwork:signup_page' %}" class="action-button-large"><img
 				src="static/img/icons/trophy.svg"><span>Sign Up Now</span></button> -->
 
-	</div>
-	<div class="landing-page-content div-13">
-		<h3>Towards the 4th industrial revolution by promoting STEAM education in South
-			African learners <br><br>
-			<p>Grade 7 to 12</p>
-		</h3>
-	</div>
-	<div class="landing-page-content div-8">
-		<h4>Sumbit works between 3 March 2020 and 29 April 2020 </h4>
-	</div>
-	<div class="landing-page-content div-5">
-		<ul>
-			<li><strong>Works:</strong>{{ num_works }}</li>
-			<li><strong>Schools:</strong>{{ num_schools }}</li>
-		</ul>
-	</div>
+</div>
+<div class="landing-page-content div-13">
+	<h3>
+		Towards the 4th industrial revolution by promoting STEAM education in
+		South African learners <br> <br>
+		<p>Grade 7 to 12</p>
+	</h3>
+</div>
+<div class="landing-page-content div-8">
+	<h4>Sumbit works between 3 March 2020 and 29 April 2020</h4>
+</div>
+<div class="landing-page-content div-5">
+	<ul>
+		<li><strong>Works:</strong>{{ num_works }}</li>
+		<li><strong>Schools:</strong>{{ num_schools }}</li>
+	</ul>
 </div>
