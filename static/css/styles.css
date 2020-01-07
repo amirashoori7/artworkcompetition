@@ -306,19 +306,10 @@ canvas {
 	border-radius: 33px;
 }
 
-@
--webkit-keyframes zoom-roll-top { 50% {
+@-webkit-keyframes zoom-roll-top { 50% {
 	transform: rotateX(-10deg) translateZ(-200px);
-}
-
-100%
-{
-transform
-:
-rotateX
-(0)
-translateZ
-(0);
+} 100% {
+	transform: rotateX(0) translateZ(0);
 }
 }
 @
@@ -327,13 +318,8 @@ translateZ
 }
 
 100%
-{
-transform
-:
-rotateX
-(0)
-translateZ
-(0);
+{ transform:rotateX(0)
+translateZ(0);
 }
 }
 @
