@@ -2,13 +2,14 @@ from django.db import models
 from django.template.defaultfilters import default
 import os
 from uuid import uuid4
+from .utils import Status
 
 
 class School(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     address = models.CharField(max_length=500)
     province = models.IntegerField(default=0,blank=False,null=False)
-    
+
     class Meta:
         ordering = ('name',)
 
@@ -53,7 +54,7 @@ class Artwork(models.Model):
     question3 = models.TextField(blank=False)
     qapproved = models.BooleanField(default=False)
     submitted = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(default=0)
+    status = models.IntegerField(choices=Status.statuslist(), default=0)
     d1a = models.ForeignKey('evaluation.D1A', blank=True,
                                     null=True, on_delete=models.CASCADE)
     d1b = models.ForeignKey('evaluation.D1B', blank=True,
@@ -78,6 +79,9 @@ class Artwork(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.surname, self.firstname)
+
+    def get_artwork_status(self):
+        return Status(self.status).name
 
 '''
 #Custom Object Manager
