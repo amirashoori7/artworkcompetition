@@ -25,9 +25,29 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def about(request):
+def aboutus(request):
     context = {}
-    return render(request, 'about.html', context)
+    return render(request, 'aboutus.html', context)
+
+def contactus(request):
+    context = {}
+    return render(request, 'contactus.html', context)
+
+def faq(request):
+    context = {}
+    return render(request, 'faq.html', context)
+
+def history(request):
+    context = {}
+    return render(request, 'history.html', context)
+
+def howtoenter(request):
+    context = {}
+    return render(request, 'howtoenter.html', context)
+
+def rules(request):
+    context = {}
+    return render(request, 'rules.html', context)
 
 def gallery(request):
     context = {}

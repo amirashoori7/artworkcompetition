@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{% endblock title %}</title>
+<title>{% block title %} {% endblock title %}</title>
 <link href="{% static 'css/bootstrap/bootstrap.css' %}" rel="stylesheet">
 <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 <link href="{% static 'css/nice-select.min.css' %}" rel="stylesheet">
@@ -52,17 +52,23 @@
 						data-href="{% url 'artwork:work_lists' %}"><img
 						src="static/img/icons/document.svg"><span>Admin</span></li>
 					<li class="menu-item" id="about-us"
-						data-href="{% url 'artwork:index' %}"><img
-						src="static/img/icons/profile.svg"><span>About</span></li>
+						data-href="{% url 'artwork:aboutus' %}"><img
+						src="static/img/icons/about.svg"><span>About Us</span></li>
 					<li class="menu-item" id="gallery"
 						data-href="{% url 'artwork:gallery' %}"><img
 						src="static/img/icons/art-gallery.svg"><span>Gallery</span></li>
 					<li class="menu-item" id="sign-up"
 						data-href="{% url 'artwork:signup_page' %}"><img
 						src="static/img/icons/trophy.svg"><span>Sign Up</span></li>
+					<li class="menu-item" id="sign-up"
+						data-href="{% url 'artwork:howtoenter' %}"><img
+						src="static/img/icons/entrance.svg"><span>How to Enter</span></li>
 					<li class="menu-item" id="contact-us"
-						data-href="{% url 'artwork:index' %}"><img
+						data-href="{% url 'artwork:contactus' %}"><img
 						src="static/img/icons/contact.svg"><span>Contact Us</span></li>
+					<li class="menu-item" id="contact-us"
+						data-href="{% url 'artwork:faq' %}"><img
+						src="static/img/icons/information.svg"><span>FAQ</span></li>
 				</ul>
 			</div>
 			<div class="page-content">{% block content %}</div>
