@@ -22,6 +22,7 @@
 	transform-style: preserve-3d;
 	transform: translateY(0px);
 	transition: all 3s ease-in-out;
+	height: 1517px;
 }
 
 .shelf {
@@ -113,6 +114,7 @@
 	transform-style: preserve-3d;
 	transform: rotateX(-90deg) rotateY(270deg) translateY(-50px)
 		translateZ(25px);
+	cursor: pointer;
 }
 
 .shelf .photocard:after {
@@ -142,78 +144,95 @@
 	top: 325px;
 }
 
+.shelf .photocard:nth-child(4n) {
+	top: 450px;
+}
+
 .shelf .photocard img {
 	display: block;
 	width: 150px;
 	height: 100px;
 	outline: 1px solid transparent; /* triggers anti-anliasing in FF */
 }
+
+.gallery-home div {
+	cursor: pointer;
+}
 </style>
-<div class="scene">
-	<!-- camera -->
-	<div class="roll-camera">
-		<div class="move-camera"></div>
-		<!-- /camera -->
-	</div>
-</div>
-
 <script>
-	$(function() {
-		var centerShelfs, readFiles, $body = $('body'), $topShelf = $('.shelf.top'), centerShelfs = function() {
-			var topShelfPosition = $body.height() / 2;
-			$topShelf.css('top', topShelfPosition);
-		};
-
-		moveToShelf = function(e) {
-			e.preventDefault();
-			$body.attr('class', '');
-			$body.addClass(e.target.id);
-		};
-
-		readFiles = function(year) {
-			$(".move-camera").html("")
-			for (var i = 1; i <= 25; i++) {
-				if (i == 1 || i % 4 == 0) {
-					var shelf = $("<div/>").addClass("shelf")
-					shelf.appendTo($(".move-camera"))
+function readFiles(year) {
+			if($(".move-camera." + year).html().length > 10) {
+				$(".move-camera").parent().fadeOut()
+				setTimeout(function(){
+					$(".move-camera." + year).parent().fadeIn()
+				},300)
+				return
+			}
+			for (var i = 0; i < 25; i++) {
+				if (i % 3 == 0) {
+					var shelf = $("<div/>").addClass("shelf "+year)
 					$("<div/>").addClass("face front").appendTo(shelf)
 					$("<div/>").addClass("face top").appendTo(shelf)
 					$("<div/>").addClass("face back").appendTo(shelf)
 					$("<div/>").addClass("face left").appendTo(shelf)
 					$("<div/>").addClass("face bottom").appendTo(shelf)
-					shelf.css("top", (parseInt($(".scene").position().top)
-							+ ($(".shelf").length * 200)) + "px")
+					shelf.appendTo($(".move-camera." + year))
 				}
 				var imgHolder = $("<a/>").addClass("photocard")
 				var front = $(".face.front").last()
-				if (i < 10)
+				if (i < 9)
 					$("<img/>").attr(
 							"src",
-							"media/gallery/" + year + "/" + year + "-0" + i
+							"media/gallery/" + year + "/" + year + "-0" + (i+1)
 									+ ".jpg").appendTo(imgHolder)
 				else
 					$("<img/>").attr(
 							"src",
-							"media/gallery/" + year + "/" + year + "-" + i
+							"media/gallery/" + year + "/" + year + "-" + (i+1)
 									+ ".jpg").appendTo(imgHolder)
 				imgHolder.appendTo(front)
 			}
+			$(".shelf."+year).each(function(i ,k){
+				if(i == 0)
+					$(k).css("top", parseInt($(".scene").position().top)
+							+ $(".gallery-container-" + year + ">.page-title").height()
+							+ "px")
+				else
+					$(k).css("top", parseInt($(".scene").position().top)
+						+ $(".gallery-container-" + year + ">.page-title").height()
+						+ (i * 222)
+						+ "px")
+			})
 		}
-
-		$(window).on('resize', centerShelfs)
-		$('.scene').on('scroll', function(){
-			var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-			   if (st > lastScrollTop){
-			      // downscroll code
-			   } else {
-			      // upscroll code
-			   }
-			   lastScrollTop = st <= 0 ? 0 : st;
-		})
-		centerShelfs()
-		readFiles(2018)
-		window.setTimeout(function() {
-			$body.addClass('view-middle-shelf');
-		}, 500);
-	});
+</script>
+<div class="scene">
+	<div class="row gallery-home">
+		<div class="col-md-6" onclick="readFiles(2018)">
+			<h2>Gallery 2018</h2>
+		</div>
+		<div class="col-md-6" onclick="readFiles(2019)">
+			<h2>Gallery 2019</h2>
+		</div>
+	</div>
+	<div class="gallery-container-2019">
+		<div class="page-title">
+			<h2>Gallery 2019</h2>
+		</div>
+		<div class="roll-camera">
+			<div class="move-camera 2019"></div>
+			<!-- /camera -->
+		</div>
+	</div>
+	<div class="gallery-container-2018">
+		<div class="page-title">
+			<h2>Gallery 2018</h2>
+		</div>
+		<div class="roll-camera">
+			<div class="move-camera 2018"></div>
+			<!-- /camera -->
+		</div>
+	</div>
+</div>
+<script>
+$(".move-camera").hide()
 </script>
