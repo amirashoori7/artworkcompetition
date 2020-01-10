@@ -1,168 +1,10 @@
-<style>
-.scene {
-	overflow-x: hidden;
-	margin: 0 auto;
-	width: 100%;
-	height: calc(100% - 77px);
-	perspective: 1000px;
-	perspective-origin: 50% 25%;
-	backface-visibility: hidden;
-	transform-style: preserve-3d;
-	box-shadow: inset 0px 0px 33px 11px black;
-	border-radius: 33px;
-	padding: 22px;
-	margin-top: 22px;
-}
-
-.roll-camera {
-	transform-style: preserve-3d;
-}
-
-.roll-camera .move-camera {
-	transform-style: preserve-3d;
-	transform: translateY(0px);
-	transition: all 3s ease-in-out;
-	height: 1517px;
-}
-
-.shelf {
-	position: absolute;
-	left: 50%;
-	margin-left: -325px;
-	transform-style: preserve-3d;
-	backface-visibility: hidden;
-	transform: rotateY(90deg) rotateX(90deg) translateX(199px);
-}
-
-.shelf .face {
-	position: absolute;
-	top: 0;
-	left: 0;
-	background-color: #fff7eb;
-	box-shadow: inset 0 0 75px 1.5px rgba(0, 0, 0, .1);
-}
-
-.shelf .front {
-	width: 100px;
-	height: 700px;
-	transform-style: preserve-3d;
-	transform: translateX(35px) translateY(-350px) translateZ(10px);
-}
-
-.shelf .back {
-	width: 100px;
-	height: 700px;
-	transform: translateX(35px) translateY(-350px) translateZ(-10px);
-}
-
-.shelf .left {
-	width: 20px;
-	height: 700px;
-	background: linear-gradient(0deg, #eae3d8 0%, #fff7eb 100%);
-	transform: translateX(25px) translateY(-350px) rotateY(-90deg)
-		translateZ(0);
-}
-
-.shelf .top {
-	width: 20px;
-	height: 100px;
-	transform: translateX(75px) translateY(300px) rotateX(90deg)
-		rotateZ(90deg);
-}
-
-.shelf .bottom {
-	width: 20px;
-	height: 100px;
-	transform: translateX(75px) translateY(-400px) rotateX(90deg)
-		rotateZ(90deg);
-}
-
-.shelf:before {
-	content: "";
-	display: block;
-	width: 670px;
-	height: 20px;
-	box-shadow: 0 -30px 30px 20px rgba(0, 0, 0, 0.5);
-	transform: rotateX(90deg) rotateY(90deg) translateX(-20px)
-		translateZ(-200px) skew(-45deg);
-}
-
-.shelf .back:before {
-	content: "";
-	position: absolute;
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.65);
-}
-
-.shelf .top:before, .shelf .bottom:before, .shelf .left:before, .shelf .right:before
-	{
-	content: "";
-	position: absolute;
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.25);
-}
-
-.shelf .photocard {
-	position: relative;
-	display: block;
-	width: 150px;
-	height: 100px;
-	transform-style: preserve-3d;
-	transform: rotateX(-90deg) rotateY(270deg) translateY(-50px)
-		translateZ(25px);
-	cursor: pointer;
-}
-
-.shelf .photocard:after {
-	content: "";
-	position: absolute;
-	bottom: 0px;
-	right: 0;
-	display: block;
-	width: 100px;
-	height: 1px;
-	box-shadow: 0 30px 30px 20px rgba(0, 0, 0, 0.5);
-	transform: rotateX(90deg) rotateZ(180deg) translateX(25px)
-		translateY(-15px) skew(-45deg);
-	/* don't apply box-shadow to FF (render bug) */
-	-moz-transform: scale(0);
-}
-
-.shelf .photocard:nth-child(1n) {
-	top: 75px;
-}
-
-.shelf .photocard:nth-child(2n) {
-	top: 200px;
-}
-
-.shelf .photocard:nth-child(3n) {
-	top: 325px;
-}
-
-.shelf .photocard:nth-child(4n) {
-	top: 450px;
-}
-
-.shelf .photocard img {
-	display: block;
-	width: 150px;
-	height: 100px;
-	outline: 1px solid transparent; /* triggers anti-anliasing in FF */
-}
-
-.gallery-home div {
-	cursor: pointer;
-}
-</style>
+<link href="static/css/gallery.style.css" rel="stylesheet">
 <script>
 function readFiles(year) {
+	$(".move-camera").parent().fadeOut()
+			$(".gallery-home").fadeOut()
+			$(".page-title>h2").html("Gallery "+ year)
 			if($(".move-camera." + year).html().length > 10) {
-				$(".move-camera").parent().fadeOut()
 				setTimeout(function(){
 					$(".move-camera." + year).parent().fadeIn()
 				},300)
@@ -178,61 +20,88 @@ function readFiles(year) {
 					$("<div/>").addClass("face bottom").appendTo(shelf)
 					shelf.appendTo($(".move-camera." + year))
 				}
-				var imgHolder = $("<a/>").addClass("photocard")
-				var front = $(".face.front").last()
+				var imgHolder = $("<a/>").attr("onclick","openImage(this)").addClass("photocard"),
+				front = $(".face.front").last(),
+				imgsrc = "";
 				if (i < 9)
-					$("<img/>").attr(
-							"src",
-							"media/gallery/" + year + "/" + year + "-0" + (i+1)
-									+ ".jpg").appendTo(imgHolder)
+					imgsrc = year + "-0" + (i+1)
 				else
-					$("<img/>").attr(
-							"src",
-							"media/gallery/" + year + "/" + year + "-" + (i+1)
-									+ ".jpg").appendTo(imgHolder)
+					imgsrc = year + "-" + (i+1)
+				$("<img/>").attr("src", "media/gallery/" + year + "/" + imgsrc + ".jpg").appendTo(imgHolder)
 				imgHolder.appendTo(front)
 			}
+			
 			$(".shelf."+year).each(function(i ,k){
 				if(i == 0)
 					$(k).css("top", parseInt($(".scene").position().top)
-							+ $(".gallery-container-" + year + ">.page-title").height()
+							+ $(".page-title").height()
 							+ "px")
 				else
 					$(k).css("top", parseInt($(".scene").position().top)
-						+ $(".gallery-container-" + year + ">.page-title").height()
+						+ $(".page-title").height()
 						+ (i * 222)
 						+ "px")
 			})
+			setTimeout(function(){
+				$(".move-camera." + year).parent().fadeIn()
+			},300)
+		}
+		var TweenImage
+		function showGallery() {
+			$(".move-camera").parent().fadeOut()
+			$(".gallery-home").fadeIn()
+			$(".page-title>h2").html("Gallery")
+		}
+		
+		function openImage(image) {
+			if(TweenImage != null)
+				TweenImage.reverse()
+			var tl = new TimelineLite({paused: true})
+			TweenImage = tl.to($(image), 1, {
+				left: "11%",
+				right: "11%",
+				bottom: "11%",
+				top: "11%",
+				width: $(window).width() * .89,
+				height: $(window).height() * .89
+			})
+			TweenImage.play()
+		}
+		
+		function closeImage() {
+			TweenImage.reverse()
+			TweenImage = null
 		}
 </script>
 <div class="scene">
+	<div class="page-title" onclick="showGallery()">
+		<img alt="" src="static/img/icons/art-gallery.svg">
+		<h2>Gallery</h2>
+	</div>
 	<div class="row gallery-home">
 		<div class="col-md-6" onclick="readFiles(2018)">
+			<img alt="" src="static/img/icons/art-gallery.svg">
 			<h2>Gallery 2018</h2>
 		</div>
 		<div class="col-md-6" onclick="readFiles(2019)">
+			<img alt="" src="static/img/icons/art-gallery.svg">
 			<h2>Gallery 2019</h2>
 		</div>
 	</div>
 	<div class="gallery-container-2019">
-		<div class="page-title">
-			<h2>Gallery 2019</h2>
-		</div>
 		<div class="roll-camera">
 			<div class="move-camera 2019"></div>
+			<div class="to-gallery-2018">Gallery 2018</div>
 			<!-- /camera -->
 		</div>
 	</div>
 	<div class="gallery-container-2018">
-		<div class="page-title">
-			<h2>Gallery 2018</h2>
-		</div>
 		<div class="roll-camera">
 			<div class="move-camera 2018"></div>
-			<!-- /camera -->
+			<div class="to-gallery-2019">Gallery 2019</div>
 		</div>
 	</div>
 </div>
 <script>
-$(".move-camera").hide()
+showGallery()
 </script>
