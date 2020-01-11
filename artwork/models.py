@@ -55,15 +55,7 @@ class Artwork(models.Model):
     qapproved = models.BooleanField(default=False)
     submitted = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status.statuslist(), default=0)
-    d1a = models.ForeignKey('evaluation.D1A', blank=True,
-                                    null=True, on_delete=models.CASCADE)
-    d1b = models.ForeignKey('evaluation.D1B', blank=True,
-                                 null=True, on_delete=models.CASCADE)
-    d2 = models.ForeignKey('evaluation.D2', blank=True,
-                                 null=True, on_delete=models.CASCADE)
-    d3 = models.ForeignKey('evaluation.D3', blank=True,
-                                 null=True, on_delete=models.CASCADE)
-
+    
     class Meta:
         ordering = ['id']
 
