@@ -189,15 +189,15 @@ p {
 
 .page-content {
 	overflow: hidden;
-	color: black;
-	border-radius: 0 22px 22px 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin-left: 22px;
-	perspective: 400px;
-	box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px
-		#aeb5d1;
+    color: black;
+    border-radius: 0 22px 22px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 22px;
+    perspective: 400px;
+    box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px #aeb5d1;
+    padding: 11px;
 }
 
 .page-content-area {
