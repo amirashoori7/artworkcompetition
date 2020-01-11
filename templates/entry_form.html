@@ -94,6 +94,15 @@
 		$("#main-cropper").empty()
 		return false
 	});
+	function filterSchool(stateId){
+		$("#school-div-container").fadeIn()
+		$(".school-option-class").each(function(){
+			if($(this).attr("data-state") === stateId)
+				$(this).show()
+			else
+				$(this).hide()
+		})
+	}
 </script>
 <div class="page-title">
 	<h2>Entry Form</h2>
@@ -130,23 +139,22 @@
 							value="{{ form.instance.surname|default_if_none:'' }}" required>
 					</div>
 				</div>
-				<lable for="dob-row">Date of Birth</lable>
 				<div class="row" id="dob-row">
 					<div class="col-md-4">
+						<lable for="yearDropDown">Date of Birth</lable>
 						<input type="hidden" class="form-control form-input" id="dob"
 							placeholder="" name="dob"
 							value="{{ form.instance.dob|default_if_none:'' }}" required>
-						<lable for="yearDropDown">Year</lable>
 						<select id="yearDropDown" class="form-control form-input">
 						</select>
 					</div>
 					<div class="col-md-4">
-						<lable for="monthDropDown">Month</lable>
+						<lable for="monthDropDown">&nbsp;</lable>
 						<select id="monthDropDown" class="form-control form-input">
 						</select>
 					</div>
 					<div class="col-md-4">
-						<lable for="dayDropDown">Day</lable>
+						<lable for="dayDropDown">&nbsp;</lable>
 						<select id="dayDropDown" class="form-control form-input">
 						</select>
 					</div>
@@ -160,8 +168,8 @@
 					</div>
 					<div class="col-md-6">
 						<lable for="cellphone">Cellphone</lable>
-						<input type="text" class="form-control form-input" id="cellphone"
-							name="cellphone" placeholder=""
+						<input type="tel" class="form-control form-input" id="cellphone"
+							name="cellphone" placeholder="012 345 67 89"
 							value="{{ form.instance.cellphone|default_if_none:'' }}" required>
 					</div>
 				</div>
@@ -181,7 +189,7 @@
 					<div class="col-md-6">
 						<lable for="parentname">Guardian (Parent) Full-Name</lable>
 						<input type="text" class="form-control form-input" id="parentname"
-							name="parentname" placeholder=""
+							name="parentname" placeholder="i.e. Jack Scholtz"
 							value="{{ form.instance.parentname|default_if_none:'' }}"
 							required>
 					</div>
@@ -196,8 +204,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<lable for="parentemail">Guardian (Parent)'s Email Address</lable>
-						<input type="text" class="form-control form-input"
-							id="parentemail" name="parentemail" placeholder=""
+						<input type="email" class="form-control form-input"
+							id="parentemail" name="parentemail" placeholder="you@example.com"
 							value="{{ form.instance.parentemail|default_if_none:'' }}"
 							required>
 					</div>
@@ -218,7 +226,8 @@
 					<div class="col-md-6">
 						<lable for="states-dropdown">State (Province)</lable>
 						<select class="form-control form-input" id="states-dropdown"
-							onchange="alert('state dropdown')">
+							onchange="filterSchool($(this).val())">
+							<option value="" selected="selected" disabled="disabled">Select</option>
 							<option value="0">Eastern Cape</option>
 							<option value="1">Free State</option>
 							<option value="2">Gauteng</option>
@@ -230,14 +239,15 @@
 							<option value="8">Western Cape</option>
 						</select>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" id="school-div-container">
 						<lable for="school-dropdown">School</lable>
 						<input type="hidden" name="school" id="school"
 							value="{{ form.instance.school|default_if_none:'' }}" required>
 						<select class="form-control form-input" id="school-dropdown"
 							onchange="$('#school').val($('#school-dropdown').val())">
-							<option value="">Choose...</option> {% for sch in schools %}
-							<option value="{{ sch.name }}">{{ sch.name }} {% endfor	%}
+							<option value="" class="school-option-class">Choose...</option> {% for sch in schools %}
+							<option value="{{ sch.id }}" data-state="{{ sch.province }}" class="school-option-class">{{ sch.name }} 
+							{% endfor %}
 						</select>
 					</div>
 				</div>
@@ -257,40 +267,40 @@
 					<div class="col-md-2">
 						<lable for="learnergrade7">Grade 7</lable>
 						<input type="hidden" class="form-control form-input"
-							id="currentlearnergrade" placeholder=""
+							id="currentlearnergrade" 
 							value="{{ form.instance.learnergrade|default_if_none:'' }}"
-							required> <input type="radio"
+							required> <input type="radio" checked
 							class="form-control form-input" id="learnergrade"
-							name="learnergrade" placeholder="" value="Grade 7">
+							name="learnergrade"  value="Grade 7">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade8">Grade 8</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade8" name="learnergrade" placeholder=""
+							id="learnergrade8" name="learnergrade" 
 							value="Grade 8">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade9">Grade 9</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade9" name="learnergrade" placeholder=""
+							id="learnergrade9" name="learnergrade" 
 							value="Grade 9">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade10">Grade 10</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade10" name="learnergrade" placeholder=""
+							id="learnergrade10" name="learnergrade" 
 							value="Grade 10">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade11">Grade 11</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade11" name="learnergrade" placeholder=""
+							id="learnergrade11" name="learnergrade" 
 							value="Grade 11">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade12">Grade 12</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade12" name="learnergrade" placeholder=""
+							id="learnergrade12" name="learnergrade" 
 							value="Grade 12">
 					</div>
 				</div>
@@ -311,7 +321,7 @@
 					<div class="col-md-4">
 						<lable for="teachername">Teacher Name</lable>
 						<input type="text" class="form-control form-input"
-							id="teachername" name="teachername" placeholder=""
+							id="teachername" name="teachername" placeholder="i.e. Edvard Harry"
 							value="{{ form.instance.teachername|default_if_none:'' }}"
 							required>
 					</div>
@@ -326,7 +336,7 @@
 					<div class="col-md-4">
 						<lable for="teacherphone">Teacher Phone</lable>
 						<input type="tel" class="form-control form-input"
-							id="teacherphone" name="teacherphone" placeholder=""
+							id="teacherphone" name="teacherphone" placeholder="0123456789"
 							value="{{ form.instance.teacherphone|default_if_none:'' }}"
 							required>
 					</div>
@@ -364,7 +374,7 @@
 					<div class="col-md-8">
 						<lable for="surname">Work Title</lable>
 						<input type="text" class="form-control form-input" id="worktitle"
-							name="worktitle" placeholder=""
+							name="worktitle" placeholder="I would like to call my artwork (Max 10 words)"
 							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
 					</div>
 				</div>
@@ -383,9 +393,9 @@
 			<div class="form-section" data-title="Answering questions">
 				<div class="row">
 					<div class="col-md-6">
-						<lable for="question1">Question 1: What Mathematics did
-						you use in your artwork? Explain your answer.</lable>
-						<textarea class="form-control form-input" id="question1"
+						<lable for="question1"><strong>Question 1: </strong>What Mathematics did
+						you use in your artwork?</lable>
+						<textarea class="form-control form-input" placeholder="Explain it in 50-100 words" id="question1"
 							name="question1" rows="5">{{ form.instance.question1|default_if_none:'' }}</textarea>
 					</div>
 					<div class="col-md-6">
@@ -399,16 +409,16 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<lable for="question2">Question 2: How did you use
+						<lable for="question2"><strong>Question 2:</strong> How did you use
 						creativity to connect Mathematics with "My Universe" to make your
 						artwork?</lable>
-						<textarea class="form-control form-input" id="question2"
+						<textarea class="form-control form-input" id="question2" placeholder="Explain it in 50-100 words"
 							name="question2" rows="5">{{ form.instance.question2|default_if_none:'' }}</textarea>
 					</div>
 					<div class="col-md-6">
-						<lable for="question3">Question 3: Do you think creativity
-						could be used to teach Mathematics? Explain your answer</lable>
-						<textarea class="form-control form-input" id="question3"
+						<lable for="question3"><strong>Question 3:</strong> Do you think creativity
+						could be used to teach Mathematics? </lable>
+						<textarea class="form-control form-input" id="question3" placeholder="Explain it in 50-100 words"
 							name="question3" rows="5">{{ form.instance.question3|default_if_none:'' }}</textarea>
 					</div>
 				</div>

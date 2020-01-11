@@ -17,6 +17,7 @@
 .form-section label {
 	font-size: 14px;
 	margin-bottom: 0px;
+	text-align: justify;
 }
 
 .form-section input, .form-section select, .form-input {
@@ -34,11 +35,11 @@
 }
 
 .form-section input::placeholder {
-	color: #bbbbbb;
+	color: #999;
 }
 
 .form-section input:focus, .form-section select:focus {
-	background: #00000066;
+	background: #00000033;
 	border: none;
 	color: white;
 }

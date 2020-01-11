@@ -38,10 +38,7 @@ p {
 	margin: 0;
 }
 
-
 /* MESSAGE BOXE START  */
-
-
 .message-box-container {
 	position: fixed;
 	color: white;
@@ -122,10 +119,7 @@ p {
 	color: #517813;
 }
 
-
 /* MESSAGE BOXE END  */
-
-
 .menu-icon {
 	z-index: 22;
 	position: absolute;
@@ -196,7 +190,7 @@ p {
 .page-content {
 	overflow: hidden;
 	color: black;
-    border-radius: 0 22px 22px 0;
+	border-radius: 0 22px 22px 0;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -247,3 +241,11 @@ p {
 	border-radius: 33px;
 }
 
+.user-icon {
+	background: radial-gradient(#174c66, #4e7e96);
+	border-radius: 50%;
+	padding: 3px;
+	width: 66px;
+	height: 66px;
+	display: inline-block;
+}

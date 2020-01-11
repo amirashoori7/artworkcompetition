@@ -40,7 +40,20 @@
 			</div>
 			<div class="menu-items-holder">
 				{% if user.is_authenticated %}
-				<p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+								<div id="">HERE FIX
+				 <img class="user-icon"
+					src="static/img/icons/user.svg">
+				<p style="display: inline-block;"><h4 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}
+				</h4>
+				</p>
+				<div class="row">
+					<div class="col-md-8">
+						<a href="#">Change Password</a>
+					</div>
+					<div class="col-md-4">
+						<a href="#">Logout</a>
+					</div>
+				</div></div>
 				{% else %}
 				<div id="login-div"></div>
 				{% endif %}
