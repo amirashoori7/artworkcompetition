@@ -2,14 +2,13 @@
 .landing-page-content {
 	position: absolute;
 	text-align: center;
-	border-radius: 21px;
-	border: 1px solid white;
+	border-radius: 22px;
 }
 
 .div-21 {
 	height: 100%;
 	width: 61.76%;
-	padding: 21px;
+	padding: 11px;
 }
 
 .div-21 ul, .div-5 ul {
@@ -51,6 +50,35 @@
 	filter: drop-shadow(0px 0px 17px #e79ab4);
 }
 </style>
+<script>
+var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+//Update the count down every 1 second
+var x = setInterval(function() {
+
+// Get today's date and time
+var now = new Date().getTime();
+
+// Find the distance between now and the count down date
+var distance = countDownDate - now;
+
+// Time calculations for days, hours, minutes and seconds
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+// Display the result in the element with id="demo"
+document.getElementById("demo").innerHTML = days + "d " + hours + "h "
++ minutes + "m " + seconds + "s ";
+
+// If the count down is finished, write some text
+if (distance < 0) {
+ clearInterval(x);
+ document.getElementById("demo").innerHTML = "EXPIRED";
+}
+}, 1000);
+</script>
 <!-- 34 * 21 -->
 <div class="landing-page-content div-21">
 	<ul>
@@ -58,7 +86,6 @@
 			<h1>The GMMDC National MathArt Competition 2020</h1>
 		</li>
 		<li>
-			<!-- <img src="/static/img/myuinverse.png" id="my-universe-logo"> -->
 			<h2>My Universe</h2>
 		</li>
 		<li>
@@ -70,11 +97,6 @@
 			</button>
 		</li>
 	</ul>
-	<!-- <h1>The GMMDC National MathArt Competition 2020</h1>
-		<h2>My Universe</h2>
-		<button onclick="loadContent(this)" data-href="{% url 'artwork:signup_page' %}" class="action-button-large"><img
-				src="static/img/icons/trophy.svg"><span>Sign Up Now</span></button> -->
-
 </div>
 <div class="landing-page-content div-13">
 	<h3>
