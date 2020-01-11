@@ -3,5 +3,5 @@ from django import forms
 
 class FormD1A(forms.ModelForm):
     class Meta:
-        model = EvalD1A
-        fields = ['biodetails', 'picview', 'paragraphsview', 'comment']
+        model = D1A
+        fields = ['artwork', 'imgq', 'answersq', 'originq', 'revisit', 'comment', 'author']
