@@ -14,6 +14,8 @@
 <link href="{% static 'css/buttons.style.css' %}" rel="stylesheet">
 <link href="{% static 'css/form.style.css' %}" rel="stylesheet">
 <link href="{% static 'css/table.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/menu.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/content.style.css' %}" rel="stylesheet">
 
 <script src="{% static 'js/jquery/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
@@ -27,7 +29,6 @@
 <body>
 	<main role="main" class="container">
 	<div id="main-body">
-		<!-- <img src="static/img/icons/sitting.svg" class="background-sitting"> -->
 		<div class="full-screen-div"></div>
 		<div id="main-frame">
 			<!-- 			<div class="menu-icon"></div> -->
@@ -58,11 +59,12 @@
 						data-href="{% url 'artwork:gallery' %}"><img
 						src="static/img/icons/art-gallery.svg"><span>Gallery</span></li>
 					<li class="menu-item" id="sign-up"
+						data-href="{% url 'artwork:howtoenter' %}"><img
+						src="static/img/icons/entrance.svg"><span>How to
+							Enter</span></li>
+					<li class="menu-item" id="sign-up"
 						data-href="{% url 'artwork:signup_page' %}"><img
 						src="static/img/icons/trophy.svg"><span>Sign Up</span></li>
-					<li class="menu-item" id="sign-up"
-						data-href="{% url 'artwork:howtoenter' %}"><img
-						src="static/img/icons/entrance.svg"><span>How to Enter</span></li>
 					<li class="menu-item" id="contact-us"
 						data-href="{% url 'artwork:contactus' %}"><img
 						src="static/img/icons/contact.svg"><span>Contact Us</span></li>

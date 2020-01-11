@@ -1,0 +1,52 @@
+.menu-items-holder {
+	position: absolute;
+	padding: 33px 11px;
+	margin: 0;
+	bottom: 0;
+	z-index: 21;
+	left: 0;
+	top: 3%;
+	transform: matrix(1, 0, 0, 1, 0, 0);
+	background: linear-gradient(to right, #f2f7fc, #f6fbff, #dff0f5);
+	border-radius: 0 22px 0 0;
+	box-shadow: 0px 11px 22px -11px #2e5781;
+}
+
+.menu-items {
+	list-style: none;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.menu-items li {
+	margin: 22px;
+	padding: 0px 33px 0 11px;
+	border-radius: 22px;
+	cursor: pointer;
+	-webkit-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	-moz-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	-o-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	-ms-transition: transform .2s ease-in, box-shadow .2s ease-in;
+	transition: transform .2s ease-in, box-shadow .2s ease-in;
+	height: 44px;
+}
+
+.menu-items li:hover, .menu-items li.active {
+	box-shadow: -7px -7px 7px -7px #b0c6d4, 7px 7px 7px -7px #ffffff, inset
+		7px 7px 7px -7px #b0c6d4, inset -7px -7px 7px -7px #ffffff;
+	transform: scale(1.1);
+}
+
+.menu-items li img {
+	width: 33px;
+	display: inline-block;
+	padding: 3px;
+}
+
+.menu-items li span {
+	color: #174c66;
+	display: inline-block;
+	padding: 11px 22px;
+	line-height: 22px;
+	font-size: 19px;
+}
