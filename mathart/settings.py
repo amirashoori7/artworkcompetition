@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'account',#account.apps.AccountConfig
     'artwork',
     'evaluation',
-    'django_postgres_dropdb',
     'rest_framework',
 ]
 
@@ -87,9 +86,9 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	'NAME': 'mathart',
-    'USER': 'postgres',
-    'PASSWORD': 'root',
+	'NAME': 'mathartdev',
+    'USER': 'mathartuser',
+    'PASSWORD': 'mathartuser',
 	'HOST':	'localhost',
 	'PORT': '5432',
     }
