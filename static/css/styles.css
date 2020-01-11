@@ -196,7 +196,7 @@ p {
 .page-content {
 	overflow: hidden;
 	color: black;
-	border-radius: 0 22px;
+    border-radius: 0 22px 22px 0;
 	position: absolute;
 	top: 0;
 	left: 0;

@@ -2,7 +2,7 @@ var tweenMenuShow
 function windowLayoutFitSize() {
 	$("#main-body").width($(window).width())
 	$("#main-body").height($(window).height())
-	var frameHeight = ($(window).height() * .95)
+	var frameHeight = ($(window).height() * .9) - 22
 	var isHorizontal = true
 	var frameWidth = frameHeight + (frameHeight * 13 / 21)
 	$(".page-content").width(frameWidth)

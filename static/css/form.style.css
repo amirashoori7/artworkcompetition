@@ -14,22 +14,19 @@
 		#d3e2ec;
 }
 
-.form-section .col-md-2 {
-	text-align: center;
-}
-
 .form-section label {
 	font-size: 14px;
 	margin-bottom: 0px;
 }
 
 .form-section input, .form-section select, .form-input {
-	margin-bottom: 7px;
-	background-color: #1b1c2c;
-	background: #1b1c2c;
-	border: none;
-	border-bottom: 2px solid #8aa5d6;
-	border-radius: 7px;
+    margin-bottom: 7px;
+    background-color: #1b1c2c;
+    background: #1b1c2c;
+    border: none;
+    border-bottom: 2px solid white;
+    border-radius: 7px;
+    color: white;
 }
 
 .form-input[type=radio], .form-input[type=checkbox] {

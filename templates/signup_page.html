@@ -1,30 +1,45 @@
 <!-- Multi step form -->
 <script>
-	$(document).ready(function() {
-		$.ajax({
-			url : "{% url 'artwork:entry_form' %}",
-			success : function(response) {
-				$(".multi_step_form").html(response);
-				$('#entry-form-id').submit(function(event) {
-					event.preventDefault()
-					submitEntryForm()
-				})
-				var maxYear = 2008, minYear = 2003
-				var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-				while (maxYear >= minYear) {
-					$("<option/>").val(maxYear).text(maxYear).appendTo("#yearDropDown")
-					maxYear = maxYear - 1
-				} 
-				for (var i = 1; i < 32; i++)
-					$("<option/>").val(i).text(i).appendTo("#dayDropDown")
-				for (var i = 1; i < 13; i++)
-					$("<option/>").val(i).text(month[i-1]).appendTo("#monthDropDown")
-			},
-			error : function(request, status, error) {
-				console.log(request.responseText);
-			}
-		});
-	})
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "{% url 'artwork:entry_form' %}",
+					success : function(response) {
+						$(".multi_step_form").html(response);
+						$('#entry-form-id').submit(function(event) {
+							event.preventDefault()
+							submitEntryForm()
+						})
+						var maxYear = 2008, minYear = 2003
+						var month = [ 'January', 'February', 'March', 'April',
+								'May', 'June', 'July', 'August', 'September',
+								'October', 'November', 'December' ]
+						$("<option/>").val("").text("Year").prop("disabled",
+								true).prop("selected", true).appendTo(
+								"#yearDropDown")
+						while (maxYear >= minYear) {
+							$("<option/>").val(maxYear).text(maxYear).appendTo(
+									"#yearDropDown")
+							maxYear = maxYear - 1
+						}
+						$("<option/>").val("").text("Day").prop("disabled",
+								true).prop("selected", true).appendTo(
+								"#dayDropDown")
+						for (var i = 1; i < 32; i++)
+							$("<option/>").val(i).text(i).appendTo(
+									"#dayDropDown")
+						$("<option/>").val("").text("Month").prop("disabled",
+								true).prop("selected", true).appendTo(
+								"#monthDropDown")
+						for (var i = 1; i < 13; i++)
+							$("<option/>").val(i).text(month[i - 1]).appendTo(
+									"#monthDropDown")
+					},
+					error : function(request, status, error) {
+						console.log(request.responseText);
+					}
+				});
+			})
 
 	function submitEntryForm() {
 		var form = $('#entry-form-id')[0];
@@ -61,7 +76,10 @@
 							xhr.setRequestHeader("X-CSRFToken",
 									getCookie('csrftoken'));
 						}
-						$("#dob").val($("#monthDropDown").val()+"/"+$("#dayDropDown").val()+"/"+$("#yearDropDown").val())
+						$("#dob").val(
+								$("#monthDropDown").val() + "/"
+										+ $("#dayDropDown").val() + "/"
+										+ $("#yearDropDown").val())
 					},
 					success : function(response) {
 						if (response.successResult != null) {
@@ -70,12 +88,17 @@
 						} else if (response.errorResult != null) {
 							$("#id").val(0)
 							var errorList = $("<ul/>");
-							Object.keys(JSON.parse(response.errorResult)).forEach(
-								function(key, value) {
-									$('<li/>').text("* "+key).appendTo(errorList)
-							})
-							toggleMessageBox("<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
-									+$('<div>').append(errorList.clone()).html(), true)
+							Object.keys(JSON.parse(response.errorResult))
+									.forEach(
+											function(key, value) {
+												$('<li/>').text("* " + key)
+														.appendTo(errorList)
+											})
+							toggleMessageBox(
+									"<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
+											+ $('<div>').append(
+													errorList.clone()).html(),
+									true)
 						}
 					},
 					error : function(xhr, errmsg, err) {
