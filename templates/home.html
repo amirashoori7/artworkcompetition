@@ -3,12 +3,14 @@
 	position: absolute;
 	text-align: center;
 	border-radius: 22px;
+	margin: 22px;
 }
-
+/* h1, h2, h3, h4, h5, h6, p { */
+/*     color: white; */
+/* } */
 .div-21 {
 	height: 100%;
 	width: 61.76%;
-	padding: 11px;
 }
 
 .div-21 ul, .div-5 ul {
@@ -26,7 +28,6 @@
 	left: 61.76%;
 	width: calc(100% - 61.76%);
 	height: calc(100% - 38.09%);
-	padding: 13px;
 }
 
 .div-8 {
@@ -34,7 +35,6 @@
 	bottom: 0;
 	top: calc(100% - 38.09%);
 	left: 76.46%;
-	padding: 8px;
 }
 
 .div-5 {
@@ -42,12 +42,18 @@
 	right: 0;
 	bottom: 0;
 	width: 14.70%;
-	padding: 5px;
 }
 
 #my-universe-logo {
 	width: 271px;
 	filter: drop-shadow(0px 0px 17px #e79ab4);
+}
+
+#home-theme-img {
+    left: 0;
+    position: absolute;
+    width: 100%;
+    padding: 22px;
 }
 </style>
 <script>
@@ -60,8 +66,9 @@
 				/ (1000 * 60 * 60));
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		$("#signupbuttonid").html("Signup "+ days + " days, " + hours + " h, "
-				+ minutes + " m, " + seconds + " s ");
+		$("#signupbuttonid").html(
+				"Signup " + days + " days, " + hours + " h, " + minutes
+						+ " m, " + seconds + " s ");
 		if (distance < 0) {
 			clearInterval(x);
 			$("#demo").html() = "EXPIRED";
@@ -70,22 +77,7 @@
 </script>
 <!-- 34 * 21 -->
 <div class="landing-page-content div-21">
-	<ul>
-		<li>
-			<h1>The GMMDC National MathArt Competition 2020</h1>
-		</li>
-		<li>
-			<h2>My Universe</h2>
-		</li>
-		<li>
-			<button onclick="loadContent(this)"
-				data-href="{% url 'artwork:signup_page' %}"
-				class="action-button action-button-large">
-				<img src="static/img/icons/trophy.svg"><span
-					id="signupbuttonid">Sign Up Now</span>
-			</button>
-		</li>
-	</ul>
+	<img alt="" src="static/img/theme.svg" id="home-theme-img">
 </div>
 <div class="landing-page-content div-13">
 	<h3>
@@ -103,3 +95,32 @@
 		<li><strong>Schools:</strong>{{ num_schools }}</li>
 	</ul>
 </div>
+<script>
+	setTimeout(function() {
+		$(".landing-page-content").each(
+				function() {
+					$(this).css("line-height", $(this).height())
+					var div = $(this)
+					div.find("img").css(
+							"top",
+							div.height() / 2
+									- ($("#home-theme-img").height() / 2))
+				})
+	}, 100)
+</script>
+<!-- 	<ul> -->
+<!-- 		<li> -->
+<!-- 			<h1>The GMMDC National MathArt Competition 2020</h1> -->
+<!-- 		</li> -->
+<!-- 		<li> -->
+<!-- 			<h2>My Universe</h2> -->
+<!-- 		</li> -->
+<!-- 		<li> -->
+<!-- 			<button onclick="loadContent(this)" -->
+<!-- 				data-href="{% url 'artwork:signup_page' %}" -->
+<!-- 				class="action-button action-button-large"> -->
+<!-- 				<img src="static/img/icons/trophy.svg"><span -->
+<!-- 					id="signupbuttonid">Sign Up Now</span> -->
+<!-- 			</button> -->
+<!-- 		</li> -->
+<!-- 	</ul> -->

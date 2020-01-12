@@ -38,6 +38,10 @@ function loadContent(liItem) {
 		$(".page-content-area").html(response)
 		$(".page-content").prepend($("<div/>").addClass("page-content-area-bg"))
 		tl.play()
+		if($(liItem).attr("data-bg") != null)
+		$(".page-content-area-bg").css("background-image", $(liItem).attr("data-bg"))
+	else
+		$(".page-content-area-bg").css("background-image", "none")
 	})
 }
 
@@ -52,7 +56,8 @@ $(document).ready(function () {
 
 $(window).on("load", function () {
 	$(".menu-item").attr("onclick", "loadContent(this)")
-	loadContent($("<li/>").attr("data-href", "/home/"))
+	loadContent($("<li/>").attr({"data-href":"/home/",
+		"data-bg":"url(media/gallery/2019/2019-10.jpg)"}))
 	toggleMessageBox(null, null)
 })
 

@@ -27,9 +27,9 @@
 </head>
 
 <body>
-	<main role="main" class="container">
 	<div id="main-body">
 		<div class="full-screen-div"></div>
+		<div class="main-logo"></div>
 		<div id="main-frame">
 			<!-- 			<div class="menu-icon"></div> -->
 			<div class="message-box-container">
@@ -39,38 +39,18 @@
 				</div>
 			</div>
 			<div class="menu-items-holder">
-				{% if user.is_authenticated %}
-				<div class="form-section">
-					<img class="user-icon" src="static/img/icons/user.svg">
-					<p style="display: inline-block;"><h4 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}
-					</h4>
-					</p>
-					<div class="row">
-						<div class="col-md-9">
-							<a href="#">Change Password</a>
-						</div>
-						<div class="col-md-3">
-							<a href="{% url 'account:logout' %}">Logout</a>
-						</div>
-					</div>
-				</div>
-				{% else %}
-				<div id="login-div"></div>
-				{% endif %}
-
 				<ul class="menu-items menu-top">
 					<li class="menu-item" id="home"
-						data-href="{% url 'artwork:home' %}"><img
-						src="static/img/icons/home.svg"><span>Home</span></li>
+						data-href="{% url 'artwork:home' %}" data-bg="url(media/gallery/2019/2019-10.jpg)"><img
+						src="static/img/icons/home.svg"><span>Home</span></li> 
 						{% if user.is_authenticated %}
 					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:work_lists' %}"><img
-						src="static/img/icons/document.svg"><span>Admin</span></li>
-						{% endif %}
+						src="static/img/icons/document.svg"><span>Admin</span></li> {% endif %}
 					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:aboutus' %}"><img
 						src="static/img/icons/about.svg"><span>About Us</span></li>
-						<li class="menu-item" id="about-us"
+					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:history' %}"><img
 						src="static/img/icons/history.svg"><span>History</span></li>
 					<li class="menu-item" id="gallery"
@@ -90,6 +70,23 @@
 						data-href="{% url 'artwork:faq' %}"><img
 						src="static/img/icons/information.svg"><span>FAQ</span></li>
 				</ul>
+				{% if user.is_authenticated %}
+						<div class="form-section">
+							<img class="user-icon" src="static/img/icons/user.svg">
+							<p style="display: inline-block;">
+							<h4 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}</h4>
+							</p>
+							<div class="row">
+								<div class="col-md-9">
+									<a href="#">Change Password</a>
+								</div>
+								<div class="col-md-3">
+									<a href="{% url 'account:logout' %}">Logout</a>
+								</div>
+							</div>
+						</div> {% else %}
+						<div id="login-div"></div> 
+					{% endif %}
 			</div>
 			<div class="page-content">{% block content %}</div>
 		</div>
@@ -102,7 +99,7 @@
 			</ul>
 		</footer>
 	</div>
-	{% endblock %} </main>
+	{% endblock %} 
 </body>
 
 </html>

@@ -1,8 +1,6 @@
 html, body {
 	height: 100%;
 	align-items: center;
-	padding-top: 40px;
-	padding-bottom: 40px;
 	font-family: sans-serif !important;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -201,10 +199,9 @@ p {
 	padding: 11px;
 }
 
-.page-content-area {
-	padding: 11px 22px;
-}
-
+/* .page-content-area { */
+/* 	padding: 11px 22px; */
+/* } */
 .page-content-area-bg {
 	height: 100%;
 	width: 100%;
@@ -213,8 +210,8 @@ p {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-image: url(/media/gallery/2019/2019-15.jpg);
-	background-size: cover;}
+	background-size: cover;
+}
 
 .page-content-area {
 	height: 100%;
@@ -250,4 +247,14 @@ p {
 	width: 66px;
 	height: 66px;
 	display: inline-block;
+}
+.main-logo{
+	position: absolute;
+    left: 117px;
+    top: 14px;
+    width: 222px;
+    background-image: url(/static/img/logo.svg);
+    background-size: cover;
+    height: 96px;
+    z-index: 1107;
 }
