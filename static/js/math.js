@@ -43,6 +43,8 @@ function loadContent(liItem) {
 	else
 		$(".page-content-area-bg").css("background-image", "none")
 	})
+	
+	$(".main-logo").load("/static/img/logo.svg")
 }
 
 $(window).bind('resize', function () {
