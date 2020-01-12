@@ -24,7 +24,7 @@ function loadContent(liItem) {
 		rotationY: -180, 
 		transformOrigin: "left" })
 	.to(".page-content", 1.2, { 
-		left: $(".menu-items-holder").width(),
+		left: $(".menu-items-holder-left").width(),
 		rotationY: 0,
 		transformOrigin: "left"
 	}, "-= .4")
@@ -58,7 +58,7 @@ $(document).ready(function () {
 $(window).on("load", function () {
 	$(".menu-item").attr("onclick", "loadContent(this)")
 	loadContent($("<li/>").attr({"data-href":"/home/",
-		"data-bg":"url(media/gallery/2019/2019-14.jpg)"}))
+		"data-bg":"linear-gradient(45deg, rgba(42, 113, 148, .66), rgba(1, 45, 66, 0.66)), url(media/gallery/2019/2019-14.jpg)"}))
 	toggleMessageBox(null, null)
 })
 

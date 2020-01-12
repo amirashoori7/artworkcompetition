@@ -187,17 +187,16 @@ p {
 
 .page-content {
 	overflow: hidden;
-	color: black;
-	border-radius: 0 22px 22px 0;
-	position: fixed;
-	left: 0;
-	margin-left: 22px;
-	perspective: 400px;
-	box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px
-		#aeb5d1;
-	padding: 11px;
-	height: 78%;
-    top: 11%;
+    color: black;
+    border-radius: 0 22px 0 0;
+    position: fixed;
+    left: 0;
+    margin-left: 22px;
+    perspective: 400px;
+    box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px #aeb5d1;
+    padding: 22px;
+    height: 89%;
+    top: calc(11% + 22px);
 }
 
 /* .page-content-area { */
