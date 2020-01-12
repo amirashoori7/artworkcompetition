@@ -6,7 +6,7 @@ function windowLayoutFitSize() {
 	var isHorizontal = true
 	var frameWidth = frameHeight + (frameHeight * 13 / 21)
 	$(".page-content").width(frameWidth)
-	$(".page-content").height(frameHeight)
+//	$(".page-content").height(frameHeight)
 	if ($(window).width() < $(window).height()) {
 		isHorizontal = false
 	}
@@ -22,7 +22,6 @@ function loadContent(liItem) {
 	var tl = new TimelineLite({paused: true,ease: Power4.easeOut})
 	tl.to(".page-content", 1, { 
 		rotationY: -180, 
-		top: "9%",
 		transformOrigin: "left" })
 	.to(".page-content", 1.2, { 
 		left: $(".menu-items-holder").width(),
@@ -59,7 +58,7 @@ $(document).ready(function () {
 $(window).on("load", function () {
 	$(".menu-item").attr("onclick", "loadContent(this)")
 	loadContent($("<li/>").attr({"data-href":"/home/",
-		"data-bg":"url(media/gallery/2019/2019-10.jpg)"}))
+		"data-bg":"url(media/gallery/2019/2019-14.jpg)"}))
 	toggleMessageBox(null, null)
 })
 

@@ -5,11 +5,10 @@
 	bottom: 0;
 	z-index: 21;
 	left: 0;
-	top: 3%;
+	top: 0;
 	transform: matrix(1, 0, 0, 1, 0, 0);
 	background: linear-gradient(to right, #f2f7fc, #f6fbff, #dff0f5);
-	border-radius: 0 22px 0 0;
-	box-shadow: 0px 11px 22px -11px #2e5781;
+	box-shadow: 0px 11px 22px -22px #2e5781;
 }
 
 .menu-items {
@@ -49,4 +48,28 @@
 	padding: 11px 22px;
 	line-height: 22px;
 	font-size: 19px;
+}
+
+.main-logo {
+    position: absolute;
+    left: 0;
+    top: 33px;
+    z-index: 1107;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: linear-gradient(to right, #f2f7fc, #f6fbff, #dff0f5);
+    border-radius: 0 44px 44px 0;
+    box-shadow: 0px 11px 22px -22px #2e5781;
+    padding: 22px;
+    cursor: pointer;
+}
+
+.main-logo svg {
+	height: 100%;
+	width: 444px;
+    transition: transform .666s ease-in;
+}
+
+.main-logo svg:hover {
+    transform: scale(1.1);
 }
