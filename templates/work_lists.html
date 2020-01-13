@@ -1,7 +1,8 @@
 
-<div class="">
+<div class="page-title">
 	<h2>Artworks</h2>
 </div>
+<div class="photo-viewer"></div>
 <table class="table table-general-style">
 	<thead>
 		<tr>
@@ -15,13 +16,13 @@
 	</thead>
 	<tbody>
 		{% for work in works %}
-		<tr class="row-hover" onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
+		<tr class="row-hover"
+			onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
 			<th scope="row">{{ work.id }}</th>
 			<td>{{ work.surname }}, {{ work.firstname }}</td>
 			<td>{{ work.worktitle }}
 				<div class="artwork-thumbnail">
-					<img class="img-thumbnail" height="100" width="100"
-						src='{{ work.workfile.url }}'>
+					<img class="img-thumbnail" src='{{ work.workfile.url }}'>
 				</div>
 			</td>
 			<td>{{ work.email }}</td>
@@ -35,9 +36,9 @@
 setTimeout(function(){
 	$("tr.row-hover").each(function() {
 		$(this).mouseenter(function() {
-			TweenLite.to($(this).find(".artwork-thumbnail"), .2, {
-				scaleY: 2,
-				scaleX: 2,
+			$(".photo-viewer").html($(this).find(".artwork-thumbnail").html())
+			TweenLite.to(".photo-viewer", .2, {
+				scale: 1,
 				"z-index": 11,
 				opacity: 1,
 				transformOrigin: "center"
@@ -50,9 +51,9 @@ setTimeout(function(){
 			})
 		})
 		$(this).mouseleave(function(){
-			TweenLite.to($(this).find(".artwork-thumbnail"), .2 , {
-				scaleY: 1,
-				scaleX: 1,
+			$(".photo-viewer").html("")
+			TweenLite.to(".photo-viewer", .2 , {
+				scale: 0,
 				opacity: 0,
 				"z-index": 1,
 				transformOrigin: "center"

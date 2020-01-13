@@ -15,8 +15,9 @@
 	color: white;
 }
 
-.table-general-style>tbody>tr:hover{
-background: linear-gradient(0deg, rgb(21, 154, 176), rgb(32, 97, 108), rgb(21, 154, 176));
+.table-general-style>tbody>tr:hover {
+	background: linear-gradient(0deg, rgb(21, 154, 176), rgb(32, 97, 108),
+		rgb(21, 154, 176));
 }
 
 .table-general-style>tbody>tr:nth-child(odd) {
@@ -25,13 +26,20 @@ background: linear-gradient(0deg, rgb(21, 154, 176), rgb(32, 97, 108), rgb(21, 1
 }
 
 .artwork-thumbnail {
-	position: fixed;
-	background: white;
-	border: none;
-	z-index: 10;
+	display: none;
 }
 
-.artwork-thumbnail img {
-	border: none;
-	z-index: 10;
+.photo-viewer {
+	position: fixed;
+	right: 11px;
+	top: 11px;
+	border-radius: 11px;
+	width: 222px;
+	height: 222px;
+	width: 222px;
+}
+
+.photo-viewer img{
+	max-width: 100%;
+	max-height: 100%;
 }

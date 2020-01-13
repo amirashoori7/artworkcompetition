@@ -2,28 +2,30 @@
 	cursor: pointer;
 }
 
-.scene {
+.gallery-scene {
 	overflow-x: hidden;
 	margin: 0 auto;
-	width: 100%;
-	height: calc(100% - 77px);
 	perspective: 1000px;
 	perspective-origin: 50% 25%;
 	backface-visibility: hidden;
 	transform-style: preserve-3d;
 	border-radius: 33px;
 	padding: 22px;
-	margin-top: 22px;
+	position: absolute;
+	top: 222px;
+	bottom: 22px;
+	left: 22px;
+	right: 22px;
 }
 
-.roll-camera {
-	transform-style: preserve-3d;
+.page-content-area {
+	overflow: hidden;
 }
 
-.roll-camera .move-camera {
+.move-camera {
 	transform-style: preserve-3d;
 	transform: translateY(0px);
-	height: 1517px;
+	height: 2000px;
 }
 
 .shelf {

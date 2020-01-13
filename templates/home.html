@@ -4,6 +4,11 @@
 	text-align: center;
 	border-radius: 22px;
 	padding: 22px;
+	transition: transform .8s cubic-bezier(0.99,-0.01, 0, 1.1);
+}
+
+.landing-page-content:hover {
+	transform: scale(1.1);
 }
 /* h1, h2, h3, h4, h5, h6, p { */
 /*     color: white; */
@@ -17,6 +22,7 @@
 	list-style: none;
 	height: 100%;
 	display: table;
+	background: radial-gradient(#c0c1e8, transparent, transparent);
 }
 
 .div-21 ul li {
@@ -28,13 +34,16 @@
 	left: 61.76%;
 	width: calc(100% - 61.76%);
 	height: calc(100% - 38.09%);
+	padding-top: 44px;
 }
 
 .div-8 {
 	right: 0;
-	bottom: 0;
-	top: calc(100% - 38.09%);
-	left: 76.46%;
+	/* 	bottom: 0; */
+	/* 	top: calc(100% - 38.09%); */
+	/* 	left: 76.46%; */
+	left: 0;
+	bottom: 22px;
 }
 
 .div-5 {
@@ -51,6 +60,11 @@
 	padding: 22px;
 }
 
+#home-4ir-bot-img {
+	position: absolute;
+	left: 0;
+	top: 99px !important;
+}
 </style>
 <script>
 	var countDownDate = new Date("Mar 3, 2020 00:00:00").getTime();
@@ -63,8 +77,8 @@
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		$("#signupbuttonid").html(
-				"Signup " + days + " days, " + hours + " h, " + minutes
-						+ " m, " + seconds + " s ");
+				"<strong>" + days + " days, " + hours + " h, " + minutes
+						+ " m, " + seconds + " s </strong>");
 		if (distance < 0) {
 			clearInterval(x);
 			$("#demo").html() = "EXPIRED";
@@ -73,17 +87,25 @@
 </script>
 <!-- 34 * 21 -->
 <div class="landing-page-content div-21">
+	<h1
+		style="margin-top: 122px; padding-left: 66px; font-style: italic; font-weight: bold;">
+		<p>2020's Theme</p>
+	</h1>
 	<img alt="" src="static/img/theme.svg" id="home-theme-img">
 </div>
 <div class="landing-page-content div-13">
-	<h3>
-		Towards the 4th industrial revolution by promoting STEAM education in
-		South African learners <br> <br>
-		<p>Grade 7 to 12</p>
-	</h3>
+	<img alt="" src="static/img/4irrobot.png" id="home-4ir-bot-img">
+	<h5>
+		To promote STEAM education in South African learners, towards the 4th
+		Industrial Revolution<br> <br>
+	</h5>
 </div>
 <div class="landing-page-content div-8">
-	<h4>Sumbit works between 3 March 2020 and 29 April 2020</h4>
+	<h3 style="font-style: italic;">
+		Registration Opens in <span id="signupbuttonid"></span>
+	</h3>
+	<!-- 	<h5>Deadline</h5> -->
+	<!-- 	<h5>Registration Opens in</h5> -->
 </div>
 <div class="landing-page-content div-5">
 	<ul>
@@ -100,5 +122,6 @@
 					div.find("img").css(
 							"top", div.height() / 2 - ($("#home-theme-img").height() / 2))
 				})
+		$("#home-4ir-bot-img").css("width", $(".div-13").width() -44)
 	}, 100)
 </script>
