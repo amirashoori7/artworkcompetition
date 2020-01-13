@@ -20,7 +20,7 @@ function readFiles(year) {
 					$("<div/>").addClass("face bottom").appendTo(shelf)
 					shelf.appendTo($(".move-camera." + year))
 				}
-				var imgHolder = $("<a/>").attr("onclick","openImage(this)").addClass("photocard"),
+				var imgHolder = $("<a/>").attr("onclick","openFullScreenDiv($(this).html())").addClass("photocard"),
 				front = $(".face.front").last(),
 				imgsrc = "";
 				if (i < 9)
@@ -47,32 +47,12 @@ function readFiles(year) {
 			},300)
 		}
 		
-		var TweenImage
 		function showGallery() {
 			$(".move-camera").parent().fadeOut()
 			$(".gallery-home").fadeIn()
 			$(".page-title>h2").html("Gallery")
 		}
 		
-		function openImage(image) {
-			if(TweenImage != null)
-				TweenImage.reverse()
-			var tl = new TimelineLite({paused: true})
-			TweenImage = tl.to($(image), 1, {
-				left: "11%",
-				right: "11%",
-				bottom: "11%",
-				top: "11%",
-				width: $(window).width() * .89,
-				height: $(window).height() * .89
-			})
-			TweenImage.play()
-		}
-		
-		function closeImage() {
-			TweenImage.reverse()
-			TweenImage = null
-		}
 </script>
 <div class="scene">
 	<div class="page-title" onclick="showGallery()">

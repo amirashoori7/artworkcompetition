@@ -90,13 +90,22 @@ p {
 
 .close-button {
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 11px;
+	top: 11px;
 	width: 48px;
 	height: 48px;
 	background: #162830;
 	border-radius: 50%;
 	cursor: pointer;
+	background-image: url("/static/img/icons/close.svg");
+	background-repeat: no-repeat;
+	background-size: 77%;
+	background-position: center;
+	transition: transform .2s ease-in;
+}
+
+.close-button:hover {
+	transform: scale(1.1);
 }
 
 .error-message-box {
@@ -187,16 +196,17 @@ p {
 
 .page-content {
 	overflow: hidden;
-    color: black;
-    border-radius: 0 22px 0 0;
-    position: fixed;
-    left: 0;
-    margin-left: 22px;
-    perspective: 400px;
-    box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px #aeb5d1;
-    padding: 22px;
-    height: 89%;
-    top: calc(11% + 22px);
+	color: black;
+	border-radius: 0 22px 0 0;
+	position: fixed;
+	left: 0;
+	margin-left: 22px;
+	perspective: 400px;
+	box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px
+		#aeb5d1;
+	padding: 22px;
+	height: 89%;
+	top: calc(11% + 22px);
 }
 
 /* .page-content-area { */
@@ -211,7 +221,7 @@ p {
 	top: 0;
 	left: 0;
 	background-size: cover;
-	filter: opacity(.666) invert(1) hue-rotate(111deg);
+	filter: opacity(.333) invert(1) hue-rotate(111deg);
 }
 
 .page-content-area {
@@ -249,3 +259,15 @@ p {
 	height: 66px;
 	display: inline-block;
 }
+
+.full-screen-div {
+	position: fixed;
+	z-index: 2000;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(255, 255, 255, .3);
+	display: none;
+}
+

@@ -1,14 +1,14 @@
 var tweenMenuShow
+var isHorizontal = false
 function windowLayoutFitSize() {
 	$("#main-body").width($(window).width())
 	$("#main-body").height($(window).height())
 	var frameHeight = ($(window).height() * .9) - 22
-	var isHorizontal = true
 	var frameWidth = frameHeight + (frameHeight * 13 / 21)
 	$(".page-content").width(frameWidth)
-//	$(".page-content").height(frameHeight)
-	if ($(window).width() < $(window).height()) {
-		isHorizontal = false
+// $(".page-content").height(frameHeight)
+	if ($(window).width() > $(window).height()) {
+		isHorizontal = true
 	}
 }
 
@@ -56,9 +56,13 @@ $(document).ready(function () {
 })
 
 $(window).on("load", function () {
+	TweenLite.to(".full-screen-div", 1, {
+		scale: 0,
+		transformOrigin: "center"
+	})
 	$(".menu-item").attr("onclick", "loadContent(this)")
 	loadContent($("<li/>").attr({"data-href":"/home/",
-		"data-bg":"linear-gradient(45deg, rgba(42, 113, 148, .66), rgba(1, 45, 66, 0.66)), url(media/gallery/2019/2019-14.jpg)"}))
+		"data-bg":"url(media/gallery/2019/2019-14.jpg)"}))
 	toggleMessageBox(null, null)
 })
 
@@ -149,4 +153,28 @@ function showDialogPage(element, url){
 		$(this).find(".close-button").load('static/img/icons/close.svg')
 	})
 	return -1
+}
+
+function openFullScreenDiv(htmlContenet) {
+	$(".full-screen-div").html(htmlContenet)
+	$(".full-screen-div").css("display","block")
+	$(".full-screen-div").append($("<div/>").addClass("close-button").on("click", function(){
+		TweenLite.to(".full-screen-div", 1, {
+			scale: 0,
+			transformOrigin: "center"
+		})
+		setTimeout(function(){
+			$(".full-screen-div").html("")
+		},
+		1000)
+	}))
+	$(this).find(".close-button").load('static/img/icons/close.svg')
+	TweenLite.to(".full-screen-div", 1, {
+		scale: 1,
+		top: 0,
+		right: 0,
+		left:0,
+		bottom:0,
+		transformOrigin: "center"
+	})
 }
