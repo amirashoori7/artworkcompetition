@@ -95,9 +95,9 @@
 
 	<div class="form-section" data-title="Comment">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<lable for="comment"> <strong>Comments</strong></lable>
-				<textarea class="form-control form-input" id="comment"
+				<textarea class="form-control form-input" id="comment" placeholder="Dear judge, please add any comments, if there are some..."
 					name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 			</div>
 <!-- 			<div class="col-md-6"> -->
@@ -109,6 +109,6 @@
 
 	</div>
 	<div class="col-md-12 text-center">
-		<button class="action-button" type="submit" id="buttonSubmit">Submit</button>
+		<button class="action-button" type="button" id="buttonSubmitD1AForm" >Submit</button>
 	</div>
 </form>

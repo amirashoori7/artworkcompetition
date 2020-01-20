@@ -8,13 +8,13 @@
 			<strong>Artwork </strong>"{{ work.worktitle }}"
 		</h3>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12 normaldata">
 		<h5>
 			<strong>By </strong>{{ work.surname }}, {{ work.firstname }}
 		</h5>
 	</div>
 </div>
-<div class="row report-section">
+<div class="row report-section normaldata">
 	<div class="col-md-6">
 		<h6>
 			<strong>Born in </strong>{{ work.dob }}
@@ -72,30 +72,31 @@
 </div>
 
 {%if work.status == 0 %}
-<div class="row form-section" data-title="Eligible/Revision/Reject">
+<div class="row form-section normaldata"
+	data-title="Eligible/Revision/Reject">
 	<div class="col-md-10" id="">
 		<form method="post" id="" action="/"
 			class="needs-validation form-general-style"
 			enctype="multipart/form-data" novalidate>
 			<div class="row form-section" data-title="Validate the entry format">
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<label for="bioapproved">Bio is acceptable</strong> <input
 						type="checkbox" name="bioapproved" id="bioapproved"
 						value="{{ work.bioapproved }}" class="form-control form-input">
 						<input type="hidden" name="id" id="id" value="{{ work.id }}"
 						class="form-control form-input">
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<label for="artworkapproved">Artwork is uploaded properly</strong> <input
 						type="checkbox" name="artworkapproved" id="artworkapproved"
 						class="form-control form-input" value="{{ work.bioapproved }}">
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<label for="questionsapproved">Questions are answered</strong> <input
 						type="checkbox" name="questionsapproved" id="questionsapproved"
 						value="{{ work.workapproved }}" class="form-control form-input">
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-3">
 					<label for="comment1">Comment</strong> <textarea type="checkbox"
 							name="comment1" id="comment1" class="form-control form-input"
 							rows="5" cols="100" placeholder="Any comments"></textarea>
@@ -103,8 +104,7 @@
 			</div>
 			<div class="row form-section" data-title="Decision">
 				<div class="col-md-4">
-					<button class="action-button green"
-						onclick="alert('update status to 3')">Approve</button>
+					<button class="action-button green" id="approveBTNTMP">Approve</button>
 				</div>
 				<div class="col-md-4">
 					<button class="action-button orange"
@@ -125,7 +125,7 @@
 
 
 
-<div class="row form-section" data-title="Evaluation Form Stage 1">
+<div class="row form-section evaldata" data-title="Evaluation Form Stage 1">
 	<div class="col-md-10" id="form-d1-a"></div>
 </div>
 
@@ -167,7 +167,17 @@
 <script>
 	$(document).ready(function() {
 		$("#form-d1-a").load('/evaluation/formd1a/', function() {
-			alert(1)
+			$("#buttonSubmitD1AForm").click(function(ev) {
+				ev.preventDefault()
+				$(".normaldata").show()
+				$(".evaldata").hide()
+			})
 		})
+		$("#approveBTNTMP").click(function(ev) {
+			ev.preventDefault()
+			$(".normaldata").hide()
+			$(".evaldata").show()
+		})
+		$(".evaldata").hide()
 	})
 </script>

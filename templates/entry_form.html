@@ -11,15 +11,16 @@
 						"<span>Use the scroll wheel of your mouse to resize the image</span>");
 		var basic = $('#main-cropper').croppie({
 			viewport : {
-				width : $(".form-section").width() * 6 / 7,
-				height : $(".form-section").width() * 6 / 14
+				width : $("#main-cropper").width() * 6 / 7,
+				height : $("#main-cropper").width() * 6 / 14
 			},
 			boundary : {
-				width : $(".form-section").width(),
-				height : $(".form-section").width() / 2
+				width : $("#main-cropper").width(),
+				height : $("#main-cropper").width() / 2
 			},
 			showZoomer : true
 		});
+		console.log($("#entry-form-id").width())
 		// 		basic.croppie('bind', {
 		// 			url : 'images/NMMU_logo.png'
 		// 		});
@@ -93,10 +94,10 @@
 		$("#main-cropper").empty()
 		return false
 	});
-	function filterSchool(stateId){
+	function filterSchool(stateId) {
 		$("#school-div-container").fadeIn()
-		$(".school-option-class").each(function(){
-			if($(this).attr("data-state") === stateId)
+		$(".school-option-class").each(function() {
+			if ($(this).attr("data-state") === stateId)
 				$(this).show()
 			else
 				$(this).hide()
@@ -163,13 +164,13 @@
 						<lable for="email">Email</lable>
 						<input type="email" class="form-control form-input" id="email"
 							name="email" placeholder="you@example.com"
-							value="{{ form.instance.email|default_if_none:'' }}" required>
+							value="{{ form.instance.email|default_if_none:'you@example.com' }}" required>
 					</div>
 					<div class="col-md-6">
 						<lable for="cellphone">Cellphone</lable>
 						<input type="tel" class="form-control form-input" id="cellphone"
 							name="cellphone" placeholder="012 345 67 89"
-							value="{{ form.instance.cellphone|default_if_none:'' }}" required>
+							value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}" required>
 					</div>
 				</div>
 			</div>
@@ -189,14 +190,14 @@
 						<lable for="parentname">Guardian (Parent) Full-Name</lable>
 						<input type="text" class="form-control form-input" id="parentname"
 							name="parentname" placeholder="i.e. Jack Scholtz"
-							value="{{ form.instance.parentname|default_if_none:'' }}"
+							value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}"
 							required>
 					</div>
 					<div class="col-md-6">
 						<lable for="parentphone">Guardian (Parent)'s Phone Number</lable>
 						<input type="tel" class="form-control form-input" id="parentphone"
 							name="parentphone" placeholder="012 345 67 89"
-							value="{{ form.instance.parentphone|default_if_none:'' }}"
+							value="{{ form.instance.parentphone|default_if_none:'012 345 67 89' }}"
 							required>
 					</div>
 				</div>
@@ -205,7 +206,7 @@
 						<lable for="parentemail">Guardian (Parent)'s Email Address</lable>
 						<input type="email" class="form-control form-input"
 							id="parentemail" name="parentemail" placeholder="you@example.com"
-							value="{{ form.instance.parentemail|default_if_none:'' }}"
+							value="{{ form.instance.parentemail|default_if_none:'you@example.com' }}"
 							required>
 					</div>
 				</div>
@@ -244,9 +245,12 @@
 							value="{{ form.instance.school|default_if_none:'' }}" required>
 						<select class="form-control form-input" id="school-dropdown"
 							onchange="$('#school').val($('#school-dropdown').val())">
-							<option value="" class="school-option-class">Choose...</option> {% for sch in schools %}
-							<option value="{{ sch.id }}" data-state="{{ sch.province }}" class="school-option-class">{{ sch.name }} 
-							{% endfor %}
+							<option value="" class="school-option-class">Choose...</option>
+							{% for sch in schools %}
+							<option value="{{ sch.id }}" data-state="{{ sch.province }}"
+								class="school-option-class">{{ sch.name }} {% endfor %}
+
+							
 						</select>
 					</div>
 				</div>
@@ -266,41 +270,36 @@
 					<div class="col-md-2">
 						<lable for="learnergrade7">Grade 7</lable>
 						<input type="hidden" class="form-control form-input"
-							id="currentlearnergrade" 
+							id="currentlearnergrade"
 							value="{{ form.instance.learnergrade|default_if_none:'' }}"
 							required> <input type="radio" checked
 							class="form-control form-input" id="learnergrade"
-							name="learnergrade"  value="Grade 7">
+							name="learnergrade" value="Grade 7">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade8">Grade 8</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade8" name="learnergrade" 
-							value="Grade 8">
+							id="learnergrade8" name="learnergrade" value="Grade 8">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade9">Grade 9</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade9" name="learnergrade" 
-							value="Grade 9">
+							id="learnergrade9" name="learnergrade" value="Grade 9">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade10">Grade 10</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade10" name="learnergrade" 
-							value="Grade 10">
+							id="learnergrade10" name="learnergrade" value="Grade 10">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade11">Grade 11</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade11" name="learnergrade" 
-							value="Grade 11">
+							id="learnergrade11" name="learnergrade" value="Grade 11">
 					</div>
 					<div class="col-md-2">
 						<lable for="learnergrade12">Grade 12</lable>
 						<input type="radio" class="form-control form-input"
-							id="learnergrade12" name="learnergrade" 
-							value="Grade 12">
+							id="learnergrade12" name="learnergrade" value="Grade 12">
 					</div>
 				</div>
 			</div>
@@ -320,8 +319,9 @@
 					<div class="col-md-4">
 						<lable for="teachername">Teacher Name</lable>
 						<input type="text" class="form-control form-input"
-							id="teachername" name="teachername" placeholder="i.e. Edvard Harry"
-							value="{{ form.instance.teachername|default_if_none:'' }}"
+							id="teachername" name="teachername"
+							placeholder="i.e. Edvard Harry"
+							value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
 							required>
 					</div>
 					<div class="col-md-4">
@@ -329,14 +329,14 @@
 						<input type="email" class="form-control form-input"
 							id="teacheremail" name="teacheremail"
 							placeholder="you@example.com"
-							value="{{ form.instance.teacheremail|default_if_none:'' }}"
+							value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
 							required>
 					</div>
 					<div class="col-md-4">
 						<lable for="teacherphone">Teacher Phone</lable>
 						<input type="tel" class="form-control form-input"
-							id="teacherphone" name="teacherphone" placeholder="0123456789"
-							value="{{ form.instance.teacherphone|default_if_none:'' }}"
+							id="teacherphone" name="teacherphone" placeholder="012 345 67 89"
+							value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
 							required>
 					</div>
 				</div>
@@ -354,12 +354,31 @@
 
 			<div class="form-section" data-title="Upload my artwork">
 				<div class="row">
-					<div class="col-md-4" id="iconDiv">
+					<div class="col-md-12">
+						<lable for="surname">Work Title</lable>
+						<input type="text" class="form-control form-input" id="worktitle"
+							name="worktitle"
+							placeholder="I would like to call my artwork (Max 10 words)"
+							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2" id="h-v-label">Vertical</div>
+					<div class="col-md-2" id="">
+						<label class="switch"> <input type="checkbox" checked>
+							<span class="slider round"></span>
+						</label>
+					</div>
+					<div class="col-md-2" id="">Horizontal</div>
+					<div class="col-md-6" id="">
 						<lable for="workfile">Upload Work File</lable>
 						<input type="file" class="form-control form-input" id="workfile"
 							name="workfile" placeholder="" value="Browse"
 							value="{{ form.instance.workfile|default_if_none:'' }}"
 							accept="image/*" required>
+					</div>
+					<div class="col-md-12">
 						<div id="main-cropper"></div>
 						<div id="iconCropDiv">
 							<img id="croppedImage" src="" alt="" /> <input type="hidden"
@@ -369,12 +388,6 @@
 								required>
 						</div>
 						<button class="cropIcon" id="cropIcon" style="display: none">Crop</button>
-					</div>
-					<div class="col-md-8">
-						<lable for="surname">Work Title</lable>
-						<input type="text" class="form-control form-input" id="worktitle"
-							name="worktitle" placeholder="I would like to call my artwork (Max 10 words)"
-							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
 					</div>
 				</div>
 			</div>
@@ -392,10 +405,11 @@
 			<div class="form-section" data-title="Answering questions">
 				<div class="row">
 					<div class="col-md-6">
-						<lable for="question1"><strong>Question 1: </strong>What Mathematics did
-						you use in your artwork?</lable>
-						<textarea class="form-control form-input" placeholder="Explain it in 50-100 words" id="question1"
-							name="question1" rows="5">{{ form.instance.question1|default_if_none:'' }}</textarea>
+						<lable for="question1"> <strong>Question 1: </strong>What
+						Mathematics did you use in your artwork?</lable>
+						<textarea class="form-control form-input"
+							placeholder="Explain it in 50-100 words" id="question1"
+							name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
 					</div>
 					<div class="col-md-6">
 						<lable for="formulafile">Formula File</lable>
@@ -408,17 +422,19 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<lable for="question2"><strong>Question 2:</strong> How did you use
-						creativity to connect Mathematics with "My Universe" to make your
-						artwork?</lable>
-						<textarea class="form-control form-input" id="question2" placeholder="Explain it in 50-100 words"
-							name="question2" rows="5">{{ form.instance.question2|default_if_none:'' }}</textarea>
+						<lable for="question2"> <strong>Question 2:</strong> How
+						did you use creativity to connect Mathematics with "My Universe"
+						to make your artwork?</lable>
+						<textarea class="form-control form-input" id="question2"
+							placeholder="Explain it in 50-100 words" name="question2"
+							rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
 					</div>
 					<div class="col-md-6">
-						<lable for="question3"><strong>Question 3:</strong> Do you think creativity
-						could be used to teach Mathematics? </lable>
-						<textarea class="form-control form-input" id="question3" placeholder="Explain it in 50-100 words"
-							name="question3" rows="5">{{ form.instance.question3|default_if_none:'' }}</textarea>
+						<lable for="question3"> <strong>Question 3:</strong> Do
+						you think creativity could be used to teach Mathematics? </lable>
+						<textarea class="form-control form-input" id="question3"
+							placeholder="Explain it in 50-100 words" name="question3"
+							rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
 					</div>
 				</div>
 			</div>

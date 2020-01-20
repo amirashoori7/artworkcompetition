@@ -40,7 +40,7 @@ p {
 .message-box-container {
 	position: fixed;
 	color: white;
-	z-index: 100;
+	z-index: 100000;
 	opacity: 0;
 	text-align: center;
 	margin: 0 auto;

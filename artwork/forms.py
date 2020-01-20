@@ -7,8 +7,10 @@ class EntryForm(forms.ModelForm):
         model = Artwork
         # fields = '__all__'
         fields = ['worktitle', 'surname', 'firstname', 'id',
-                  'school', 'workfile', 'email',
+                  'school', 'workfile', 'workfileCropped','email',
                   'dob', 'parentname', 'parentemail',
-                  'parentphone', 'learnergrade', 'teachername',
+                  'parentphone', 'learnergrade', 'workformulafile','teachername',
                   'teacheremail', 'teacherphone', 'cellphone',
                   'question1', 'question2', 'question3']
+        
+     
