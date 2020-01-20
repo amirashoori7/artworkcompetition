@@ -76,22 +76,27 @@
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	<div class="row form-section" data-title="Validate the entry format">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<label for="bioapproved">Bio is acceptable</strong> <input
 				type="checkbox" name="bioapproved" id="bioapproved"
 				value="{{ work.bioapproved }}" class="form-control form-input">
 				<input type="hidden" name="id" id="id" value="{{ work.id }}"
 				class="form-control form-input">
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<label for="bioapproved">Artwork is uploaded properly</strong> <input
 				type="checkbox" name="bioapproved" id="bioapproved"
 				class="form-control form-input" value="{{ work.bioapproved }}">
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<label for="bioapproved">Questions are answered</strong> <input
 				type="checkbox" name="bioapproved" id="bioapproved"
 				value="{{ work.workapproved }}" class="form-control form-input">
+		</div>
+		<div class="col-md-6">
+			<label for="comment1">Comment</strong> <textarea type="checkbox"
+					name="comment1" id="comment1" class="form-control form-input"
+					rows="5" cols="100" placeholder="Any comments"></textarea>
 		</div>
 	</div>
 	<div class="row form-section" data-title="Decision">
@@ -118,15 +123,11 @@
 
 
 {%elif work.status == 3 %}
-<form method="post" id="" action="/"
-	class="needs-validation form-general-style"
-	enctype="multipart/form-data" novalidate>
-	<div class="row form-section" data-title="Decision">
-		<div class="col-md-12">
-			<button class="action-button green" id="buttonSubmit">Submit</button>
-		</div>
+<div class="row" id="form-d1-a" data-title="Decision">
+	<div class="col-md-12">
+		<button class="action-button green" id="buttonSubmit">Submit</button>
 	</div>
-</form>
+</div>
 
 
 
@@ -134,7 +135,7 @@
 
 
 
-{% elif work.status == 5  %}
+{% elif work.status == 5 %}
 <form method="post" id="" action="/"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
@@ -162,3 +163,10 @@
 	</div>
 </form>
 {%endif%}
+
+<script>
+	$(document).ready(function() {
+		$("#form-d1-a").load('/account/login/')
+
+	})
+</script>

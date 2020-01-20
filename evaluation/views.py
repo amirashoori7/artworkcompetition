@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
 from artwork.models import Artwork
-from .import models
-from .import forms
+from evaluation.forms import FormD1A
+from django.http.response import HttpResponse
+import json
 
 def create_d1a(request, id):
     work = get_object_or_404(Artwork, id=id)
