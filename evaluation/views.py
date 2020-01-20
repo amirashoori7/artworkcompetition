@@ -4,8 +4,8 @@ from evaluation.forms import FormD1A
 from django.http.response import HttpResponse
 import json
 
-def create_d1a(request, id):
-    work = get_object_or_404(Artwork, id=id)
+def create_d1a(request):
+#     work = get_object_or_404(Artwork, id=id)
     if request.method == 'POST':
         response_data = {}
         form = FormD1A(request.POST, request.FILES)

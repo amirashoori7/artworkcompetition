@@ -1,133 +1,114 @@
-<div class="page-title">
-	<h2>D1A Form for {{ work.title }}</h2>
-</div>
-<div class="row">
-	<div class="col-md-10 offset-md-1">
-		<form method="post" action="{% url 'evaluation:create_D1A' %}"
-			class="needs-validation form-general-style"
-			enctype="multipart/form-data" novalidate>
-
-
-			<div class="form-section" data-title="Image Quality">
-				<div class="row">
-					<div class="col-md-2">
-						<lable for="imagequality">1</lable>
-						<input type="hidden" class="form-control form-input"
-							id="imagequality"
-							value="{{ form.instance.imgq|default_if_none:'' }}" required>
-						<input type="radio" checked class="form-control form-input"
-							id="imgq" name="imgq" value="1">
-					</div>
-					<div class="col-md-2">
-						<lable for="imagequality">2</lable>
-						<input type="radio" class="form-control form-input" id="imgq"
-							name="imgq" value="2">
-					</div>
-					<div class="col-md-2">
-						<lable for="imagequality">3</lable>
-						<input type="radio" class="form-control form-input" id="imgq"
-							name="imgq" value="3">
-					</div>
-					<div class="col-md-2">
-						<lable for="imagequality">4</lable>
-						<input type="radio" class="form-control form-input" id="imgq"
-							name="imgq" value="4">
-					</div>
-					<div class="col-md-2">
-						<lable for="imagequality">5</lable>
-						<input type="radio" class="form-control form-input" id="imgq"
-							name="imgq" value="5">
-					</div>
-				</div>
+<!-- <div class="page-title"> -->
+<!-- 	<h2>D1A Form for {{ work.title }}</h2> -->
+<!-- </div> -->
+<form method="post" action="{% url 'evaluation:formd1a' %}"
+	class="needs-validation form-general-style"
+	enctype="multipart/form-data" novalidate>
+	<div class="form-section" data-title="Image Quality">
+		<div class="row">
+			<div class="col-md-2">
+				<lable for="imagequality">Excellent</lable>
+				<input type="hidden" class="form-control form-input"
+					id="imagequality"
+					value="{{ form.instance.imgq|default_if_none:'' }}" required>
+				<input type="radio" checked class="form-control form-input"
+					id="imgq" name="imgq" value="1">
 			</div>
-
-			<div class="form-section" data-title="Answers Score">
-				<div class="row">
-					<div class="col-md-2">
-						<lable for="answerscore">1</lable>
-						<input type="hidden" class="form-control form-input"
-							id="answerscore"
-							value="{{ form.instance.answersq|default_if_none:'' }}" required>
-						<input type="radio" checked class="form-control form-input"
-							id="answersq" name="answersq" value="1">
-					</div>
-					<div class="col-md-2">
-						<lable for="answerscore">2</lable>
-						<input type="radio" class="form-control form-input" id="answersq"
-							name="answersq" value="2">
-					</div>
-					<div class="col-md-2">
-						<lable for="answerscore">3</lable>
-						<input type="radio" class="form-control form-input" id="answersq"
-							name="answersq" value="3">
-					</div>
-					<div class="col-md-2">
-						<lable for="answerscore">4</lable>
-						<input type="radio" class="form-control form-input" id="answersq"
-							name="answersq" value="4">
-					</div>
-					<div class="col-md-2">
-						<lable for="answerscore">5</lable>
-						<input type="radio" class="form-control form-input" id="answersq"
-							name="answersq" value="5">
-					</div>
-				</div>
+			<div class="col-md-2">
+				<lable for="imagequality">Good</lable>
+				<input type="radio" class="form-control form-input" id="imgq"
+					name="imgq" value="2">
 			</div>
-
-			<div class="form-section" data-title="Origin Quality">
-				<div class="row">
-					<div class="col-md-2">
-						<lable for="originquality">1</lable>
-						<input type="hidden" class="form-control form-input"
-							id="originquality"
-							value="{{ form.instance.answersq|default_if_none:'' }}" required>
-						<input type="radio" checked class="form-control form-input"
-							id="originq" name="originq" value="1">
-					</div>
-					<div class="col-md-2">
-						<lable for="originquality">2</lable>
-						<input type="radio" class="form-control form-input" id="originq"
-							name="originq" value="2">
-					</div>
-					<div class="col-md-2">
-						<lable for="originquality">3</lable>
-						<input type="radio" class="form-control form-input" id="originq"
-							name="originq" value="3">
-					</div>
-					<div class="col-md-2">
-						<lable for="originquality">4</lable>
-						<input type="radio" class="form-control form-input" id="originq"
-							name="originq" value="4">
-					</div>
-					<div class="col-md-2">
-						<lable for="originquality">5</lable>
-						<input type="radio" class="form-control form-input" id="originq"
-							name="originq" value="5">
-					</div>
-				</div>
+			<div class="col-md-2">
+				<lable for="imagequality">Average</lable>
+				<input type="radio" class="form-control form-input" id="imgq"
+					name="imgq" value="3">
 			</div>
-
-			<div class="form-section" data-title="Comment">
-				<div class="row">
-					<div class="col-md-6">
-						<lable for="comment">
-						<strong>Comments</strong></lable>
-						<textarea class="form-control form-input" id="comment"
-							name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
-					</div>
-					<div class="col-md-6">
-						<lable for="revisit">Must Be Revised</lable>
-						<input type="radio" class="form-control form-input" id="revisit"
-							name="revisit" value="5">
-					</div>
-				</div>
-
+			<div class="col-md-2">
+				<lable for="imagequality">Minimal</lable>
+				<input type="radio" class="form-control form-input" id="imgq"
+					name="imgq" value="4">
 			</div>
-			<div class="col-md-12 text-center">
-				<button class="action-button" type="submit" id="buttonSubmit">Submit</button>
+			<div class="col-md-2">
+				<lable for="imagequality">None</lable>
+				<input type="radio" class="form-control form-input" id="imgq"
+					name="imgq" value="5">
 			</div>
-
-
-		</form>
+		</div>
 	</div>
-</div>
+
+	<div class="form-section" data-title="Answers Score">
+		<div class="row">
+			<div class="col-md-2">
+				<input type="hidden" class="form-control form-input"
+					id="answerscore"
+					value="{{ form.instance.answersq|default_if_none:'' }}" required>
+				<input type="radio" checked class="form-control form-input"
+					id="answersq" name="answersq" value="1">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="answersq"
+					name="answersq" value="2">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="answersq"
+					name="answersq" value="3">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="answersq"
+					name="answersq" value="4">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="answersq"
+					name="answersq" value="5">
+			</div>
+		</div>
+	</div>
+
+	<div class="form-section" data-title="Origin Quality">
+		<div class="row">
+			<div class="col-md-2">
+				<input type="hidden" class="form-control form-input"
+					id="originquality"
+					value="{{ form.instance.answersq|default_if_none:'' }}" required>
+				<input type="radio" checked class="form-control form-input"
+					id="originq" name="originq" value="1">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="originq"
+					name="originq" value="2">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="originq"
+					name="originq" value="3">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="originq"
+					name="originq" value="4">
+			</div>
+			<div class="col-md-2">
+				<input type="radio" class="form-control form-input" id="originq"
+					name="originq" value="5">
+			</div>
+		</div>
+	</div>
+
+	<div class="form-section" data-title="Comment">
+		<div class="row">
+			<div class="col-md-6">
+				<lable for="comment"> <strong>Comments</strong></lable>
+				<textarea class="form-control form-input" id="comment"
+					name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
+			</div>
+<!-- 			<div class="col-md-6"> -->
+<!-- 				<lable for="revisit">Must Be Revised</lable> -->
+<!-- 				<input type="radio" class="form-control form-input" id="revisit" -->
+<!-- 					name="revisit" value="5"> -->
+<!-- 			</div> -->
+		</div>
+
+	</div>
+	<div class="col-md-12 text-center">
+		<button class="action-button" type="submit" id="buttonSubmit">Submit</button>
+	</div>
+</form>

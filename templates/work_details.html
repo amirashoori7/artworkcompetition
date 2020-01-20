@@ -72,61 +72,61 @@
 </div>
 
 {%if work.status == 0 %}
-<form method="post" id="" action="/"
-	class="needs-validation form-general-style"
-	enctype="multipart/form-data" novalidate>
-	<div class="row form-section" data-title="Validate the entry format">
-		<div class="col-md-2">
-			<label for="bioapproved">Bio is acceptable</strong> <input
-				type="checkbox" name="bioapproved" id="bioapproved"
-				value="{{ work.bioapproved }}" class="form-control form-input">
-				<input type="hidden" name="id" id="id" value="{{ work.id }}"
-				class="form-control form-input">
-		</div>
-		<div class="col-md-2">
-			<label for="bioapproved">Artwork is uploaded properly</strong> <input
-				type="checkbox" name="bioapproved" id="bioapproved"
-				class="form-control form-input" value="{{ work.bioapproved }}">
-		</div>
-		<div class="col-md-2">
-			<label for="bioapproved">Questions are answered</strong> <input
-				type="checkbox" name="bioapproved" id="bioapproved"
-				value="{{ work.workapproved }}" class="form-control form-input">
-		</div>
-		<div class="col-md-6">
-			<label for="comment1">Comment</strong> <textarea type="checkbox"
-					name="comment1" id="comment1" class="form-control form-input"
-					rows="5" cols="100" placeholder="Any comments"></textarea>
-		</div>
+<div class="row form-section" data-title="Eligible/Revision/Reject">
+	<div class="col-md-10" id="">
+		<form method="post" id="" action="/"
+			class="needs-validation form-general-style"
+			enctype="multipart/form-data" novalidate>
+			<div class="row form-section" data-title="Validate the entry format">
+				<div class="col-md-2">
+					<label for="bioapproved">Bio is acceptable</strong> <input
+						type="checkbox" name="bioapproved" id="bioapproved"
+						value="{{ work.bioapproved }}" class="form-control form-input">
+						<input type="hidden" name="id" id="id" value="{{ work.id }}"
+						class="form-control form-input">
+				</div>
+				<div class="col-md-2">
+					<label for="artworkapproved">Artwork is uploaded properly</strong> <input
+						type="checkbox" name="artworkapproved" id="artworkapproved"
+						class="form-control form-input" value="{{ work.bioapproved }}">
+				</div>
+				<div class="col-md-2">
+					<label for="questionsapproved">Questions are answered</strong> <input
+						type="checkbox" name="questionsapproved" id="questionsapproved"
+						value="{{ work.workapproved }}" class="form-control form-input">
+				</div>
+				<div class="col-md-6">
+					<label for="comment1">Comment</strong> <textarea type="checkbox"
+							name="comment1" id="comment1" class="form-control form-input"
+							rows="5" cols="100" placeholder="Any comments"></textarea>
+				</div>
+			</div>
+			<div class="row form-section" data-title="Decision">
+				<div class="col-md-4">
+					<button class="action-button green"
+						onclick="alert('update status to 3')">Approve</button>
+				</div>
+				<div class="col-md-4">
+					<button class="action-button orange"
+						onclick="alert('update status to 1, email to the user, and revise -- hide it for now')">Requires
+						Revision</button>
+				</div>
+				<div class="col-md-4">
+					<button class="action-button red"
+						onclick="alert('update status to 2, visibility to 0')">Reject</button>
+				</div>
+			</div>
+		</form>
 	</div>
-	<div class="row form-section" data-title="Decision">
-		<div class="col-md-4">
-			<button class="action-button green"
-				onclick="alert('update status to 3')">Approve</button>
-		</div>
-		<div class="col-md-4">
-			<button class="action-button orange"
-				onclick="alert('update status to 1, email to the user, and revise -- hide it for now')">Requires
-				Revision</button>
-		</div>
-		<div class="col-md-4">
-			<button class="action-button red"
-				onclick="alert('update status to 2, visibility to 0')">Reject</button>
-		</div>
-	</div>
-</form>
-
+</div>
 
 
 <!-- 	FORM D1-a -->
 
 
 
-{%elif work.status == 3 %}
-<div class="row" id="form-d1-a" data-title="Decision">
-	<div class="col-md-12">
-		<button class="action-button green" id="buttonSubmit">Submit</button>
-	</div>
+<div class="row form-section" data-title="Evaluation Form Stage 1">
+	<div class="col-md-10" id="form-d1-a"></div>
 </div>
 
 
@@ -166,7 +166,8 @@
 
 <script>
 	$(document).ready(function() {
-		$("#form-d1-a").load('/account/login/')
-
+		$("#form-d1-a").load('/evaluation/formd1a/', function() {
+			alert(1)
+		})
 	})
 </script>
