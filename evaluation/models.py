@@ -1,7 +1,6 @@
 from django.contrib.postgres.fields import ArrayField
 from account.models import ProjectUser
 from django.db import models
-from datetime import *
 
 WEIGHT = (
     ('5', 'Excellent'),

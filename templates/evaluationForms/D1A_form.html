@@ -12,27 +12,27 @@
 					id="imagequality"
 					value="{{ form.instance.imgq|default_if_none:'' }}" required>
 				<input type="radio" checked class="form-control form-input"
-					id="imgq" name="imgq" value="1">
+					name="imgq" value="1">
 			</div>
 			<div class="col-md-2">
 				<lable for="imagequality">Good</lable>
-				<input type="radio" class="form-control form-input" id="imgq"
-					name="imgq" value="2">
+				<input type="radio" class="form-control form-input" name="imgq"
+					value="2">
 			</div>
 			<div class="col-md-2">
 				<lable for="imagequality">Average</lable>
-				<input type="radio" class="form-control form-input" id="imgq"
-					name="imgq" value="3">
+				<input type="radio" class="form-control form-input" name="imgq"
+					value="3">
 			</div>
 			<div class="col-md-2">
 				<lable for="imagequality">Minimal</lable>
-				<input type="radio" class="form-control form-input" id="imgq"
-					name="imgq" value="4">
+				<input type="radio" class="form-control form-input" name="imgq"
+					value="4">
 			</div>
 			<div class="col-md-2">
 				<lable for="imagequality">None</lable>
-				<input type="radio" class="form-control form-input" id="imgq"
-					name="imgq" value="5">
+				<input type="radio" class="form-control form-input" name="imgq"
+					value="5">
 			</div>
 		</div>
 	</div>
@@ -44,23 +44,23 @@
 					id="answerscore"
 					value="{{ form.instance.answersq|default_if_none:'' }}" required>
 				<input type="radio" checked class="form-control form-input"
-					id="answersq" name="answersq" value="1">
+					name="answersq" value="1">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="answersq"
-					name="answersq" value="2">
+				<input type="radio" class="form-control form-input" name="answersq"
+					value="2">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="answersq"
-					name="answersq" value="3">
+				<input type="radio" class="form-control form-input" name="answersq"
+					value="3">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="answersq"
-					name="answersq" value="4">
+				<input type="radio" class="form-control form-input" name="answersq"
+					value="4">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="answersq"
-					name="answersq" value="5">
+				<input type="radio" class="form-control form-input" name="answersq"
+					value="5">
 			</div>
 		</div>
 	</div>
@@ -72,23 +72,23 @@
 					id="originquality"
 					value="{{ form.instance.answersq|default_if_none:'' }}" required>
 				<input type="radio" checked class="form-control form-input"
-					id="originq" name="originq" value="1">
+					name="originq" value="1">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="originq"
-					name="originq" value="2">
+				<input type="radio" class="form-control form-input" name="originq"
+					value="2">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="originq"
-					name="originq" value="3">
+				<input type="radio" class="form-control form-input" name="originq"
+					value="3">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="originq"
-					name="originq" value="4">
+				<input type="radio" class="form-control form-input" name="originq"
+					value="4">
 			</div>
 			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" id="originq"
-					name="originq" value="5">
+				<input type="radio" class="form-control form-input" name="originq"
+					value="5">
 			</div>
 		</div>
 	</div>
@@ -97,18 +97,14 @@
 		<div class="row">
 			<div class="col-md-12">
 				<lable for="comment"> <strong>Comments</strong></lable>
-				<textarea class="form-control form-input" id="comment" placeholder="Dear judge, please add any comments, if there are some..."
+				<textarea class="form-control form-input" id="comment"
+					placeholder="Dear judge, please add any comments, if there are some..."
 					name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 			</div>
-<!-- 			<div class="col-md-6"> -->
-<!-- 				<lable for="revisit">Must Be Revised</lable> -->
-<!-- 				<input type="radio" class="form-control form-input" id="revisit" -->
-<!-- 					name="revisit" value="5"> -->
-<!-- 			</div> -->
 		</div>
 
 	</div>
 	<div class="col-md-12 text-center">
-		<button class="action-button" type="button" id="buttonSubmitD1AForm" >Submit</button>
+		<button class="action-button" type="button" id="buttonSubmitD1AForm">Submit</button>
 	</div>
 </form>
