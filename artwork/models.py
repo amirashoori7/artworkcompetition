@@ -54,7 +54,7 @@ class Artwork(models.Model):
     question2 = models.TextField(blank=False)
     question3 = models.TextField(blank=False)
     submitted = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=Status.statuslist(), default=0)
+    status = models.IntegerField(choices=Status.statuslist(), default=-1)
     
     class Meta:
         ordering = ['id']

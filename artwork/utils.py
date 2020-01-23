@@ -1,6 +1,7 @@
 from enum import *
 
 class Status(IntEnum):
+    Partially_Submitted = -1
     Submitted_Successfully = 0
     Revision_Required = 1
     Rejected_Stage_0 = 2

@@ -9,9 +9,9 @@
 			<th scope="col"></th>
 			<th scope="col">Full Name</th>
 			<th scope="col">Title</th>
+			<th scope="col">Status</th>
 			<th scope="col">Email</th>
 			<th scope="col">Grade</th>
-			<th scope="col">Status</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,6 +20,7 @@
 			onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
 			<th scope="row">{{ work.id }}</th>
 			<td>{{ work.surname }}, {{ work.firstname }}</td>
+			<td>{{ work.get_status_display }}</td>
 			<td>{{ work.worktitle }}
 				<div class="artwork-thumbnail">
 					<img class="img-thumbnail" src='{{ work.workfile.url }}'>
@@ -27,7 +28,6 @@
 			</td>
 			<td>{{ work.email }}</td>
 			<td>{{ work.learnergrade }}</td>
-			<td>{{ work.get_status_display }}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
