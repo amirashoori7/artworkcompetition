@@ -19,6 +19,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('gallery/', views.gallery, name='gallery'),
     path('work_lists/', views.work_lists, name='work_lists'),
+    path('work_detail_update/', views.work_detail_update, name='work_detail_update'),
     path('<int:id>/', views.work_details, name='work_details'),
     path('<school>/', views.work_lists,
           name='work_lists_by_school'),

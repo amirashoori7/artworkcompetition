@@ -29,29 +29,36 @@ def aboutus(request):
     context = {}
     return render(request, 'aboutus.html', context)
 
+
 def contactus(request):
     context = {}
     return render(request, 'contactus.html', context)
+
 
 def faq(request):
     context = {}
     return render(request, 'faq.html', context)
 
+
 def history(request):
     context = {}
     return render(request, 'history.html', context)
+
 
 def howtoenter(request):
     context = {}
     return render(request, 'howtoenter.html', context)
 
+
 def rules(request):
     context = {}
     return render(request, 'rules.html', context)
 
+
 def gallery(request):
     context = {}
     return render(request, 'gallery.html', context)
+
 
 def work_lists(request):
     works = Artwork.objects.all()
@@ -60,11 +67,27 @@ def work_lists(request):
  
 
 def work_details(request, id):
+    if request.method == 'POST':
+        Artwork.objects.filter(id=id).update(status='updated_name')
     work = get_object_or_404(Artwork, id=id)
     context = {'work': work}
     return render(request, 'work_details.html', context)
 
 
+def work_detail_update(request):
+    response_data = {}
+    if request.method == 'POST':
+        workapproved = request.POST.get('workapproved', '') == 'False'
+        bioapproved = request.POST.get('bioapproved', '') == 'False'
+        qapproved = request.POST.get('qapproved', '') == 'False'
+        Artwork.objects.filter(id=request.POST['id']).update(status=request.POST['status'], workapproved=workapproved, 
+                                                     bioapproved=bioapproved, qapproved=qapproved)
+        response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
+        
+    return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+
+    
 def signup_page(request):   
     context = {}
     return render(request, 'signup_page.html', context)
@@ -77,7 +100,7 @@ def entry_form(request):
         form = EntryForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save()
-            response_data['successResult'] = 'The entry form submission is successful!'
+            response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
             response_data['id'] = form.id
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")

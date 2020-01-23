@@ -1,7 +1,6 @@
 <div class="row report-section">
 	<div class="col-md-12">
-		<img type="file" class="img-fluid" id="workfile"
-			src="{{ work.workfile.url }}">
+		<img type="file" id="workfileCropped" src="{{ work.workfileCropped }}">
 	</div>
 	<div class="col-md-12">
 		<h3>
@@ -74,8 +73,9 @@
 {%if work.status == 0 %}
 <div class="row form-section normaldata"
 	data-title="Eligible/Revision/Reject">
-	<div class="col-md-10" id="">
-		<form method="post" id="" action="/"
+	<div class="col-md-12" id="">
+		<form method="post" id="entry-approval-form"
+			action="{% url 'artwork:work_detail_update' %}"
 			class="needs-validation form-general-style"
 			enctype="multipart/form-data" novalidate>
 			<div class="row form-section" data-title="Validate the entry format">
@@ -83,18 +83,17 @@
 					<label for="bioapproved">Bio is acceptable</strong> <input
 						type="checkbox" name="bioapproved" id="bioapproved"
 						value="{{ work.bioapproved }}" class="form-control form-input">
-						<input type="hidden" name="id" id="id" value="{{ work.id }}"
+				</div>
+				<div class="col-md-3">
+					<label for="workapproved">Artwork is uploaded properly</strong> <input
+						type="checkbox" name="workapproved" id="workapproved"
+						class="form-control form-input" value="{{ work.workapproved|default_if_none:'on'}}">
+				</div>
+				<div class="col-md-3">
+					<label for="qapproved">All 3 questions are answered</strong>
+						<input type="checkbox" name="qapproved"
+						id="qapproved" value="{{ work.qapproved }}"
 						class="form-control form-input">
-				</div>
-				<div class="col-md-3">
-					<label for="artworkapproved">Artwork is uploaded properly</strong> <input
-						type="checkbox" name="artworkapproved" id="artworkapproved"
-						class="form-control form-input" value="{{ work.bioapproved }}">
-				</div>
-				<div class="col-md-3">
-					<label for="questionsapproved">Questions are answered</strong> <input
-						type="checkbox" name="questionsapproved" id="questionsapproved"
-						value="{{ work.workapproved }}" class="form-control form-input">
 				</div>
 				<div class="col-md-3">
 					<label for="comment1">Comment</strong> <textarea type="checkbox"
@@ -102,18 +101,20 @@
 							rows="5" cols="100" placeholder="Any comments"></textarea>
 				</div>
 			</div>
+			<input type="hidden" name="id" id="id" value="{{ work.id }}"
+				class="form-control form-input"> <input type="hidden"
+				name="status" id="status" value="{{ work.status }}"
+				class="form-control form-input">
 			<div class="row form-section" data-title="Decision">
 				<div class="col-md-4">
-					<button class="action-button green" id="approveBTNTMP">Approve</button>
+					<button class="action-button green" id="approveBTN0">Approve</button>
 				</div>
 				<div class="col-md-4">
-					<button class="action-button orange"
-						onclick="alert('update status to 1, email to the user, and revise -- hide it for now')">Requires
+					<button class="action-button orange" id="reviseBTN0">Requires
 						Revision</button>
 				</div>
 				<div class="col-md-4">
-					<button class="action-button red"
-						onclick="alert('update status to 2, visibility to 0')">Reject</button>
+					<button class="action-button red" id="rejectBTN0">Reject</button>
 				</div>
 			</div>
 		</form>
@@ -123,9 +124,11 @@
 
 <!-- 	FORM D1-a -->
 
+{% elif work.status == 3 %}
 
 
-<div class="row form-section evaldata" data-title="Evaluation Form Stage 1">
+<div class="row form-section evaldata"
+	data-title="Evaluation Form Stage 1">
 	<div class="col-md-10" id="form-d1-a"></div>
 </div>
 
@@ -164,20 +167,5 @@
 </form>
 {%endif%}
 
-<script>
-	$(document).ready(function() {
-		$("#form-d1-a").load('/evaluation/formd1a/', function() {
-			$("#buttonSubmitD1AForm").click(function(ev) {
-				ev.preventDefault()
-				$(".normaldata").show()
-				$(".evaldata").hide()
-			})
-		})
-		$("#approveBTNTMP").click(function(ev) {
-			ev.preventDefault()
-			$(".normaldata").hide()
-			$(".evaldata").show()
-		})
-		$(".evaldata").hide()
-	})
-</script>
+<script type="text/javascript" src="static/js/work.detail.admin.js">
+	
