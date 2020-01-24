@@ -52,6 +52,7 @@ MATH = (
     ('40', 'Vector Calculus')
 )
 
+
 class D1A(models.Model):
     artwork = models.ForeignKey('artwork.Artwork', blank=True, null=True, on_delete=models.CASCADE)
     imgq = models.IntegerField(blank=True, null=True)
@@ -69,6 +70,7 @@ class D1A(models.Model):
             ('update_D1A', 'can update D1A'),
             ('view_D1A', 'can view D1A'),
         )
+
 
 class D1B(models.Model):
     artwork = models.ForeignKey('artwork.Artwork', blank=True, null=True, on_delete=models.CASCADE)
@@ -92,7 +94,7 @@ class D2(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        self.score = self.q1+self.q2+self.q3+self.q4
+        self.score = self.q1 + self.q2 + self.q3 + self.q4
         super(D2, self).save(*args, **kwargs)
 
 
@@ -108,5 +110,5 @@ class D3(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        self.score = self.q1+self.q2+self.q3+self.q4
+        self.score = self.q1 + self.q2 + self.q3 + self.q4
         super(D2, self).save(*args, **kwargs)

@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404
-from artwork.models import Artwork
+from django.shortcuts import render
 from evaluation.forms import FormD1A
 from django.http.response import HttpResponse
 import json
