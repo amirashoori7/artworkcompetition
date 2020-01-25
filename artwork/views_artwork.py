@@ -5,10 +5,13 @@ and then routing requests with an appropriate response.
 '''
 
 from django.shortcuts import render, get_object_or_404
-from .models import Artwork, School
-from .forms import EntryForm
+from .models_artwork import Artwork, School
 from django.http import HttpResponse
 import json
+from artwork.forms_artwork import EntryForm, UserForm
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
+from account.models import ProjectUser
 
 
 def index(request):
@@ -92,23 +95,32 @@ def signup_page(request):
     context = {}
     return render(request, 'signup_page.html', context)
 
-
+@login_required
+@transaction.atomic
 def entry_form(request):
     schools = School.objects.all()
+    userModel = ProjectUser.objects.get(username=request.user)
+    user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         response_data = {}
-        form = EntryForm(request.POST, request.FILES)
-        if form.is_valid():
-            form = form.save()
+        artwork_form = EntryForm(request.POST, request.FILES)
+        if artwork_form.is_valid():
+            artwork_form = artwork_form.save(commit=False)
+            artwork_form.owner = request.user
+            artwork_form.save()
             response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
-            response_data['id'] = form.id
+            response_data['id'] = artwork_form.id
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            response_data['errorResult'] = form.errors.as_json(True)
+            response_data['errorResultWork'] = artwork_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
+    elif userModel.user_type == 1:
+        artwork_model = Artwork.objects.get(owner=request.user)
+        artwork_form = EntryForm(instance=artwork_model)
     else:
-        form = EntryForm()
-        context = {'form': form, 'schools': schools}
-        return render(request, 'entry_form.html', context)
+        artwork_form = EntryForm()
+    context = {'form': artwork_form, 'schools': schools, 'user_form': user_form}
+    return render(request, 'entry_form.html', context)
+    

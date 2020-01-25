@@ -54,10 +54,11 @@
 <!-- 			</div> -->
 			<div class="menu-items-holder menu-items-holder-left">
 				<ul class="menu-items menu-top">
-					{% if user.is_authenticated %}
+					{% if user.is_authenticated and user.user_type == 1%}
 					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:work_lists' %}"><img
-						src="static/img/icons/document.svg"><span>Admin</span></li> {% endif %}
+						src="static/img/icons/document.svg"><span>Artwork List</span></li> 
+						{% endif %}
 <!-- 					<li class="menu-item" id="about-us" -->
 <!-- 						data-href="{% url 'artwork:history' %}"><img -->
 <!-- 						src="static/img/icons/history.svg"><span>History</span></li> -->

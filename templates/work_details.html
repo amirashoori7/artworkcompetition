@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-md-12 normaldata">
 		<h5>
-			<strong>By </strong>{{ work.surname }}, {{ work.firstname }}
+			<strong>By </strong>{{ work.owner.last_name }}, {{ work.owner.first_name }}
 		</h5>
 	</div>
 </div>
@@ -19,7 +19,7 @@
 			<strong>Born in </strong>{{ work.dob }}
 		</h6>
 		<h6>
-			<strong>Email </strong>{{ work.email }}, <strong>Cell </strong>{{work.cellphone}}
+			<strong>Email </strong>{{ work.owner.email }}, <strong>Cell </strong>{{work.cellphone}}
 			<h6>
 	</div>
 	<div class="col-md-6">

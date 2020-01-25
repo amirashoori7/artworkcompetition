@@ -7,7 +7,7 @@
 	<div class="form-section" data-title="Image Quality">
 		<div class="row">
 			<div class="col-md-2">
-				<lable for="imagequality">Excellent</lable>
+				<label for="imagequality">Excellent</label>
 				<input type="hidden" class="form-control form-input"
 					id="imagequality"
 					value="{{ form.instance.imgq|default_if_none:'' }}" required>
@@ -15,22 +15,22 @@
 					name="imgq" value="1">
 			</div>
 			<div class="col-md-2">
-				<lable for="imagequality">Good</lable>
+				<label for="imagequality">Good</label>
 				<input type="radio" class="form-control form-input" name="imgq"
 					value="2">
 			</div>
 			<div class="col-md-2">
-				<lable for="imagequality">Average</lable>
+				<label for="imagequality">Average</label>
 				<input type="radio" class="form-control form-input" name="imgq"
 					value="3">
 			</div>
 			<div class="col-md-2">
-				<lable for="imagequality">Minimal</lable>
+				<label for="imagequality">Minimal</label>
 				<input type="radio" class="form-control form-input" name="imgq"
 					value="4">
 			</div>
 			<div class="col-md-2">
-				<lable for="imagequality">None</lable>
+				<label for="imagequality">None</label>
 				<input type="radio" class="form-control form-input" name="imgq"
 					value="5">
 			</div>
@@ -96,7 +96,7 @@
 	<div class="form-section" data-title="Comment">
 		<div class="row">
 			<div class="col-md-12">
-				<lable for="comment"> <strong>Comments</strong></lable>
+				<label for="comment"> <strong>Comments</strong></label>
 				<textarea class="form-control form-input" id="comment"
 					placeholder="Dear judge, please add any comments, if there are some..."
 					name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>

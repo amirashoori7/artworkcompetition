@@ -3,6 +3,10 @@ from django.template.defaultfilters import default
 import os
 from uuid import uuid4
 from .utils import Status
+from account.models import ProjectUser
+from django.dispatch.dispatcher import receiver
+from django.db.models.signals import post_save
+from django.conf import settings
 
 
 class School(models.Model):
@@ -30,10 +34,9 @@ def path_and_rename(path):
     return wrapper
 
 class Artwork(models.Model):
-    firstname = models.CharField(max_length=200)
-    surname = models.CharField(max_length=200)
-    email = models.CharField(blank=True, null=True, max_length=100)
-    dob = models.DateField(blank=True, null=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+        null=True, blank=True, on_delete=models.CASCADE)
+    dob = models.CharField(blank=True, null=True, max_length=12)
     cellphone = models.CharField(blank=True, null=True, max_length=100)
     learnergrade = models.CharField(blank=True, null=True, max_length=100)
     parentname = models.CharField(blank=True, max_length=200)
@@ -57,7 +60,7 @@ class Artwork(models.Model):
     status = models.IntegerField(choices=Status.statuslist(), default=-1)
     
     class Meta:
-        ordering = ['id']
+        ordering = ['submitted']
 
     def save(self, *args, **kwargs):
         print("save initiation >>> ", self)
@@ -70,10 +73,11 @@ class Artwork(models.Model):
         return "work_details/{self.id}"
 
     def __str__(self):
-        return '%s %s' % (self.surname, self.firstname)
+        return '%s %s' % (self.dob, self.parentname)
 
     def get_artwork_status(self):
         return Status(self.status).name
+    
 
 '''
 #Custom Object Manager

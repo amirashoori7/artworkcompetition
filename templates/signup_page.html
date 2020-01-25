@@ -5,7 +5,7 @@
 				$.ajax({
 					url : "{% url 'artwork:entry_form' %}",
 					success : function(response) {
-						$(".multi_step_form").html(response)
+						$("#artwork-submit-form-holder-id").html(response)
 						$("#registrationForm").load(
 								'/account/register/',
 								function() {
@@ -158,23 +158,15 @@
 										+ $("#yearDropDown").val())
 					},
 					success : function(response) {
+						console.log(response)
 						if (response.successResult != null) {
 							$("#id").val(response.id)
 							toggleMessageBox(response.successResult, false)
-						} else if (response.errorResult != null) {
+						} else if (response.errorResultUser != null
+								|| response.errorResultWork != null) {
 							$("#id").val(0)
-							var errorList = $("<ul/>");
-							Object.keys(JSON.parse(response.errorResult))
-									.forEach(
-											function(key, value) {
-												$('<li/>').text("* " + key)
-														.appendTo(errorList)
-											})
-							toggleMessageBox(
-									"<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
-											+ $('<div>').append(
-													errorList.clone()).html(),
-									true)
+							populateErrorMessageFields(response.errorResultUser)
+							populateErrorMessageFields(response.errorResultWork)
 						}
 					},
 					error : function(xhr, errmsg, err) {
@@ -188,10 +180,17 @@
 				})
 	}
 </script>
+{% if user.is_authenticated %}
 <div class="page-title">
 	<h2>Entry Form</h2>
+</div>
+<section class="multi_step_form" id="artwork-submit-form-holder-id">
+</section>
+{% else %}
+<div class="page-title">
+	<h2>Register</h2>
 </div>
 <div class="row">
 	<div class="col-md-12" id="registrationForm"></div>
 </div>
-<section class="multi_step_form"></section>
+{% endif %}

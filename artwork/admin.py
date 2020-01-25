@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import School, Artwork
+from .models_artwork import School, Artwork
 
 @admin.register(School)
 class SchoolAdmin(admin.ModelAdmin):
@@ -8,8 +8,8 @@ class SchoolAdmin(admin.ModelAdmin):
 
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
-    list_display = ['surname', 'firstname', 'worktitle',
+    list_display = ['worktitle',
                      'school', 'dob',
                       'parentname', 'teachername']
-    list_filter = ['surname', 'school', 'worktitle']
+    list_filter = ['school', 'worktitle']
     #list_editable = ['']

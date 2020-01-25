@@ -1,5 +1,9 @@
 var tweenMenuShow
 var isHorizontal = false
+var testData = [{
+	name: "Jack",
+	surname: "smith"
+}]
 function windowLayoutFitSize() {
 	$("#main-body").width($(window).width())
 	$("#main-body").height($(window).height())
@@ -20,6 +24,7 @@ function populateErrorMessageFields(errorString){
 						$("<br/>").appendTo(errorSection)
 						errorSection.append(JSON.parse(errorString)[key][0].message)
 						$("#" + key).parent().find("label").after(errorSection)
+						console.log(errorSection)
 					})
 }
 

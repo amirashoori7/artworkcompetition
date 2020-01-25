@@ -46,7 +46,7 @@ AUTH_USER_MODEL = 'account.ProjectUser'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'login'
+LOGIN_URL = '/account/login/'
 LOGOUT_URL = 'logout'
 
 MIDDLEWARE = [

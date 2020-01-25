@@ -4,26 +4,39 @@
 	<div class="form-section" data-title="Registration">
 		<div class="row">
 			<div class="col-md-6">
-				<label for="username">Username</label>
-				<input type="text" class="form-control form-input" id="username"
-					name="username" value="{{ form.instance.username }}" required>
+				<label for="username">Username</label> <input type="text"
+					class="form-control form-input" id="username" name="username"
+					value="" required>
+					<input type="hidden" name="is_valid" value="True">
+			</div>
+			<div class="col-md-6"> <label
+					for="email">Email</label> <input type="email"
+					class="form-control form-input" id="email" name="email" value=""
+					required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="first_name">Firstname</label> <input type="text"
+					class="form-control form-input" id="first_name" name="first_name"
+					value="" required>
 			</div>
 			<div class="col-md-6">
-				<label for="email">Email</label>
-				<input type="email" class="form-control form-input" id="email"
-					name="email" value="{{ form.instance.email }}" required>
+				<label for="last_name">Last Name</label> <input type="text"
+					class="form-control form-input" id="last_name" name="last_name"
+					value="" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="password1">Password</label> <input type="password"
+					class="form-control form-input" id="password1" name="password1"
+					value="" required>
 			</div>
 			<div class="col-md-6">
-				<label for="password1">Password</label>
-				<input type="password" class="form-control form-input"
-					id="password1" name="password1"
-					value="{{ form.instance.password1 }}" required>
-			</div>
-			<div class="col-md-6">
-				<label for="password2">Repeat Password</label>
-				<input type="password" class="form-control form-input"
-					id="password2" name="password2"
-					value="{{ form.instance.password2 }}" required>
+				<label for="password2">Repeat Password</label> <input
+					type="password" class="form-control form-input" id="password2"
+					name="password2" value="" required>
 			</div>
 		</div>
 		{% csrf_token %}

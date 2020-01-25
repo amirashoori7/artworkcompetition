@@ -11,4 +11,4 @@ class ProjectUser(AbstractUser):
       (6, 'admin'),
     )
 
-    user_type = models.PositiveSmallIntegerField(null=True, choices=USER_TYPE_CHOICES)
+    user_type = models.PositiveSmallIntegerField(null=True, choices=USER_TYPE_CHOICES, default=1)

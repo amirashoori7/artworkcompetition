@@ -1,16 +1,19 @@
 from django import forms
-from .models import Artwork, School
+from .models_artwork import Artwork
+from account.models import ProjectUser
 
 class EntryForm(forms.ModelForm):
-
     class Meta:
         model = Artwork
-        # fields = '__all__'
-        fields = ['worktitle', 'surname', 'firstname', 'id',
-                  'school', 'workfile', 'workfileCropped','email',
+        fields = ['worktitle', 'id',
+                  'school', 'workfile', 'workfileCropped',
                   'dob', 'parentname', 'parentemail',
                   'parentphone', 'learnergrade', 'workformulafile','teachername',
                   'teacheremail', 'teacherphone', 'cellphone',
                   'question1', 'question2', 'question3']
         
      
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = ProjectUser
+        fields = ('username', 'email', 'first_name', 'last_name')

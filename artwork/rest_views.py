@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
 from rest_framework.parsers import JSONParser
 from .serializer import ArtworkSerializer
-from .models import Artwork
+from .models_artwork import Artwork
 
 def worklists(request):
     works = Artwork.objects.all()
