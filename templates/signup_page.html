@@ -52,6 +52,7 @@
 					}
 				});
 			})
+
 	function submitRegistryForm() {
 		var form = $('#registry-form')[0];
 		$("#register-btn").prop("disabled", true);
@@ -96,20 +97,13 @@
 						} else if (response.errorResult != null) {
 							$("#id").val(0)
 							var errorList = $("<ul/>");
-							console.log(JSON.parse(response.errorResult))
-							Object.keys(JSON.parse(response.errorResult))
-									.forEach(
-											function(key, value) {
-												$('<li/>').text("* " + key)
-														.appendTo(errorList)
-											})
+							populateErrorMessageFields(response.errorResult)
 							toggleMessageBox(
 									"<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
 											+ $('<div>').append(
 													errorList.clone()).html(),
 									true)
-									
-									
+
 						}
 					},
 					error : function(xhr, errmsg, err) {

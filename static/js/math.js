@@ -12,6 +12,19 @@ function windowLayoutFitSize() {
 	}
 }
 
+function populateErrorMessageFields(errorString){
+	console.log(JSON.parse(errorString))
+// $("<small/>").addClass("text-danger").text("his").html()
+	Object.keys(JSON.parse(errorString))
+			.forEach(
+					function(key, value) {
+						var errorSection = $("<small/>").addClass("text-danger")
+						$("<br/>").appendTo(errorSection)
+						errorSection.append(JSON.parse(errorString)[key][0].message)
+						$("#" + key).parent().find("label").after(errorSection)
+					})
+}
+
 function loadContent(liItem) {
 	$("div.page-content").hide()
 	var url = ""
