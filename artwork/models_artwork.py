@@ -3,7 +3,7 @@ from django.template.defaultfilters import default
 import os
 from uuid import uuid4
 from .utils import Status
-from account.models import ProjectUser
+from account.models_account import ProjectUser
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_save
 from django.conf import settings

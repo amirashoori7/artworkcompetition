@@ -29,8 +29,8 @@
 <body>
 	<div id="main-body">
 		<div class="full-screen-div"></div>
-<!-- 		<div class="main-logo" data-href="/home/" -->
-<!-- 			data-bg="url(media/gallery/2019/2019-14.jpg)" onclick="loadContent(this)"></div> -->
+		<!-- 		<div class="main-logo" data-href="/home/" -->
+		<!-- 			data-bg="url(media/gallery/2019/2019-14.jpg)" onclick="loadContent(this)"></div> -->
 		<div id="main-frame">
 			<!-- 			<div class="menu-icon"></div> -->
 			<div class="message-box-container">
@@ -39,42 +39,45 @@
 				<div class="return-button" onclick="toggleMessageBox(null, null)">
 				</div>
 			</div>
-<!-- 			<div class="menu-items-holder menu-items-holder-top"> -->
-<!-- 				<ul class="menu-items menu-top"> -->
-<!-- 					<li class="menu-item" id="about-us" -->
-<!-- 						data-href="{% url 'artwork:aboutus' %}"><img -->
-<!-- 						src="static/img/icons/about.svg"><span>About Us</span></li> -->
-<!-- 					<li class="menu-item" id="gallery" -->
-<!-- 						data-href="{% url 'artwork:gallery' %}"><img -->
-<!-- 						src="static/img/icons/art-gallery.svg"><span>Gallery</span></li> -->
-<!-- 					<li class="menu-item" id="contact-us" -->
-<!-- 						data-href="{% url 'artwork:contactus' %}"><img -->
-<!-- 						src="static/img/icons/contact.svg"><span>Contact Us</span></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
+			<!-- 			<div class="menu-items-holder menu-items-holder-top"> -->
+			<!-- 				<ul class="menu-items menu-top"> -->
+			<!-- 					<li class="menu-item" id="about-us" -->
+			<!-- 						data-href="{% url 'artwork:aboutus' %}"><img -->
+			<!-- 						src="static/img/icons/about.svg"><span>About Us</span></li> -->
+			<!-- 					<li class="menu-item" id="gallery" -->
+			<!-- 						data-href="{% url 'artwork:gallery' %}"><img -->
+			<!-- 						src="static/img/icons/art-gallery.svg"><span>Gallery</span></li> -->
+			<!-- 					<li class="menu-item" id="contact-us" -->
+			<!-- 						data-href="{% url 'artwork:contactus' %}"><img -->
+			<!-- 						src="static/img/icons/contact.svg"><span>Contact Us</span></li> -->
+			<!-- 				</ul> -->
+			<!-- 			</div> -->
 			<div class="menu-items-holder menu-items-holder-left">
 				<ul class="menu-items menu-top">
-					{% if user.is_authenticated and user.user_type == 1%}
+					{% if user.is_authenticated and user.user_type == 6%}
 					<li class="menu-item" id="about-us"
 						data-href="{% url 'artwork:work_lists' %}"><img
-						src="static/img/icons/document.svg"><span>Artwork List</span></li> 
-						{% endif %}
-<!-- 					<li class="menu-item" id="about-us" -->
-<!-- 						data-href="{% url 'artwork:history' %}"><img -->
-<!-- 						src="static/img/icons/history.svg"><span>History</span></li> -->
-<!-- 					<li class="menu-item" id="sign-up" -->
-<!-- 						data-href="{% url 'artwork:howtoenter' %}"><img -->
-<!-- 						src="static/img/icons/entrance.svg"><span>How to -->
-<!-- 							Enter</span></li> -->
-<!-- 					<li class="menu-item" id="sign-up" -->
-<!-- 						data-href="{% url 'artwork:rules' %}"><img -->
-<!-- 						src="static/img/icons/document.svg"><span>Rules</span></li> -->
+						src="static/img/icons/document.svg"><span>Artwork
+							List</span></li> {% endif %}
+					<!-- 					<li class="menu-item" id="about-us" -->
+					<!-- 						data-href="{% url 'artwork:history' %}"><img -->
+					<!-- 						src="static/img/icons/history.svg"><span>History</span></li> -->
+					<!-- 					<li class="menu-item" id="sign-up" -->
+					<!-- 						data-href="{% url 'artwork:howtoenter' %}"><img -->
+					<!-- 						src="static/img/icons/entrance.svg"><span>How to -->
+					<!-- 							Enter</span></li> -->
+					<!-- 					<li class="menu-item" id="sign-up" -->
+					<!-- 						data-href="{% url 'artwork:rules' %}"><img -->
+					<!-- 						src="static/img/icons/document.svg"><span>Rules</span></li> -->
+					{% if user.is_authenticated and user.user_type == 1%}
 					<li class="menu-item" id="sign-up"
 						data-href="{% url 'artwork:signup_page' %}"><img
-						src="static/img/icons/trophy.svg"><span>Sign Up</span></li>
-<!-- 					<li class="menu-item" id="contact-us" -->
-<!-- 						data-href="{% url 'artwork:faq' %}"><img -->
-<!-- 						src="static/img/icons/information.svg"><span>FAQ</span></li> -->
+						src="static/img/icons/trophy.svg"><span>Submit
+							Artwork </span></li> {% endif %}
+
+					<!-- 					<li class="menu-item" id="contact-us" -->
+					<!-- 						data-href="{% url 'artwork:faq' %}"><img -->
+					<!-- 						src="static/img/icons/information.svg"><span>FAQ</span></li> -->
 				</ul>
 				{% if user.is_authenticated %}
 				<div class="form-section">

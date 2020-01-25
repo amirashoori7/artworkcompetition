@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-from .models import ProjectUser
+from .models_account import ProjectUser
 from .forms_account import UserRegistrationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -16,11 +16,11 @@ def registration(request):
         if form.is_valid():
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=password)
-#             login(request, user)
-#             return redirect('home')
+            username = form.username
+            password = form.password
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('home')
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:

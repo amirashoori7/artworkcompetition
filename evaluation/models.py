@@ -1,5 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
-from account.models import ProjectUser
+from account.models_account import ProjectUser
 from django.db import models
 
 WEIGHT = (

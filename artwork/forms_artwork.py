@@ -1,6 +1,6 @@
 from django import forms
 from .models_artwork import Artwork
-from account.models import ProjectUser
+from account.models_account import ProjectUser
 
 class EntryForm(forms.ModelForm):
     class Meta:

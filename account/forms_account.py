@@ -1,6 +1,6 @@
-from . models import ProjectUser
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from account.models_account import ProjectUser
 
 class LoginForm(forms.Form):
     username = forms.CharField()

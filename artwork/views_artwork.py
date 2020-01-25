@@ -11,7 +11,8 @@ import json
 from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from account.models import ProjectUser
+from account.models_account import ProjectUser
+from oauthlib.oauth2.rfc6749.endpoints.base import catch_errors_and_unavailability
 
 
 def index(request):
@@ -117,10 +118,12 @@ def entry_form(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif userModel.user_type == 1:
-        artwork_model = Artwork.objects.get(owner=request.user)
-        artwork_form = EntryForm(instance=artwork_model)
-    else:
-        artwork_form = EntryForm()
+#         artwork_model = Artwork.objects.get(owner=request.user)
+        try:
+            artwork_model = get_object_or_404(Artwork, owner=userModel)
+            artwork_form = EntryForm(instance=artwork_model)
+        except:
+            artwork_form = EntryForm()
     context = {'form': artwork_form, 'schools': schools, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
     
