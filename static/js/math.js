@@ -13,8 +13,6 @@ function windowLayoutFitSize() {
 }
 
 function populateErrorMessageFields(errorString){
-	console.log(JSON.parse(errorString))
-// $("<small/>").addClass("text-danger").text("his").html()
 	Object.keys(JSON.parse(errorString))
 			.forEach(
 					function(key, value) {
