@@ -12,4 +12,4 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = ProjectUser
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1')

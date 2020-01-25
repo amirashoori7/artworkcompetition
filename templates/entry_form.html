@@ -104,11 +104,8 @@
 		})
 	}
 </script>
-<div class="page-title">
-	<h2>Entry Form</h2>
-</div>
 <div class="row">
-	<div class="col-md-10 offset-md-1">
+	<div class="col-md-12">
 		<form method="post" id="entry-form-id" action="/"
 			class="needs-validation form-general-style"
 			enctype="multipart/form-data" novalidate>
@@ -164,13 +161,15 @@
 						<lable for="email">Email</lable>
 						<input type="email" class="form-control form-input" id="email"
 							name="email" placeholder="you@example.com"
-							value="{{ form.instance.email|default_if_none:'you@example.com' }}" required>
+							value="{{ form.instance.email|default_if_none:'you@example.com' }}"
+							required>
 					</div>
 					<div class="col-md-6">
 						<lable for="cellphone">Cellphone</lable>
 						<input type="tel" class="form-control form-input" id="cellphone"
 							name="cellphone" placeholder="012 345 67 89"
-							value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}" required>
+							value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}"
+							required>
 					</div>
 				</div>
 			</div>
@@ -249,6 +248,7 @@
 							{% for sch in schools %}
 							<option value="{{ sch.id }}" data-state="{{ sch.province }}"
 								class="school-option-class">{{ sch.name }} {% endfor %}
+
 
 							
 						</select>
