@@ -118,7 +118,6 @@ def entry_form(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif userModel.user_type == 1:
-#         artwork_model = Artwork.objects.get(owner=request.user)
         try:
             artwork_model = get_object_or_404(Artwork, owner=userModel)
             artwork_form = EntryForm(instance=artwork_model)
