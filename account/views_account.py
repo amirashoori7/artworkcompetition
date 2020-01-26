@@ -16,11 +16,11 @@ def registration(request):
         if form.is_valid():
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
-            username = form.username
-            password = form.password
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('home')
+#             username = form.username
+#             password = form.password
+#             user = authenticate(username=username, password=password)
+#             login(request, user)
+#             return redirect('home')
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:

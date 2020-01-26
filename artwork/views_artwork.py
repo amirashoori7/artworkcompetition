@@ -12,7 +12,6 @@ from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
-from oauthlib.oauth2.rfc6749.endpoints.base import catch_errors_and_unavailability
 
 
 def index(request):
