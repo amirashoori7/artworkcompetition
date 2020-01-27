@@ -94,6 +94,9 @@
 						if (response.successResult != null) {
 							$("#id").val(response.id)
 							toggleMessageBox(response.successResult, false)
+							loadContent($("<li/>").attr({
+								"data-href" : "/signup_page/"
+							}))
 						} else if (response.errorResult != null) {
 							$("#id").val(0)
 							var errorList = $("<ul/>");
