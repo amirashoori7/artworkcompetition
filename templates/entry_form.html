@@ -220,7 +220,7 @@
 
 			<div class="form-section" data-title="My School">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<label for="states-dropdown">Province of School (Estate)</label>
 						<select class="form-control form-input" id="states-dropdown"
 							onchange="filterSchool($(this).val())">
@@ -236,7 +236,23 @@
 							<option value="8">Western Cape</option>
 						</select>
 					</div>
-					<div class="col-md-6" id="school-div-container">
+					<div class="col-md-4">
+						<label for="states-dropdown">Town</label>
+						<select class="form-control form-input" id="states-dropdown"
+							onchange="filterSchool($(this).val())">
+							<option value="" selected="selected" disabled="disabled">Select</option>
+							<option value="0">Eastern Cape</option>
+							<option value="1">Free State</option>
+							<option value="2">Gauteng</option>
+							<option value="3">KwaZulu-Natal</option>
+							<option value="4">Limpopo</option>
+							<option value="5">Mpumalanga</option>
+							<option value="6">North West</option>
+							<option value="7">Northern Cape</option>
+							<option value="8">Western Cape</option>
+						</select>
+					</div>
+					<div class="col-md-4" id="school-div-container">
 						<label for="school-dropdown">School</label>
 						<input type="hidden" name="school" id="school"
 							value="{{ form.instance.school|default_if_none:'' }}" required>
