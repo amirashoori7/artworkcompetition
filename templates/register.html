@@ -6,13 +6,13 @@
 			<div class="col-md-6">
 				<label for="username">Username</label> <input type="text"
 					class="form-control form-input" id="username" autocomplete="off"
-					placeholder="Pick a unique username" name="username" value=""
+					placeholder="Pick a unique username" name="username" value="test"
 					required> <input type="hidden" name="is_valid" value="True">
 			</div>
 			<div class="col-md-6">
 				<label for="email">Email</label> <input type="email"
 					autocomplete="off" placeholder="i.e. name@mail.com"
-					class="form-control form-input" id="email" name="email" value=""
+					class="form-control form-input" id="email" name="email" value="test@email.com"
 					required>
 			</div>
 		</div>
@@ -20,28 +20,28 @@
 			<div class="col-md-6">
 				<label for="first_name">Firstname</label> <input type="text"
 					placeholder="i.e. edward, rose" class="form-control form-input"
-					id="first_name" autocomplete="off" name="first_name" value=""
+					id="first_name" autocomplete="off" name="first_name" value="test name"
 					required>
 			</div>
 			<div class="col-md-6">
 				<label for="last_name">Last Name</label> <input type="text"
 					autocomplete="off" placeholder="i.e. scholtz, calitz"
 					class="form-control form-input" id="last_name" name="last_name"
-					value="" required>
+					value="test surname" required>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<label for="password1">Password</label><br />
-				<small class="text-success">At least 8 characters, including
+				<label for="password1">Password</label>
+				<small class="text-warning">&nbsp;At least 8 characters, including
 					text and numbers</small> <input type="password"
 					class="form-control form-input" autocomplete="off" id="password1"
-					name="password1" value="" required>
+					name="password1" value="abcdefg12345" required>
 			</div>
 			<div class="col-md-6">
 				<label for="password2">Repeat Password</label><br /> <input
 					type="password" class="form-control form-input" autocomplete="off"
-					id="password2" name="password2" value="" required>
+					id="password2" name="password2" value="abcdefg12345" required>
 			</div>
 		</div>
 		{% csrf_token %}
