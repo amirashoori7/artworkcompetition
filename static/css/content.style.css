@@ -12,10 +12,9 @@
 }
 
 .page-title h2 {
-	padding-bottom: 11px;
-	font-size: 44px;
-	line-height: 88px;
-	display: inline-block;
+    font-size: 33px;
+    line-height: 66px;
+    display: inline-block;
 }
 
 p.tab {

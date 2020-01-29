@@ -104,6 +104,16 @@
 		})
 	}
 </script>
+<style>
+.entry-form-warning {
+	margin: 11px;
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
+<div class="row entry-form-warning">
+	<div class="col-md-12"><h4><strong style="font-style: italic;">Entry Status:</strong> {{ form.instance.get_status_display | default_if_none:'Submission is Not Available'}}</h4><br></div>
+</div>
 <div class="row">
 	<div class="col-md-12">
 		<form method="post" id="entry-form-id" action="/"
@@ -117,56 +127,54 @@
 			<div class="form-section" data-title="Personal Information">
 				<div class="row">
 					<div class="col-md-6">
-						<label for="username">Username</label>
-						<input type="text" class="form-control form-input" id="username"
-							name="username"
+						<label for="username">Username</label> <input type="text"
+							class="form-control form-input" id="username" name="username"
 							value="{{ user.username }}" disabled="disabled">
 					</div>
-					
+
 					<div class="col-md-6">
-						<label for="email">Email</label>
-						<input type="text" class="form-control form-input" id="email"
-							name="email" value="{{ user.email }}" disabled="disabled">
+						<label for="email">Email</label> <input type="text"
+							class="form-control form-input" id="email" name="email"
+							value="{{ user.email }}" disabled="disabled">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">
-						<label for="firstname">First Name</label>
-						<input type="text" class="form-control form-input" id="firstname"
-							name="firstname" placeholder="i.e. John   i.e. Amy"
-							value="{{ user.first_name}}" required>
+						<label for="firstname">First Name</label> <input type="text"
+							class="form-control form-input" id="firstname" name="firstname"
+							placeholder="i.e. John   i.e. Amy" value="{{ user.first_name}}"
+							required>
 					</div>
 					<div class="col-md-4">
-						<label for="surname">Surname</label>
-						<input type="text" class="form-control form-input" id="surname"
-							name="surname" placeholder="i.e. Scholtz"
-							value="{{ user.last_name }}" required>
+						<label for="surname">Surname</label> <input type="text"
+							class="form-control form-input" id="surname" name="surname"
+							placeholder="i.e. Scholtz" value="{{ user.last_name }}" required>
 					</div>
 					<div class="col-md-4">
-						<label for="cellphone">Cellphone</label>
-						<input type="tel" class="form-control form-input" id="cellphone"
-							name="cellphone" placeholder="012 345 67 89"
+						<label for="cellphone">Cellphone</label> <input type="tel"
+							class="form-control form-input" id="cellphone" name="cellphone"
+							placeholder="012 345 67 89"
 							value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}"
 							required>
 					</div>
 				</div>
 				<div class="row" id="dob-row">
 					<div class="col-md-4">
-						<label for="yearDropDown">Date of Birth</label>
-						<input type="hidden" class="form-control form-input" id="dob"
+						<label for="yearDropDown">Date of Birth</label> <input
+							type="hidden" class="form-control form-input" id="dob"
 							placeholder="" name="dob"
 							value="{{ form.instance.dob|default_if_none:'' }}" required>
 						<select id="yearDropDown" class="form-control form-input">
 						</select>
 					</div>
 					<div class="col-md-4">
-						<label for="monthDropDown">&nbsp;</label>
-						<select id="monthDropDown" class="form-control form-input">
+						<label for="monthDropDown">&nbsp;</label> <select
+							id="monthDropDown" class="form-control form-input">
 						</select>
 					</div>
 					<div class="col-md-4">
-						<label for="dayDropDown">&nbsp;</label>
-						<select id="dayDropDown" class="form-control form-input">
+						<label for="dayDropDown">&nbsp;</label> <select id="dayDropDown"
+							class="form-control form-input">
 						</select>
 					</div>
 				</div>
@@ -184,8 +192,8 @@
 			<div class="form-section" data-title="Parent (Guardian) Information">
 				<div class="row">
 					<div class="col-md-6">
-						<label for="parentname">Parent (Guardian) Full-Name</label>
-						<input type="text" class="form-control form-input" id="parentname"
+						<label for="parentname">Parent (Guardian) Full-Name</label> <input
+							type="text" class="form-control form-input" id="parentname"
 							name="parentname" placeholder="i.e. Jack Scholtz"
 							value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}"
 							required>
@@ -221,8 +229,8 @@
 			<div class="form-section" data-title="My School">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="states-dropdown">Province of School (Estate)</label>
-						<select class="form-control form-input" id="states-dropdown"
+						<label for="states-dropdown">Province of School (Estate)</label> <select
+							class="form-control form-input" id="states-dropdown"
 							onchange="filterSchool($(this).val())">
 							<option value="" selected="selected" disabled="disabled">Select</option>
 							<option value="0">Eastern Cape</option>
@@ -237,8 +245,8 @@
 						</select>
 					</div>
 					<div class="col-md-4">
-						<label for="states-dropdown">Town</label>
-						<select class="form-control form-input" id="states-dropdown"
+						<label for="states-dropdown">Town</label> <select
+							class="form-control form-input" id="states-dropdown"
 							onchange="filterSchool($(this).val())">
 							<option value="" selected="selected" disabled="disabled">Select</option>
 							<option value="0">Eastern Cape</option>
@@ -253,8 +261,8 @@
 						</select>
 					</div>
 					<div class="col-md-4" id="school-div-container">
-						<label for="school-dropdown">School</label>
-						<input type="hidden" name="school" id="school"
+						<label for="school-dropdown">School</label> <input type="hidden"
+							name="school" id="school"
 							value="{{ form.instance.school|default_if_none:'' }}" required>
 						<select class="form-control form-input" id="school-dropdown"
 							onchange="$('#school').val($('#school-dropdown').val())">
@@ -262,6 +270,9 @@
 							{% for sch in schools %}
 							<option value="{{ sch.id }}" data-state="{{ sch.province }}"
 								class="school-option-class">{{ sch.name }} {% endfor %}
+
+
+							
 						</select>
 					</div>
 				</div>
@@ -279,38 +290,37 @@
 			<div class="form-section" data-title="My Grade">
 				<div class="row">
 					<div class="col-md-2">
-						<label for="learnergrade7">Grade 7</label>
-						<input type="hidden" class="form-control form-input"
-							id="currentlearnergrade"
+						<label for="learnergrade7">Grade 7</label> <input type="hidden"
+							class="form-control form-input" id="currentlearnergrade"
 							value="{{ form.instance.learnergrade|default_if_none:'' }}"
 							required> <input type="radio" checked
 							class="form-control form-input" id="learnergrade"
 							name="learnergrade" value="Grade 7">
 					</div>
 					<div class="col-md-2">
-						<label for="learnergrade8">Grade 8</label>
-						<input type="radio" class="form-control form-input"
-							id="learnergrade8" name="learnergrade" value="Grade 8">
+						<label for="learnergrade8">Grade 8</label> <input type="radio"
+							class="form-control form-input" id="learnergrade8"
+							name="learnergrade" value="Grade 8">
 					</div>
 					<div class="col-md-2">
-						<label for="learnergrade9">Grade 9</label>
-						<input type="radio" class="form-control form-input"
-							id="learnergrade9" name="learnergrade" value="Grade 9">
+						<label for="learnergrade9">Grade 9</label> <input type="radio"
+							class="form-control form-input" id="learnergrade9"
+							name="learnergrade" value="Grade 9">
 					</div>
 					<div class="col-md-2">
-						<label for="learnergrade10">Grade 10</label>
-						<input type="radio" class="form-control form-input"
-							id="learnergrade10" name="learnergrade" value="Grade 10">
+						<label for="learnergrade10">Grade 10</label> <input type="radio"
+							class="form-control form-input" id="learnergrade10"
+							name="learnergrade" value="Grade 10">
 					</div>
 					<div class="col-md-2">
-						<label for="learnergrade11">Grade 11</label>
-						<input type="radio" class="form-control form-input"
-							id="learnergrade11" name="learnergrade" value="Grade 11">
+						<label for="learnergrade11">Grade 11</label> <input type="radio"
+							class="form-control form-input" id="learnergrade11"
+							name="learnergrade" value="Grade 11">
 					</div>
 					<div class="col-md-2">
-						<label for="learnergrade12">Grade 12</label>
-						<input type="radio" class="form-control form-input"
-							id="learnergrade12" name="learnergrade" value="Grade 12">
+						<label for="learnergrade12">Grade 12</label> <input type="radio"
+							class="form-control form-input" id="learnergrade12"
+							name="learnergrade" value="Grade 12">
 					</div>
 				</div>
 			</div>
@@ -328,25 +338,23 @@
 			<div class="form-section" data-title="My Teacher">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="teachername">Teacher Name</label>
-						<input type="text" class="form-control form-input"
-							id="teachername" name="teachername"
-							placeholder="i.e. Edvard Harry"
+						<label for="teachername">Teacher Name</label> <input type="text"
+							class="form-control form-input" id="teachername"
+							name="teachername" placeholder="i.e. Edvard Harry"
 							value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
 							required>
 					</div>
 					<div class="col-md-4">
-						<label for="teacheremail">Teacher Email</label>
-						<input type="email" class="form-control form-input"
-							id="teacheremail" name="teacheremail"
-							placeholder="you@example.com"
+						<label for="teacheremail">Teacher Email</label> <input
+							type="email" class="form-control form-input" id="teacheremail"
+							name="teacheremail" placeholder="you@example.com"
 							value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
 							required>
 					</div>
 					<div class="col-md-4">
-						<label for="teacherphone">Teacher Phone</label>
-						<input type="tel" class="form-control form-input"
-							id="teacherphone" name="teacherphone" placeholder="012 345 67 89"
+						<label for="teacherphone">Teacher Phone</label> <input type="tel"
+							class="form-control form-input" id="teacherphone"
+							name="teacherphone" placeholder="012 345 67 89"
 							value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
 							required>
 					</div>
@@ -366,9 +374,8 @@
 			<div class="form-section" data-title="Upload my artwork">
 				<div class="row">
 					<div class="col-md-12">
-						<label for="surname">Work Title</label>
-						<input type="text" class="form-control form-input" id="worktitle"
-							name="worktitle"
+						<label for="surname">Work Title</label> <input type="text"
+							class="form-control form-input" id="worktitle" name="worktitle"
 							placeholder="I would like to call my artwork (Max 10 words)"
 							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
 					</div>
@@ -383,14 +390,16 @@
 					</div>
 					<div class="col-md-2" id="">Horizontal</div>
 					<div class="col-md-6" id="">
-						<label for="workfile">Upload Work File</label>
-						<input type="file" class="form-control form-input" id="workfile"
-							name="workfile" placeholder="" value="Browse"
+						<label for="workfile">Upload Work File</label> <input type="file"
+							class="form-control form-input" id="workfile" name="workfile"
+							placeholder="" value="Browse"
 							value="{{ form.instance.workfile|default_if_none:'' }}"
 							accept="image/*" required>
 					</div>
 					<div class="col-md-12">
-						<div id="main-cropper"><img src="{{ form.instance.workfileCropped }}"></div>
+						<div id="main-cropper">
+							<img src="{{ form.instance.workfileCropped }}">
+						</div>
 						<div id="iconCropDiv">
 							<img id="croppedImage" src="" alt="" /> <input type="hidden"
 								class="form-control form-input" id="workfileCropped"
@@ -417,16 +426,16 @@
 				<div class="row">
 					<div class="col-md-6">
 						<label for="question1"> <strong>Question 1: </strong>What
-						Mathematics did you use in your artwork? (Explain your answer)</label>
+							Mathematics did you use in your artwork? (Explain your answer)
+						</label>
 						<textarea class="form-control form-input"
 							placeholder="Explain it in 50-100 words" id="question1"
 							name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
 					</div>
 					<div class="col-md-6">
-						<label for="formulafile">Upload Mathematics Image</label>
-						<input type="file" class="form-control form-input"
-							id="workformulafile" name="workformulafile" placeholder=""
-							value="Browse"
+						<label for="formulafile">Upload Mathematics Image</label> <input
+							type="file" class="form-control form-input" id="workformulafile"
+							name="workformulafile" placeholder="" value="Browse"
 							value="{{ form.instance.workformulafile|default_if_none:'' }}"
 							accept="image/*" required>
 					</div>
@@ -434,23 +443,33 @@
 				<div class="row">
 					<div class="col-md-6">
 						<label for="question2"> <strong>Question 2:</strong> How
-						creatively you connected the Mathematics with "My Universe"
-						to make your artwork? (Explain your answer)</label>
+							creatively you connected the Mathematics with "My Universe" to
+							make your artwork? (Explain your answer)
+						</label>
 						<textarea class="form-control form-input" id="question2"
 							placeholder="Explain it in 50-100 words" name="question2"
 							rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
 					</div>
 					<div class="col-md-6">
 						<label for="question3"> <strong>Question 3:</strong> Do
-						you think creativity could be used to teach Mathematics? (Explain your answer)</label>
+							you think creativity could be used to teach Mathematics? (Explain
+							your answer)
+						</label>
 						<textarea class="form-control form-input" id="question3"
 							placeholder="Explain it in 50-100 words" name="question3"
 							rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 text-center">
-				<button class="action-button" type="submit" id="buttonSubmit">Submit</button>
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<button class="action-button" type="submit"
+						id="buttonSaveAndContinue">Save & Continue Later</button>
+				</div>
+				<div class="col-md-6 text-center">
+					<button class="action-button" type="submit" disabled="disabled"
+						id="buttonSubmit">Submit</button>
+				</div>
 			</div>
 		</form>
 	</div>

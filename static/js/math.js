@@ -26,6 +26,13 @@ function populateErrorMessageFields(errorString) {
 	})
 }
 
+function populateWarningMessageField(fieldId, text) {
+	var errorSection = $("<small/>").addClass("text-warning")
+	$("<br/>").appendTo(errorSection)
+	errorSection.append(text)
+	$("#" + fieldId).parent().find("label").after(errorSection)
+}
+
 function loadContent(liItem) {
 	$("div.page-content").hide()
 	var url = ""
@@ -175,12 +182,6 @@ function showDialogPage(element, url) {
 			function(response) {
 				openFullScreenDiv("<div class='dialog-popup-content'>"
 						+ response + "</div>")
-				// $(this).append($("<div/>").addClass("close-button").on("click",function(){
-				// TweenLite.to(".dialog-popup-content", 1, {right: "100%",
-				// left: "-100%",
-				// transformOrigin: "right", defaultEase: Power4.easeOut})
-				// }))
-				// $(this).find(".close-button").load('static/img/icons/close.svg')
 			})
 	return -1
 }
@@ -207,4 +208,20 @@ function openFullScreenDiv(htmlContenet) {
 		bottom : 0,
 		transformOrigin : "center"
 	})
+}
+
+function getCookie(name) {
+	var cookieValue = null;
+	if (document.cookie && document.cookie != '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = $.trim(cookies[i]);
+			if (cookie.substring(0, name.length + 1) == (name + '=')) {
+				cookieValue = decodeURIComponent(cookie
+						.substring(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
 }

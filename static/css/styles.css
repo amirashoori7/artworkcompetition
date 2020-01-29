@@ -177,12 +177,9 @@ p {
 	right: 0;
 	bottom: 0;
 	top: 0;
-	/* background: #174c66; */
 	border: none;
 	z-index: 1;
 	overflow: hidden;
-	background-image: radial-gradient(1600px at 70% 120%, rgb(209, 236, 243)
-		10%, #feffff 100%);
 }
 
 #main-frame {
@@ -197,7 +194,7 @@ p {
 .page-content {
 	overflow: hidden;
 	color: black;
-	border-radius: 0 22px 0 0;
+	border-radius: 0 22px 22px 0; 
 	position: fixed;
 	left: 0;
 	margin-left: 22px;
@@ -205,8 +202,9 @@ p {
 	box-shadow: 11px 11px 11px -11px #aeb5d1, inset -11px 11px 11px -11px
 		#aeb5d1;
 	padding: 22px;
-	height: 89%;
-	top: calc(11% + 22px);
+	/* height: 89%; */
+	top: 22px;
+	bottom: 22px;
 }
 
 /* .page-content-area { */
