@@ -26,6 +26,7 @@ function loadContent(liItem) {
 	$("div#page-content").hide()
 	var url = ""
 		$(".menu-item").removeClass("active")
+	$(".background-image").css("background-position",Math.floor(Math.random() * 333)+"px "+Math.floor(Math.random() * 333)+"px")
 	$(liItem).addClass("active")
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
