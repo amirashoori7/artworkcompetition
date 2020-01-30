@@ -19,6 +19,10 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        print("save initiation >>> ", self)
+        super(School, self).save(*args, **kwargs)
 
 def path_and_rename(path):
     def wrapper(instance, filename):

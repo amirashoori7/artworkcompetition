@@ -3,3 +3,5 @@ connect to psql database and then:
 COPY tablename (field1, field2....) FROM '/pathto/file.csv' DELIMITER ',' CSV HEADER;
 
 COPY artwork_school(name, region, province) FROM '/home/aj/National Schools Database.csv' DELIMITER ',' CSV HEADER;
+
+COPY artwork_school(name, region, province) FROM 'C:\Users\s213457989\Documents\GitHub\artworkcompetition\datatoimport' DELIMITER ',' CSV HEADER;
