@@ -12,3 +12,8 @@ class ProjectUser(AbstractUser):
     )
 
     user_type = models.PositiveSmallIntegerField(null=True, choices=USER_TYPE_CHOICES, default=1)
+    dob = models.CharField(blank=True, null=True, max_length=12)
+    cellphone = models.CharField(blank=True, null=True, max_length=100)
+    parentname = models.CharField(blank=True, null=True, max_length=200)
+    parentphone = models.CharField(blank=True, null=True, max_length=100)
+    parentemail = models.CharField(blank=True, null=True, max_length=100)
