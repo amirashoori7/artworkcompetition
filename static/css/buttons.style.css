@@ -17,6 +17,10 @@
 	transition: background .2s ease-in, color .2s ease-in;
 }
 
+.action-button.disabled, .action-button.disabled:hover{
+	background: linear-gradient(0deg, #7f8fa0, #8187a5);
+}
+
 .action-button.green {
 	background: linear-gradient(0deg, #098c1f, #23af0a);
 	color: rgb(255, 255, 255);

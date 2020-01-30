@@ -1,85 +1,69 @@
 <!-- Multi step form -->
 <script>
-	$(document)
-			.ready(
-					function() {
-						$
-								.ajax({
-									url : "{% url 'artwork:entry_form' %}",
-									success : function(response) {
-										$("#artwork-submit-form-holder-id")
-												.html(response)
-										$("#registrationForm")
-												.load(
-														'/account/register/',
-														function() {
-															$("#register-btn")
-																	.on(
-																			"click",
-																			function(
-																					ev) {
-																				ev
-																						.preventDefault()
-																				submitRegistryForm()
-																			})
-														})
-										$('#entry-form-id').submit(
-												function(event) {
-													event.preventDefault()
-													submitEntryForm()
-												})
-// 										$("input")
-// 												.each(
-// 														function() {
-// 															if ($(this).val().length == 0) {
-// 																console.log($(this).attr("id"))
-// 																populateWarningMessageField(
-// 																		$(this)
-// 																				.attr(
-// 																						"id"),
-// 																		"To enter the competition, this field must be filled.")
-// 															}
-// 														})
-										var maxYear = 2008, minYear = 2003
-										var month = [ 'January', 'February',
-												'March', 'April', 'May',
-												'June', 'July', 'August',
-												'September', 'October',
-												'November', 'December' ]
-										$("<option/>").val("").text("Year")
-												.prop("disabled", true).prop(
-														"selected", true)
-												.appendTo("#yearDropDown")
-										while (maxYear >= minYear) {
-											$("<option/>").val(maxYear).text(
-													maxYear).appendTo(
-													"#yearDropDown")
-											maxYear = maxYear - 1
-										}
-										$("<option/>").val("").text("Day")
-												.prop("disabled", true).prop(
-														"selected", true)
-												.appendTo("#dayDropDown")
-										for (var i = 1; i < 32; i++)
-											$("<option/>").val(i).text(i)
-													.appendTo("#dayDropDown")
-										$("<option/>").val("").text("Month")
-												.prop("disabled", true).prop(
-														"selected", true)
-												.appendTo("#monthDropDown")
-										for (var i = 1; i < 13; i++)
-											$("<option/>").val(i).text(
-													month[i - 1]).appendTo(
-													"#monthDropDown")
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "{% url 'artwork:entry_form' %}",
+					success : function(response) {
+						$("#artwork-submit-form-holder-id").html(response)
+						$("#registrationForm").load(
+								'/account/register/',
+								function() {
+									$("#register-btn").on("click",
+											function(ev) {
+												ev.preventDefault()
+												submitRegistryForm()
+											})
+								})
+						$('#entry-form-id').submit(function(event) {
+							event.preventDefault()
+							submitEntryForm()
+						})
+						// 										$("input")
+						// 												.each(
+						// 														function() {
+						// 															if ($(this).val().length == 0) {
+						// 																console.log($(this).attr("id"))
+						// 																populateWarningMessageField(
+						// 																		$(this)
+						// 																				.attr(
+						// 																						"id"),
+						// 																		"To enter the competition, this field must be filled.")
+						// 															}
+						// 														})
+						var maxYear = 2008, minYear = 2003
+						var month = [ 'January', 'February', 'March', 'April',
+								'May', 'June', 'July', 'August', 'September',
+								'October', 'November', 'December' ]
+						$("<option/>").val("").text("Year").prop("disabled",
+								true).prop("selected", true).appendTo(
+								"#yearDropDown")
+						while (maxYear >= minYear) {
+							$("<option/>").val(maxYear).text(maxYear).appendTo(
+									"#yearDropDown")
+							maxYear = maxYear - 1
+						}
+						$("<option/>").val("").text("Day").prop("disabled",
+								true).prop("selected", true).appendTo(
+								"#dayDropDown")
+						for (var i = 1; i < 32; i++)
+							$("<option/>").val(i).text(i).appendTo(
+									"#dayDropDown")
+						$("<option/>").val("").text("Month").prop("disabled",
+								true).prop("selected", true).appendTo(
+								"#monthDropDown")
+						for (var i = 1; i < 13; i++)
+							$("<option/>").val(i).text(month[i - 1]).appendTo(
+									"#monthDropDown")
 
-										$("#school-div-container").fadeOut()
-										$(".school-option-class").hide()
-									},
-									error : function(request, status, error) {
-										console.log(request.responseText);
-									}
-								});
-					})
+						$("#school-div-container").fadeOut()
+						$(".school-option-class").hide()
+					},
+					error : function(request, status, error) {
+						console.log(request.responseText);
+					}
+				});
+			})
 
 	function submitRegistryForm() {
 		var form = $('#registry-form')[0];
@@ -171,11 +155,12 @@
 						if (response.successResult != null) {
 							$("#id").val(response.id)
 							toggleMessageBox(response.successResult, false)
-						} else if (response.errorResultUser != null
-								|| response.errorResultWork != null) {
-							$("#id").val(0)
+						}
+						if (response.errorResultUser != null)
 							populateErrorMessageFields(response.errorResultUser)
+						if (response.errorResultWork != null) {
 							populateErrorMessageFields(response.errorResultWork)
+							$("#id").val(0)
 						}
 					},
 					error : function(xhr, errmsg, err) {

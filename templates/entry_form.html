@@ -5,14 +5,14 @@
 	var Cropper = window.Cropper;
 	var aspectRatio = 1.414 //A4 paper
 
-	function createCroppie() {
+	function createCroppie(w,h) {
 		$("#main-cropper")
 				.append(
 						"<span>Use the scroll wheel of your mouse to resize the image</span>");
 		var basic = $('#main-cropper').croppie({
 			viewport : {
-				width : $("#main-cropper").width() * 6 / 7,
-				height : $("#main-cropper").width() * 6 / 14
+				width : $("#main-cropper").width() * w / h,
+				height : $("#main-cropper").width() * w / h
 			},
 			boundary : {
 				width : $("#main-cropper").width(),
@@ -20,10 +20,6 @@
 			},
 			showZoomer : true
 		});
-		console.log($("#entry-form-id").width())
-		// 		basic.croppie('bind', {
-		// 			url : 'images/NMMU_logo.png'
-		// 		});
 	}
 
 	function readFile(input) {
@@ -131,7 +127,6 @@
 							class="form-control form-input" id="username" name="username"
 							value="{{ user.username }}" disabled="disabled">
 					</div>
-
 					<div class="col-md-6">
 						<label for="email">Email</label> <input type="text"
 							class="form-control form-input" id="email" name="email"
@@ -382,14 +377,14 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-2" id="h-v-label">Vertical</div>
-					<div class="col-md-2" id="">
-						<label class="switch"> <input type="checkbox" checked>
-							<span class="slider round"></span>
-						</label>
-					</div>
-					<div class="col-md-2" id="">Horizontal</div>
-					<div class="col-md-6" id="">
+<!-- 					<div class="col-md-2" id="h-v-label">Vertical</div> -->
+<!-- 					<div class="col-md-2" id=""> -->
+<!-- 						<label class="switch"> <input type="checkbox" checked> -->
+<!-- 							<span class="slider round"></span> -->
+<!-- 						</label> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-2" id="">Horizontal</div> -->
+					<div class="col-md-12" id="">
 						<label for="workfile">Upload Work File</label> <input type="file"
 							class="form-control form-input" id="workfile" name="workfile"
 							placeholder="" value="Browse"
@@ -464,11 +459,11 @@
 			<div class="row">
 				<div class="col-md-6 text-center">
 					<button class="action-button" type="submit"
-						id="buttonSaveAndContinue">Save & Continue Later</button>
+						id="buttonSubmit">Save & Continue Later</button>
 				</div>
 				<div class="col-md-6 text-center">
-					<button class="action-button" type="submit" disabled="disabled"
-						id="buttonSubmit">Submit</button>
+					<button class="action-button disabled" type="button"
+						onclick="toggleMessageBox('Please fill all the fields first',true)">Submit</button>
 				</div>
 			</div>
 		</form>
