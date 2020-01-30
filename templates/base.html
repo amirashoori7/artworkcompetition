@@ -91,28 +91,23 @@
 		</div>
 
 		<!-- 			<div class="menu-items-holder menu-items-holder-left"> -->
-		<ul class="menu-items menu-top">
-			{% if user.is_authenticated and user.user_type == 6%}
-			<li class="menu-item" id="about-us"
-				data-href="{% url 'artwork:work_lists' %}"><img
-				src="static/img/icons/document.svg"><span>Artwork List</span></li>
-			{% endif %} {% if user.is_authenticated and user.user_type == 1%}
-			<li class="menu-item" id="sign-up"
-				data-href="{% url 'artwork:signup_page' %}"><img
-				src="static/img/icons/trophy.svg"><span>Submit Artwork
-			</span></li> {% endif %}
+<!-- 		<ul class="menu-items menu-top"> -->
+<!-- 			{% if user.is_authenticated and user.user_type == 6%} -->
+<!-- 			<li class="menu-item" id="about-us" -->
+<!-- 				data-href="{% url 'artwork:work_lists' %}"><img -->
+<!-- 				src="static/img/icons/document.svg"><span>Artwork List</span></li> -->
+<!-- 			{% endif %} {% if user.is_authenticated and user.user_type == 1%} -->
+<!-- 			<li class="menu-item" id="sign-up" -->
+<!-- 				data-href="{% url 'artwork:signup_page' %}"><img -->
+<!-- 				src="static/img/icons/trophy.svg"><span>Submit Artwork -->
+<!-- 			</span></li> {% endif %} -->
 
-		</ul>
-
-		<!-- 			</div> -->
-		<!-- 		</div> -->
-
-		{% if user.is_authenticated %}
-		<div class="form-section">
+<!-- 		</ul> -->
+{% if user.is_authenticated %}
+		<div class="form-section row">
 			<img class="user-icon" src="static/img/icons/user.svg">
 			<p style="display: inline-block;">
-			<h4 style="display: inline-block; padding-left: 22px;">{{
-				user.get_username }}</h4>
+			<h4 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}</h4>
 			</p>
 			<div class="row">
 				<div class="col-md-9">
@@ -126,6 +121,9 @@
 		{% else %}
 		<div id="login-div"></div>
 		{% endif %}
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+
 		<footer class="my-5 pt-5 text-muted text-center text-small">
 			<p class="mb-1">&copy; 2019 Company Name</p>
 			<ul class="list-inline">

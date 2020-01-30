@@ -1,64 +1,3 @@
-<style>
-.landing-page-content {
-	text-align: center;
-	border-radius: 22px;
-	padding: 22px;
-	transition: transform .8s cubic-bezier(0.99,-0.01, 0, 1.1);
-}
-
-.landing-page-content:hover {
-	transform: scale(1.1);
-}
-/* h1, h2, h3, h4, h5, h6, p { */
-/*     color: white; */
-/* } */
-.div-21 {
-	height: 100%;
-	width: 61.76%;
-}
-
-.div-21 ul, .div-5 ul {
-	list-style: none;
-	height: 100%;
-	display: table;
-	background: radial-gradient(#c0c1e8, transparent, transparent);
-}
-
-.div-21 ul li {
-	height: 33%;
-	display: table-row;
-}
-
-.div-13 {
-	left: 61.76%;
-	width: calc(100% - 61.76%);
-	height: calc(100% - 38.09%);
-	padding-top: 44px;
-}
-
-.div-8 {
-	right: 0;
-	/* 	bottom: 0; */
-	/* 	top: calc(100% - 38.09%); */
-	/* 	left: 76.46%; */
-	left: 0;
-	bottom: 22px;
-}
-
-.div-5 {
-	left: 61.76%;
-	right: 0;
-	bottom: 0;
-	width: 14.70%;
-}
-
-#home-theme-img {
-	left: 0;
-	width: 100%;
-	padding: 22px;
-}
-
-</style>
 <script>
 	var countDownDate = new Date("Mar 3, 2020 00:00:00").getTime();
 	var x = setInterval(function() {
@@ -101,14 +40,4 @@
 	</ul>
 </div>
 <script>
-	setTimeout(function() {
-		$(".landing-page-content").each(
-				function() {
-					$(this).css("line-height", $(this).height())
-					var div = $(this)
-					div.find("img").css(
-							"top", div.height() / 2 - ($("#home-theme-img").height() / 2))
-				})
-		$("#home-4ir-bot-img").css("width", $(".div-13").width() -44)
-	}, 100)
 </script>
