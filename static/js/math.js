@@ -204,16 +204,16 @@ function showDialogPage(element, url) {
 function openFullScreenDiv(htmlContenet) {
 	$(".full-screen-div").html(htmlContenet)
 	$(".full-screen-div").css("display", "block")
-	$(".full-screen-div").append(
-			$("<div/>").addClass("close-button").on("click", function() {
-				TweenLite.to(".full-screen-div", 1, {
-					scale : 0,
-					transformOrigin : "center"
-				})
-				setTimeout(function() {
-					$(".full-screen-div").html("")
-				}, 1000)
-			}))
+//	$(".full-screen-div").append(
+//			$("<div/>").addClass("close-button").on("click", function() {
+//				TweenLite.to(".full-screen-div", 1, {
+//					scale : 0,
+//					transformOrigin : "center"
+//				})
+//				setTimeout(function() {
+//					$(".full-screen-div").html("")
+//				}, 1000)
+//			}))
 	$(this).find(".close-button").load('static/img/icons/close.svg')
 	TweenLite.to(".full-screen-div", 1, {
 		scale : 1,
