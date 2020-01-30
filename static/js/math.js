@@ -4,17 +4,6 @@ var testData = [ {
 	name : "Jack",
 	surname : "smith"
 } ]
-function windowLayoutFitSize() {
-	$("#main-body").width($(window).width())
-	$("#main-body").height($(window).height())
-	var frameHeight = ($(window).height() * .9) - 22
-	var frameWidth = frameHeight + (frameHeight * 13 / 21)
-	$(".page-content").width(frameWidth)
-	// $(".page-content").height(frameHeight)
-	if ($(window).width() > $(window).height()) {
-		isHorizontal = true
-	}
-}
 
 function populateErrorMessageFields(errorString) {
 	Object.keys(JSON.parse(errorString)).forEach(function(key, value) {
@@ -34,34 +23,34 @@ function populateWarningMessageField(fieldId, text) {
 }
 
 function loadContent(liItem) {
-	$("div.page-content").hide()
+	$("div#page-content").hide()
 	var url = ""
-	$(".menu-item").removeClass("active")
+		$(".menu-item").removeClass("active")
 	$(liItem).addClass("active")
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-	$(".page-content").load(
+	$("#page-content").load(
 			url,
 			function(response) {
 				var tl = new TimelineLite({
 					paused : true,
 					ease : Power4.easeOut
 				})
-				tl.to(".page-content", 1, {
+				tl.to("#page-content", 1, {
 					rotationY : -180,
 					transformOrigin : "left"
-				}).to(".page-content", 1.2, {
+				}).to("#page-content", 1.2, {
 					left : $(".menu-items-holder-left").width(),
 					rotationY : 0,
 					transformOrigin : "left"
 				}, "-= .4")
-				$(".page-content").fadeIn()
-				$(".page-content").html("")
-				$(".page-content").prepend(
+				$("#page-content").fadeIn()
+				$("#page-content").html("")
+				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area"))
 				$(".page-content-area").html(response)
-				$(".page-content").prepend(
+				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area-bg"))
 				tl.play()
 				if ($(liItem).attr("data-bg") != null)
@@ -74,13 +63,38 @@ function loadContent(liItem) {
 	$(".main-logo").load("/static/img/logo.svg")
 }
 
-$(window).bind('resize', function() {
-	windowLayoutFitSize()
-})
-
 $(document).ready(function() {
-	windowLayoutFitSize()
-	$(".return-button").load("static/img/icons/close.svg")
+	$('img.svg').each(function() {
+	    var $img = jQuery(this);
+	    var imgID = $img.attr('id');
+	    var imgClass = $img.attr('class');
+	    var imgURL = $img.attr('src');
+
+	    jQuery.get(imgURL, function(data) {
+	        // Get the SVG tag, ignore the rest
+	        var $svg = jQuery(data).find('svg');
+
+	        // Add replaced image's ID to the new SVG
+	        if(typeof imgID !== 'undefined') {
+	            $svg = $svg.attr('id', imgID);
+	        }
+	        // Add replaced image's classes to the new SVG
+	        if(typeof imgClass !== 'undefined') {
+	            $svg = $svg.attr('class', imgClass+' replaced-svg');
+	        }
+
+	        // Remove any invalid XML tags as per http://validator.w3.org
+	        $svg = $svg.removeAttr('xmlns:a');
+
+	        // Replace image with new SVG
+	        $img.replaceWith($svg);
+
+// // Add an handler
+// jQuery('path').each(function() {
+// jQuery(this).click(function() {alert(jQuery(this).attr('id'));});
+// });
+	    })
+	})
 	$("#login-div").load('/account/login/')
 
 })
@@ -169,7 +183,7 @@ function toggleMessageBox(messageText, isError) {
 		}
 		TweenLite.to(".message-box", .6, {
 			opacity : 1,
-			width : $(".page-content").width(),
+			width : $("#page-content").width(),
 			top : 22
 		})
 		messageBoxTween.play()

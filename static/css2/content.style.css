@@ -1,0 +1,22 @@
+.page-title {
+	text-align: center;
+	padding: 33px;
+	width: 100%;
+	color: #174c66;
+}
+
+.page-title>img {
+	text-align: center;
+	padding: 33px;
+	width: 166px;
+}
+
+.page-title h2 {
+    font-size: 33px;
+    line-height: 66px;
+    display: inline-block;
+}
+
+p.tab {
+	margin-left: 44px;
+}

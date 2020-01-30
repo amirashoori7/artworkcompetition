@@ -11,8 +11,8 @@
 <title>{% block title %} {% endblock title %}</title>
 
 <link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
-<link href="static/css/styles.css" rel="stylesheet">
-<link href="static/css/nice-select.min.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
+<link href="static/css/constants.css" rel="stylesheet">
 <link href="static/css/buttons.style.css" rel="stylesheet">
 <link href="static/css/form.style.css" rel="stylesheet">
 <link href="static/css/table.style.css" rel="stylesheet">
@@ -21,37 +21,20 @@
 <script src="static/js/jquery/jquery-3.4.1.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/GSAP/TweenMax.min.js"></script>
-<script src="static/js/jquery/jquery.easing.min.js"></script>
-<script src="static/js/jquery/jquery.nice-select.min.js"></script>
 <script src="static/js/math.js"></script>
 
 </head>
 
 <body>
-	<div class="container" id="main-body">
-		<div class="full-screen-div"></div>
+	<div class="container">
 		<div class="message-box-container">
 			<div class="message-box error-message-box"></div>
 			<div class="message-box success-message-box"></div>
 			<div class="return-button" onclick="toggleMessageBox(null, null)">
 			</div>
 		</div>
-		<div class="menu-items-holder menu-items-holder-top">
-			<ul class="menu-items menu-top">
-				<!-- 					<li class="menu-item" id="about-us" -->
-				<!-- 						data-href="{% url 'artwork:aboutus' %}"><img -->
-				<!-- 						src="static/img/icons/about.svg"><span>About Us</span></li> -->
-				<!-- 					<li class="menu-item" id="gallery" -->
-				<!-- 						data-href="{% url 'artwork:gallery' %}"><img -->
-				<!-- 						src="static/img/icons/art-gallery.svg"><span>Gallery</span></li> -->
-				<li class="menu-item" id="contact-us"
-					data-href="{% url 'artwork:contactus' %}"><img
-					src="static/img/icons/contact.svg"><span>Contact Us</span></li>
-			</ul>
-		</div>
-
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#"><img src="static/img/MAlogo.png" width="33px" height="33px">Navbar</a>
+			<a class="navbar-brand" href="#"><img src="static/img/MAlogo.png"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -61,35 +44,51 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Dropdown </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div></li>
-					<li class="menu-item" id="contact-us"
-						data-href="{% url 'artwork:contactus' %}"><img
-						src="static/img/icons/contact.svg"><span>Contact Us</span></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+					<li class="menu-item active" data-href-html="home.html"
+						data-href="/home/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/home.svg"><span>Home</span></a></li>
+
+					<li class="menu-item" data-href-html="howtoenter.html"
+						data-href="/howtoenter/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/How.svg"><span>How
+								to Enter</span></a></li>
+
+					<li class="menu-item" data-href-html="rules.html"
+						data-href="/rules/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/Rules.svg"><span>Competition
+								Rules</span></a></li>
+
+					<li class="menu-item" data-href-html="faq.html" data-href="/faq/"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/FAQ.svg"><span>Frequently
+								Asked Questions</span></a></li>
+
+					<li class="menu-item" data-href-html="signup_page.html"
+						data-href="/signup_page/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/Enter.svg"><span>Enter
+								Now</span></a></li>
+
+					<li class="menu-item" data-href-html="history.html"
+						data-href="/history/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/History.svg"><span>Competition
+								History</span></a></li>
+					<li class="menu-item" data-href-html="contactus.html"
+						data-href="{% url 'artwork:contactus' %}"><a class="nav-link"
+						href="#"><img class="svg" src="static/img/icons/Contact.svg"><span>Contact
+								Us</span></a></li>
 					</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
+				<!-- 				<form class="form-inline my-2 my-lg-0"> -->
+				<!-- 					<input class="form-control mr-sm-2" type="search" -->
+				<!-- 						placeholder="Search" aria-label="Search"> -->
+				<!-- 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+				<!-- 				</form> -->
 			</div>
 		</nav>
 
-
+		<div class="row">
+			<div class="col-md-12" id="page-content">{% block content %}</div>
+		</div>
 
 		<!-- 			<div class="menu-items-holder menu-items-holder-left"> -->
 		<ul class="menu-items menu-top">
@@ -97,30 +96,15 @@
 			<li class="menu-item" id="about-us"
 				data-href="{% url 'artwork:work_lists' %}"><img
 				src="static/img/icons/document.svg"><span>Artwork List</span></li>
-			{% endif %}
-			<!-- 					<li class="menu-item" id="about-us" -->
-			<!-- 						data-href="{% url 'artwork:history' %}"><img -->
-			<!-- 						src="static/img/icons/history.svg"><span>History</span></li> -->
-			<!-- 					<li class="menu-item" id="sign-up" -->
-			<!-- 						data-href="{% url 'artwork:howtoenter' %}"><img -->
-			<!-- 						src="static/img/icons/entrance.svg"><span>How to -->
-			<!-- 							Enter</span></li> -->
-			<!-- 					<li class="menu-item" id="sign-up" -->
-			<!-- 						data-href="{% url 'artwork:rules' %}"><img -->
-			<!-- 						src="static/img/icons/document.svg"><span>Rules</span></li> -->
-			{% if user.is_authenticated and user.user_type == 1%}
+			{% endif %} {% if user.is_authenticated and user.user_type == 1%}
 			<li class="menu-item" id="sign-up"
 				data-href="{% url 'artwork:signup_page' %}"><img
 				src="static/img/icons/trophy.svg"><span>Submit Artwork
 			</span></li> {% endif %}
 
-			<!-- 					<li class="menu-item" id="contact-us" -->
-			<!-- 						data-href="{% url 'artwork:faq' %}"><img -->
-			<!-- 						src="static/img/icons/information.svg"><span>FAQ</span></li> -->
 		</ul>
 
 		<!-- 			</div> -->
-		<div class="page-content">{% block content %}</div>
 		<!-- 		</div> -->
 
 		{% if user.is_authenticated %}
