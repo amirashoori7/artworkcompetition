@@ -11,8 +11,8 @@ from django.conf import settings
 
 class School(models.Model):
     name = models.CharField(max_length=200, db_index=True)
-    address = models.CharField(max_length=500)
-    province = models.IntegerField(default=0,blank=False,null=False)
+    region = models.CharField(blank=False, null=True, max_length=200)
+    province = models.CharField(blank=False, null=True, max_length=200)
 
     class Meta:
         ordering = ('name',)
@@ -36,12 +36,7 @@ def path_and_rename(path):
 class Artwork(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
         null=True, blank=True, on_delete=models.CASCADE)
-    dob = models.CharField(blank=True, null=True, max_length=12)
-    cellphone = models.CharField(blank=True, null=True, max_length=100)
     learnergrade = models.CharField(blank=True, null=True, max_length=100)
-    parentname = models.CharField(blank=True, max_length=200)
-    parentphone = models.CharField(blank=True, null=True, max_length=100)
-    parentemail = models.CharField(blank=False, null=False, max_length=100)
     school = models.CharField(blank=False, null=False, max_length=100)
     teachername = models.CharField(blank=True, max_length=300)
     teacherphone = models.CharField(blank=False, null=True, max_length=100)
@@ -58,7 +53,7 @@ class Artwork(models.Model):
     question3 = models.TextField(blank=False)
     submitted = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=Status.statuslist(), default=-1)
-    
+
     class Meta:
         ordering = ['submitted']
 
@@ -77,7 +72,7 @@ class Artwork(models.Model):
 
     def get_artwork_status(self):
         return Status(self.status).name
-    
+
 
 '''
 #Custom Object Manager

@@ -8,8 +8,6 @@ class SchoolAdmin(admin.ModelAdmin):
 
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
-    list_display = ['worktitle',
-                     'school', 'dob',
-                      'parentname', 'teachername']
+    list_display = ['worktitle', 'school']
     list_filter = ['school', 'worktitle']
     #list_editable = ['']
