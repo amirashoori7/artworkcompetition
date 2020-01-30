@@ -5,14 +5,14 @@
 	var Cropper = window.Cropper;
 	var aspectRatio = 1.414 //A4 paper
 
-	function createCroppie(w,h) {
+	function createCroppie(w, h) {
 		$("#main-cropper")
 				.append(
 						"<span>Use the scroll wheel of your mouse to resize the image</span>");
 		var basic = $('#main-cropper').croppie({
 			viewport : {
-				width : $("#main-cropper").width() * w / h,
-				height : $("#main-cropper").width() * w / h
+				width : $("#main-cropper").width() * 6 / 7,
+				height : $("#main-cropper").width() * 6 / 14
 			},
 			boundary : {
 				width : $("#main-cropper").width(),
@@ -108,7 +108,12 @@
 }
 </style>
 <div class="row entry-form-warning">
-	<div class="col-md-12"><h4><strong style="font-style: italic;">Entry Status:</strong> {{ form.instance.get_status_display | default_if_none:'Submission is Not Available'}}</h4><br></div>
+	<div class="col-md-12">
+		<h4>
+			<strong style="font-style: italic;">Entry Status:</strong> {{ form.instance.get_status_display }}
+		</h4>
+		<br>
+	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
@@ -117,10 +122,27 @@
 			enctype="multipart/form-data" novalidate>
 			{% csrf_token %} <input type="hidden" name="id" id="id"
 				value="{{ form.instance.id|default_if_none:'' }}">
-
 			<!-- 				BIO  -->
-
-			<div class="form-section" data-title="Personal Information">
+			<div class="row">
+				<div class="col-md-12">
+					<a data-toggle="collapse" href="#profile-section"
+						aria-expanded="false">My Profile</a>
+				</div>
+			</div>
+			<div class="form-section collapse" id="profile-section"
+				data-title="Personal Information">
+				<div class="row ">
+					<div class="col-md-6">
+						<label for="username">Username</label> <input type="text"
+							class="form-control form-input" id="username" name="username"
+							value="{{ user.username }}" disabled="disabled">
+					</div>
+					<div class="col-md-6">
+						<label for="email">Email</label> <input type="text"
+							class="form-control form-input" id="email" name="email"
+							value="{{ user.email }}" disabled="disabled">
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<label for="username">Username</label> <input type="text"
@@ -173,21 +195,9 @@
 						</select>
 					</div>
 				</div>
-			</div>
-
-
-
-
-			<!-- 			PARENT INFO -->
-
-
-
-
-
-			<div class="form-section" data-title="Parent (Guardian) Information">
 				<div class="row">
 					<div class="col-md-6">
-						<label for="parentname">Parent (Guardian) Full-Name</label> <input
+						<label for="parentname">Parent (Guardian)'s Full-Name</label> <input
 							type="text" class="form-control form-input" id="parentname"
 							name="parentname" placeholder="i.e. Jack Scholtz"
 							value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}"
@@ -203,7 +213,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<label for="parentemail">Guardian (Parent)'s Email Address</label>
+						<label for="parentemail">Parent (Guardian)'s Email Address</label>
 						<input type="email" class="form-control form-input"
 							id="parentemail" name="parentemail" placeholder="you@example.com"
 							value="{{ form.instance.parentemail|default_if_none:'you@example.com' }}"
@@ -219,12 +229,18 @@
 
 
 
+			<div class="row">
+				<div class="col-md-12">
+					<a data-toggle="collapse" href="#school-section"
+						aria-expanded="false">My School</a>
+				</div>
+			</div>
+			<div class="form-section collapse" id="school-section"
+				data-title="My School">
 
-
-			<div class="form-section" data-title="My School">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="states-dropdown">Province of School (Estate)</label> <select
+						<label for="states-dropdown">Province of School</label> <select
 							class="form-control form-input" id="states-dropdown"
 							onchange="filterSchool($(this).val())">
 							<option value="" selected="selected" disabled="disabled">Select</option>
@@ -266,23 +282,10 @@
 							<option value="{{ sch.id }}" data-state="{{ sch.province }}"
 								class="school-option-class">{{ sch.name }} {% endfor %}
 
-
 							
 						</select>
 					</div>
 				</div>
-			</div>
-
-
-
-
-			<!-- 			GRADE -->
-
-
-
-
-
-			<div class="form-section" data-title="My Grade">
 				<div class="row">
 					<div class="col-md-2">
 						<label for="learnergrade7">Grade 7</label> <input type="hidden"
@@ -318,37 +321,24 @@
 							name="learnergrade" value="Grade 12">
 					</div>
 				</div>
-			</div>
-
-
-
-
-
-			<!-- 			TEACHER'S INFO -->
-
-
-
-
-
-			<div class="form-section" data-title="My Teacher">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="teachername">Teacher Name</label> <input type="text"
+						<label for="teachername">Teacher's Name</label> <input type="text"
 							class="form-control form-input" id="teachername"
 							name="teachername" placeholder="i.e. Edvard Harry"
 							value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
 							required>
 					</div>
 					<div class="col-md-4">
-						<label for="teacheremail">Teacher Email</label> <input
+						<label for="teacheremail">Teacher's Email</label> <input
 							type="email" class="form-control form-input" id="teacheremail"
 							name="teacheremail" placeholder="you@example.com"
 							value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
 							required>
 					</div>
 					<div class="col-md-4">
-						<label for="teacherphone">Teacher Phone</label> <input type="tel"
-							class="form-control form-input" id="teacherphone"
+						<label for="teacherphone">Teacher's Phone</label> <input
+							type="tel" class="form-control form-input" id="teacherphone"
 							name="teacherphone" placeholder="012 345 67 89"
 							value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
 							required>
@@ -364,30 +354,37 @@
 
 
 
+			<div class="row">
+				<div class="col-md-12">
+					<a data-toggle="collapse" href="#artwork-section"
+						aria-expanded="false">My Artwork</a>
+				</div>
+			</div>
+			<div class="form-section collapse" id="artwork-section"
+				data-title="Upload my artwork">
 
-
-			<div class="form-section" data-title="Upload my artwork">
 				<div class="row">
 					<div class="col-md-12">
-						<label for="surname">Work Title</label> <input type="text"
-							class="form-control form-input" id="worktitle" name="worktitle"
+						<label for="surname">Title of my artwork</label> <input
+							type="text" class="form-control form-input" id="worktitle"
+							name="worktitle"
 							placeholder="I would like to call my artwork (Max 10 words)"
 							value="{{ form.instance.worktitle|default_if_none:'' }}" required>
 					</div>
 				</div>
 
 				<div class="row">
-<!-- 					<div class="col-md-2" id="h-v-label">Vertical</div> -->
-<!-- 					<div class="col-md-2" id=""> -->
-<!-- 						<label class="switch"> <input type="checkbox" checked> -->
-<!-- 							<span class="slider round"></span> -->
-<!-- 						</label> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-2" id="">Horizontal</div> -->
+					<!-- 					<div class="col-md-2" id="h-v-label">Vertical</div> -->
+					<!-- 					<div class="col-md-2" id=""> -->
+					<!-- 						<label class="switch"> <input type="checkbox" checked> -->
+					<!-- 							<span class="slider round"></span> -->
+					<!-- 						</label> -->
+					<!-- 					</div> -->
+					<!-- 					<div class="col-md-2" id="">Horizontal</div> -->
 					<div class="col-md-12" id="">
-						<label for="workfile">Upload Work File</label> <input type="file"
-							class="form-control form-input" id="workfile" name="workfile"
-							placeholder="" value="Browse"
+						<label for="workfile">Upload image of my artwork</label> <input
+							type="file" class="form-control form-input" id="workfile"
+							name="workfile" placeholder="" value="Browse"
 							value="{{ form.instance.workfile|default_if_none:'' }}"
 							accept="image/*" required>
 					</div>
@@ -416,56 +413,64 @@
 
 
 
-
-			<div class="form-section" data-title="Answering questions">
-				<div class="row">
-					<div class="col-md-6">
-						<label for="question1"> <strong>Question 1: </strong>What
-							Mathematics did you use in your artwork? (Explain your answer)
-						</label>
-						<textarea class="form-control form-input"
-							placeholder="Explain it in 50-100 words" id="question1"
-							name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
-					</div>
-					<div class="col-md-6">
-						<label for="formulafile">Upload Mathematics Image</label> <input
-							type="file" class="form-control form-input" id="workformulafile"
-							name="workformulafile" placeholder="" value="Browse"
-							value="{{ form.instance.workformulafile|default_if_none:'' }}"
-							accept="image/*" required>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<label for="question2"> <strong>Question 2:</strong> How
-							creatively you connected the Mathematics with "My Universe" to
-							make your artwork? (Explain your answer)
-						</label>
-						<textarea class="form-control form-input" id="question2"
-							placeholder="Explain it in 50-100 words" name="question2"
-							rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
-					</div>
-					<div class="col-md-6">
-						<label for="question3"> <strong>Question 3:</strong> Do
-							you think creativity could be used to teach Mathematics? (Explain
-							your answer)
-						</label>
-						<textarea class="form-control form-input" id="question3"
-							placeholder="Explain it in 50-100 words" name="question3"
-							rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
-					</div>
-				</div>
-			</div>
 			<div class="row">
-				<div class="col-md-6 text-center">
-					<button class="action-button" type="submit"
-						id="buttonSubmit">Save & Continue Later</button>
-				</div>
-				<div class="col-md-6 text-center">
-					<button class="action-button disabled" type="button"
-						onclick="toggleMessageBox('Please fill all the fields first',true)">Submit</button>
+				<div class="col-md-12">
+					<a data-toggle="collapse" href="#questions-section"
+						aria-expanded="false">Questions</a>
 				</div>
 			</div>
+			<div class="form-section collapse" id="questions-section"
+				data-title="Answering questions">
+					<div class="row">
+						<div class="col-md-6">
+							<label for="question1"> <strong>Question 1: </strong>What
+								Mathematics did you use in your artwork? (Explain your answer)
+							</label>
+							<textarea class="form-control form-input"
+								placeholder="Explain it in 50-100 words" id="question1"
+								name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
+						</div>
+						<div class="col-md-6">
+							<label for="formulafile">Upload Mathematics Image (If a
+								photo of your mathematics would help your explanation, upload an
+								image here)</label> <input type="file" class="form-control form-input"
+								id="workformulafile" name="workformulafile" placeholder=""
+								value="Browse"
+								value="{{ form.instance.workformulafile|default_if_none:'' }}"
+								accept="image/*" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="question2"> <strong>Question 2:</strong> How
+								did you creatively connect Mathematics with "My Universe" to
+								your artwork? (Explain your answer)
+							</label>
+							<textarea class="form-control form-input" id="question2"
+								placeholder="Explain it in 50-100 words" name="question2"
+								rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
+						</div>
+						<div class="col-md-6">
+							<label for="question3"> <strong>Question 3:</strong> Do
+								you think creativity could be used to teach Mathematics?
+								(Explain your answer)
+							</label>
+							<textarea class="form-control form-input" id="question3"
+								placeholder="Explain it in 50-100 words" name="question3"
+								rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 text-center">
+						<button class="action-button" type="submit" id="buttonSubmit">Save
+							& Continue Later</button>
+					</div>
+					<div class="col-md-6 text-center">
+						<button class="action-button disabled" type="button"
+							onclick="toggleMessageBox('Please fill all the fields first',true)">Submit</button>
+					</div>
+				</div>
 		</form>
 	</div>
 </div>

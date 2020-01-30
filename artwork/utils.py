@@ -1,9 +1,9 @@
 from enum import *
 
 class Status(IntEnum):
-    Partially_Submitted = -1
-    Submitted_Successfully = 0
-    Revision_Required = 1
+    Pending = -1
+    Submitted = 0
+    Requires_Revision = 1
     Rejected_Stage_0 = 2
     Accepted_Stage_0 = 3
     Waiting_For_Decision = 4
