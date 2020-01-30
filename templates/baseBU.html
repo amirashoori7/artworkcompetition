@@ -9,21 +9,21 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>{% block title %} {% endblock title %}</title>
+<link href="{% static 'css/bootstrap/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+<link href="{% static 'css/nice-select.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/buttons.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/form.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/table.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/menu.style.css' %}" rel="stylesheet">
+<link href="{% static 'css/content.style.css' %}" rel="stylesheet">
 
-<link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
-<link href="static/css/styles.css" rel="stylesheet">
-<link href="static/css/nice-select.min.css" rel="stylesheet">
-<link href="static/css/buttons.style.css" rel="stylesheet">
-<link href="static/css/form.style.css" rel="stylesheet">
-<link href="static/css/table.style.css" rel="stylesheet">
-<link href="static/css/menu.style.css" rel="stylesheet">
-<link href="static/css/content.style.css" rel="stylesheet">
-<script src="static/js/jquery/jquery-3.4.1.min.js"></script>
-<script src="static/js/bootstrap/bootstrap.min.js"></script>
-<script src="static/js/GSAP/TweenMax.min.js"></script>
-<script src="static/js/jquery/jquery.easing.min.js"></script>
-<script src="static/js/jquery/jquery.nice-select.min.js"></script>
-<script src="static/js/math.js"></script>
+<script src="{% static 'js/jquery/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/GSAP/TweenMax.min.js' %}"></script>
+<script src="{% static 'js/jquery/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/jquery/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/math.js' %}"></script>
 
 </head>
 
@@ -51,7 +51,7 @@
 		</div>
 
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#"><img src="static/img/MAlogo.png" width="33px" height="33px">Navbar</a>
+			<a class="navbar-brand" href="#">Navbar</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
