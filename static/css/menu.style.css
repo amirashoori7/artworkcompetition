@@ -2,12 +2,16 @@
     cursor: pointer;
     min-width: 122px;
     text-align: center;
-    margin-top: 11px;
 }
 
 .menu-item svg {
 	width: auto;
-	height: 44px;
+	height: 33px;
+	margin-top: 11px;
+}
+
+.menu-item a img{
+	width: 99px;
 }
 
 .menu-item svg *{
@@ -33,4 +37,23 @@
 .navbar-brand img{
 	width: 99px;
 	height: 99px;
+}
+
+#banner-top{
+	background: var(--main-color-yellow);
+	height: 69px;
+}
+
+#banner-top .background-image {
+	background: url("../img/bg/Backicons.svg");
+	background-size: cover;
+	opacity: .3;
+}
+
+#banner-top .text-content {
+    position: absolute;
+    text-align: center;
+    height: 69px;
+    font-size: 27px;
+    line-height: 69px;
 }
