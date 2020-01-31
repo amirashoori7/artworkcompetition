@@ -222,3 +222,57 @@ function getCookie(name) {
 	}
 	return cookieValue;
 }
+
+function getSchoolVal(reason) {
+	var prov = $("#province-dropdown").val()
+	var reg = $("#region-dropdown").val()
+	$("#region-dropdownDIV").fadeOut()
+	$("#schoolDIV").fadeOut()
+	$
+	.ajax({
+		type : "POST",
+		url : "/get_school?reason="+reason+"&prov="+prov+"&reg="+reg,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken",
+						getCookie('csrftoken'));
+			}
+		},
+		success : function(response) {
+			if(reason==1) {
+				$("#province-dropdown").html("")
+				$("#province-dropdown").html('<option value="" selected="selected" disabled="disabled">Province</option>')
+				$(response).each(function(i,j){
+					if(!$('#province-dropdown option[value="'+j+'"]').length)
+						$("#province-dropdown").append($("<option/>").attr("value",j).text(j))
+					
+				})
+			} else if(reason==2){
+				$("#region-dropdown").html('<option value="" selected="selected" disabled="disabled">Region</option>')
+				$("#region-dropdownDIV").fadeIn()
+				$(response).each(function(i,j){
+					if(!$('#region-dropdown option[value="'+j+'"]').length)
+						$("#region-dropdown").append($("<option/>").attr("value",j).text(j))
+				})
+			}
+			else{
+				$("#school").html('<option value="" selected="selected" disabled="disabled">School</option>')
+				$("#schoolDIV").fadeIn()
+				$("#region-dropdownDIV").fadeIn()
+				$(response).each(function(i,j){
+					if(!$('#school option[value="'+j[1]+'"]').length)
+						$("#school").append($("<option/>").attr("value",j[0]).text(j[1]))
+				})
+			}
+		},
+		error : function(xhr, errmsg, err) {
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		},
+		complete : function(response) {
+			$("#buttonSubmit").prop("disabled", false)
+			return -1
+		}
+	})
+}

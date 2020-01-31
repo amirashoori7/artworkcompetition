@@ -18,7 +18,7 @@ def get_school(request):
     elif request.GET['reason'] == '2':#gets all the regions for a province
         data = list(School.objects.filter(province=request.GET['prov']).order_by().values_list("region").distinct("region"))
     elif request.GET['reason'] == '3':#gets all the schools
-        data = list(School.objects.filter(province=request.GET['prov'], region=request.GET['reg']).order_by().values_list("name"))
+        data = list(School.objects.filter(province=request.GET['prov'], region=request.GET['reg']).order_by().values_list())
     else:
         data = list(School.objects.all())
     return HttpResponse(json.dumps(data),
