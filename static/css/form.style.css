@@ -332,9 +332,11 @@ input:checked+.slider:before {
 		background: var(--main-color-green);
         border-color: #dfe3e8;
         font-size: 16px;
+    	padding: 6px 12px;
     }
 	.navbar .form-inline i {
 		font-size: 16px;
+		color: white;
 	}
 	.navbar .form-inline .btn {
 		border-radius: 2px;
@@ -344,8 +346,8 @@ input:checked+.slider:before {
 		outline: none;
 	}
 	.navbar .form-inline .btn:hover, .navbar .form-inline .btn:focus {
-        border-color: var(--main-color-green);
-		background: var(--main-color-green);
+        border-color: var(--main-color-pink);
+		background: var(--main-color-pink);
     }
 	.navbar .search-form {
 		display: inline-block;
