@@ -134,19 +134,16 @@
 	border-bottom: 2px solid var(--main-color-green);
 }
 
-.return-button {
-	position: absolute;
-	height: 66px;
-	width: 66px;
-	right: 22px;
-	top: 22px;
-	cursor: pointer;
-}
-
 .return-button i {
 	font-size: 66px;
 }
 
+
+.text-danger {
+    color: #dc3545 !important;
+    position: absolute;
+    top: -33px;
+}
 
 @media ( min-width : 1200px) {
 	.search-form .input-group {

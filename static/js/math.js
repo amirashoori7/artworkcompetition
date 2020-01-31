@@ -25,8 +25,11 @@ function populateWarningMessageField(fieldId, text) {
 function loadContent(liItem) {
 	$("div#page-content").hide()
 	var url = ""
-		$(".menu-item").removeClass("active")
-	$(".background-image").css("background-position",Math.floor(Math.random() * 333)+"px "+Math.floor(Math.random() * 333)+"px")
+	$(".menu-item").removeClass("active")
+	$(".banners-background-image").css(
+			"background-position",
+			Math.floor(Math.random() * 333) + "px "
+					+ Math.floor(Math.random() * 333) + "px")
 	$(liItem).addClass("active")
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
@@ -39,12 +42,11 @@ function loadContent(liItem) {
 					ease : Power4.easeOut
 				})
 				tl.to("#page-content", 1, {
-					rotationY : -180,
-					transformOrigin : "left"
+					height : 0,
+					transformOrigin : "top"
 				}).to("#page-content", 1.2, {
-					left : $(".menu-items-holder-left").width(),
-					rotationY : 0,
-					transformOrigin : "left"
+					scaleY : 1,
+					transformOrigin : "top"
 				}, "-= .4")
 				$("#page-content").fadeIn()
 				$("#page-content").html("")
@@ -54,47 +56,40 @@ function loadContent(liItem) {
 				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area-bg"))
 				tl.play()
-				if ($(liItem).attr("data-bg") != null)
-					$(".page-content-area-bg").css("background-image",
-							$(liItem).attr("data-bg"))
-				else
-					$(".page-content-area-bg").css("background-image", "none")
 			})
-
-	$(".main-logo").load("/static/img/logo.svg")
 }
 
 $(document).ready(function() {
 	$('img.svg').each(function() {
-	    var $img = jQuery(this);
-	    var imgID = $img.attr('id');
-	    var imgClass = $img.attr('class');
-	    var imgURL = $img.attr('src');
+		var $img = jQuery(this);
+		var imgID = $img.attr('id');
+		var imgClass = $img.attr('class');
+		var imgURL = $img.attr('src');
 
-	    jQuery.get(imgURL, function(data) {
-	        // Get the SVG tag, ignore the rest
-	        var $svg = jQuery(data).find('svg');
+		jQuery.get(imgURL, function(data) {
+			// Get the SVG tag, ignore the rest
+			var $svg = jQuery(data).find('svg');
 
-	        // Add replaced image's ID to the new SVG
-	        if(typeof imgID !== 'undefined') {
-	            $svg = $svg.attr('id', imgID);
-	        }
-	        // Add replaced image's classes to the new SVG
-	        if(typeof imgClass !== 'undefined') {
-	            $svg = $svg.attr('class', imgClass+' replaced-svg');
-	        }
+			// Add replaced image's ID to the new SVG
+			if (typeof imgID !== 'undefined') {
+				$svg = $svg.attr('id', imgID);
+			}
+			// Add replaced image's classes to the new SVG
+			if (typeof imgClass !== 'undefined') {
+				$svg = $svg.attr('class', imgClass + ' replaced-svg');
+			}
 
-	        // Remove any invalid XML tags as per http://validator.w3.org
-	        $svg = $svg.removeAttr('xmlns:a');
+			// Remove any invalid XML tags as per http://validator.w3.org
+			$svg = $svg.removeAttr('xmlns:a');
 
-	        // Replace image with new SVG
-	        $img.replaceWith($svg);
+			// Replace image with new SVG
+			$img.replaceWith($svg);
 
-// // Add an handler
-// jQuery('path').each(function() {
-// jQuery(this).click(function() {alert(jQuery(this).attr('id'));});
-// });
-	    })
+			// // Add an handler
+			// jQuery('path').each(function() {
+			// jQuery(this).click(function() {alert(jQuery(this).attr('id'));});
+			// });
+		})
 	})
 	$("#login-div").load('/account/login/')
 
@@ -152,17 +147,13 @@ function toggleMessageBox(messageText, isError) {
 			})
 			messageBoxTween.reverse()
 			return
-			
-
 		}
 		messageBoxTween = tl.to(".message-box-container", .3, {
 			opacity : 1,
-			width : "88%",
-			height : "88%",
-			top : "5.5%",
-			left : "5.5%"
+			scaleY : 0,
+			transfromOrigin : "top"
 		})
-		messageBoxTween.reverse()
+		messageBoxTween.play()
 	} else {
 		// SHOWS ERROR MESSAGE
 		$(".message-box").fadeIn()
@@ -184,10 +175,10 @@ function toggleMessageBox(messageText, isError) {
 		}
 		TweenLite.to(".message-box", .6, {
 			opacity : 1,
-			width : $("#page-content").width(),
+			width : "100%",
 			top : 22
 		})
-		messageBoxTween.play()
+		messageBoxTween.reverse()
 	}
 }
 
@@ -204,16 +195,6 @@ function showDialogPage(element, url) {
 function openFullScreenDiv(htmlContenet) {
 	$(".full-screen-div").html(htmlContenet)
 	$(".full-screen-div").css("display", "block")
-//	$(".full-screen-div").append(
-//			$("<div/>").addClass("close-button").on("click", function() {
-//				TweenLite.to(".full-screen-div", 1, {
-//					scale : 0,
-//					transformOrigin : "center"
-//				})
-//				setTimeout(function() {
-//					$(".full-screen-div").html("")
-//				}, 1000)
-//			}))
 	$(this).find(".close-button").load('static/img/icons/close.svg')
 	TweenLite.to(".full-screen-div", 1, {
 		scale : 1,

@@ -46,7 +46,7 @@
 	height: 69px;
 }
 
-#banner-top .background-image {
+.banners-background-image {
 	background: url("../img/bg/Backicons.svg");
 	background-size: cover;
 	opacity: .3;

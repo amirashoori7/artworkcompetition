@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +18,7 @@
 <link href="static/css/table.style.css" rel="stylesheet">
 <link href="static/css/menu.style.css" rel="stylesheet">
 <link href="static/css/content.style.css" rel="stylesheet">
-<script src="static/js/jquery/jquery-3.4.1.min.js"></script>
-<script src="static/js/bootstrap/bootstrap.min.js"></script>
-<script src="static/js/GSAP/TweenMax.min.js"></script>
-<script src="static/js/math.js"></script>
+
 
 </head>
 
@@ -36,10 +31,11 @@
 		<div class="message-box-container">
 			<div class="message-box error-message-box"></div>
 			<div class="message-box success-message-box"></div>
-			<div class="return-button" onclick="toggleMessageBox(null, null)"><i class="fa fa-times-circle"></i>
+			<div class="return-button" onclick="toggleMessageBox(null, null)">
+				<i class="fa fa-times-circle"></i>
 			</div>
 		</div>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -87,75 +83,44 @@
 								Us</span></a></li>
 					</li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right ml-auto">
-
-					{% if user.is_authenticated %}
-					<li class="nav-item">
-						<div class="row">
-							<img class="user-icon" src="static/img/icons/user.svg">
-							<p style="display: inline-block;">
-							<h4 style="display: inline-block; padding-left: 22px;">{{
-								user.get_username }}</h4>
-							</p>
-							<div class="row">
-								<div class="col-md-9">
-									<a href="#">Change Password</a>
-								</div>
-								<div class="col-md-3">
-									<a href="{% url 'account:logout' %}">Logout</a>
-								</div>
-							</div>
-						</div>
-					</li>{% else %}
-					<li class="nav-item dropdown"><a data-toggle="dropdown"
-						class="nav-link dropdown-toggle" href="#"><i
-							class="fa fa-user-o"></i> Login</a>
-						<ul class="dropdown-menu">
-							<li>
-								<div id="login-div"></div>
-
-							</li>
-						</ul></li> {% endif %}
+				<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
 				</ul>
 			</div>
 		</nav>
 		<div class="row" id="banner-top">
-			<div class="col-md-12 background-image"></div>
+			<div class="col-md-12 banners-background-image"></div>
 			<div class="col-md-12 text-content">Inspiring artistic
 				connections with Mathematics</div>
 		</div>
+		<nav class="navbar fixed-bottom navbar-light bg-light">
+			<div class="row" id="banner-bottom-1">
+				<div class="col-md-12 banners-background-image"></div>
+				<div class="col-md-12 text-content">Inspiring artistic
+					connections with Mathematics</div>
+			</div>
+			<div class="row" id="banner-bottom-2">
+				<div class="col-md-12 banners-background-image"></div>
+				<div class="col-md-12 text-content">Inspiring artistic
+					connections with Mathematics</div>
+				<p class="mb-1">&copy; 2019 Company Name</p>
+				<ul class="list-inline">
+					<li class="list-inline-item"><a href="#">Privacy</a></li>
+					<li class="list-inline-item"><a href="#">Terms</a></li>
+					<li class="list-inline-item"><a href="#">Support</a></li>
+				</ul>
+			</div>
+		</nav>
 		<div class="row">
-			<div class="col-md-1" ></div>
+			<div class="col-md-1"></div>
 			<div class="col-md-10" id="page-content">{% block content %}</div>
 		</div>
 
-		<!-- 			<div class="menu-items-holder menu-items-holder-left"> -->
-		<!-- 		<ul class="menu-items menu-top"> -->
-		<!-- 			{% if user.is_authenticated and user.user_type == 6%} -->
-		<!-- 			<li class="menu-item" id="about-us" -->
-		<!-- 				data-href="{% url 'artwork:work_lists' %}"><img -->
-		<!-- 				src="static/img/icons/document.svg"><span>Artwork List</span></li> -->
-		<!-- 			{% endif %} {% if user.is_authenticated and user.user_type == 1%} -->
-		<!-- 			<li class="menu-item" id="sign-up" -->
-		<!-- 				data-href="{% url 'artwork:signup_page' %}"><img -->
-		<!-- 				src="static/img/icons/trophy.svg"><span>Submit Artwork -->
-		<!-- 			</span></li> {% endif %} -->
 
-		<!-- 		</ul> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
-
-
-		<footer class="my-5 pt-5 text-muted text-center text-small">
-			<p class="mb-1">&copy; 2019 Company Name</p>
-			<ul class="list-inline">
-				<li class="list-inline-item"><a href="#">Privacy</a></li>
-				<li class="list-inline-item"><a href="#">Terms</a></li>
-				<li class="list-inline-item"><a href="#">Support</a></li>
-			</ul>
-		</footer>
 	</div>
 	{% endblock %}
 </body>
-
+<script src="static/js/jquery/jquery-3.4.1.min.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/GSAP/TweenMax.min.js"></script>
+<script src="static/js/math.js"></script>
 </html>

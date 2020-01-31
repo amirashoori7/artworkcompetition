@@ -19,18 +19,6 @@
 							event.preventDefault()
 							submitEntryForm()
 						})
-						// 										$("input")
-						// 												.each(
-						// 														function() {
-						// 															if ($(this).val().length == 0) {
-						// 																console.log($(this).attr("id"))
-						// 																populateWarningMessageField(
-						// 																		$(this)
-						// 																				.attr(
-						// 																						"id"),
-						// 																		"To enter the competition, this field must be filled.")
-						// 															}
-						// 														})
 						var maxYear = 2008, minYear = 2003
 						var month = [ 'January', 'February', 'March', 'April',
 								'May', 'June', 'July', 'August', 'September',
@@ -88,7 +76,6 @@
 					},
 					success : function(response) {
 						if (response.successResult != null) {
-							$("#id").val(response.id)
 							toggleMessageBox(response.successResult, false)
 							$(".form-signin.form-general-style").find(
 									"input#inputEmail").val(
@@ -103,13 +90,10 @@
 								"data-href" : "/signup_page/"
 							}))
 						} else if (response.errorResult != null) {
-							$("#id").val(0)
-							var errorList = $("<ul/>");
+							$("#registry-form").find("small").remove()
 							populateErrorMessageFields(response.errorResult)
 							toggleMessageBox(
-									"<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
-											+ $('<div>').append(
-													errorList.clone()).html(),
+									"<span>Registration unsuccessful.</span>",
 									true)
 
 						}
@@ -176,15 +160,19 @@
 </script>
 {% if user.is_authenticated %}
 <div class="page-title">
-	<h2>Entry Form</h2>
+	<h4>Entry Form</h4>
 </div>
-<section class="multi_step_form" id="artwork-submit-form-holder-id">
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8" id="artwork-submit-form-holder-id"></div>
+</div>
 </section>
 {% else %}
 <div class="page-title">
-	<h2>Register</h2>
+	<h4>Register</h4>
 </div>
 <div class="row">
-	<div class="col-md-12" id="registrationForm"></div>
+	<div class="col-md-2"></div>
+	<div class="col-md-8" id="registrationForm"></div>
 </div>
 {% endif %}

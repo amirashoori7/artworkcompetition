@@ -6,20 +6,25 @@ from django.http import HttpResponse
 import json
 from django.contrib.auth import authenticate, login
 
+
 class ProjectUserList(ListView):
     model = ProjectUser
+
 
 def registration(request):
     response_data = {}
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
+        matching_unames = ProjectUser.objects.filter(username=request.POST['username'])
+        if matching_unames.count() > 0:
+            msg = "Course name: %s has already exist."
         if form.is_valid():
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
-#             username = form.username
-#             password = form.password
-#             user = authenticate(username=username, password=password)
-#             login(request, user)
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
@@ -30,7 +35,6 @@ def registration(request):
         form = UserRegistrationForm()
     context = {'form': form}
     return render(request, 'register.html', context)
-
 
 # def getUser(request):
 #     form = UserRegistrationForm(request.GET)
