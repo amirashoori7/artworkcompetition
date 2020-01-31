@@ -9,7 +9,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>{% block title %} {% endblock title %}</title>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
 <link href="static/css/constants.css" rel="stylesheet">
@@ -26,8 +27,11 @@
 </head>
 
 <body>
-<div class="full-screen-div"></div>
+	<div class="full-screen-div"></div>
 	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12"></div>
+		</div>
 		<div class="message-box-container">
 			<div class="message-box error-message-box"></div>
 			<div class="message-box success-message-box"></div>
@@ -82,11 +86,41 @@
 								Us</span></a></li>
 					</li>
 				</ul>
+				<ul class="nav navbar-nav navbar-right ml-auto">
+
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+						<div class="row">
+							<img class="user-icon" src="static/img/icons/user.svg">
+							<p style="display: inline-block;">
+							<h4 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}</h4>
+							</p>
+							<div class="row">
+								<div class="col-md-9">
+									<a href="#">Change Password</a>
+								</div>
+								<div class="col-md-3">
+									<a href="{% url 'account:logout' %}">Logout</a>
+								</div>
+							</div>
+						</div>
+					</li>{% else %}
+					<li class="nav-item dropdown"><a data-toggle="dropdown"
+						class="nav-link dropdown-toggle" href="#"><i
+							class="fa fa-user-o"></i> Login</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div id="login-div"></div>
+
+							</li>
+						</ul></li> {% endif %}
+				</ul>
 			</div>
 		</nav>
 		<div class="row" id="banner-top">
 			<div class="col-md-12 background-image"></div>
-			<div class="col-md-12 text-content">Inspiring artistic connections with Mathematics</div>
+			<div class="col-md-12 text-content">Inspiring artistic
+				connections with Mathematics</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12" id="page-content">{% block content %}</div>
@@ -105,25 +139,6 @@
 		<!-- 			</span></li> {% endif %} -->
 
 		<!-- 		</ul> -->
-		{% if user.is_authenticated %}
-		<div class="form-section row">
-			<img class="user-icon" src="static/img/icons/user.svg">
-			<p style="display: inline-block;">
-			<h4 style="display: inline-block; padding-left: 22px;">{{
-				user.get_username }}</h4>
-			</p>
-			<div class="row">
-				<div class="col-md-9">
-					<a href="#">Change Password</a>
-				</div>
-				<div class="col-md-3">
-					<a href="{% url 'account:logout' %}">Logout</a>
-				</div>
-			</div>
-		</div>
-		{% else %}
-		<div id="login-div"></div>
-		{% endif %}
 		<!-- 			</div> -->
 		<!-- 		</div> -->
 

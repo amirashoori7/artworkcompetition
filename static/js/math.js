@@ -96,7 +96,7 @@ $(document).ready(function() {
 // });
 	    })
 	})
-	showDialogPage(null,'/account/login/')
+	$("#login-div").load('/account/login/')
 
 })
 

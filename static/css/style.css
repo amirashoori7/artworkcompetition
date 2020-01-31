@@ -132,3 +132,12 @@ p {
 	max-height: 100%;
 	max-width: 100%;
 }
+
+.user-icon {
+	background: radial-gradient(#174c66, #4e7e96);
+	border-radius: 50%;
+	padding: 3px;
+	width: 66px;
+	height: 66px;
+	display: inline-block;
+}
