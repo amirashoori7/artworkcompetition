@@ -83,7 +83,34 @@
 					}
 				})
 	}
-
+	function getSchoolVal() {
+		var reason = 1;
+		var prov = $("").val()
+		var reg = $("").val()
+		$
+		.ajax({
+			type : "POST",
+			url : "/get_school?reason="+reason+"&prov="+prov+"&reg="+reg,
+			beforeSend : function(xhr, settings) {
+				if (!(/^http:.*/.test(settings.url) || /^https:.*/
+						.test(settings.url))) {
+					xhr.setRequestHeader("X-CSRFToken",
+							getCookie('csrftoken'));
+				}
+			},
+			success : function(response) {
+				console.log(response)
+			},
+			error : function(xhr, errmsg, err) {
+				console.log(xhr.status + ": " + xhr.responseText)
+				toggleMessageBox(xhr.responseText, true)
+			},
+			complete : function(response) {
+				$("#buttonSubmit").prop("disabled", false)
+				return -1
+			}
+		})
+	}
 	function submitEntryForm() {
 		var form = $('#entry-form-id')[0];
 		$("#buttonSubmit").prop("disabled", true);
@@ -104,10 +131,6 @@
 							xhr.setRequestHeader("X-CSRFToken",
 									getCookie('csrftoken'));
 						}
-						$("#dob").val(
-								$("#monthDropDown").val() + "/"
-										+ $("#dayDropDown").val() + "/"
-										+ $("#yearDropDown").val())
 					},
 					success : function(response) {
 						console.log(response)

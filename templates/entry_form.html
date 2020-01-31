@@ -144,7 +144,8 @@
 <form method="post" id="entry-form-id" action="/"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
-	{% csrf_token %} <input type="hidden" name="id" id="id"
+	{% csrf_token %} 
+	<input type="hidden" name="id" id="id"
 		value="{{ form.instance.id|default_if_none:'' }}">
 	<!-- 				BIO  -->
 	<div class="card-header collapsed row" data-toggle="collapse"

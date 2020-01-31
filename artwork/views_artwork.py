@@ -117,7 +117,7 @@ def entry_form(request):
                 content_type="application/json")
     elif userModel.user_type == 1:
         try:
-            artwork_model = get_object_or_404(Artwork, owner=userModel)
+            artwork_model = get_object_or_404(Artwork, owner=request.user)
             artwork_form = EntryForm(instance=artwork_model)
         except:
             artwork_form = EntryForm()
