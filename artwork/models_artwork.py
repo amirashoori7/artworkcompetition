@@ -19,7 +19,7 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def save(self, *args, **kwargs):
         print("save initiation >>> ", self)
         super(School, self).save(*args, **kwargs)
@@ -41,7 +41,7 @@ class Artwork(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
         null=False, blank=False, on_delete=models.CASCADE)
     learnergrade = models.CharField(blank=True, null=True, max_length=100)
-    school = models.CharField(blank=True, null=True, max_length=100)
+    school = models.ForeignKey(School, blank=True, null=True, on_delete=models.SET_NULL)
     teachername = models.CharField(blank=True, max_length=300)
     teacherphone = models.CharField(blank=True, null=True, max_length=100)
     teacheremail = models.CharField(blank=True, null=True, max_length=100)
