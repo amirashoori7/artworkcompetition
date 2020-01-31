@@ -46,7 +46,7 @@ class Artwork(models.Model):
     teacherphone = models.CharField(blank=True, null=True, max_length=100)
     teacheremail = models.CharField(blank=True, null=True, max_length=100)
     worktitle = models.CharField(blank=True, null=True, max_length=300)
-    workfile = models.FileField(upload_to='works',)
+    workfile = models.FileField(blank=True, null=True, upload_to='works',)
     workfileCropped = models.TextField(blank=True, default="", null=True)
     workformulafile = models.FileField(null=True, blank='True',upload_to='formulas')
     workapproved = models.BooleanField(default=True)
