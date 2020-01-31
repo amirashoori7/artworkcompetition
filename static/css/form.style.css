@@ -349,6 +349,11 @@ input:checked+.slider:before {
         border-color: var(--main-color-pink);
 		background: var(--main-color-pink);
     }
+    .navbar-light .navbar-nav .show > .nav-link{
+    	color: white !important;
+    	border-color: var(--main-color-green);
+		background: var(--main-color-green);
+    }
 	.navbar .search-form {
 		display: inline-block;
 	}

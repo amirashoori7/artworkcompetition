@@ -25,7 +25,9 @@
 .menu-item:hover span, .menu-item.active span {
 	color: var(--main-color-pink);
 }
-
+.menu-item.active a {
+	border-bottom: 2px solid var(--main-color-pink);
+}
 .menu-item span {
 	color: var(--main-color-green);
 	line-height: 17px;
