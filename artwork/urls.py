@@ -7,7 +7,9 @@ app_name = 'artwork'
 urlpatterns = [
     # re_path(r'^index/$', views.index, name='index'),
     path('rest_list', rest_views.worklists),
+    path('get_school', rest_views.get_school),
     path('', views_artwork.index, name='index'),
+    path('entry_form/', views_artwork.entry_form, name='entry_form'),
     path('entry_form/', views_artwork.entry_form, name='entry_form'),
     path('aboutus/', views_artwork.aboutus, name='aboutus'),
     path('contactus/', views_artwork.contactus, name='contactus'),

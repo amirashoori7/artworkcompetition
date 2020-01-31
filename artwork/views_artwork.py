@@ -98,7 +98,6 @@ def signup_page(request):
 @login_required
 @transaction.atomic
 def entry_form(request):
-    schools = School.objects.all()
     userModel = ProjectUser.objects.get(username=request.user)
     user_form = UserForm(instance=request.user)
     if request.method == 'POST':
@@ -122,6 +121,6 @@ def entry_form(request):
             artwork_form = EntryForm(instance=artwork_model)
         except:
             artwork_form = EntryForm()
-    context = {'form': artwork_form, 'schools': schools, 'user_form': user_form}
+    context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
     

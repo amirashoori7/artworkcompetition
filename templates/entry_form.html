@@ -293,18 +293,6 @@
 					<option value="8">Western Cape</option>
 				</select>
 			</div>
-			<div class="col-md-4" id="school-div-container">
-				<label for="school-dropdown">School</label> <input type="hidden"
-					name="school" id="school"
-					value="{{ form.instance.school|default_if_none:'' }}" required>
-				<select class="form-control form-input" id="school-dropdown"
-					onchange="$('#school').val($('#school-dropdown').val())">
-					<option value="" class="school-option-class">Choose...</option>
-					<!-- 					SCHOOL DROP DOWN LOOP --> {% for sch in schools %}
-					<option value="{{ sch.id }}" data-state="{{ sch.province }}"
-						class="school-option-class">{{ sch.name }} {% endfor %}
-				</select>
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-2">
