@@ -121,6 +121,8 @@ def entry_form(request):
             artwork_form = EntryForm(instance=artwork_model)
         except:
             artwork_form = EntryForm()
+    else:
+        artwork_form = EntryForm()
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
     
