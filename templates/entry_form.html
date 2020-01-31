@@ -100,16 +100,18 @@
 
 .card-header {
 	cursor: pointer;
+	text-align: center;
 }
 
-.card-header:after {
-	font-family: 'FontAwesome';
+.card-header:before {
+	font-family: "Font Awesome 5 Free";
 	content: "\f068";
 	float: right;
 	position: absolute;
+	font-weight: 900;
 }
 
-.card-header.collapsed:after {
+.card-header.collapsed:before {
 	content: "\f067";
 }
 
@@ -136,12 +138,12 @@
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	{% csrf_token %} <input type="hidden" name="id" id="id"
-		value="{{ form.instance.id|default_if_none:'' }}">
+		value="{{ form.instance.id|default:'0' }}">
 	<!-- 				BIO  -->
 	<div class="card-header collapsed row" data-toggle="collapse"
 		aria-expanded="false" href="#profile-section">
 		<div class="col-md-12">
-			<a class="card-title">My Profile</a>
+			<a class="card-title"><i class="fa fa-user"></i>My Profile</a>
 		</div>
 	</div>
 	<div class="row collapse card-body" id="profile-section">
@@ -153,7 +155,7 @@
 		<div class="col-md-6">
 			<label for="username"> Username </label> <input type="email"
 				class="form-control" placeholder="Email" required autocomplete="off"
-				id="username" name="username"
+				id="username" name="username" disabled="disabled"
 				value="{{ user.username|default:'test@test.com' }}">
 		</div>
 
@@ -267,17 +269,20 @@
 			</div>
 			<div class="col-md-4" id="schoolDIV">
 				<label for="states-dropdown">School</label> <select
-					class="form-control form-input" id="school" name="school">
-					<option value="" selected="selected" disabled="disabled">Select</option>
+					class="form-control form-input" id="school-dropdown"
+					onchange="$('#school-id-val').val($('#school-dropdown').val())">
+					<option value="0" selected="selected" disabled="disabled">Select</option>
 				</select>
 			</div>
+			<input type="hidden" name="school"
+				value="{{ form.instance.school.id|default:'0' }}" id="school-id-val">
 		</div>
 		<div class="row">
 			<div class="col-md-2">
 				<label for="learnergrade7">Grade 7</label> <input type="hidden"
 					class="form-control form-input" id="currentlearnergrade"
-					value="{{ form.instance.learnergrade|default_if_none:'' }}"
-					required> <input type="radio" checked
+					value="{{ form.instance.learnergrade|default:'' }}"
+					required> <input type="radio"
 					class="form-control form-input" id="learnergrade"
 					name="learnergrade" value="Grade 7">
 			</div>

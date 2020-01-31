@@ -8,6 +8,10 @@
 				$("#schoolDIV").fadeOut()
 				$("#artwork-submit-form-holder-id").html(response)
 				getSchoolVal(1)
+				if($("#currentlearnergrade").val().length > 0) 
+					$.each($("input[name='learnergrade']"), function(i, val){
+						   $("input[value='" + $("#currentlearnergrade").val() + "']").prop('checked', true)
+					});
 				$('#entry-form-id').submit(function(event) {
 					event.preventDefault()
 					submitEntryForm()

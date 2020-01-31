@@ -1,42 +1,46 @@
 {% if user.is_authenticated %}
 <li class="nav-item">
 	<div class="row">
-		<img class="user-icon" src="static/img/icons/user.svg">
 		<p style="display: inline-block;">
-		<h6 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}</h6>
+		<h6 style="display: inline-block; padding-left: 22px;">
+			<i class="fa fa-user"></i>&nbsp;{{ user.last_name}},&nbsp;{{ user.first_name }}
+		</h6>
 		</p>
 		<div class="row">
 			<div class="col-md-9">
 				<a href="#">Change Password</a>
 			</div>
 			<div class="col-md-3">
-				<a href="{% url 'account:logout' %}">Logout</a>
+				<button type="button" class="btn btn-primary btn-sm"
+					onclick="window.location.replace('{% url 'account:logout' %}')">
+					<i class="fa fa-sign-out"></i>&nbsp;Logout
+				</button>
 			</div>
 		</div>
 	</div>
 </li>
 {% else %}
 <li class="nav-item dropdown"><a data-toggle="dropdown"
-	class="nav-link dropdown-toggle" href="#"><i class="fa fa-user-o"></i>
-		Login</a>
+	class="nav-link dropdown-toggle" href="#"><i
+		class="fa fa-sign-in-alt"></i> Login</a>
 	<ul class="dropdown-menu">
-		<li>
+		<li >
 			<form action="{% url 'account:login' %}" method="post"
 				class="form-inline login-form">
-				<div class="" data-title="Login">
-					{% csrf_token %}
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input type="text" name="username" class="form-control"
-							placeholder="Email" id="inputEmail" required>
-					</div>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="password" class="form-control" id="inputPassword"
-							name="password" placeholder="Password" required>
-					</div>
-					<button type="submit" class="btn btn-primary">Login</button>
+				{% csrf_token %}
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
+						type="text" name="username" class="form-control input-group"
+						placeholder="Email" id="inputEmail" required>
 				</div>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
+						type="password" class="form-control" id="inputPassword"
+						name="password" placeholder="Password" required>
+				</div>
+				<button type="submit" class="input-group btn btn-primary">
+					<i class="fa fa-lock-open"></i>&nbsp;Login
+				</button>
 			</form>
 		</li>
 	</ul></li>

@@ -257,12 +257,12 @@ function getSchoolVal(reason) {
 				})
 			}
 			else{
-				$("#school").html('<option value="" selected="selected" disabled="disabled">School</option>')
+				$("#school-dropdown").html('<option value="" selected="selected" value="0" disabled="disabled">School</option>')
 				$("#schoolDIV").fadeIn()
 				$("#region-dropdownDIV").fadeIn()
 				$(response).each(function(i,j){
-					if(!$('#school option[value="'+j[1]+'"]').length)
-						$("#school").append($("<option/>").attr("value",j[0]).text(j[1]))
+					if(!$('#school-dropdown option[value="'+j[1]+'"]').length)
+						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[1]))
 				})
 			}
 		},

@@ -55,7 +55,7 @@
     color: var(--main-color-green);
 }
 
-.input-group-text{
+.input-group-text {
 	padding: 0 11px;
 }
 
@@ -65,7 +65,7 @@
     line-height: 37px;
 }
 
-.btn {
+.navbar .login-form .btn {
 	border-radius: 2px;
 	color: #fff;
 	border-color: var(--main-color-green);
@@ -73,7 +73,7 @@
 	outline: none;
 }
 
-.btn:hover, .btn:focus {
+.navbar .login-form .btn:hover, .navbar .login-form .btn:focus {
 	border-color: var(--main-color-pink);
 	background: var(--main-color-pink);
 }

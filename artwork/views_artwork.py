@@ -12,6 +12,8 @@ from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
+from google.protobuf.text_format import ParseInteger
+from h5py.h5t import INTEGER
 
 
 def index(request):
@@ -83,7 +85,7 @@ def work_detail_update(request):
         workapproved = request.POST.get('workapproved', '') == 'False'
         bioapproved = request.POST.get('bioapproved', '') == 'False'
         qapproved = request.POST.get('qapproved', '') == 'False'
-        Artwork.objects.filter(id=request.POST['id']).update(status=request.POST['status'], workapproved=workapproved, 
+        Artwork.objects.filter(id=request.POST['id']).update(status=request.POST['status'], workapproved=workapproved,
                                                      bioapproved=bioapproved, qapproved=qapproved)
         response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
         
@@ -95,6 +97,7 @@ def signup_page(request):
     context = {}
     return render(request, 'signup_page.html', context)
 
+
 @login_required
 @transaction.atomic
 def entry_form(request):
@@ -102,7 +105,8 @@ def entry_form(request):
     user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         response_data = {}
-        artwork_form = EntryForm(request.POST, request.FILES)
+        old_data = get_object_or_404(Artwork, id=request.POST["id"])
+        artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
