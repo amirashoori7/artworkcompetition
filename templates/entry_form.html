@@ -158,8 +158,8 @@
 					<div class="col-md-4">
 						<label for="cellphone">Cellphone</label> <input type="tel"
 							class="form-control form-input" id="cellphone" name="cellphone"
-							placeholder="012 345 67 89"
-							value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}"
+							placeholder=""
+							value="{{ user.cellphone }}"
 							required>
 					</div>
 				</div>
@@ -168,7 +168,7 @@
 						<label for="yearDropDown">Date of Birth</label> <input
 							type="hidden" class="form-control form-input" id="dob"
 							placeholder="" name="dob"
-							value="{{ form.instance.dob|default_if_none:'' }}" required>
+							value="{{ user.dob }}" required>
 						<select id="yearDropDown" class="form-control form-input">
 						</select>
 					</div>
@@ -187,15 +187,15 @@
 					<div class="col-md-6">
 						<label for="parentname">Parent (Guardian)'s Full-Name</label> <input
 							type="text" class="form-control form-input" id="parentname"
-							name="parentname" placeholder="i.e. Jack Scholtz"
-							value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}"
+							name="parentname" placeholder=""
+							value="{{ user.parentname }}"
 							required>
 					</div>
 					<div class="col-md-6">
 						<label for="parentphone">Parent (Guardian)'s Phone Number</label>
 						<input type="tel" class="form-control form-input" id="parentphone"
-							name="parentphone" placeholder="012 345 67 89"
-							value="{{ form.instance.parentphone|default_if_none:'012 345 67 89' }}"
+							name="parentphone" placeholder=""
+							value="{{ user.parentphone }}"
 							required>
 					</div>
 				</div>
@@ -203,8 +203,8 @@
 					<div class="col-md-6">
 						<label for="parentemail">Parent (Guardian)'s Email Address</label>
 						<input type="email" class="form-control form-input"
-							id="parentemail" name="parentemail" placeholder="you@example.com"
-							value="{{ form.instance.parentemail|default_if_none:'you@example.com' }}"
+							id="parentemail" name="parentemail" placeholder=""
+							value="{{ user.parentemail }}"
 							required>
 					</div>
 				</div>
@@ -270,7 +270,7 @@
 							<option value="{{ sch.id }}" data-state="{{ sch.province }}"
 								class="school-option-class">{{ sch.name }} {% endfor %}
 
-							
+
 						</select>
 					</div>
 				</div>
