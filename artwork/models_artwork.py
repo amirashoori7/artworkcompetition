@@ -72,7 +72,7 @@ class Artwork(models.Model):
         return "work_details/{self.id}"
 
     def __str__(self):
-        return '%s %s' % (self.dob, self.parentname)
+        return '' 
 
     def get_artwork_status(self):
         return Status(self.status).name
