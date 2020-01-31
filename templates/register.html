@@ -17,17 +17,69 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<label for="first_name">Firstname</label> <input type="text"
 					placeholder="i.e. edward, rose" class="form-control form-input"
 					id="first_name" autocomplete="off" name="first_name" value="test name"
 					required>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<label for="last_name">Last Name</label> <input type="text"
 					autocomplete="off" placeholder="i.e. scholtz, calitz"
 					class="form-control form-input" id="last_name" name="last_name"
 					value="test surname" required>
+			</div>
+			<div class="col-md-4">
+				<label for="cellphone">Cellphone</label> <input type="tel"
+					class="form-control form-input" id="cellphone" name="cellphone"
+					placeholder="012 345 67 89"
+					value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}"
+					required>
+			</div>
+		</div>
+		<div class="row" id="dob-row">
+			<div class="col-md-4">
+				<label for="yearDropDown">Date of Birth</label> <input
+					type="hidden" class="form-control form-input" id="dob"
+					placeholder="" name="dob"
+					value="{{ form.instance.dob|default_if_none:'' }}" required>
+				<select id="yearDropDown" class="form-control form-input">
+				</select>
+			</div>
+			<div class="col-md-4">
+				<label for="monthDropDown">&nbsp;</label> <select
+					id="monthDropDown" class="form-control form-input">
+				</select>
+			</div>
+			<div class="col-md-4">
+				<label for="dayDropDown">&nbsp;</label> <select id="dayDropDown"
+					class="form-control form-input">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="parentname">Parent (Guardian)'s Full-Name</label> <input
+					type="text" class="form-control form-input" id="parentname"
+					name="parentname" placeholder="i.e. Jack Scholtz"
+					value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}"
+					required>
+			</div>
+			<div class="col-md-6">
+				<label for="parentphone">Parent (Guardian)'s Phone Number</label>
+				<input type="tel" class="form-control form-input" id="parentphone"
+					name="parentphone" placeholder="012 345 67 89"
+					value="{{ form.instance.parentphone|default_if_none:'012 345 67 89' }}"
+					required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<label for="parentemail">Parent (Guardian)'s Email Address</label>
+				<input type="email" class="form-control form-input"
+					id="parentemail" name="parentemail" placeholder="you@example.com"
+					value="{{ form.instance.parentemail|default_if_none:'you@example.com' }}"
+					required>
 			</div>
 		</div>
 		<div class="row">
