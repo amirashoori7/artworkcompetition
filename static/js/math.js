@@ -10,7 +10,7 @@ function populateErrorMessageFields(errorString) {
 		var errorSection = $("<small/>").addClass("text-danger")
 		$("<br/>").appendTo(errorSection)
 		errorSection.append(JSON.parse(errorString)[key][0].message)
-		$("#" + key).parent().find("label").after(errorSection)
+		$("#" + key).after(errorSection)
 		console.log(errorSection)
 	})
 }

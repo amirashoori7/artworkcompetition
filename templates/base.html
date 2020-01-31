@@ -36,7 +36,7 @@
 		<div class="message-box-container">
 			<div class="message-box error-message-box"></div>
 			<div class="message-box success-message-box"></div>
-			<div class="return-button" onclick="toggleMessageBox(null, null)">
+			<div class="return-button" onclick="toggleMessageBox(null, null)"><i class="fa fa-times-circle"></i>
 			</div>
 		</div>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -94,7 +94,8 @@
 						<div class="row">
 							<img class="user-icon" src="static/img/icons/user.svg">
 							<p style="display: inline-block;">
-							<h4 style="display: inline-block; padding-left: 22px;">{{ user.get_username }}</h4>
+							<h4 style="display: inline-block; padding-left: 22px;">{{
+								user.get_username }}</h4>
 							</p>
 							<div class="row">
 								<div class="col-md-9">
@@ -124,7 +125,8 @@
 				connections with Mathematics</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12" id="page-content">{% block content %}</div>
+			<div class="col-md-1" ></div>
+			<div class="col-md-10" id="page-content">{% block content %}</div>
 		</div>
 
 		<!-- 			<div class="menu-items-holder menu-items-holder-left"> -->

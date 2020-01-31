@@ -2,101 +2,166 @@
 	class="needs-validation form-general-style" id="registry-form"
 	enctype="multipart/form-data" novalidate>
 	<div class="form-section" data-title="Registration">
-		<div class="row">
-			<div class="col-md-6">
-				<label for="username">Username</label> <input type="text"
-					class="form-control form-input" id="username" autocomplete="off"
-					placeholder="Pick a unique username" name="username" value="test"
-					required> <input type="hidden" name="is_valid" value="True">
+		<div class="form-group row">
+			<div class="input-group col-sm-2"></div>
+
+
+			<!-- 					EMAIL -->
+
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-addon"><i class="fa fa-at"></i></span>
+				</div>
+				<input type="text" class="form-control" placeholder="Email" required
+					autocomplete="off" id="email" name="email">
 			</div>
-			<div class="col-md-6">
-				<label for="email">Email</label> <input type="email"
-					autocomplete="off" placeholder="i.e. name@mail.com"
-					class="form-control form-input" id="email" name="email" value="test@email.com"
-					required>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<label for="first_name">Firstname</label> <input type="text"
-					placeholder="i.e. edward, rose" class="form-control form-input"
-					id="first_name" autocomplete="off" name="first_name" value="test name"
-					required>
-			</div>
-			<div class="col-md-4">
-				<label for="last_name">Last Name</label> <input type="text"
-					autocomplete="off" placeholder="i.e. scholtz, calitz"
-					class="form-control form-input" id="last_name" name="last_name"
-					value="test surname" required>
-			</div>
-			<div class="col-md-4">
-				<label for="cellphone">Cellphone</label> <input type="tel"
-					class="form-control form-input" id="cellphone" name="cellphone"
-					placeholder="012 345 67 89"
+
+
+
+			<!-- 				CELLPHONE -->
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+				</div>
+				<input type="text" class="form-control" placeholder="cellphone"
+					required="required" id="cellphone"
 					value="{{ form.instance.cellphone|default_if_none:'012 345 67 89' }}"
-					required>
+					name="Cellphone Number">
 			</div>
 		</div>
-		<div class="row" id="dob-row">
-			<div class="col-md-4">
-				<label for="yearDropDown">Date of Birth</label> <input
-					type="hidden" class="form-control form-input" id="dob"
-					placeholder="" name="dob"
-					value="{{ form.instance.dob|default_if_none:'' }}" required>
-				<select id="yearDropDown" class="form-control form-input">
-				</select>
+
+
+		<div class="row form-group">
+			<div class="input-group col-sm-2"></div>
+
+
+			<!-- 					NAME -->
+
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-text">First Name</span>
+				</div>
+				<input type="text" class="form-control" placeholder="i.e. Joe"
+					required id="first_name" name="first_name">
 			</div>
-			<div class="col-md-4">
-				<label for="monthDropDown">&nbsp;</label> <select
-					id="monthDropDown" class="form-control form-input">
-				</select>
-			</div>
-			<div class="col-md-4">
-				<label for="dayDropDown">&nbsp;</label> <select id="dayDropDown"
-					class="form-control form-input">
-				</select>
+
+
+
+			<!-- 				SURNAME -->
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Last Name</span>
+				</div>
+				<input type="text" class="form-control" placeholder="i.e. Scholtz"
+					required id="last_name"
+					value="{{ user.last_name | default_if_none:'testsurname' }}"
+					name="last_name">
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<label for="parentname">Parent (Guardian)'s Full-Name</label> <input
-					type="text" class="form-control form-input" id="parentname"
-					name="parentname" placeholder="i.e. Jack Scholtz"
-					value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}"
-					required>
+
+
+
+		<div class="row form-group">
+			<div class="input-group col-sm-2"></div>
+
+
+			<!-- 					Date of Birth -->
+
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-addon"><i
+						class="fa fa-birthday-cake"></i></span>
+				</div>
+				<input type="date" class="form-control" required id="dob" name="dob">
 			</div>
-			<div class="col-md-6">
-				<label for="parentphone">Parent (Guardian)'s Phone Number</label>
-				<input type="tel" class="form-control form-input" id="parentphone"
-					name="parentphone" placeholder="012 345 67 89"
+			<div class="input-group col-sm-4"></div>
+		</div>
+
+
+
+		<div class="row form-group">
+			<div class="input-group col-sm-2"></div>
+
+
+			<!-- 					PARENT NAME -->
+
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Parent's Full-Name</span>
+				</div>
+				<input type="text" class="form-control"
+					placeholder="i.e. Jack Scholtz" required id="parentname"
+					name="parentname"
+					value="{{ form.instance.parentname|default_if_none:'Jack Scholtz' }}">
+			</div>
+
+
+
+			<!-- 				PARENT PHONE NUMBER -->
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Parent's Cell phone Number</span>
+				</div>
+				<input type="phone" class="form-control" name="parentphone"
+					placeholder="012 345 67 89" id="parentphone"
 					value="{{ form.instance.parentphone|default_if_none:'012 345 67 89' }}"
 					required>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<label for="parentemail">Parent (Guardian)'s Email Address</label>
-				<input type="email" class="form-control form-input"
-					id="parentemail" name="parentemail" placeholder="you@example.com"
-					value="{{ form.instance.parentemail|default_if_none:'you@example.com' }}"
-					required>
+
+
+		<!-- 				PARENT EMAIL ADDRESS-->
+
+
+		<div class="row form-group">
+			<div class="input-group col-sm-2"></div>
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-addon"><i class="fa fa-at"></i></span>
+				</div>
+				<input type="email" class="form-control" id="parentemail"
+					name="parentemail" placeholder="you@example.com" required>
+			</div>
+
+			<div class="input-group col-sm-4"></div>
+		</div>
+
+
+
+
+		<div class="row form-group">
+			<div class="input-group col-sm-2"></div>
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-addon"><i class="fa fa-key"></i></span>
+				</div>
+				<input type="password" class="form-control" id="password1"
+					name="password1" placeholder="Password" required>
+			</div>
+
+			<div class="input-group col-sm-4">
+				<div class="input-group-prepend">
+					<span class="input-group-addon"><i class="fa fa-key"></i></span>
+				</div>
+				<input type="password" class="form-control" id="password2"
+					name="password2" placeholder="Repeat Password" required>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<label for="password1">Password</label>
-				<small class="text-warning">&nbsp;At least 8 characters, including
-					text and numbers</small> <input type="password"
-					class="form-control form-input" autocomplete="off" id="password1"
-					name="password1" value="abcdefg12345" required>
-			</div>
-			<div class="col-md-6">
-				<label for="password2">Repeat Password</label><br /> <input
-					type="password" class="form-control form-input" autocomplete="off"
-					id="password2" name="password2" value="abcdefg12345" required>
-			</div>
-		</div>
+
 		{% csrf_token %}
-		<button class="action-button green" type="submit" id="register-btn">Register</button>
+		<div class="row form-group">
+			<div class="input-group col-sm-2"></div>
+			<div class="input-group col-sm-8">
+				<button class="btn btn-primary" type="submit" id="register-btn">Register</button>
+			</div>
+		</div>
 	</div>
 </form>
