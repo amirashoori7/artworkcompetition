@@ -153,3 +153,7 @@ p {
 	height: 66px;
 	display: inline-block;
 }
+
+#page-content {
+	overflow-x: hidden;
+}

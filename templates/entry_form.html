@@ -121,6 +121,13 @@
 .card-header.collapsed:after {
 	content: "\f067";
 }
+
+#footer-form-btns {
+	position: sticky;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
 </style>
 <div class="form-group row">
 	<div class="input-group col-sm-2"></div>
@@ -146,81 +153,95 @@
 			<a class="card-title">My Profile</a>
 		</div>
 	</div>
-	<div class="row">
-		<div class="input-group col-md-2"></div>
-		<div class="form-section collapse col-md-8" id="profile-section"
-			data-title="Personal Information">
-			<div class="row">
-				<div class="col-md-6">
-					<label for="username">Username</label> <input type="text"
-						class="form-control form-input" id="username" name="username"
-						value="{{ user.username }}" disabled="disabled">
-				</div>
-				<div class="col-md-6">
-					<label for="email">Email</label> <input type="text"
-						class="form-control form-input" id="email" name="email"
-						value="{{ user.email }}" disabled="disabled">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<label for="firstname">First Name</label> <input type="text"
-						class="form-control form-input" id="firstname" name="firstname"
-						placeholder="i.e. John   i.e. Amy" value="{{ user.first_name}}"
-						required>
-				</div>
-				<div class="col-md-4">
-					<label for="surname">Surname</label> <input type="text"
-						class="form-control form-input" id="surname" name="surname"
-						placeholder="i.e. Scholtz" value="{{ user.last_name }}" required>
-				</div>
-				<div class="col-md-4">
-					<label for="cellphone">Cellphone</label> <input type="tel"
-						class="form-control form-input" id="cellphone" name="cellphone"
-						placeholder="" value="{{ user.cellphone }}" required>
-				</div>
-			</div>
-			<div class="row" id="dob-row">
-				<div class="col-md-4">
-					<label for="yearDropDown">Date of Birth</label> <input
-						type="hidden" class="form-control form-input" id="dob"
-						placeholder="" name="dob" value="{{ user.dob }}" required>
-					<select id="yearDropDown" class="form-control form-input">
-					</select>
-				</div>
-				<div class="col-md-4">
-					<label for="monthDropDown">&nbsp;</label> <select
-						id="monthDropDown" class="form-control form-input">
-					</select>
-				</div>
-				<div class="col-md-4">
-					<label for="dayDropDown">&nbsp;</label> <select id="dayDropDown"
-						class="form-control form-input">
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<label for="parentname">Parent (Guardian)'s Full-Name</label> <input
-						type="text" class="form-control form-input" id="parentname"
-						name="parentname" placeholder="" value="{{ user.parentname }}"
-						required>
-				</div>
-				<div class="col-md-6">
-					<label for="parentphone">Parent (Guardian)'s Phone Number</label> <input
-						type="tel" class="form-control form-input" id="parentphone"
-						name="parentphone" placeholder="" value="{{ user.parentphone }}"
-						required>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<label for="parentemail">Parent (Guardian)'s Email Address</label>
-					<input type="email" class="form-control form-input"
-						id="parentemail" name="parentemail" placeholder=""
-						value="{{ user.parentemail }}" required>
-				</div>
-			</div>
+	<div class="row collapse card-body" id="profile-section">
+
+
+		<!-- 					EMAIL -->
+
+
+		<div class="col-md-6">
+			<label for="username"> Username </label> <input type="email"
+				class="form-control" placeholder="Email" required autocomplete="off"
+				id="username" name="username"
+				value="{{ user.username|default:'test@test.com' }}">
+		</div>
+
+		<!-- 				CELLPHONE -->
+
+		<div class="col-md-6">
+			<label for="cellphone">Cell Phone Number</label> <input type="text"
+				class="form-control" placeholder="cellphone" required="required"
+				id="cellphone" value="{{ user.cellphone|default:'0712345678' }}"
+				name="Cellphone Number">
+		</div>
+
+
+
+
+		<!-- 					NAME -->
+
+
+		<div class="col-sm-6">
+			<label for="first_name">First Name </label> <input type="text"
+				class="form-control" placeholder="i.e. Joe" required id="first_name"
+				name="first_name" value="{{ user.first_name | default:'testname' }}">
+		</div>
+		<!-- 				SURNAME -->
+
+		<div class="col-sm-6">
+			<label for="last_name">Last Name</label> <input type="text"
+				class="form-control" placeholder="i.e. Scholtz" required
+				id="last_name" value="{{ user.last_name | default:'lastname' }}"
+				name="last_name">
+		</div>
+
+
+
+
+		<!-- 					Date of Birth -->
+
+
+		<div class="col-sm-6">
+			<label for="first_name">Date of Birth</label> <input type="date"
+				class="form-control" required id="dob" name="dob"
+				value="{{ user.dob|default:'2013-01-08' }}">
+		</div>
+
+
+
+
+		<!-- 					PARENT NAME -->
+
+
+		<div class="col-sm-6">
+			<label for="first_name">Parent's Full-Name</label> <input type="text"
+				class="form-control" placeholder="i.e. Jack Scholtz" required
+				id="parentname" name="parentname"
+				value="{{ user.parentname|default:'testparentname' }}">
+		</div>
+
+
+
+		<!-- 				PARENT PHONE NUMBER -->
+
+		<div class="col-sm-6">
+			<label for="first_name">Parent's Cell phone Number</label> <input
+				type="phone" class="form-control" name="parentphone"
+				placeholder="012 345 67 89" id="parentphone"
+				value="{{ user.parentphone|default:'081234567' }}" required>
+		</div>
+
+
+		<!-- 				PARENT EMAIL ADDRESS-->
+
+
+
+		<div class="col-sm-6">
+			<label for="parentemail">Parent's Email Address</label> <input
+				type="email" class="form-control" id="parentemail"
+				name="parentemail" placeholder="you@example.com"
+				value="{{ user.parentemail|default:'testparent@test.com' }}"
+				required>
 		</div>
 	</div>
 
@@ -236,7 +257,7 @@
 			<a class="card-title">My School</a>
 		</div>
 	</div>
-	<div class="form-section collapse" id="school-section"
+	<div class="collapse card-body" id="school-section"
 		data-title="My School">
 
 		<div class="row">
@@ -359,7 +380,7 @@
 			<a class="card-title">My Artwork</a>
 		</div>
 	</div>
-	<div class="form-section collapse" id="artwork-section"
+	<div class="form-section collapse card-body" id="artwork-section"
 		data-title="Upload my artwork">
 
 		<div class="row">
@@ -417,7 +438,7 @@
 			<a class="card-title">Questions</a>
 		</div>
 	</div>
-	<div class="form-section collapse" id="questions-section"
+	<div class="form-section collapse card-body" id="questions-section"
 		data-title="Answering questions">
 		<div class="row">
 			<div class="col-md-6">
@@ -457,7 +478,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" id="footer-form-btns">
 		<div class="col-md-6 text-center">
 			<button class="action-button" type="submit" id="buttonSubmit">Save
 				& Continue Later</button>

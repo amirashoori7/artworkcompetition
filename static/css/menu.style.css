@@ -52,7 +52,7 @@
 	opacity: .3;
 }
 
-#banner-top .text-content {
+.banners-text-content {
     position: absolute;
     text-align: center;
     height: 69px;

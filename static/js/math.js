@@ -34,6 +34,7 @@ function loadContent(liItem) {
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
+	var contentHeight = $(".navbar.fixed-bottom").position().top - ($("#banner-top").position().top+$("#banner-top").height())
 	$("#page-content").load(
 			url,
 			function(response) {
@@ -45,7 +46,7 @@ function loadContent(liItem) {
 					height : 0,
 					transformOrigin : "top"
 				}).to("#page-content", 1.2, {
-					scaleY : 1,
+					height : contentHeight,
 					transformOrigin : "top"
 				}, "-= .4")
 				$("#page-content").fadeIn()

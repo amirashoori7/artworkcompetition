@@ -52,7 +52,7 @@ class Artwork(models.Model):
     workapproved = models.BooleanField(default=False)
     bioapproved = models.BooleanField(default=False)
     qapproved = models.BooleanField(default=False)
-    question1 = models.TextField(blank=False)
+    question1 = models.TextField(blank=False, max_length=100)
     question2 = models.TextField(blank=False)
     question3 = models.TextField(blank=False)
     submitted = models.DateTimeField(auto_now_add=True)
