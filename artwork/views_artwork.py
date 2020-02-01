@@ -105,8 +105,11 @@ def entry_form(request):
     user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         response_data = {}
-        old_data = get_object_or_404(Artwork, id=request.POST["id"])
-        artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
+        if request.POST["id"] is not '0':
+            old_data = get_object_or_404(Artwork, id=request.POST["id"])
+            artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
+        else:
+            artwork_form = EntryForm(request.POST, request.FILES)
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
