@@ -4,9 +4,11 @@
 		$.ajax({
 			url : "{% url 'artwork:entry_form' %}",
 			success : function(response) {
-				$("#region-dropdownDIV").fadeOut()
-				$("#schoolDIV").fadeOut()
 				$("#artwork-submit-form-holder-id").html(response)
+				if($("#school-id-val").val()=="0"){
+					$("#region-dropdownDIV").fadeOut()
+					$("#schoolDIV").fadeOut()
+				}
 				getSchoolVal(1)
 				if($("#currentlearnergrade").val().length > 0) 
 					$.each($("input[name='learnergrade']"), function(i, val){
@@ -16,8 +18,10 @@
 					event.preventDefault()
 					submitEntryForm()
 				})
-				$("#school-div-container").fadeOut()
-				$(".school-option-class").hide()
+				$("[data-required='1']").on("focusout",function(){
+					checkValidation()
+				})
+				checkValidation()
 			},
 			error : function(request, status, error) {
 				console.log(request.responseText);
@@ -25,6 +29,7 @@
 		});
 	}
 	$(document).ready(function() {
+		$('[data-toggle="tooltip"]').tooltip()
 		{% if user.is_authenticated %}
 		fetchEntryForm()
 		{% else %}
@@ -37,6 +42,58 @@
 		{% endif %}
 	})
 
+	function checkValidation() {
+		var totalFields = 0
+		var filledFields = 0
+		$(".exteded-class").removeClass("text-success")
+		$(".exteded-class").removeClass("text-warning")
+		$(".exteded-class").removeClass("text-danger")
+		$("i.exteded-class").removeClass("fa-thumbs-up")
+		$("i.exteded-class").removeClass("fa-thumbs-down")
+		$(".card").removeClass("border-danger")
+		$(".card").removeClass("border-warning")
+		$(".card").removeClass("border-success")
+		$(".exteded-class").removeClass("exteded-class")
+		$(".card").each(function(i, j) {
+			var sectionTotalFields = $(j).find("[data-required='1']").length
+			totalFields += sectionTotalFields
+			var sectionFilledFields = 0
+			var card = j
+			$(card).find("[data-required='1']").each(function(k, l) {
+				if($(l).val().length > 0 && $(l).val() != 0) {
+					filledFields = filledFields + 1
+					sectionFilledFields = sectionFilledFields + 1
+				}
+				if((k + 1) == sectionTotalFields) {
+					console.log(sectionFilledFields + " " + sectionTotalFields)
+					if(sectionFilledFields == 0) {
+						$(card).addClass("border-danger exteded-class")
+						$(card).find(".col-md-1 i").addClass("fa-thumbs-down text-danger exteded-class")
+						$(card).find("div").addClass("text-danger exteded-class")
+					} else if(sectionFilledFields == sectionTotalFields){
+						$(card).addClass("border-success")
+						$(card).find(".col-md-1 i").addClass("fa-thumbs-up text-success exteded-class")
+						$(card).find("div").addClass("text-success exteded-class")
+					} else {
+						$(card).addClass("border-warning exteded-class")
+						$(card).find(".col-md-1 i").addClass("fa-thumbs-down text-warning exteded-class")
+						$(card).find("div").addClass("text-warning exteded-class")
+					}
+				}
+					
+			})
+		})
+		setTimeout(function(){
+			$("#buttonSubmit").html("Submit " + filledFields + "/" + totalFields)
+			if(filledFields == totalFields){
+				$("#buttonSubmit").removeClass("disabled")
+				$("#buttonSaveContinue").addClass("disabled")
+			} else {
+				$("#buttonSubmit").addClass("disabled")
+				$("#buttonSaveContinue").removeClass("disabled")
+			}
+		},1000)
+	}
 	function submitRegistryForm() {
 		var form = $('#registry-form')[0];
 		$("#register-btn").prop("disabled", true);
@@ -95,7 +152,7 @@
 
 	function submitEntryForm() {
 		var form = $('#entry-form-id')[0];
-		$("#buttonSubmit").prop("disabled", true);
+		$("#buttonSubmit, buttonSaveContinue").prop("disabled", true);
 		var data = new FormData(form);
 		$
 				.ajax({
@@ -131,7 +188,7 @@
 						toggleMessageBox(xhr.responseText, true)
 					},
 					complete : function(response) {
-						$("#buttonSubmit").prop("disabled", false)
+						$("#buttonSubmit, #buttonSaveContinue").prop("disabled", false)
 						return -1
 					}
 				})

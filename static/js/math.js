@@ -226,8 +226,6 @@ function getCookie(name) {
 function getSchoolVal(reason) {
 	var prov = $("#province-dropdown").val()
 	var reg = $("#region-dropdown").val()
-	$("#region-dropdownDIV").fadeOut()
-	$("#schoolDIV").fadeOut()
 	$
 	.ajax({
 		type : "POST",
@@ -271,7 +269,6 @@ function getSchoolVal(reason) {
 			toggleMessageBox(xhr.responseText, true)
 		},
 		complete : function(response) {
-			$("#buttonSubmit").prop("disabled", false)
 			return -1
 		}
 	})

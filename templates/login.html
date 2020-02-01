@@ -1,21 +1,19 @@
 {% if user.is_authenticated %}
 <li class="nav-item">
 	<div class="row">
-		<p style="display: inline-block;">
-		<h6 style="display: inline-block; padding-left: 22px;">
+		<div class="col-md-12">
 			<i class="fa fa-user"></i>&nbsp;{{ user.last_name}},&nbsp;{{ user.first_name }}
-		</h6>
-		</p>
-		<div class="row">
-			<div class="col-md-9">
-				<a href="#">Change Password</a>
-			</div>
-			<div class="col-md-3">
-				<button type="button" class="btn btn-primary btn-sm"
-					onclick="window.location.replace('{% url 'account:logout' %}')">
-					<i class="fa fa-sign-out"></i>&nbsp;Logout
-				</button>
-			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<a href="#">Change Password</a>
+		</div>
+		<div class="col-md-4">
+			<button type="button" class="btn btn-link btn-sm"
+				onclick="window.location.replace('{% url 'account:logout' %}')">
+				<i class="fa fa-sign-out"></i>&nbsp;Logout
+			</button>
 		</div>
 	</div>
 </li>
@@ -24,7 +22,7 @@
 	class="nav-link dropdown-toggle" href="#"><i
 		class="fa fa-sign-in-alt"></i> Login</a>
 	<ul class="dropdown-menu">
-		<li >
+		<li>
 			<form action="{% url 'account:login' %}" method="post"
 				class="form-inline login-form">
 				{% csrf_token %}

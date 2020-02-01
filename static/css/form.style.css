@@ -139,7 +139,7 @@
 }
 
 
-.text-danger {
+#form-general-style .text-danger {
     color: #dc3545 !important;
     position: absolute;
     top: -33px;

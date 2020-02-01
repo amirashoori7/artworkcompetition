@@ -157,3 +157,7 @@ p {
 #page-content {
 	overflow-x: hidden;
 }
+
+.fixed-bottom {
+	background-color: var(--main-color-purple) !important;
+}

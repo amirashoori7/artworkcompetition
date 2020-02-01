@@ -101,6 +101,7 @@
 .card-header {
 	cursor: pointer;
 	text-align: center;
+	font-weight: bold;
 }
 
 .card-header:before {
@@ -120,223 +121,231 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	padding: 11px;
+}
+
+.disabled {
+	pointer-events: none;
 }
 </style>
 <div class="form-group row">
-	<div class="input-group col-sm-2"></div>
+	<div class="input-group col-sm-1"></div>
 	<div class="input-group col-sm-8">
-		<h4>
+		<h5>
 			<strong style="font-style: italic;">Entry Status:</strong>
 			<!-- 			STATUS TITLE -->
 			{{ form.instance.get_status_display }}
-		</h4>
+		</h5>
 		<br>
 	</div>
-	<div class="input-group col-sm-2"></div>
 </div>
 <form method="post" id="entry-form-id" action="/"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	{% csrf_token %} <input type="hidden" name="id" id="id"
 		value="{{ form.instance.id|default:'0' }}">
-	<!-- 				BIO  -->
-	<div class="card-header collapsed row" data-toggle="collapse"
-		aria-expanded="false" href="#profile-section">
-		<div class="col-md-12">
-			<a class="card-title"><i class="fa fa-user"></i>My Profile</a>
+
+	<div class="card">
+
+		<!-- 				BIO  -->
+		<div class="card-header collapsed row" data-toggle="collapse"
+			aria-expanded="false" href="#profile-section">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-user"></i>&nbsp;My Profile</a>
+			</div>
+			<div class="col-md-1">
+				<i class="fa status"></i>
+			</div>
+		</div>
+		<div class="row collapse card-body" id="profile-section">
+
+
+			<!-- 					EMAIL -->
+
+
+			<div class="col-md-6">
+				<label for="username"> Username </label> <input type="email"
+					data-required="1" class="form-control" placeholder="Email" required
+					autocomplete="off" id="username" name="username"
+					disabled="disabled"
+					value="{{ user.username|default:'test@test.com' }}">
+			</div>
+
+			<!-- 				CELLPHONE -->
+
+			<div class="col-md-6">
+				<label for="cellphone">Cell Phone Number</label> <input
+					data-required="1" type="text" class="form-control"
+					placeholder="cellphone" required="required" id="cellphone"
+					value="{{ user.cellphone|default:'0712345678' }}"
+					name="Cellphone Number">
+			</div>
+
+
+
+
+			<!-- 					NAME -->
+
+
+			<div class="col-sm-6">
+				<label for="first_name">First Name </label> <input data-required="1"
+					type="text" class="form-control" placeholder="i.e. Joe" required
+					id="first_name" name="first_name"
+					value="{{ user.first_name | default:'testname' }}">
+			</div>
+			<!-- 				SURNAME -->
+
+			<div class="col-sm-6">
+				<label for="last_name">Last Name</label> <input data-required="1"
+					type="text" class="form-control" placeholder="i.e. Scholtz"
+					required id="last_name"
+					value="{{ user.last_name | default:'lastname' }}" name="last_name">
+			</div>
+
+
+
+
+			<!-- 					Date of Birth -->
+
+
+			<div class="col-sm-6">
+				<label for="first_name">Date of Birth</label> <input
+					data-required="1" type="date" class="form-control" required
+					id="dob" name="dob" value="{{ user.dob|default:'2013-01-08' }}">
+			</div>
+
+
+
+
+			<!-- 					PARENT NAME -->
+
+
+			<div class="col-sm-6">
+				<label for="first_name">Parent's Full-Name</label> <input
+					data-required="1" type="text" class="form-control"
+					placeholder="i.e. Jack Scholtz" required id="parentname"
+					name="parentname"
+					value="{{ user.parentname|default:'testparentname' }}">
+			</div>
+
+
+
+			<!-- 				PARENT PHONE NUMBER -->
+
+			<div class="col-sm-6">
+				<label for="first_name">Parent's Cell phone Number</label> <input
+					data-required="1" type="phone" class="form-control"
+					name="parentphone" placeholder="012 345 67 89" id="parentphone"
+					value="{{ user.parentphone|default:'081234567' }}" required>
+			</div>
+
+
+			<!-- 				PARENT EMAIL ADDRESS-->
+
+
+
+			<div class="col-sm-6">
+				<label for="parentemail">Parent's Email Address</label> <input
+					data-required="1" type="email" class="form-control"
+					id="parentemail" name="parentemail" placeholder="you@example.com"
+					value="{{ user.parentemail|default:'testparent@test.com' }}"
+					required>
+			</div>
 		</div>
 	</div>
-	<div class="row collapse card-body" id="profile-section">
-
-
-		<!-- 					EMAIL -->
-
-
-		<div class="col-md-6">
-			<label for="username"> Username </label> <input type="email"
-				class="form-control" placeholder="Email" required autocomplete="off"
-				id="username" name="username" disabled="disabled"
-				value="{{ user.username|default:'test@test.com' }}">
-		</div>
-
-		<!-- 				CELLPHONE -->
-
-		<div class="col-md-6">
-			<label for="cellphone">Cell Phone Number</label> <input type="text"
-				class="form-control" placeholder="cellphone" required="required"
-				id="cellphone" value="{{ user.cellphone|default:'0712345678' }}"
-				name="Cellphone Number">
-		</div>
-
-
-
-
-		<!-- 					NAME -->
-
-
-		<div class="col-sm-6">
-			<label for="first_name">First Name </label> <input type="text"
-				class="form-control" placeholder="i.e. Joe" required id="first_name"
-				name="first_name" value="{{ user.first_name | default:'testname' }}">
-		</div>
-		<!-- 				SURNAME -->
-
-		<div class="col-sm-6">
-			<label for="last_name">Last Name</label> <input type="text"
-				class="form-control" placeholder="i.e. Scholtz" required
-				id="last_name" value="{{ user.last_name | default:'lastname' }}"
-				name="last_name">
-		</div>
-
-
-
-
-		<!-- 					Date of Birth -->
-
-
-		<div class="col-sm-6">
-			<label for="first_name">Date of Birth</label> <input type="date"
-				class="form-control" required id="dob" name="dob"
-				value="{{ user.dob|default:'2013-01-08' }}">
-		</div>
-
-
-
-
-		<!-- 					PARENT NAME -->
-
-
-		<div class="col-sm-6">
-			<label for="first_name">Parent's Full-Name</label> <input type="text"
-				class="form-control" placeholder="i.e. Jack Scholtz" required
-				id="parentname" name="parentname"
-				value="{{ user.parentname|default:'testparentname' }}">
-		</div>
-
-
-
-		<!-- 				PARENT PHONE NUMBER -->
-
-		<div class="col-sm-6">
-			<label for="first_name">Parent's Cell phone Number</label> <input
-				type="phone" class="form-control" name="parentphone"
-				placeholder="012 345 67 89" id="parentphone"
-				value="{{ user.parentphone|default:'081234567' }}" required>
-		</div>
-
-
-		<!-- 				PARENT EMAIL ADDRESS-->
-
-
-
-		<div class="col-sm-6">
-			<label for="parentemail">Parent's Email Address</label> <input
-				type="email" class="form-control" id="parentemail"
-				name="parentemail" placeholder="you@example.com"
-				value="{{ user.parentemail|default:'testparent@test.com' }}"
-				required>
-		</div>
-	</div>
-
 
 
 	<!-- 			SCHOOL -->
 
 
+	<div class="card">
+		<div class="card-header collapsed row" data-toggle="collapse"
+			aria-expanded="false" href="#school-section">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-school"></i>&nbsp;My
+					School</a>
+			</div>
+			<div class="col-md-1">
+				<i class="fa status"></i>
+			</div>
+		</div>
+		<div class="collapse card-body" id="school-section"
+			data-title="My School">
+			<div class="row">
+				<div class="col-md-4">
+					<label for="states-dropdown">Province of School</label> <select
+						class="form-control form-input" id="province-dropdown"
+						onchange="getSchoolVal(2)">
+						<option value="" selected="selected" disabled="disabled">Select</option>
+					</select>
+				</div>
+				<div class="col-md-4" id="region-dropdownDIV">
+					<label for="region-dropdown">Region of the School</label> <select
+						class="form-control form-input disabled" id="region-dropdown"
+						onchange="getSchoolVal(3)">
+						<option value="" selected="selected" disabled="disabled">{{ form.instance.school.region|default:'Select' }}</option>
+					</select>
+				</div>
+				<div class="col-md-4" id="schoolDIV">
+					<label for="states-dropdown">School</label> <select
+						class="form-control form-input" id="school-dropdown"
+						onchange="$('#school-id-val').val($('#school-dropdown').val())">
+						<option value="0" selected="selected" disabled="disabled">{{ form.instance.school.name|default:'Select' }}</option>
+					</select>
+				</div>
+				<input type="hidden" name="school"
+					value="{{ form.instance.school.id|default:'0' }}"
+					id="school-id-val" data-required="1">
+			</div>
+			<div class="row">
+				<div class="col-md-12 btn-group btn-group-toggle"
+					data-toggle="buttons">
+					<input type="hidden" data-required="1"
+						class="form-control form-input" id="currentlearnergrade"
+						value="{{ form.instance.learnergrade|default:'' }}" required>
+					<label class="btn btn-secondary active"> <input
+						type="radio" name="learnergrade" autocomplete="off" checked>
+						Grade 7
+					</label> <label class="btn btn-secondary"> <input type="radio"
+						name="learnergrade" autocomplete="off"> Grade 8
+					</label> <label class="btn btn-secondary"> <input type="radio"
+						name="learnergrade" autocomplete="off"> Grade 9
+					</label> <label class="btn btn-secondary"> <input type="radio"
+						name="learnergrade" autocomplete="off"> Grade 10
+					</label> <label class="btn btn-secondary"> <input type="radio"
+						name="learnergrade" autocomplete="off"> Grade 11
+					</label> <label class="btn btn-secondary"> <input type="radio"
+						name="learnergrade" autocomplete="off"> Grade 12
+					</label>
+				</div>
+			</div>
 
-	<div class="card-header collapsed row" data-toggle="collapse"
-		aria-expanded="false" href="#school-section">
-		<div class="col-md-12">
-			<a class="card-title">My School</a>
-		</div>
-	</div>
-	<div class="collapse card-body" id="school-section"
-		data-title="My School">
-		<div class="row">
-			<div class="col-md-4">
-				<label for="states-dropdown">Province of School</label> <select
-					class="form-control form-input" id="province-dropdown"
-					onchange="getSchoolVal(2)">
-					<option value="" selected="selected" disabled="disabled">Select</option>
-				</select>
-			</div>
-			<div class="col-md-4" id="region-dropdownDIV">
-				<label for="region-dropdown">Region of the School</label> <select
-					class="form-control form-input" id="region-dropdown"
-					onchange="getSchoolVal(3)">
-					<option value="" selected="selected" disabled="disabled">Select</option>
-				</select>
-			</div>
-			<div class="col-md-4" id="schoolDIV">
-				<label for="states-dropdown">School</label> <select
-					class="form-control form-input" id="school-dropdown"
-					onchange="$('#school-id-val').val($('#school-dropdown').val())">
-					<option value="0" selected="selected" disabled="disabled">Select</option>
-				</select>
-			</div>
-			<input type="hidden" name="school"
-				value="{{ form.instance.school.id|default:'0' }}" id="school-id-val">
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="learnergrade7">Grade 7</label> <input type="hidden"
-					class="form-control form-input" id="currentlearnergrade"
-					value="{{ form.instance.learnergrade|default:'' }}"
-					required> <input type="radio"
-					class="form-control form-input" id="learnergrade"
-					name="learnergrade" value="Grade 7">
-			</div>
-			<div class="col-md-2">
-				<label for="learnergrade8">Grade 8</label> <input type="radio"
-					class="form-control form-input" id="learnergrade8"
-					name="learnergrade" value="Grade 8">
-			</div>
-			<div class="col-md-2">
-				<label for="learnergrade9">Grade 9</label> <input type="radio"
-					class="form-control form-input" id="learnergrade9"
-					name="learnergrade" value="Grade 9">
-			</div>
-			<div class="col-md-2">
-				<label for="learnergrade10">Grade 10</label> <input type="radio"
-					class="form-control form-input" id="learnergrade10"
-					name="learnergrade" value="Grade 10">
-			</div>
-			<div class="col-md-2">
-				<label for="learnergrade11">Grade 11</label> <input type="radio"
-					class="form-control form-input" id="learnergrade11"
-					name="learnergrade" value="Grade 11">
-			</div>
-			<div class="col-md-2">
-				<label for="learnergrade12">Grade 12</label> <input type="radio"
-					class="form-control form-input" id="learnergrade12"
-					name="learnergrade" value="Grade 12">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<label for="teachername">Teacher's Name</label> <input type="text"
-					class="form-control form-input" id="teachername" name="teachername"
-					placeholder="i.e. Edvard Harry"
-					value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
-					required>
-			</div>
-			<div class="col-md-4">
-				<label for="teacheremail">Teacher's Email</label> <input
-					type="email" class="form-control form-input" id="teacheremail"
-					name="teacheremail" placeholder="you@example.com"
-					value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
-					required>
-			</div>
-			<div class="col-md-4">
-				<label for="teacherphone">Teacher's Phone</label> <input type="tel"
-					class="form-control form-input" id="teacherphone"
-					name="teacherphone" placeholder="012 345 67 89"
-					value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
-					required>
+			<div class="row">
+				<div class="col-md-4">
+					<label for="teachername">Teacher's Name</label> <input type="text"
+						data-required="1" class="form-control form-input" id="teachername"
+						name="teachername" placeholder="i.e. Edvard Harry"
+						value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
+						required>
+				</div>
+				<div class="col-md-4">
+					<label for="teacheremail">Teacher's Email</label> <input
+						type="email" class="form-control form-input" id="teacheremail"
+						name="teacheremail" placeholder="you@example.com"
+						data-required="1"
+						value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
+						required>
+				</div>
+				<div class="col-md-4">
+					<label for="teacherphone">Teacher's Phone</label> <input type="tel"
+						class="form-control form-input" id="teacherphone"
+						data-required="1" name="teacherphone" placeholder="012 345 67 89"
+						value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
+						required>
+				</div>
 			</div>
 		</div>
 	</div>
-
 
 
 
@@ -344,56 +353,54 @@
 	<!-- 			UPLOAD ARTWORK -->
 
 
+	<div class="card">
+		<div class="card-header collapsed row" data-toggle="collapse"
+			aria-expanded="false" href="#artwork-section">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-palette"></i>&nbsp;My
+					Artwork</a>
+			</div>
+			<div class="col-md-1">
+				<i class="fa status"></i>
+			</div>
+		</div>
+		<div class="collapse card-body" id="artwork-section"
+			data-title="Upload my artwork">
 
-	<div class="card-header collapsed row" data-toggle="collapse"
-		aria-expanded="false" href="#artwork-section">
-		<div class="col-md-12">
-			<a class="card-title">My Artwork</a>
+			<div class="row">
+				<div class="col-md-12">
+					<label for="surname">Title of my artwork</label> <input type="text"
+						data-required="1" class="form-control form-input" id="worktitle"
+						name="worktitle"
+						placeholder="I would like to call my artwork (Max 10 words)"
+						value="{{ form.instance.worktitle|default_if_none:'' }}" required>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" id="">
+					<label for="workfile">Upload image of my artwork</label> <input
+						type="file" class="form-control form-input" id="workfile"
+						name="workfile" placeholder="" value="Browse"
+						value="{{ form.instance.workfile|default_if_none:'' }}"
+						accept="image/*" required>
+				</div>
+				<div class="col-md-12">
+					<div id="main-cropper">
+						<img src="{{ form.instance.workfileCropped }}">
+					</div>
+					<div id="iconCropDiv">
+						<img id="croppedImage" src="" alt="" /> <input type="hidden"
+							class="form-control form-input" id="workfileCropped"
+							name="workfileCropped" placeholder="" value=""
+							value="{{ form.instance.workfileCropped|default_if_none:'' }}"
+							required>
+					</div>
+					<button class="cropIcon" id="cropIcon" style="display: none">Crop</button>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="form-section collapse card-body" id="artwork-section"
-		data-title="Upload my artwork">
-
-		<div class="row">
-			<div class="col-md-12">
-				<label for="surname">Title of my artwork</label> <input type="text"
-					class="form-control form-input" id="worktitle" name="worktitle"
-					placeholder="I would like to call my artwork (Max 10 words)"
-					value="{{ form.instance.worktitle|default_if_none:'' }}" required>
-			</div>
-		</div>
-
-		<div class="row">
-			<!-- 					<div class="col-md-2" id="h-v-label">Vertical</div> -->
-			<!-- 					<div class="col-md-2" id=""> -->
-			<!-- 						<label class="switch"> <input type="checkbox" checked> -->
-			<!-- 							<span class="slider round"></span> -->
-			<!-- 						</label> -->
-			<!-- 					</div> -->
-			<!-- 					<div class="col-md-2" id="">Horizontal</div> -->
-			<div class="col-md-12" id="">
-				<label for="workfile">Upload image of my artwork</label> <input
-					type="file" class="form-control form-input" id="workfile"
-					name="workfile" placeholder="" value="Browse"
-					value="{{ form.instance.workfile|default_if_none:'' }}"
-					accept="image/*" required>
-			</div>
-			<div class="col-md-12">
-				<div id="main-cropper">
-					<img src="{{ form.instance.workfileCropped }}">
-				</div>
-				<div id="iconCropDiv">
-					<img id="croppedImage" src="" alt="" /> <input type="hidden"
-						class="form-control form-input" id="workfileCropped"
-						name="workfileCropped" placeholder="" value=""
-						value="{{ form.instance.workfileCropped|default_if_none:'' }}"
-						required>
-				</div>
-				<button class="cropIcon" id="cropIcon" style="display: none">Crop</button>
-			</div>
-		</div>
-	</div>
-
 
 
 
@@ -402,61 +409,68 @@
 
 
 
-
-	<div class="card-header collapsed row" data-toggle="collapse"
-		aria-expanded="false" href="#questions-section">
-		<div class="col-md-12">
-			<a class="card-title">Questions</a>
-		</div>
-	</div>
-	<div class="form-section collapse card-body" id="questions-section"
-		data-title="Answering questions">
-		<div class="row">
-			<div class="col-md-6">
-				<label for="question1"> <strong>Question 1: </strong>What
-					Mathematics did you use in your artwork? (Explain your answer)
-				</label>
-				<textarea class="form-control form-input"
-					placeholder="Explain it in 50-100 words" id="question1"
-					name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
+	<div class="card">
+		<div class="card-header collapsed row" data-toggle="collapse"
+			aria-expanded="false" href="#questions-section">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-square-root-alt"></i>&nbsp;Questions</a>
 			</div>
-			<div class="col-md-6">
-				<label for="formulafile">Upload Mathematics Image (If a
-					photo of your mathematics would help your explanation, upload an
-					image here)</label> <input type="file" class="form-control form-input"
-					id="workformulafile" name="workformulafile" placeholder=""
-					value="Browse"
-					value="{{ form.instance.workformulafile|default_if_none:'' }}"
-					accept="image/*" required>
+			<div class="col-md-1">
+				<i class="fa status"></i>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<label for="question2"> <strong>Question 2:</strong> How did
-					you creatively connect Mathematics with "My Universe" to your
-					artwork? (Explain your answer)
-				</label>
-				<textarea class="form-control form-input" id="question2"
-					placeholder="Explain it in 50-100 words" name="question2" rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
+		<div class="collapse card-body" id="questions-section"
+			data-title="Answering questions">
+			<div class="row">
+				<div class="col-md-6">
+					<label for="question1"> <strong>Question 1: </strong>What
+						Mathematics did you use in your artwork? (Explain your answer)
+					</label>
+					<textarea class="form-control form-input" data-required="1"
+						placeholder="Explain it in 50-100 words" id="question1"
+						name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
+				</div>
+				<div class="col-md-6">
+					<label for="formulafile">Upload Mathematics Image (If a
+						photo of your mathematics would help your explanation, upload an
+						image here)</label> <input type="file" class="form-control form-input"
+						id="workformulafile" name="workformulafile" placeholder=""
+						value="Browse"
+						value="{{ form.instance.workformulafile|default_if_none:'' }}"
+						accept="image/*" required>
+				</div>
 			</div>
-			<div class="col-md-6">
-				<label for="question3"> <strong>Question 3:</strong> Do you
-					think creativity could be used to teach Mathematics? (Explain your
-					answer)
-				</label>
-				<textarea class="form-control form-input" id="question3"
-					placeholder="Explain it in 50-100 words" name="question3" rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="question2"> <strong>Question 2:</strong> How
+						did you creatively connect Mathematics with "My Universe" to your
+						artwork? (Explain your answer)
+					</label>
+					<textarea class="form-control form-input" id="question2"
+						data-required="1" placeholder="Explain it in 50-100 words"
+						name="question2" rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
+				</div>
+				<div class="col-md-6">
+					<label for="question3"> <strong>Question 3:</strong> Do you
+						think creativity could be used to teach Mathematics? (Explain your
+						answer)
+					</label>
+					<textarea class="form-control form-input" id="question3"
+						data-required="1" placeholder="Explain it in 50-100 words"
+						name="question3" rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row" id="footer-form-btns">
-		<div class="col-md-6 text-center">
-			<button class="action-button" type="submit" id="buttonSubmit">Save
-				& Continue Later</button>
+		<div class="col-md-6 text-center" data-toggle="tooltip"
+			data-placement="top" title="Fill the required forms to activate me">
+			<button class="btn btn-warning btn-sm col-md-12 disabled"
+				type="submit" id="buttonSubmit">Submit</button>
 		</div>
 		<div class="col-md-6 text-center">
-			<button class="action-button disabled" type="button"
-				onclick="toggleMessageBox('Please fill all the fields first',true)">Submit</button>
+			<button class="btn btn-outline-success btn-sm col-md-12"
+				type="submit" id="buttonSaveContinue">Save & Continue Later</button>
 		</div>
 	</div>
 </form>
