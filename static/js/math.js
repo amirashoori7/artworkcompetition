@@ -240,15 +240,17 @@ function getSchoolVal(reason) {
 		success : function(response) {
 			if(reason==1) {
 				$("#province-dropdown").html("")
-				$("#province-dropdown").html('<option value="" selected="selected" disabled="disabled">Province</option>')
+				$("#province-dropdown").html('<option value="" selected="selected">Province</option>')
+				$("#province-dropdown").removeClass("disabled")
 				$(response).each(function(i,j){
 					if(!$('#province-dropdown option[value="'+j+'"]').length)
 						$("#province-dropdown").append($("<option/>").attr("value",j).text(j))
 					
 				})
 			} else if(reason==2){
-				$("#region-dropdown").html('<option value="" selected="selected" disabled="disabled">Region</option>')
+				$("#region-dropdown").html('<option value="" selected="selected">Region</option>')
 				$("#region-dropdownDIV").fadeIn()
+				$("#region-dropdown").removeClass("disabled")
 				$(response).each(function(i,j){
 					if(!$('#region-dropdown option[value="'+j+'"]').length)
 						$("#region-dropdown").append($("<option/>").attr("value",j).text(j))
@@ -258,6 +260,7 @@ function getSchoolVal(reason) {
 				$("#school-dropdown").html('<option value="" selected="selected" value="0" disabled="disabled">School</option>')
 				$("#schoolDIV").fadeIn()
 				$("#region-dropdownDIV").fadeIn()
+				$("#school-dropdown").removeClass("disabled")
 				$(response).each(function(i,j){
 					if(!$('#school-dropdown option[value="'+j[1]+'"]').length)
 						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[1]))
