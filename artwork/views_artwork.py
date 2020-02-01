@@ -12,8 +12,6 @@ from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
-from google.protobuf.text_format import ParseInteger
-from h5py.h5t import INTEGER
 
 
 def index(request):
