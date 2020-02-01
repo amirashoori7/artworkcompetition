@@ -39,6 +39,9 @@
 			</div>
 		</div>
 		<nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
+			<a class="navbar-brand" href="#"> <img
+				src="static/img/MAlogo.png" width="30" height="30" alt="">
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -48,9 +51,6 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="menu-item active" data-href-html="home.html"
-						data-href="/home/"><a class="nav-link" href="#"><img
-							src="static/img/MAlogo.png"><span></span></a></li>
 
 					<li class="menu-item active" data-href-html="home.html"
 						data-href="/home/"><a class="nav-link" href="#"><img
@@ -63,13 +63,7 @@
 
 					<li class="menu-item" data-href-html="rules.html"
 						data-href="/rules/"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/Rules.svg"><span>Competition
-								Rules</span></a></li>
-
-					<li class="menu-item" data-href-html="faq.html" data-href="/faq/"><a
-						class="nav-link" href="#"><img class="svg"
-							src="static/img/icons/FAQ.svg"><span>Frequently
-								Asked Questions</span></a></li>
+							class="svg" src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
 					<li class="menu-item" data-href-html="signup_page.html"
 						data-href="/signup_page/"><a class="nav-link" href="#"><img
@@ -78,17 +72,23 @@
 
 					<li class="menu-item" data-href-html="history.html"
 						data-href="/history/"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/History.svg"><span>Competition
-								History</span></a></li>
+							class="svg" src="static/img/icons/History.svg"><span>History</span></a></li>
+
+					<li class="menu-item" data-href-html="faq.html" data-href="/faq/"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/FAQ.svg"><span>Frequently
+								Asked Questions</span></a></li>
+								
+								
 					<li class="menu-item" data-href-html="contactus.html"
 						data-href="{% url 'artwork:contactus' %}"><a class="nav-link"
 						href="#"><img class="svg" src="static/img/icons/Contact.svg"><span>Contact
-								Us</span></a></li>
+						</span></a></li>
 					</li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
-				</ul>
 			</div>
+			<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
+			</ul>
 		</nav>
 		<div class="row" id="banner-top">
 			<div class="col-md-12 banners-background-image"></div>

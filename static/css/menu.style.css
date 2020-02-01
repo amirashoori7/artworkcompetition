@@ -1,13 +1,11 @@
 .menu-item {
     cursor: pointer;
-    min-width: 122px;
     text-align: center;
 }
 
 .menu-item svg {
 	width: auto;
 	height: 33px;
-	margin-top: 11px;
 }
 
 .menu-item a img{
