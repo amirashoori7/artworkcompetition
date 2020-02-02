@@ -8,9 +8,18 @@
 				/ (1000 * 60 * 60));
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		$("#signupbuttonid").html(
-				"<strong>" + days + " days, " + hours + " h, " + minutes
-						+ " m, " + seconds + " s </strong>");
+// 		$("#signupbuttonid").html(
+// 				"<ul><li class='date-counter' data-text='DAYS'>" + days
+// 						+ "</li> <li class='date-counter' data-text='HOURSE'>"
+// 						+ hours
+// 						+ "</li> <li class='date-counter' data-text='MINUTES'>"
+// 						+ minutes
+// 						+ "</li> <li class='date-counter' data-text='SECONDS'>"
+// 						+ seconds + "</li></ul>");
+		$('[data-text="DAYS"]').html(days)
+		$('[data-text="HOURS"]').html(hours)
+		$('[data-text="MINUTES"]').html(minutes)
+		$('[data-text="SECONDS"]').html(seconds)
 		if (distance < 0) {
 			clearInterval(x);
 			$("#demo").html() = "EXPIRED";
@@ -24,12 +33,9 @@
 		<p>2020's Theme</p>
 	</h1>
 </div>
-<div class="landing-page-content div-13">
-</div>
+<div class="landing-page-content div-13"></div>
 <div class="landing-page-content div-8">
-	<h3 style="font-style: italic;">
-		Registration Opens in <span id="signupbuttonid"></span>
-	</h3>
+
 	<!-- 	<h5>Deadline</h5> -->
 	<!-- 	<h5>Registration Opens in</h5> -->
 </div>
@@ -40,4 +46,5 @@
 	</ul>
 </div>
 <script>
+	
 </script>

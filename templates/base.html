@@ -18,7 +18,6 @@
 <link href="static/css/menu.style.css" rel="stylesheet">
 <link href="static/css/content.style.css" rel="stylesheet">
 <script src="static/js/jquery/jquery-3.4.1.min.js"></script>
-<script src="static/js/math.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="static/js/GSAP/TweenMax.min.js"></script>
@@ -78,8 +77,8 @@
 						class="nav-link" href="#"><img class="svg"
 							src="static/img/icons/FAQ.svg"><span>Frequently
 								Asked Questions</span></a></li>
-								
-								
+
+
 					<li class="menu-item" data-href-html="contactus.html"
 						data-href="{% url 'artwork:contactus' %}"><a class="nav-link"
 						href="#"><img class="svg" src="static/img/icons/Contact.svg"><span>Contact
@@ -95,31 +94,46 @@
 			<div class="col-md-12 banners-text-content">Inspiring artistic
 				connections with Mathematics</div>
 		</div>
-		<nav class="navbar fixed-bottom navbar-light bg-light">
-			<div class="row" id="banner-bottom-1">
-				<div class="col-md-12 banners-background-image"></div>
-				<div class="col-md-12 banners-text-content">Inspiring artistic
-					connections with Mathematics</div>
+		<div class="row fixed-bottom" id="banner-bottom-1">
+			<div class="col-md-12 banners-text-content">
+				<h3 style="font-style: italic;">
+					Registration Opens in <span id="signupbuttonid">
+						<ul>
+							<li class="date-counter" data-text="DAYS"></li>
+							<li class="date-counter" data-text="HOURS"></li>
+							<li class="date-counter" data-text="MINUTES"></li>
+							<li class="date-counter" data-text="SECONDS"></li>
+						</ul>
+					</span>
+				</h3>
 			</div>
-			<div class="row" id="banner-bottom-2">
-				<div class="col-md-12 banners-background-image"></div>
-				<div class="col-md-12 banners-text-content">Inspiring artistic
-					connections with Mathematics</div>
-				<p class="mb-1">&copy; 2019 Company Name</p>
-				<ul class="list-inline">
-					<li class="list-inline-item"><a href="#">Privacy</a></li>
-					<li class="list-inline-item"><a href="#">Terms</a></li>
-					<li class="list-inline-item"><a href="#">Support</a></li>
-				</ul>
-			</div>
-		</nav>
+			<div class="col-md-12 banners-background-image"></div>
+			<div class="col-md-12 banners-text-content">Inspiring artistic
+				connections with Mathematics</div>
+		</div>
+		<div class="row fixed-bottom" id="banner-bottom-2">
+			<div class="col-md-12 second-color"></div>
+			<div class="col-md-12 banners-text-content">Inspiring artistic
+				connections with Mathematics</div>
+			<div class="col-md-12 third-color"></div>
+			<div class="col-md-12 banners-text-content">Inspiring artistic
+				connections with Mathematics</div>
+		</div>
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10" id="page-content">{% block content %}</div>
 		</div>
+		<!-- 				<p class="mb-1">&copy; 2019 Company Name</p> -->
+		<!-- 				<ul class="list-inline"> -->
+		<!-- 					<li class="list-inline-item"><a href="#">Privacy</a></li> -->
+		<!-- 					<li class="list-inline-item"><a href="#">Terms</a></li> -->
+		<!-- 					<li class="list-inline-item"><a href="#">Support</a></li> -->
+		<!-- 				</ul> -->
 
 
 	</div>
 	{% endblock %}
 </body>
+<script src="static/js/math.js"></script>
+
 </html>

@@ -26,15 +26,15 @@ function loadContent(liItem) {
 	$("div#page-content").hide()
 	var url = ""
 	$(".menu-item").removeClass("active")
-	$(".banners-background-image").css(
-			"background-position",
-			Math.floor(Math.random() * 333) + "px "
-					+ Math.floor(Math.random() * 333) + "px")
+//	$(".banners-background-image").css(
+//			"background-position",
+//			Math.floor(Math.random() * 333) + "px "
+//					+ Math.floor(Math.random() * 333) + "px")
 	$(liItem).addClass("active")
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-	var contentHeight = $(".navbar.fixed-bottom").position().top - ($("#banner-top").position().top+$("#banner-top").height())
+	var contentHeight = $(".fixed-bottom").position().top - ($("#banner-top").position().top + $("#banner-top").height())
 	$("#page-content").load(
 			url,
 			function(response) {
