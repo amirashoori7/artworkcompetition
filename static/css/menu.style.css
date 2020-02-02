@@ -49,12 +49,6 @@
 .banners-background-image {
 	background: url("../img/bg/Backicons.svg");
 	background-size: cover;
-	background-position: 65px 248px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
 }
 
 .fixed-bottom {
@@ -66,11 +60,8 @@
 }
 
 .banners-text-content {
-	position: absolute;
 	text-align: center;
 	height: 69px;
-	font-size: 27px;
-	line-height: 69px;
 }
 
 #banner-bottom-1 {
@@ -78,7 +69,7 @@
 }
 
 .second-color {
-	background-color: var(--main-color-green) !important;
+	background-color: var(--main-color-purple) !important;
 }
 
 .third-color {
@@ -86,5 +77,24 @@
 }
 
 #signupbuttonid ul {
-	
+	list-style: none;
+	margin: 0;
+}
+
+#signupbuttonid ul li {
+	display: inline-flex;
+    border-left: 1px solid white;
+    width: 66px;
+    color: white;
+    height: 33px;
+    line-height: 1;
+    text-align: center;
+}
+
+#signupbuttonid ul li span {
+    text-align: center;
+    display: block;
+    width: 66px;
+    height: 33px;
+    line-height: 33px;
 }
