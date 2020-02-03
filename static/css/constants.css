@@ -2,5 +2,7 @@
 	--main-color-green: #01c8a6;
 	--main-color-pink: #f25156;
 	--main-color-yellow: #f1e106;
-	--main-color-purple: #3b2f8b;
+	--main-color-dark-blue: #3b2f8b;
+	--main-color-aqua: rgb(141, 244,243);
+	--main-color-grey-text: rgb(192,200,211);
 }

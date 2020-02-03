@@ -40,10 +40,12 @@
 	height: 99px;
 }
 
-#banner-top {
-	background: var(--main-color-yellow);
+#banner-top, #banner-top .banners-text-content, #banner-top .banners-text-content img {
 	height: 69px;
+	text-align: center;
 }
+
+
 
 .banners-background-image {
 	background: url("../img/bg/Backicons.svg");
@@ -76,7 +78,7 @@
 }
 
 .third-color {
-	background-color: var(--main-color-purple) !important;
+	background-color: var(--main-color-dark-blue) !important;
 }
 
 .banners-text-content label {
@@ -87,12 +89,12 @@
 
 }
 
-#signupbuttonid ul {
+.timeCounterDiv ul {
 	list-style: none;
 	margin: 0;
 }
 
-#signupbuttonid ul li {
+.timeCounterDiv ul li {
 	display: inline-flex;
     border-left: 1px solid white;
     width: 66px;
@@ -102,7 +104,7 @@
     text-align: center;
 }
 
-#signupbuttonid ul li span {
+.timeCounterDiv ul li span {
     text-align: center;
     display: block;
     width: 66px;
@@ -111,7 +113,7 @@
     font-size: 33px;
 }
 
-#signupbuttonid ul li:before {
+.timeCounterDiv ul li:before {
     content: attr(data-text);
     position: absolute;
     top: 30px;

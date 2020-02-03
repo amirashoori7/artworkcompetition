@@ -32,6 +32,7 @@ function populateDangerMessageField(fieldId, text) {
 
 function loadContent(liItem) {
 	$("div#page-content").hide()
+	$("#banner-bottom-1").fadeIn()
 	var url = ""
 	$(".menu-item").removeClass("active")
 //	$(".banners-background-image").css(
@@ -65,6 +66,11 @@ function loadContent(liItem) {
 				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area-bg"))
 				tl.play()
+				if($(liItem).attr("data-color")!=null){
+					var color = "var("+$(liItem).attr("data-color")+")";
+					console.log(color)
+					$("#banner-top").css("background-color", "var("+$(liItem).attr("data-color")+")")
+				}
 			})
 }
 

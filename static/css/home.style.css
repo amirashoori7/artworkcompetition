@@ -18,7 +18,7 @@
 }
 
 .my-universe {
-	color: var(--main-color-purple);
+	color: var(--main-color-dark-blue);
 	font-size: 44px;
 	text-align: center;
 	margin: 0 0 22px 0;
@@ -26,7 +26,7 @@
 
 .comp-theme {
 	color: var(--main-color-pink);
-    font-size: 22px;
+    font-size: 33px;
     text-align: center;
     font-weight: bold;
 	margin: 22px 0 11px 0;
@@ -39,4 +39,26 @@
 .youtube-btn img{
 	width: 33%;
 	height: auto;
+}
+
+#banner-bottom-home {
+	background-color: var(--main-color-pink) !important;
+    height: 133px;
+    margin-bottom: 33px;
+    padding-top: 11px;
+}
+
+.col-md-6.mid-div-icons{
+	color: var(--main-color-aqua) !important;
+	font-size: 22px;
+	font-weight: bold;
+}
+.col-md-6.mid-div-icons img{
+	width: 44px;
+	height: 44px;
+	margin-right: 11px;
+}
+
+.mid-div-container .col-md-6 {
+	color: var(--main-color-grey-text);
 }
