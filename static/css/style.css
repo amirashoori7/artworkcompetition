@@ -158,3 +158,13 @@ p {
 	overflow-x: hidden;
 }
 
+.content-holder-overflow{
+    padding: 0;
+    position: fixed;
+    top: 133px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-x: hidden;
+    margin: 0;
+}

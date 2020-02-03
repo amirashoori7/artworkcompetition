@@ -31,7 +31,6 @@
 .menu-item span {
 	color: var(--main-color-green);
 	line-height: 17px;
-	font-size: 16px;
 	display: block;
 	padding: 11px;
 }
@@ -51,14 +50,6 @@
 	background-size: cover;
 }
 
-.fixed-bottom {
-	position: fixed;
-	bottom: 0;
-	height: 133px;
-	left: 0;
-	right: 0;
-}
-
 .banners-text-content {
 	text-align: center;
 	height: 69px;
@@ -66,14 +57,33 @@
 
 #banner-bottom-1 {
 	z-index: 1111;
+    height: 133px;
+    margin-bottom: 33px;
+    padding-top: 11px;
+}
+
+#banner-bottom-2 {
+	height: 66px;
 }
 
 .second-color {
-	background-color: var(--main-color-purple) !important;
+	background-color: var(--main-color-yellow) !important;
+}
+
+.second-color *:not(small){
+	color: black !important;
 }
 
 .third-color {
-	background-color: var(--main-color-pink) !important;
+	background-color: var(--main-color-purple) !important;
+}
+
+.banners-text-content label {
+	color: white;
+    height: 33px;
+    font-size: 22px;
+    font-weight: bold;
+
 }
 
 #signupbuttonid ul {
@@ -95,6 +105,16 @@
     text-align: center;
     display: block;
     width: 66px;
-    height: 33px;
+    height: 27px;
     line-height: 33px;
+    font-size: 33px;
 }
+
+#signupbuttonid ul li:before {
+    content: attr(data-text);
+    position: absolute;
+    top: 30px;
+    font-size: 11px;
+    width: 69px;
+}
+

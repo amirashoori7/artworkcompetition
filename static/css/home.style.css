@@ -1,0 +1,10 @@
+.main-content-brain {
+	background-color: var(--main-color-green);
+}
+
+.brain-holder-div {
+	background-image: url("../img/bg/Backicons.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+    text-align: center;
+}

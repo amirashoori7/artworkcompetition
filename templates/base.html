@@ -16,6 +16,7 @@
 <link href="static/css/form.style.css" rel="stylesheet">
 <link href="static/css/table.style.css" rel="stylesheet">
 <link href="static/css/menu.style.css" rel="stylesheet">
+<link href="static/css/home.style.css" rel="stylesheet">
 <link href="static/css/content.style.css" rel="stylesheet">
 <script src="static/js/jquery/jquery-3.4.1.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
@@ -89,42 +90,36 @@
 			<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
 			</ul>
 		</nav>
-		<div class="row" id="banner-top">
-			<div class="col-md-12 banners-background-image"></div>
-			<div class="col-md-12 banners-text-content">Inspiring artistic
-				connections with Mathematics</div>
-		</div>
-		<div class="row fixed-bottom" id="banner-bottom-1">
-			<div class="col-md-12 banners-text-content">
-				<span id="signupbuttonid">
-					<ul>
-						<li class="date-counter" data-text="DAYS"><span>22</span></li>
-						<li class="date-counter" data-text="HOURS"></li>
-						<li class="date-counter" data-text="MINUTES"></li>
-						<li class="date-counter" data-text="SECONDS"></li>
-					</ul>
-				</span>
-				<a class="btn-enternow btn btn-danger">ENTER NOW</a>
+		<div class="row content-holder-overflow">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12" id="page-content"></div>
+				</div>
+				<div class="row second-color" id="banner-bottom-1">
+					<div class="col-md-12 banners-text-content">
+						<label for="signupbuttonid">Time left to enter</label> <span
+							id="signupbuttonid">
+							<ul>
+								<li class="date-counter" data-text="DAYS"><span>22</span></li>
+								<li class="date-counter" data-text="HOURS"></li>
+								<li class="date-counter" data-text="MINUTES"></li>
+								<li class="date-counter" data-text="SECONDS"></li>
+							</ul>
+						</span>
+						<button class="btn-enternow btn btn-danger">ENTER NOW</button>
+					</div>
+				</div>
+				<div class="row " id="banner-bottom-2">
+					<div class="col-md-12 third-color">
+						<ul>
+							<li></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row fixed-bottom" id="banner-bottom-2">
-			<div class="col-md-12 second-color"></div>
-			<div class="col-md-12 third-color"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-md-10" id="page-content">{% block content %}</div>
-		</div>
-		<!-- 				<p class="mb-1">&copy; 2019 Company Name</p> -->
-		<!-- 				<ul class="list-inline"> -->
-		<!-- 					<li class="list-inline-item"><a href="#">Privacy</a></li> -->
-		<!-- 					<li class="list-inline-item"><a href="#">Terms</a></li> -->
-		<!-- 					<li class="list-inline-item"><a href="#">Support</a></li> -->
-		<!-- 				</ul> -->
-
-
 	</div>
-	{% endblock %}
+	{% block content %} {% endblock %}
 </body>
 <script src="static/js/math.js"></script>
 

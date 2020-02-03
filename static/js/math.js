@@ -22,6 +22,14 @@ function populateWarningMessageField(fieldId, text) {
 	$("#" + fieldId).parent().find("label").after(errorSection)
 }
 
+function populateDangerMessageField(fieldId, text) {
+	$("small").remove()
+	var errorSection = $("<small/>").addClass("text-danger")
+	$("<br/>").appendTo(errorSection)
+	errorSection.append(text)
+	$("#" + fieldId).parent().find("label").after(errorSection)
+}
+
 function loadContent(liItem) {
 	$("div#page-content").hide()
 	var url = ""
@@ -34,7 +42,7 @@ function loadContent(liItem) {
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-	var contentHeight = $(".fixed-bottom").position().top - ($("#banner-top").position().top + $("#banner-top").height())
+//	var contentHeight = $(".fixed-bottom").position().top - ($("#banner-top").position().top + $("#banner-top").height())
 	$("#page-content").load(
 			url,
 			function(response) {
@@ -43,10 +51,10 @@ function loadContent(liItem) {
 					ease : Power4.easeOut
 				})
 				tl.to("#page-content", 1, {
-					height : 0,
+					opacity : 0,
 					transformOrigin : "top"
 				}).to("#page-content", 1.2, {
-					height : contentHeight,
+					opacity : 1,
 					transformOrigin : "top"
 				}, "-= .4")
 				$("#page-content").fadeIn()

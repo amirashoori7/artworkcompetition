@@ -17,7 +17,7 @@
 	transition: background .2s ease-in, color .2s ease-in;
 }
 
-.action-button.disabled, .action-button.disabled:hover{
+.action-button.disabled, .action-button.disabled:hover {
 	background: linear-gradient(0deg, #7f8fa0, #8187a5);
 }
 
@@ -95,7 +95,8 @@
 	background: linear-gradient(0deg, #fefefe, #e3f4fa);
 	box-shadow: none;
 }
-.btn-enternow{
+
+.btn-enternow {
+	margin-top: 5px;
 	color: white;
 }
-

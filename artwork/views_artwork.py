@@ -96,13 +96,17 @@ def signup_page(request):
     return render(request, 'signup_page.html', context)
 
 
-@login_required
-@transaction.atomic
+# @login_required
+# @transaction.atomic
 def entry_form(request):
+    response_data = {}
+    if request.user is not None:
+        artwork_form = EntryForm()
+        context = {'form': artwork_form, 'user_form': UserForm()}
+        return render(request, 'entry_form.html', context)
     userModel = ProjectUser.objects.get(username=request.user)
     user_form = UserForm(instance=request.user)
     if request.method == 'POST':
-        response_data = {}
         if request.POST["id"] is not '0':
             old_data = get_object_or_404(Artwork, id=request.POST["id"])
             artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)

@@ -30,16 +30,16 @@
 	}
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
-		{% if user.is_authenticated %}
+		{#% if user.is_authenticated %#}
 		fetchEntryForm()
-		{% else %}
+		{#% else %#}
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
 				submitRegistryForm()
 			})
 		})
-		{% endif %}
+		{#% endif %#}
 	})
 
 	function checkValidation() {
@@ -95,6 +95,12 @@
 		},1000)
 	}
 	function submitRegistryForm() {
+		$('.content-holder-overflow').animate({
+	        scrollTop: $("#banner-bottom-1").offset().top
+	    }, 'slow', function() {
+			populateDangerMessageField("banner-bottom-1", "The registration will be activated in ")
+	    })
+		return false;
 		var form = $('#registry-form')[0];
 		$("#register-btn").prop("disabled", true);
 		var data = new FormData(form);
@@ -151,6 +157,12 @@
 	}
 
 	function submitEntryForm() {
+		$('.content-holder-overflow').animate({
+	        scrollTop: $("#banner-bottom-1").offset().top
+	    }, 'slow', function() {
+			populateDangerMessageField("banner-bottom-1", "The registration will be activated in ")
+	    })
+		return false;
 		var form = $('#entry-form-id')[0];
 		$("#buttonSubmit, buttonSaveContinue").prop("disabled", true);
 		var data = new FormData(form);
@@ -194,8 +206,15 @@
 				})
 	}
 </script>
-{% if user.is_authenticated %}
-
+{#% if user.is_authenticated %#}
+<div class="page-title">
+	<h4>Register</h4>
+</div>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8" id="registrationForm"></div>
+</div>
+{#% else %#}
 <div class="page-title">
 	<h4>Entry Form</h4>
 </div>
@@ -204,12 +223,4 @@
 	<div class="col-md-8" id="artwork-submit-form-holder-id"></div>
 </div>
 </section>
-{% else %}
-<div class="page-title">
-	<h4>Register</h4>
-</div>
-<div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8" id="registrationForm"></div>
-</div>
-{% endif %}
+{#% endif %#}
