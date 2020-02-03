@@ -69,6 +69,7 @@ function loadContent(liItem) {
 }
 
 $(document).ready(function() {
+	runTimer()
 	$('img.svg').each(function() {
 		var $img = jQuery(this);
 		var imgID = $img.attr('id');
@@ -284,22 +285,22 @@ function getSchoolVal(reason) {
 		}
 	})
 }
-$('[data-text="DAYS"]').html($("<span/>").text(21))
-
 var countDownDate = new Date("Mar 3, 2020 00:00:00").getTime();
-var x = setInterval(function() {
-	var now = new Date().getTime();
-	var distance = countDownDate - now;
-	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	var hours = Math.floor((distance % (1000 * 60 * 60 * 24))
-			/ (1000 * 60 * 60));
-	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	$('[data-text="DAYS"]').html($("<span/>").text(days))
-	$('[data-text="HOURS"]').html($("<span/>").text(hours))
-	$('[data-text="MINUTES"]').html($("<span/>").text(minutes))
-	$('[data-text="SECONDS"]').html($("<span/>").text(seconds))
-	if (distance < 0) {
-		clearInterval(x);
-	}
-}, 1000);
+function runTimer(){
+	var x = setInterval(function() {
+		var now = new Date().getTime();
+		var distance = countDownDate - now;
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24))
+				/ (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		$('[data-text="DAYS"]').html($("<span/>").text(days))
+		$('[data-text="HOURS"]').html($("<span/>").text(hours))
+		$('[data-text="MINUTES"]').html($("<span/>").text(minutes))
+		$('[data-text="SECONDS"]').html($("<span/>").text(seconds))
+		if (distance < 0) {
+			clearInterval(x);
+		}
+	}, 1000);
+}
