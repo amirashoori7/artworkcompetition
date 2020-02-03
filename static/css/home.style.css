@@ -3,8 +3,40 @@
 }
 
 .brain-holder-div {
-	background-image: url("../img/bg/Backicons.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
+    background-image: url(../img/bg/Backicons.svg);
+    background-size: 88%;
+    background-repeat: no-repeat;
     text-align: center;
+    margin: 33px 0;
+    background-position: 77% 13%;
+}
+
+.brain-holder-div img {
+    width: 70%;
+    height: auto;
+    margin-top: 24px;
+}
+
+.my-universe {
+	color: var(--main-color-purple);
+	font-size: 44px;
+	text-align: center;
+	margin: 0 0 22px 0;
+}
+
+.comp-theme {
+	color: var(--main-color-pink);
+    font-size: 22px;
+    text-align: center;
+    font-weight: bold;
+	margin: 22px 0 11px 0;
+}
+
+.youtube-btn {
+	text-align: center;
+	margin-bottom: 22px;
+}
+.youtube-btn img{
+	width: 33%;
+	height: auto;
 }

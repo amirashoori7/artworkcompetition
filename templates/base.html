@@ -6,23 +6,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+{% with version=0.1 %}
 <title>{% block title %} {% endblock title %}</title>
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
 <link href="static/css/bootstrap/bootstrap.min.css.map" rel="stylesheet">
 <link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
-<link href="static/css/style.css" rel="stylesheet">
-<link href="static/css/constants.css" rel="stylesheet">
-<link href="static/css/buttons.style.css" rel="stylesheet">
-<link href="static/css/form.style.css" rel="stylesheet">
-<link href="static/css/table.style.css" rel="stylesheet">
-<link href="static/css/menu.style.css" rel="stylesheet">
-<link href="static/css/home.style.css" rel="stylesheet">
-<link href="static/css/content.style.css" rel="stylesheet">
+<link href="static/css/style.css?ver={{ version }}" rel="stylesheet">
+<link href="static/css/constants.css?ver={{ version }}" rel="stylesheet">
+<link href="static/css/buttons.style.css?ver={{ version }}"
+	rel="stylesheet">
+<link href="static/css/form.style.css?ver={{ version }}"
+	rel="stylesheet">
+<link href="static/css/table.style.css?ver={{ version }}"
+	rel="stylesheet">
+<link href="static/css/menu.style.css?ver={{ version }}"
+	rel="stylesheet">
+<link href="static/css/home.style.css?ver={{ version }}"
+	rel="stylesheet">
+<link href="static/css/content.style.css?ver={{ version }}"
+	rel="stylesheet">
 <script src="static/js/jquery/jquery-3.4.1.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="static/js/GSAP/TweenMax.min.js"></script>
-
 </head>
 
 <body>
@@ -54,7 +60,7 @@
 
 					<li class="menu-item active" data-href-html="home.html"
 						data-href="/home/"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/home.svg"><span>Home</span></a></li>
+							class="svg" src="static/img/icons/Home.svg"><span>Home</span></a></li>
 
 					<li class="menu-item" data-href-html="howtoenter.html"
 						data-href="/howtoenter/"><a class="nav-link" href="#"><img
@@ -111,9 +117,9 @@
 				</div>
 				<div class="row " id="banner-bottom-2">
 					<div class="col-md-12 third-color">
-						<ul>
-							<li></li>
-						</ul>
+						<span class="social-media-btn"><i class="fa fa-facebook"></i></span>
+						<span class="social-media-btn"><i class="fa fa-youtube"></i></span>
+						<span class="social-media-btn"><i class="fa fa-instagram"></i></span>
 					</div>
 				</div>
 			</div>
@@ -121,6 +127,6 @@
 	</div>
 	{% block content %} {% endblock %}
 </body>
-<script src="static/js/math.js"></script>
-
+<script src="static/js/math.js?ver={{ version }}"></script>
+{% endwith %}
 </html>
