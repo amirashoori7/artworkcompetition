@@ -62,3 +62,19 @@
 .mid-div-container .col-md-6 {
 	color: var(--main-color-grey-text);
 }
+
+.contact-title {
+	font-size: 33px;
+	color: var(--main-color-light-blue);
+	text-align: center;
+	font-weight: bold;
+}
+
+.contact-logo-holder {
+	width: 222px;
+	height: auto;
+}
+
+.contact-main-div-bg{
+/* 	background-image: url(../img/icons/Enter.svg); */
+}

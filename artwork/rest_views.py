@@ -2,8 +2,6 @@ from django.http import JsonResponse
 from .serializer import ArtworkSerializer
 from .models_artwork import Artwork
 from artwork.models_artwork import School
-import simplejson
-from django.core import serializers
 import json
 from django.http.response import HttpResponse
 
