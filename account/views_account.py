@@ -15,9 +15,6 @@ def registration(request):
     response_data = {}
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
-        matching_unames = ProjectUser.objects.filter(username=request.POST['username'])
-        if matching_unames.count() > 0:
-            msg = "Course name: %s has already exist."
         if form.is_valid():
             form = form.save()
             response_data['successResult'] = 'Registration succeed'

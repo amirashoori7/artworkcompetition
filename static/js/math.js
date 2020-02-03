@@ -23,11 +23,11 @@ function populateWarningMessageField(fieldId, text) {
 }
 
 function populateDangerMessageField(fieldId, text) {
-	$("small").remove()
-	var errorSection = $("<small/>").addClass("text-danger")
+	$("small."+fieldId).remove()
+	var errorSection = $("<small/>").addClass("text-danger "+fieldId)
 	$("<br/>").appendTo(errorSection)
 	errorSection.append(text)
-	$("#" + fieldId).parent().find("label").after(errorSection)
+	$("#" + fieldId).before(errorSection)
 }
 
 function loadContent(liItem) {
