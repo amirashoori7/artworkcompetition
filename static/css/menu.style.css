@@ -120,3 +120,8 @@
     width: 69px;
 }
 
+.navbar-nav.mr-auto {
+	max-width: 822px;
+	margin: 0 auto;
+	width: 100%;
+}
