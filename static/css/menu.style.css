@@ -68,7 +68,6 @@
 
 .banners-text-content {
 	text-align: center;
-	height: 69px;
 }
 
 #banner-bottom-1 {
@@ -96,10 +95,8 @@
 
 .banners-text-content label {
 	color: white;
-    height: 33px;
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 22px;
 }
 
 .timeCounterDiv ul {
@@ -129,7 +126,7 @@
 .timeCounterDiv ul li:before {
     content: attr(data-text);
     position: absolute;
-    top: 44px;
+    top: -17px;
     font-size: 11px;
     width: 69px;
 }

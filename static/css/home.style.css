@@ -19,7 +19,7 @@
 
 .my-universe {
 	color: var(--main-color-dark-blue);
-	font-size: 44px;
+	font-size: 40px;
 	text-align: center;
     font-weight: bolder;
 	margin: 0 0 22px 0;
@@ -29,7 +29,7 @@
 
 .comp-theme {
 	color: var(--main-color-pink);
-    font-size: 33px;
+    font-size: 31px;
     text-align: center;
     font-weight: bolder;
 	margin: 22px 0 11px 0;
@@ -47,17 +47,17 @@
 
 #banner-bottom-home {
 	background-color: var(--main-color-pink) !important;
-    height: 155px;
+    height: 122px;
     margin-bottom: 33px;
     padding-top: 11px;
 }
 
-.col-md-6.mid-div-icons{
+.mid-div-icons{
 	color: var(--main-color-green) !important;
 	font-size: 22px;
 	font-weight: bold;
 }
-.col-md-6.mid-div-icons img{
+.mid-div-icons img{
 	width: 44px;
 	height: 44px;
 	margin-right: 11px;
