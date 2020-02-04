@@ -1,8 +1,65 @@
+<!-- <div class="row" id="banner-top"> -->
+<!-- 	<div class="banners-background-image"> -->
+<!-- 				<img alt="" src="static/img/graphics/Inspiringbar2.png"> -->
+<!-- 	</div> -->
+<!-- 	<div class="col-md-12" style="color: var(--main-color-dark-blue)"> -->
+<!-- 			Inspiring artistic connections with Maths -->
+<!-- 	</div> -->
+<!-- </div> -->
+<!-- <div class="row" id="banner-top"> -->
+<!-- 	<div class="banners-background-image"> -->
+<!-- 		<img alt="" src="static/img/graphics/Inspiringbar2.png"> -->
+<!-- 	</div> -->
+<!-- 	<div class="col-md-12" style="color: var(- -main-color-dark-blue)"> -->
+<!-- 		Inspiring artistic connections with Maths</div> -->
+<!-- </div> -->
+
 <div class="row" id="banner-top">
 	<div class="col-md-12 banners-text-content">
 		<img alt="" src="static/img/graphics/Inspiringbar2.png">
 	</div>
 </div>
+<style>
+p {
+	display: list-item;
+	/* This has to be "list-item"                                               */
+	list-style-type: disc;
+	/* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+	list-style-position: inside;
+}
+
+.card-header:before {
+	content: "\f077";
+	font-size: 26px;
+	position: absolute;
+	right: 13px;
+	font-family: "Font Awesome 5 Free";
+	top: 13px;
+	font-weight: bold;
+}
+
+.card-header.collapsed:before {
+	content: "\f078";
+}
+
+.card-header {
+	cursor: pointer;
+	font-weight: normal;
+	font-family: sans-serif;
+	height: 48px;
+	margin-bottom: 11px;
+	line-height: 22px;
+	box-shadow: 0px 7px 7px -7px #3b2f8b, inset 7px 7px 7px -7px #f1e106,
+		-7px -7px 7px -7px #f1e106, inset -7px -7px 7px -7px #3b2f8b;
+	background-color: #3b2f8b;
+	color: white;
+	font-size: 22px;
+	box-shadow: 0px 7px 7px -7px #3b2f8b, inset 7px 7px 7px -7px #f1e106,
+		-7px -7px 7px -7px #f1e106, inset -7px -7px 7px -7px #3b2f8b;
+	background-color: #3b2f8b;
+	color: white;
+}
+</style>
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -10,52 +67,66 @@
 			<h2>Competition Rules</h2>
 		</div>
 		<div class="col-md-12" style="text-align: center;">
-			<img alt="" src="static/img/graphics/Big Buttons/Printbutton.svg" style="height: 66px; width: auto;">
+			<img alt="" src="static/img/graphics/Big Buttons/Printbutton.svg"
+				style="height: 66px; width: auto;">
 		</div>
 		<br>
 		<div class="row">
 			<div class="col-md-12">
-				<p>Closing date for entries: 30 April 2020. Entries must be
-					entered electronically before 17h00 on 30 April 2020. No late
-					entries will be accepted.</p>
-				<p>No name of entrant or school may appear on the front of the
-					artwork.</p>
-				<p>Only electronic entries will be accepted.</p>
-				<p>Each person may enter only one piece of art.</p>
-				<p>The artwork must be mostly two-dimensional and must be no
-					smaller than an A4 (21 x 29 cm) and no bigger than A2 (42 x 59 cm).
-					If relief work is used it may be no thicker than 2 cm.</p>
-				<p>All entries must be the artist's original handwork . Copies
-					from the Internet (Google, Pinterest, etc.) or other sources, will
-					not be accepted.</p>
-				<p>The artwork itself may not be a photograph or
-					computer-generated graphics.</p>
-				<p>Artworks may not contain copyrighted material; or contain
-					threatening, offensive, or abusive material.</p>
-				<p>Artwork that does not meet the criteria will be disqualified.</p>
-				<p>The photograph of the artwork must be clear and in focus. No
-					editing of the photograph will be accepted. Any artworks that are
-					found to have been changed after the photograph was taken submitted
-					will be disqualified. (link to photograph requirements)</p>
-				<p>The answers to the questions must be one paragraph each (50 -
-					100 words)</p>
-				<p>The top-selected entries will be requested to send the
-					physical artworks to the GMMDC office in Port Elizabeth before May
-					2020.</p>
-				<p>The judge's decision is final, and no correspondence will be
-					entered into.</p>
-				<p>The GMMDC holds unrestricted rights to use any of the artwork
-					or images thereof for purposes that will support STEAM education in
-					South Africa.</p>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h2>PHOTO REQUIREMENTS</h2>
+				<div class="card-header collapsed row" data-toggle="collapse"
+					aria-expanded="false" href="#general-rules-section">
+					<div class="col-md-12">
+						<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;&nbsp;General
+							Requirements</a>
+					</div>
+				</div>
+				<div class="row card-body" id="general-rules-section">
+					<p>Closing date for entries: 30 April 2020. Entries must be
+						entered electronically before 17h00 on 30 April 2020. No late
+						entries will be accepted.</p>
+					<p>No name of entrant or school may appear on the front of the
+						artwork.</p>
+					<p>Only electronic entries will be accepted.</p>
+					<p>Each person may enter only one piece of art.</p>
+					<p>The artwork must be mostly two-dimensional and must be no
+						smaller than an A4 (21 x 29 cm) and no bigger than A2 (42 x 59
+						cm). If relief work is used it may be no thicker than 2 cm.</p>
+					<p>All entries must be the artist's original handwork . Copies
+						from the Internet (Google, Pinterest, etc.) or other sources, will
+						not be accepted.</p>
+					<p>The artwork itself may not be a photograph or
+						computer-generated graphics.</p>
+					<p>Artworks may not contain copyrighted material; or contain
+						threatening, offensive, or abusive material.</p>
+					<p>Artwork that does not meet the criteria will be
+						disqualified.</p>
+					<p>The photograph of the artwork must be clear and in focus. No
+						editing of the photograph will be accepted. Any artworks that are
+						found to have been changed after the photograph was taken
+						submitted will be disqualified. (link to photograph requirements)</p>
+					<p>The answers to the questions must be one paragraph each (50
+						- 100 words)</p>
+					<p>The top-selected entries will be requested to send the
+						physical artworks to the GMMDC office in Port Elizabeth before May
+						2020.</p>
+					<p>The judge's decision is final, and no correspondence will be
+						entered into.</p>
+					<p>The GMMDC holds unrestricted rights to use any of the
+						artwork or images thereof for purposes that will support STEAM
+						education in South Africa.</p>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-md-12">
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card-header collapsed row" data-toggle="collapse"
+					aria-expanded="false" href="#photo-rules-section">
+					<div class="col-md-12">
+						<i class="fa fa-palette"></i><a class="card-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Photo
+							Requirements</a>
+					</div>
+				</div>
+				<div class="row collapse card-body" id="photo-rules-section">
 					<p>Take a good quality photo of your artwork (only have your
 						artwork in the photo) using a cellphone with a 5 megapixel camera
 						or greater.</p>
@@ -70,14 +141,18 @@
 						disqualified.</p>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h2>And Remember!</h2>
-					<h2>ORIGINAL ARTWORK</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card-header collapsed row" data-toggle="collapse"
+					aria-expanded="false" href="#original-rules-section">
+					<div class="col-md-12">
+						<i class="fa fa-award"></i><a class="card-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Originality
+							Requirements</a>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
+				<div class="row collapse card-body" id="original-rules-section">
 					<p>Copying an image can be illegal and you should be aware of
 						these implications if you're making art based on someone else's
 						work.</p>
@@ -97,4 +172,3 @@
 	</div>
 	<div class="col-md-2"></div>
 </div>
-

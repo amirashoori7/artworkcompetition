@@ -11,7 +11,6 @@ function populateErrorMessageFields(errorString) {
 		$("<br/>").appendTo(errorSection)
 		errorSection.append(JSON.parse(errorString)[key][0].message)
 		$("#" + key).after(errorSection)
-		console.log(errorSection)
 	})
 }
 
@@ -35,15 +34,12 @@ function loadContent(liItem) {
 	$("#banner-bottom-1").fadeIn()
 	var url = ""
 	$(".menu-item").removeClass("active")
-//	$(".banners-background-image").css(
-//			"background-position",
-//			Math.floor(Math.random() * 333) + "px "
-//					+ Math.floor(Math.random() * 333) + "px")
 	$(liItem).addClass("active")
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-//	var contentHeight = $(".fixed-bottom").position().top - ($("#banner-top").position().top + $("#banner-top").height())
+// var contentHeight = $(".fixed-bottom").position().top -
+// ($("#banner-top").position().top + $("#banner-top").height())
 	$("#page-content").load(
 			url,
 			function(response) {
@@ -60,15 +56,21 @@ function loadContent(liItem) {
 				}, "-= .4")
 				$("#page-content").fadeIn()
 				$("#page-content").html("")
+				$(".page-content-holder").prepend($("<div/>").addClass("page-bg-svg"))
+				$(".page-bg-svg").find("span").remove()
 				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area"))
 				$(".page-content-area").html(response)
 				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area-bg"))
+				$(".page-content-area-bg").html($(".menu-item.active").find("a").html())
+				$(".banners-background-image").css(
+			"background-position",
+			Math.floor(Math.random() * 333) + "px "
+					+ Math.floor(Math.random() * 333) + "px")
 				tl.play()
 				if($(liItem).attr("data-color")!=null){
 					var color = "var("+$(liItem).attr("data-color")+")";
-					console.log(color)
 					$("#banner-top").css("background-color", "var("+$(liItem).attr("data-color")+")")
 				}
 			})

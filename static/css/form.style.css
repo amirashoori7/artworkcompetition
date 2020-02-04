@@ -11,37 +11,6 @@
 	padding: 0 !important;
 }
 
-.navbar {
-	padding-left: 16px;
-	padding-right: 16px;
-	border-bottom: 1px solid #dfe3e8;
-	border-radius: 0;
-}
-
-.navbar .navbar-brand {
-	font-size: 20px;
-	padding-left: 0;
-	padding-right: 50px;
-}
-
-.navbar .navbar-brand b {
-	font-weight: bold;
-	color: var(--main-color-green);
-}
-
-.navbar ul.nav li a {
-	color: var(--main-color-green);
-}
-
-.navbar ul.nav li a:hover, .navbar ul.nav li a:focus {
-	color: var(--main-color-pink) !important;
-	background: none;
-}
-
-.navbar ul.nav li.active>a, .navbar ul.nav li.open>a {
-	color: white !important;
-	background: transparent !important;
-}
 
 .input-group-addon, .input-group-text {
 	box-shadow: none;

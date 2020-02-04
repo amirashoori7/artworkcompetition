@@ -140,7 +140,8 @@
 		<br>
 	</div>
 </div>
-<form method="post" id="entry-form-id" action="{% url 'artwork:entry_form' %}"
+<form method="post" id="entry-form-id"
+	action="{% url 'artwork:entry_form' %}"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	{% csrf_token %} <input type="hidden" name="id" id="id"
@@ -284,14 +285,16 @@
 					<label for="region-dropdown">Region of the School</label> <select
 						class="form-control form-input disabled" id="region-dropdown"
 						onchange="getSchoolVal(3)">
-						<option value="" selected="selected" >{{ form.instance.school.region|default:'Select' }}</option>
+						<option value="" selected="selected">{{
+							form.instance.school.region|default:'Select' }}</option>
 					</select>
 				</div>
 				<div class="col-md-4" id="schoolDIV">
 					<label for="school-dropdown">School</label> <select
 						class="form-control form-input disabled" id="school-dropdown"
 						onchange="$('#school-id-val').val($('#school-dropdown').val())">
-						<option value="0" selected="selected" >{{ form.instance.school.name|default:'Select' }}</option>
+						<option value="0" selected="selected">{{
+							form.instance.school.name|default:'Select' }}</option>
 					</select>
 				</div>
 				<input type="hidden" name="school"
@@ -384,8 +387,8 @@
 						type="file" class="form-control form-input" id="workfile"
 						name="workfile" placeholder="" value="Browse"
 						value="{{ form.instance.workfile|default_if_none:'' }}"
-						accept="image/*" required>
-						<input type="hidden" name="imagefilesize" id="imagefilesize">
+						accept="image/*" required> <input type="hidden"
+						name="imagefilesize" id="imagefilesize">
 				</div>
 				<div class="col-md-12">
 					<div id="main-cropper">

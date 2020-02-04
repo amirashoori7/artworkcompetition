@@ -3,12 +3,15 @@
 
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 {% with version=0.4 %}
 <title>{% block title %} {% endblock title %}</title>
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
+<link
+	href="//db.onlinewebfonts.com/c/07d3973894be3bed33aa1447c022b323?family=luna"
+	rel="stylesheet" type="text/css" />
 <link href="static/css/bootstrap/bootstrap.min.css.map" rel="stylesheet">
 <link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="static/css/style.css?ver={{ version }}" rel="stylesheet">
@@ -33,19 +36,17 @@
 
 <body>
 	<div class="full-screen-div"></div>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="message-box-container">
-					<div class="message-box error-message-box"></div>
-					<div class="message-box success-message-box"></div>
-					<div class="return-button" onclick="toggleMessageBox(null, null)">
-						<i class="fa fa-times-circle"></i>
-					</div>
-				</div>
-				<nav
-					class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
+	<div class="container">
+		<div class="message-box-container">
+			<div class="message-box error-message-box"></div>
+			<div class="message-box success-message-box"></div>
+			<div class="return-button" onclick="toggleMessageBox(null, null)">
+				<i class="fa fa-times-circle"></i>
+			</div>
+		</div>
+		<nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
+			<div class="container">
+				<div class="navbar-header">
 					<a class="navbar-brand" href="#"> <img
 						src="static/img/MAlogo.png" width="30" height="30" alt="">
 					</a>
@@ -55,88 +56,85 @@
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item menu-item active" data-href-html="home.html"
+							data-href="/home/"><a class="nav-link" href="#"><img
+								class="svg" src="static/img/icons/Home.svg"><span>Home</span></a></li>
 
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-							<li class="menu-item active" data-href-html="home.html"
-								data-href="/home/"><a class="nav-link" href="#"><img
-									class="svg" src="static/img/icons/Home.svg"><span>Home</span></a></li>
+						<li class="nav-item menu-item" data-href-html="howtoenter.html"
+							data-href="/howtoenter/" data-color="--main-color-dark-blue"
+							data-color2="--main-color-yellow"><a class="nav-link"
+							href="#"><img class="svg" src="static/img/icons/How.svg"><span>How
+									to Enter</span></a></li>
 
-							<li class="menu-item" data-href-html="howtoenter.html"
-								data-href="/howtoenter/" data-color="--main-color-dark-blue"
-								data-color2="--main-color-yellow"><a class="nav-link"
-								href="#"><img class="svg" src="static/img/icons/How.svg"><span>How
-										to Enter</span></a></li>
+						<li class="nav-item menu-item" data-href-html="rules.html"
+							data-color="--main-color-yellow" data-href="/rules/"><a
+							class="nav-link" href="#"><img class="svg"
+								src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
-							<li class="menu-item" data-href-html="rules.html"
-								data-color="--main-color-yellow" data-href="/rules/"><a
-								class="nav-link" href="#"><img class="svg"
-									src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
+						<li class="nav-item menu-item"
+							data-href-html="signup_page_view.html"
+							data-href="/signup_page_view/"><a class="nav-link" href="#"><img
+								class="svg" src="static/img/icons/Enter.svg"><span>Enter
+									Now</span></a></li>
 
-							<li class="menu-item" data-href-html="signup_page_view.html"
-								data-href="/signup_page_view/"><a class="nav-link" href="#"><img
-									class="svg" src="static/img/icons/Enter.svg"><span>Enter
-										Now</span></a></li>
-										
-							<li class="menu-item" data-href-html="signup_page.html"
-								data-href="/signup_page/"><a class="nav-link" href="#"><img
-									class="svg" src="static/img/icons/Enter.svg"><span>Enter
-										Now ADMIN</span></a></li>
+						<!-- 							<li class="menu-item" data-href-html="signup_page.html" -->
+						<!-- 								data-href="/signup_page/"><a class="nav-link" href="#"><img -->
+						<!-- 									class="svg" src="static/img/icons/Enter.svg"><span>Enter -->
+						<!-- 										Now ADMIN</span></a></li> -->
 
-							<li class="menu-item" data-href-html="history.html"
-								data-color="--main-color-pink" data-href="/history/"><a
-								class="nav-link" href="#"><img class="svg"
-									src="static/img/icons/History.svg"><span>History</span></a></li>
+						<li class="nav-item menu-item" data-href-html="history.html"
+							data-color="--main-color-pink" data-href="/history/"><a
+							class="nav-link" href="#"><img class="svg"
+								src="static/img/icons/History.svg"><span>History</span></a></li>
 
-							<li class="menu-item" data-href-html="faq.html" data-href="/faq/"
-								data-color="--main-color-light-blue"><a class="nav-link"
-								href="#"><img class="svg" src="static/img/icons/FAQ.svg"><span>FAQ's</span></a></li>
+						<li class="nav-item menu-item" data-href-html="faq.html" data-href="/faq/"
+							data-color="--main-color-light-blue"><a class="nav-link"
+							href="#"><img class="svg" src="static/img/icons/FAQ.svg"><span>FAQ's</span></a></li>
 
 
-							<li class="menu-item" data-href-html="contactus.html"
-								data-color="--main-color-dark-blue"
-								data-href="{% url 'artwork:contactus' %}"><a
-								class="nav-link" href="#"><img class="svg"
-									src="static/img/icons/Contact.svg"><span>Contact </span></a></li>
-							</li>
-						</ul>
-					</div>
-					<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
+						<li class="menu-item" data-href-html="contactus.html"
+							data-color="--main-color-dark-blue"
+							data-href="{% url 'artwork:contactus' %}"><a
+							class="nav-link" href="#"><img class="svg"
+								src="static/img/icons/Contact.svg"><span>Contact </span></a></li>
+						</li>
 					</ul>
-				</nav>
-				<div class="row content-holder-overflow">
-					<div class="col-md-2"></div>
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-md-12" id="page-content"></div>
-						</div>
-						<div class="row second-color" id="banner-bottom-1">
-							<div class="col-md-12 banners-text-content">
-								<label for="signupbuttonIdMain">Registration opens in...</label> <span
-									id="signupbuttonIdMain" class="timeCounterDiv">
-									<ul>
-										<li class="date-counter" data-text="DAYS"><span>22</span></li>
-										<li class="date-counter" data-text="HOURS"></li>
-										<li class="date-counter" data-text="MINUTES"></li>
-										<li class="date-counter" data-text="SECONDS"></li>
-									</ul>
-								</span>
-								<button class="btn-enternow btn btn-danger">ENTER NOW</button>
-							</div>
-						</div>
-						<div class="row " id="banner-bottom-2">
-							<div class="col-md-12 third-color">
-								<span class="social-media-btn"><i class="fa fa-facebook"></i></span>
-								<span class="social-media-btn"><i class="fa fa-youtube"></i></span>
-								<span class="social-media-btn"><i class="fa fa-instagram"></i></span>
-							</div>
+				</div>
+				<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
+				</ul>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12" id="page-content"></div>
+				</div>
+				<div class="row second-color" id="banner-bottom-1">
+					<div class="col-md-12 banners-text-content">
+						<label for="signupbuttonIdMain">Registration opens in...</label>
+						<div id="signupbuttonIdMain" class="timeCounterDiv">
+							<ul>
+								<li class="date-counter" data-text="DAYS"
+									style="border-left: none;"><span>22</span></li>
+								<li class="date-counter" data-text="HOURS"></li>
+								<li class="date-counter" data-text="MINUTES"></li>
+								<li class="date-counter" data-text="SECONDS"></li>
+							</ul>
 						</div>
 					</div>
-					<div class="col-md-2"></div>
+				</div>
+				<div class="row " id="banner-bottom-2">
+					<div class="col-md-12 third-color">
+						<span class="social-media-btn"><i class="fa fa-facebook"></i></span>
+						<span class="social-media-btn"><i class="fa fa-youtube"></i></span>
+						<span class="social-media-btn"><i class="fa fa-instagram"></i></span>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
 	</div>
 
 	{% block content %} {% endblock %}

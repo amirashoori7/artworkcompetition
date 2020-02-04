@@ -1,3 +1,20 @@
+@font-face {
+	font-family: "luna";
+	src:
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.eot");
+	src:
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.eot?#iefix")
+		format("embedded-opentype"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.woff2")
+		format("woff2"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.woff")
+		format("woff"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.ttf")
+		format("truetype"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.svg#luna")
+		format("svg");
+}
+
 html, body {
 	height: 100%;
 	align-items: center;
@@ -8,10 +25,10 @@ html, body {
 	-o-user-select: none;
 	user-select: none;
 	background: #f8f9fa;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
-i{
+i {
 	font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands" !important;
 }
 
@@ -38,13 +55,24 @@ p {
 	height: 13px;
 }
 
-.navbar-nav {
-	margin: 0 auto;
+.row {
+	margin: 0;
 }
 
-.container-fluid {
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9,
+	.col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2,
+	.col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8,
+	.col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto,
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+	.col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
+	.col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4,
+	.col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10,
+	.col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2,
+	.col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8,
+	.col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
 	padding: 0;
 }
+
 
 /* MESSAGE BOXE START  */
 .message-box-container {
@@ -159,17 +187,28 @@ p {
 }
 
 #page-content {
-    padding-bottom: 66px;
-    background-color: white;
+	padding-bottom: 66px;
+	background-color: white;
 }
 
-.content-holder-overflow{
-    padding: 0;
-    position: fixed;
-    top: 126px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow-x: hidden;
-    margin: 0;
+/* .content-holder-overflow { */
+/* 	padding: 0; */
+/* 	position: fixed; */
+/* 	top: 126px; */
+/* 	bottom: 0; */
+/* 	left: 0; */
+/* 	right: 0; */
+/* 	overflow-x: hidden; */
+/* 	margin: 0; */
+/* } */
+.page-content-area-bg {
+	height: 66%;
+	z-index: -1;
+	position: absolute;
+	left: 0;
+	background-size: cover;
+	opacity: .04; left : 23%;
+	bottom: 0;
+	width: 66%;
+	left: 23%;
 }

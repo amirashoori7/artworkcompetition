@@ -45,12 +45,26 @@
 	text-align: center;
 }
 
+/* #banner-top .col-md-12 { */
+/* 	height: 69px; */
+/* 	text-align: center; */
+/* 	font-size: 33px; */
+/*     line-height: 52px; */
+/*     padding-top: 11px; */
+/*     font-weight: bold; */
+/* 	font-family: "luna"; */
+/* } */
 
-
-.banners-background-image {
-	background: url("../img/bg/Backicons.svg");
-	background-size: cover;
-}
+/* .banners-background-image { */
+/*     background: url(../img/bg/Backicons.svg); */
+/*     background-size: cover; */
+/*     position: absolute; */
+/*     top: 0; */
+/*     bottom: 0; */
+/*     height: 69px; */
+/*     width: 100%; */
+/*     opacity: .3; */
+/* } */
 
 .banners-text-content {
 	text-align: center;
@@ -85,7 +99,7 @@
     height: 33px;
     font-size: 22px;
     font-weight: bold;
-
+    margin-bottom: 22px;
 }
 
 .timeCounterDiv ul {
@@ -115,13 +129,8 @@
 .timeCounterDiv ul li:before {
     content: attr(data-text);
     position: absolute;
-    top: 30px;
+    top: 44px;
     font-size: 11px;
     width: 69px;
 }
 
-.navbar-nav.mr-auto {
-	max-width: 822px;
-	margin: 0 auto;
-	width: 100%;
-}

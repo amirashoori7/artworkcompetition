@@ -47,7 +47,7 @@
 
 #banner-bottom-home {
 	background-color: var(--main-color-pink) !important;
-    height: 133px;
+    height: 155px;
     margin-bottom: 33px;
     padding-top: 11px;
 }
@@ -67,8 +67,9 @@
 	color: var(--main-color-green) !important;
 	font-size: 22px;
 	font-weight: bold;
-	text-align: center;
+	text-align: justify;
 }
+
 .col-md-8.mid-div-icons img{
 	width: 44px;
 	height: 44px;
@@ -77,6 +78,7 @@
 
 .mid-div-container .col-md-6, .mid-div-container .col-md-8 {
 	color: var(--main-color-dark-blue);
+	  text-align: justify;
 }
 
 .contact-title {
