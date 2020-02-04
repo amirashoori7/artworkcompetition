@@ -108,6 +108,7 @@ def entry_form(request):
     if request.method == 'POST':
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
         artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
+        print(request.POST['imagefilesize'])
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user

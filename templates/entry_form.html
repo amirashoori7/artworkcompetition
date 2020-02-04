@@ -64,7 +64,7 @@
 				$('#croppedImage').attr('src', dataurl)
 			}
 			reader.readAsDataURL(input.files[0]);
-			alert(input.files[0].size)
+			$("#imagefilesize").val(input.files[0].size)
 		} else {
 			toggleMessageBox(
 					"Sorry - you're browser doesn't support the FileReader API",
@@ -385,6 +385,7 @@
 						name="workfile" placeholder="" value="Browse"
 						value="{{ form.instance.workfile|default_if_none:'' }}"
 						accept="image/*" required>
+						<input type="hidden" name="imagefilesize" id="imagefilesize">
 				</div>
 				<div class="col-md-12">
 					<div id="main-cropper">
