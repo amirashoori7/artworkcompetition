@@ -64,6 +64,7 @@
 				$('#croppedImage').attr('src', dataurl)
 			}
 			reader.readAsDataURL(input.files[0]);
+			alert(input.files[0].size)
 		} else {
 			toggleMessageBox(
 					"Sorry - you're browser doesn't support the FileReader API",
@@ -139,7 +140,7 @@
 		<br>
 	</div>
 </div>
-<form method="post" id="entry-form-id" action="/"
+<form method="post" id="entry-form-id" action="{% url 'artwork:entry_form' %}"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	{% csrf_token %} <input type="hidden" name="id" id="id"

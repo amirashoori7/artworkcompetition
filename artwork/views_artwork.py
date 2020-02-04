@@ -103,18 +103,11 @@ def signup_page_view(request):
 @transaction.atomic
 def entry_form(request):
     response_data = {}
-#     if request.user is not None:
-#         artwork_form = EntryForm()
-#         context = {'form': artwork_form, 'user_form': UserForm()}
-#         return render(request, 'entry_form.html', context)
     userModel = ProjectUser.objects.get(username=request.user)
     user_form = UserForm(instance=request.user)
     if request.method == 'POST':
-        if request.POST["id"] is not '0':
-            old_data = get_object_or_404(Artwork, id=request.POST["id"])
-            artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
-        else:
-            artwork_form = EntryForm(request.POST, request.FILES)
+        old_data = get_object_or_404(Artwork, id=request.POST["id"])
+        artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
@@ -132,7 +125,7 @@ def entry_form(request):
             artwork_model = get_object_or_404(Artwork, owner=request.user)
             artwork_form = EntryForm(instance=artwork_model)
         except:
-            artwork_form = EntryForm()
+            artwork_form, artwork_obj= Artwork.objects.get_or_create(owner=request.user)
     else:
         artwork_form = EntryForm()
     context = {'form': artwork_form, 'user_form': user_form}
