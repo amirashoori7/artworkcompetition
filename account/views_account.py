@@ -33,6 +33,12 @@ def registration(request):
     context = {'form': form}
     return render(request, 'register.html', context)
 
+
+def registration_view(request):
+    form = UserRegistrationForm()
+    context = {'form': form}
+    return render(request, 'register_view.html', context)
+
 # def getUser(request):
 #     form = UserRegistrationForm(request.GET)
 #     if form.is_valid():

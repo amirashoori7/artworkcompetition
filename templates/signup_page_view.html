@@ -2,7 +2,7 @@
 <script>
 	function fetchEntryForm() {
 		$.ajax({
-			url : "{% url 'artwork:entry_form' %}",
+			url : "{% url 'artwork:entry_form_view' %}",
 			success : function(response) {
 				$("#artwork-submit-form-holder-id").html(response)
 				if($("#school-id-val").val()=="0"){
@@ -30,16 +30,13 @@
 	}
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
-		{% if user.is_authenticated %}
 		fetchEntryForm()
-		{% else %}
-		$("#registrationForm").load('/account/register/', function() {
+		$("#registrationForm").load('/account/register_view/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
 				submitRegistryForm()
 			})
 		})
-		{% endif %}
 	})
 
 	function checkValidation() {
@@ -95,6 +92,12 @@
 		},1000)
 	}
 	function submitRegistryForm() {
+		$('.content-holder-overflow').animate({
+	        scrollTop: $("#signupbuttonid").offset().top
+	    }, 'slow', function() {
+			populateDangerMessageField("signupbuttonid", "The registration will be activated in ")
+	    })
+		return false;
 		var form = $('#registry-form')[0];
 		$("#register-btn").prop("disabled", true);
 		var data = new FormData(form);
@@ -107,7 +110,7 @@
 					contentType : false,
 					cache : false,
 					timeout : 60000,
-					url : "{% url 'account:register' %}",
+					url : "{% url 'account:register_view' %}",
 					beforeSend : function(xhr, settings) {
 						if (!(/^http:.*/.test(settings.url) || /^https:.*/
 								.test(settings.url))) {
@@ -128,7 +131,7 @@
 											.val())
 							$(".form-signin.form-general-style").submit()
 							loadContent($("<li/>").attr({
-								"data-href" : "/signup_page/"
+								"data-href" : "/signup_page_view/"
 							}))
 						} else if (response.errorResult != null) {
 							$("#registry-form").find("small").remove()
@@ -151,6 +154,12 @@
 	}
 
 	function submitEntryForm() {
+		$('.content-holder-overflow').animate({
+	        scrollTop: $("#signupbuttonid").offset().top
+	    }, 'slow', function() {
+			populateDangerMessageField("signupbuttonid", "The registration will be activated in ")
+	    })
+		return false;
 		var form = $('#entry-form-id')[0];
 		$("#buttonSubmit, buttonSaveContinue").prop("disabled", true);
 		var data = new FormData(form);
@@ -163,7 +172,7 @@
 					contentType : false,
 					cache : false,
 					timeout : 60000,
-					url : "{% url 'artwork:entry_form' %}",
+					url : "{% url 'artwork:entry_form_view' %}",
 					beforeSend : function(xhr, settings) {
 						if (!(/^http:.*/.test(settings.url) || /^https:.*/
 								.test(settings.url))) {
@@ -194,7 +203,13 @@
 				})
 	}
 </script>
-{% if user.is_authenticated %}
+<div class="page-title">
+	<h4>Register</h4>
+</div>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8" id="registrationForm"></div>
+</div>
 <div class="page-title">
 	<h4>Entry Form</h4>
 </div>
@@ -203,13 +218,3 @@
 	<div class="col-md-8" id="artwork-submit-form-holder-id"></div>
 </div>
 </section>
-{% else %}
-
-<div class="page-title">
-	<h4>Register</h4>
-</div>
-<div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8" id="registrationForm"></div>
-</div>
-{% endif %}

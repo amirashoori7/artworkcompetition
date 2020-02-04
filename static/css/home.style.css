@@ -21,15 +21,19 @@
 	color: var(--main-color-dark-blue);
 	font-size: 44px;
 	text-align: center;
+    font-weight: bolder;
 	margin: 0 0 22px 0;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	line-height: 13px;
 }
 
 .comp-theme {
 	color: var(--main-color-pink);
     font-size: 33px;
     text-align: center;
-    font-weight: bold;
+    font-weight: bolder;
 	margin: 22px 0 11px 0;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .youtube-btn {
@@ -37,7 +41,7 @@
 	margin-bottom: 22px;
 }
 .youtube-btn img{
-	width: 33%;
+	width: 55%;
 	height: auto;
 }
 
@@ -49,7 +53,7 @@
 }
 
 .col-md-6.mid-div-icons{
-	color: var(--main-color-aqua) !important;
+	color: var(--main-color-green) !important;
 	font-size: 22px;
 	font-weight: bold;
 }
@@ -59,8 +63,20 @@
 	margin-right: 11px;
 }
 
-.mid-div-container .col-md-6 {
-	color: var(--main-color-grey-text);
+.col-md-8.mid-div-icons{
+	color: var(--main-color-green) !important;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+}
+.col-md-8.mid-div-icons img{
+	width: 44px;
+	height: 44px;
+	margin-right: 11px;
+}
+
+.mid-div-container .col-md-6, .mid-div-container .col-md-8 {
+	color: var(--main-color-dark-blue);
 }
 
 .contact-title {

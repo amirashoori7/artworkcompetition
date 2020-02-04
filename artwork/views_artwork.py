@@ -95,15 +95,18 @@ def signup_page(request):
     context = {}
     return render(request, 'signup_page.html', context)
 
+def signup_page_view(request):   
+    context = {}
+    return render(request, 'signup_page_view.html', context)
 
-# @login_required
-# @transaction.atomic
+@login_required
+@transaction.atomic
 def entry_form(request):
     response_data = {}
-    if request.user is not None:
-        artwork_form = EntryForm()
-        context = {'form': artwork_form, 'user_form': UserForm()}
-        return render(request, 'entry_form.html', context)
+#     if request.user is not None:
+#         artwork_form = EntryForm()
+#         context = {'form': artwork_form, 'user_form': UserForm()}
+#         return render(request, 'entry_form.html', context)
     userModel = ProjectUser.objects.get(username=request.user)
     user_form = UserForm(instance=request.user)
     if request.method == 'POST':
@@ -134,4 +137,9 @@ def entry_form(request):
         artwork_form = EntryForm()
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
+
+    
+def entry_form_view(request):
+    context = {'form': EntryForm(), 'user_form': UserForm()}
+    return render(request, 'entry_form_view.html', context)
     

@@ -169,3 +169,8 @@
 		width: 100%;
 	}
 }
+
+.input-group small{
+	position: absolute;
+	top: -31px;
+}

@@ -117,11 +117,12 @@
 }
 
 #footer-form-btns {
-	position: sticky;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	padding: 11px;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 22px;
+    background: white;
 }
 
 .disabled {
@@ -143,7 +144,7 @@
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	{% csrf_token %} <input type="hidden" name="id" id="id"
-		value="{{ form.instance.id|default:'0' }}">
+		value="{{ form.instance.id|default:'' }}">
 
 	<div class="card">
 
@@ -168,7 +169,7 @@
 					data-required="1" class="form-control" placeholder="Email" required
 					autocomplete="off" id="username" name="username"
 					disabled="disabled"
-					value="{{ user.username|default:'test@test.com' }}">
+					value="{{ user.username|default:'' }}">
 			</div>
 
 			<!-- 				CELLPHONE -->
@@ -176,8 +177,8 @@
 			<div class="col-md-6">
 				<label for="cellphone">Cell Phone Number</label> <input
 					data-required="1" type="text" class="form-control"
-					placeholder="cellphone" required="required" id="cellphone"
-					value="{{ user.cellphone|default:'0712345678' }}"
+					placeholder="0712345678" required="required" id="cellphone"
+					value=""
 					name="Cellphone Number">
 			</div>
 
@@ -191,7 +192,7 @@
 				<label for="first_name">First Name </label> <input data-required="1"
 					type="text" class="form-control" placeholder="i.e. Joe" required
 					id="first_name" name="first_name"
-					value="{{ user.first_name | default:'testname' }}">
+					value="{{ user.first_name | default:'' }}">
 			</div>
 			<!-- 				SURNAME -->
 
@@ -199,7 +200,7 @@
 				<label for="last_name">Last Name</label> <input data-required="1"
 					type="text" class="form-control" placeholder="i.e. Scholtz"
 					required id="last_name"
-					value="{{ user.last_name | default:'lastname' }}" name="last_name">
+					value="{{ user.last_name | default:'' }}" name="last_name">
 			</div>
 
 
@@ -211,7 +212,7 @@
 			<div class="col-sm-6">
 				<label for="first_name">Date of Birth</label> <input
 					data-required="1" type="date" class="form-control" required
-					id="dob" name="dob" value="{{ user.dob|default:'2013-01-08' }}">
+					id="dob" name="dob" value="">
 			</div>
 
 
@@ -225,7 +226,7 @@
 					data-required="1" type="text" class="form-control"
 					placeholder="i.e. Jack Scholtz" required id="parentname"
 					name="parentname"
-					value="{{ user.parentname|default:'testparentname' }}">
+					value="{{ user.parentname|default:'' }}">
 			</div>
 
 
@@ -236,7 +237,7 @@
 				<label for="first_name">Parent's Cell phone Number</label> <input
 					data-required="1" type="phone" class="form-control"
 					name="parentphone" placeholder="012 345 67 89" id="parentphone"
-					value="{{ user.parentphone|default:'081234567' }}" required>
+					value="{{ user.parentphone|default:'' }}" required>
 			</div>
 
 
@@ -247,8 +248,8 @@
 			<div class="col-sm-6">
 				<label for="parentemail">Parent's Email Address</label> <input
 					data-required="1" type="email" class="form-control"
-					id="parentemail" name="parentemail" placeholder="you@example.com"
-					value="{{ user.parentemail|default:'testparent@test.com' }}"
+					id="parentemail" name="parentemail" placeholder="yourparentemail@example.com"
+					value="{{ user.parentemail|default:'' }}"
 					required>
 			</div>
 		</div>
@@ -325,7 +326,7 @@
 					<label for="teachername">Teacher's Name</label> <input type="text"
 						data-required="1" class="form-control form-input" id="teachername"
 						name="teachername" placeholder="i.e. Edvard Harry"
-						value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
+						value="{{ form.instance.teachername|default_if_none:'' }}"
 						required>
 				</div>
 				<div class="col-md-4">
@@ -333,14 +334,14 @@
 						type="email" class="form-control form-input" id="teacheremail"
 						name="teacheremail" placeholder="you@example.com"
 						data-required="1"
-						value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
+						value="{{ form.instance.teacheremail|default_if_none:'' }}"
 						required>
 				</div>
 				<div class="col-md-4">
 					<label for="teacherphone">Teacher's Phone</label> <input type="tel"
 						class="form-control form-input" id="teacherphone"
 						data-required="1" name="teacherphone" placeholder="012 345 67 89"
-						value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
+						value="{{ form.instance.teacherphone|default_if_none:'' }}"
 						required>
 				</div>
 			</div>
