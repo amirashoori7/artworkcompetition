@@ -134,6 +134,7 @@
 	font-weight: normal;
 	cursor: pointer;
 	vertical-align: middle;
+    box-shadow: inset 2px 2px 6px -2px white;
 }
 
 .social-media-btn i:hover {

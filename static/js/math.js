@@ -110,14 +110,15 @@ $(document).ready(function() {
 		})
 	})
 	$("#login-div").load('/account/login/')
-
-})
-
-$(window).on("load", function() {
 	TweenLite.to(".full-screen-div", 1, {
 		scale : 0,
 		transformOrigin : "center"
 	})
+
+})
+
+$(window).on("load", function() {
+	$(".frameLoding").fadeOut()
 	$(".menu-item").attr("onclick", "loadContent(this)")
 	loadContent($("<li/>").attr({
 		"data-href" : "/home/"
@@ -303,10 +304,10 @@ function runTimer(){
 				/ (1000 * 60 * 60));
 		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		$('[data-text="DAYS"]').html($("<span/>").text(days))
-		$('[data-text="HOURS"]').html($("<span/>").text(hours))
-		$('[data-text="MINUTES"]').html($("<span/>").text(minutes))
-		$('[data-text="SECONDS"]').html($("<span/>").text(seconds))
+		$('[data-text="days"]').html($("<span/>").text(days))
+		$('[data-text="hrs"]').html($("<span/>").text(hours))
+		$('[data-text="mins"]').html($("<span/>").text(minutes))
+		$('[data-text="sec"]').html($("<span/>").text(seconds))
 		if (distance < 0) {
 			clearInterval(x);
 		}

@@ -16,6 +16,7 @@
 <link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
 <link href="static/css/style.css?ver={{ version }}" rel="stylesheet">
 <link href="static/css/constants.css?ver={{ version }}" rel="stylesheet">
+<link href="static/css/animation.css?ver={{ version }}" rel="stylesheet">
 <link href="static/css/buttons.style.css?ver={{ version }}"
 	rel="stylesheet">
 <link href="static/css/form.style.css?ver={{ version }}"
@@ -32,9 +33,39 @@
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="static/js/GSAP/TweenMax.min.js"></script>
-</head>
+<script async=""
+	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
+<script type="text/javascript">
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
 
+	gtag('config', 'UA-156942839-1');
+</script>
+</head>
 <body>
+	<div class="frameLoding">
+		<div class="frame">
+			<div class="center">
+				<div class="dot-1"></div>
+				<div class="dot-2"></div>
+				<div class="dot-3"></div>
+				<div class="loading">
+					<div class="loading-text">
+						<span class="loading-text-words">L</span> <span
+							class="loading-text-words">O</span> <span
+							class="loading-text-words">A</span> <span
+							class="loading-text-words">D</span> <span
+							class="loading-text-words">I</span> <span
+							class="loading-text-words">N</span> <span
+							class="loading-text-words">G</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="full-screen-div"></div>
 	<div class="container">
 		<div class="message-box-container">
@@ -58,7 +89,7 @@
 					</button>
 				</div>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
+					<ul class="navbar-nav" style="margin: 0 auto;">
 						<li class="nav-item menu-item active" data-href-html="home.html"
 							data-href="/home/"><a class="nav-link" href="#"><img
 								class="svg" src="static/img/icons/Home.svg"><span>Home</span></a></li>
@@ -119,11 +150,11 @@
 							<label for="signupbuttonIdMain">Registration opens in...</label>
 							<div id="signupbuttonIdMain" class="timeCounterDiv">
 								<ul>
-									<li class="date-counter" data-text="DAYS"
+									<li class="date-counter" data-text="days"
 										style="border-left: none;"><span>22</span></li>
-									<li class="date-counter" data-text="HOURS"></li>
-									<li class="date-counter" data-text="MINUTES"></li>
-									<li class="date-counter" data-text="SECONDS"></li>
+									<li class="date-counter" data-text="hrs"></li>
+									<li class="date-counter" data-text="mins"></li>
+									<li class="date-counter" data-text="sec"></li>
 								</ul>
 							</div>
 						</div>

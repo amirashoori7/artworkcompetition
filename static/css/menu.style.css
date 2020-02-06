@@ -126,8 +126,12 @@
 .timeCounterDiv ul li:before {
     content: attr(data-text);
     position: absolute;
-    top: -17px;
+    top: 30px;
     font-size: 11px;
     width: 69px;
+}
+
+#timeCounterDivId ul li:before{
+	top: -17px;
 }
 
