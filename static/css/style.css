@@ -39,6 +39,7 @@ h1, h2, h3, h4, h5, h6, p {
 p {
 	text-align: justify;
 }
+
 .frameLoding {
 	position: fixed;
 	top: 0;
@@ -46,10 +47,10 @@ p {
 	right: 0;
 	left: 0;
 	z-index: 99999999;
-/* 	background: url(../img/MAlogo.png); */
-/* 	background-repeat: no-repeat; */
-/* 	background-position: 11% 11%; */
-/* 	background-size: 22%; */
+	/* 	background: url(../img/MAlogo.png); */
+	/* 	background-repeat: no-repeat; */
+	/* 	background-position: 11% 11%; */
+	/* 	background-size: 22%; */
 	background-color: white;
 }
 
@@ -64,6 +65,7 @@ p {
 	border-radius: 2px;
 	color: #fff;
 }
+
 .dot-1, .dot-2, .dot-3 {
 	position: absolute;
 	z-index: 3;
@@ -216,7 +218,6 @@ p {
 /* 	padding: 0; */
 /* } */
 
-
 /* MESSAGE BOXE START  */
 .message-box-container {
 	position: fixed;
@@ -350,8 +351,29 @@ p {
 	position: absolute;
 	left: 0;
 	background-size: cover;
-	opacity: .04; left : 23%;
+	opacity: .04;
+	left: 23%;
 	bottom: 0;
 	width: 66%;
 	left: 23%;
+}
+
+@media ( max-width :800px) {
+	.container {
+		overflow-x: hidden;
+	}
+	.timeCounterDiv ul li:before {
+		top: 33px;
+		width: 44px;
+	}
+	.timeCounterDiv ul li span {
+		top: -13px;
+		font-size: 23px;
+	}
+	.timeCounterDiv ul li {
+		width: 44px;
+	}
+	.timeCounterDiv ul {
+		padding: 0;
+	}
 }

@@ -22,3 +22,11 @@
 p.tab {
 	margin-left: 44px;
 }
+
+@media ( max-width :800px) {
+	.page-title h2 {
+		font-size: 27px;
+		line-height: 66px;
+		display: inline-block;
+	}
+}

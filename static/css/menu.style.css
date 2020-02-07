@@ -40,7 +40,8 @@
 	height: 99px;
 }
 
-#banner-top, #banner-top .banners-text-content, #banner-top .banners-text-content img {
+#banner-top, #banner-top .banners-text-content, #banner-top .banners-text-content img
+	{
 	height: 69px;
 	text-align: center;
 }
@@ -65,15 +66,14 @@
 /*     width: 100%; */
 /*     opacity: .3; */
 /* } */
-
 .banners-text-content {
 	text-align: center;
 }
 
 #banner-bottom-1 {
 	z-index: 1111;
-    height: 133px;
-    padding-top: 11px;
+	height: 133px;
+	padding-top: 11px;
 }
 
 #banner-bottom-2 {
@@ -85,7 +85,7 @@
 	background-color: var(--main-color-yellow) !important;
 }
 
-.second-color *:not(small){
+.second-color *:not(small) {
 	color: black !important;
 }
 
@@ -95,8 +95,8 @@
 
 .banners-text-content label {
 	color: white;
-    font-size: 22px;
-    font-weight: bold;
+	font-size: 22px;
+	font-weight: bold;
 }
 
 .timeCounterDiv ul {
@@ -106,32 +106,39 @@
 
 .timeCounterDiv ul li {
 	display: inline-flex;
-    border-left: 1px solid white;
-    width: 66px;
-    color: white;
-    height: 33px;
-    line-height: 1;
-    text-align: center;
+	border-left: 1px solid white;
+	width: 66px;
+	color: white;
+	height: 33px;
+	line-height: 1;
+	text-align: center;
 }
 
 .timeCounterDiv ul li span {
-    text-align: center;
-    display: block;
-    width: 66px;
-    height: 27px;
-    line-height: 33px;
-    font-size: 33px;
+	text-align: center;
+	display: block;
+	width: 66px;
+	height: 27px;
+	line-height: 33px;
+	font-size: 33px;
 }
 
 .timeCounterDiv ul li:before {
-    content: attr(data-text);
-    position: absolute;
-    top: 30px;
-    font-size: 11px;
-    width: 69px;
+	content: attr(data-text);
+	position: absolute;
+	top: 30px;
+	font-size: 11px;
+	width: 69px;
 }
 
-#timeCounterDivId ul li:before{
+#timeCounterDivId ul li:before {
 	top: -17px;
 }
 
+@media ( max-width : 800px) {
+	#banner-top, #banner-top .banners-text-content, #banner-top .banners-text-content img
+		{
+		height: 29px;
+		text-align: center;
+	}
+}

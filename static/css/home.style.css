@@ -31,7 +31,7 @@
 	color: var(--main-color-pink);
     font-size: 31px;
     text-align: center;
-    font-weight: bolder;
+    font-weight: normal;
 	margin: 22px 0 11px 0;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
@@ -41,7 +41,7 @@
 	margin-bottom: 22px;
 }
 .youtube-btn img{
-	width: 55%;
+	width: 133px;
 	height: auto;
 }
 
@@ -93,6 +93,21 @@
 	height: auto;
 }
 
-.contact-main-div-bg{
-/* 	background-image: url(../img/icons/Enter.svg); */
+@media(max-width: 800px){
+	#timeCounterDivId ul li:before {
+		top: -13px;
+		width: 44px;
+	}
+	#timeCounterDivId ul li span {
+		top: -13px;
+		font-size: 23px;
+	}
+	
+	#timeCounterDivId ul li {
+		width: 44px;
+	}
+	
+	#timeCounterDivId ul {
+		padding: 0;
+	}
 }

@@ -54,6 +54,7 @@ function loadContent(liItem) {
 					opacity : 1,
 					transformOrigin : "top"
 				}, "-= .4")
+				$(".navbar-collapse").removeClass("show")
 				$("#page-content").fadeIn()
 				$("#page-content").html("")
 				$(".page-content-holder").prepend($("<div/>").addClass("page-bg-svg"))

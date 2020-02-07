@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{% with version=0.5 %}
+{% with version=0.6 %}
 <title>{% block title %} {% endblock title %}</title>
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
 <link
@@ -14,7 +14,6 @@
 	rel="stylesheet" type="text/css" />
 <link href="static/css/bootstrap/bootstrap.min.css.map" rel="stylesheet">
 <link href="static/css/bootstrap/bootstrap.css" rel="stylesheet">
-<link href="static/css/style.css?ver={{ version }}" rel="stylesheet">
 <link href="static/css/constants.css?ver={{ version }}" rel="stylesheet">
 <link href="static/css/animation.css?ver={{ version }}" rel="stylesheet">
 <link href="static/css/buttons.style.css?ver={{ version }}"
@@ -29,6 +28,7 @@
 	rel="stylesheet">
 <link href="static/css/content.style.css?ver={{ version }}"
 	rel="stylesheet">
+<link href="static/css/style.css?ver={{ version }}" rel="stylesheet">
 <script src="static/js/jquery/jquery-3.4.1.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.bundle.min.js"></script>
@@ -46,28 +46,7 @@
 </script>
 </head>
 <body>
-	<div class="frameLoding">
-		<div class="frame">
-			<div class="center">
-				<div class="dot-1"></div>
-				<div class="dot-2"></div>
-				<div class="dot-3"></div>
-				<div class="loading">
-					<div class="loading-text">
-						<span class="loading-text-words">L</span> <span
-							class="loading-text-words">O</span> <span
-							class="loading-text-words">A</span> <span
-							class="loading-text-words">D</span> <span
-							class="loading-text-words">I</span> <span
-							class="loading-text-words">N</span> <span
-							class="loading-text-words">G</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="full-screen-div"></div>
-	<div class="container">
+	<div class="container" >
 		<div class="message-box-container">
 			<div class="message-box error-message-box"></div>
 			<div class="message-box success-message-box"></div>
@@ -75,96 +54,113 @@
 				<i class="fa fa-times-circle"></i>
 			</div>
 		</div>
-		<nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#"> <img
-						src="static/img/MAlogo.png" width="30" height="30" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+		<div class="frameLoding">
+			<div class="frame">
+				<div class="center">
+					<div class="dot-1"></div>
+					<div class="dot-2"></div>
+					<div class="dot-3"></div>
+					<div class="loading">
+						<div class="loading-text">
+							<span class="loading-text-words">L</span> <span
+								class="loading-text-words">O</span> <span
+								class="loading-text-words">A</span> <span
+								class="loading-text-words">D</span> <span
+								class="loading-text-words">I</span> <span
+								class="loading-text-words">N</span> <span
+								class="loading-text-words">G</span>
+						</div>
+					</div>
 				</div>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav" style="margin: 0 auto;">
-						<li class="nav-item menu-item active" data-href-html="home.html"
-							data-href="/home/"><a class="nav-link" href="#"><img
-								class="svg" src="static/img/icons/Home.svg"><span>Home</span></a></li>
+			</div>
+		</div>
+		<div class="full-screen-div"></div>
+		<nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light row">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"> <img
+					src="static/img/MAlogo.png" width="30" height="30" alt="">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav" style="margin: 0 auto;">
+					<li class="nav-item menu-item active" data-href-html="home.html"
+						data-href="/home/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/Home.svg"><span>Home</span></a></li>
 
-						<li class="nav-item menu-item" data-href-html="howtoenter.html"
-							data-href="/howtoenter/" data-color="--main-color-dark-blue"
-							data-color2="--main-color-yellow"><a class="nav-link"
-							href="#"><img class="svg" src="static/img/icons/How.svg"><span>How
-									to Enter</span></a></li>
+					<li class="nav-item menu-item" data-href-html="howtoenter.html"
+						data-href="/howtoenter/" data-color="--main-color-dark-blue"
+						data-color2="--main-color-yellow"><a class="nav-link"
+						href="#"><img class="svg" src="static/img/icons/How.svg"><span>How
+								to Enter</span></a></li>
 
-						<li class="nav-item menu-item" data-href-html="rules.html"
-							data-color="--main-color-yellow" data-href="/rules/"><a
-							class="nav-link" href="#"><img class="svg"
-								src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
+					<li class="nav-item menu-item" data-href-html="rules.html"
+						data-color="--main-color-yellow" data-href="/rules/"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
-						<li class="nav-item menu-item"
-							data-href-html="signup_page_view.html"
-							data-href="/signup_page_view/"><a class="nav-link" href="#"><img
-								class="svg" src="static/img/icons/Enter.svg"><span>Enter
-									Now</span></a></li>
+					<li class="nav-item menu-item"
+						data-href-html="signup_page_view.html"
+						data-href="/signup_page_view/"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/Enter.svg"><span>Enter
+								Now</span></a></li>
 
-						<!-- 							<li class="menu-item" data-href-html="signup_page.html" -->
-						<!-- 								data-href="/signup_page/"><a class="nav-link" href="#"><img -->
-						<!-- 									class="svg" src="static/img/icons/Enter.svg"><span>Enter -->
-						<!-- 										Now ADMIN</span></a></li> -->
+					<!-- 							<li class="menu-item" data-href-html="signup_page.html" -->
+					<!-- 								data-href="/signup_page/"><a class="nav-link" href="#"><img -->
+					<!-- 									class="svg" src="static/img/icons/Enter.svg"><span>Enter -->
+					<!-- 										Now ADMIN</span></a></li> -->
 
-						<li class="nav-item menu-item" data-href-html="history.html"
-							data-color="--main-color-pink" data-href="/history/"><a
-							class="nav-link" href="#"><img class="svg"
-								src="static/img/icons/History.svg"><span>History</span></a></li>
+					<li class="nav-item menu-item" data-href-html="history.html"
+						data-color="--main-color-pink" data-href="/history/"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/History.svg"><span>History</span></a></li>
 
-						<li class="nav-item menu-item" data-href-html="faq.html"
-							data-href="/faq/" data-color="--main-color-light-blue"><a
-							class="nav-link" href="#"><img class="svg"
-								src="static/img/icons/FAQ.svg"><span>FAQ's</span></a></li>
+					<li class="nav-item menu-item" data-href-html="faq.html"
+						data-href="/faq/" data-color="--main-color-light-blue"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/FAQ.svg"><span>FAQ's</span></a></li>
 
 
-						<li class="menu-item" data-href-html="contactus.html"
-							data-color="--main-color-dark-blue"
-							data-href="{% url 'artwork:contactus' %}"><a
-							class="nav-link" href="#"><img class="svg"
-								src="static/img/icons/Contact.svg"><span>Contact </span></a></li>
-						</li>
-					</ul>
-				</div>
-				<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
+					<li class="menu-item" data-href-html="contactus.html"
+						data-color="--main-color-dark-blue"
+						data-href="{% url 'artwork:contactus' %}"><a class="nav-link"
+						href="#"><img class="svg" src="static/img/icons/Contact.svg"><span>Contact
+						</span></a></li>
+					</li>
 				</ul>
 			</div>
+			<ul class="nav navbar-nav navbar-right ml-auto" id="login-div">
+			</ul>
 		</nav>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-12" id="page-content"></div>
-					</div>
-					<div class="row second-color" id="banner-bottom-1">
-						<div class="col-md-12 banners-text-content">
-							<label for="signupbuttonIdMain">Registration opens in...</label>
-							<div id="signupbuttonIdMain" class="timeCounterDiv">
-								<ul>
-									<li class="date-counter" data-text="days"
-										style="border-left: none;"><span>22</span></li>
-									<li class="date-counter" data-text="hrs"></li>
-									<li class="date-counter" data-text="mins"></li>
-									<li class="date-counter" data-text="sec"></li>
-								</ul>
-							</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12" id="page-content"></div>
+				</div>
+				<div class="row second-color" id="banner-bottom-1">
+					<div class="col-md-12 banners-text-content">
+						<label for="signupbuttonIdMain">Registration opens in...</label>
+						<div id="signupbuttonIdMain" class="timeCounterDiv">
+							<ul>
+								<li class="date-counter" data-text="days"
+									style="border-left: none;"><span>22</span></li>
+								<li class="date-counter" data-text="hrs"></li>
+								<li class="date-counter" data-text="mins"></li>
+								<li class="date-counter" data-text="sec"></li>
+							</ul>
 						</div>
 					</div>
-					<div class="row " id="banner-bottom-2">
-						<div class="col-md-12 third-color">
-							<span class="social-media-btn"><i class="fa fa-facebook"></i></span>
-							<span class="social-media-btn"><i class="fa fa-youtube"></i></span>
-							<span class="social-media-btn"><i class="fa fa-instagram"></i></span>
-						</div>
+				</div>
+				<div class="row " id="banner-bottom-2">
+					<div class="col-md-12 third-color">
+						<span class="social-media-btn"><i class="fa fa-facebook"></i></span>
+						<span class="social-media-btn"><i class="fa fa-youtube"></i></span>
+						<span class="social-media-btn"><i class="fa fa-instagram"></i></span>
 					</div>
 				</div>
 			</div>
