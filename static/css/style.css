@@ -358,6 +358,26 @@ p {
 	left: 23%;
 }
 
+.close-button {
+	position: absolute;
+	right: 11px;
+	top: 11px;
+	width: 48px;
+	height: 48px;
+	background: #162830;
+	border-radius: 50%;
+	cursor: pointer;
+	background-image: url("/static/img/icons/close.svg");
+	background-repeat: no-repeat;
+	background-size: 77%;
+	background-position: center;
+	transition: transform .2s ease-in;
+}
+
+.close-button:hover {
+	transform: scale(1.1);
+}
+
 @media ( max-width :800px) {
 	.container {
 		overflow-x: hidden;

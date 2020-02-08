@@ -109,7 +109,8 @@ function convertImg2SVG(className){
 	
 				// // Add an handler
 				// jQuery('path').each(function() {
-				// jQuery(this).click(function() {alert(jQuery(this).attr('id'));});
+				// jQuery(this).click(function()
+				// {alert(jQuery(this).attr('id'));});
 				// });
 			})
 		})
@@ -213,6 +214,7 @@ function openFullScreenDiv(htmlContenet) {
 	$(".full-screen-div").html(htmlContenet)
 	$(".full-screen-div").css("display", "block")
 	$(this).find(".close-button").load('static/img/icons/close.svg')
+	$(".dialog-popup-content").append($("<div/>").addClass("close-button").attr("onclick","closeFullScreenDiv()"))
 	TweenLite.to(".full-screen-div", 1, {
 		scale : 1,
 		top : 0,
@@ -220,6 +222,17 @@ function openFullScreenDiv(htmlContenet) {
 		left : 0,
 		bottom : 0,
 		transformOrigin : "center"
+	})
+}
+
+function closeFullScreenDiv(){
+	TweenLite.to(".full-screen-div", 1, {
+		scale : 0,
+		transformOrigin : "center",
+		onComplete: function(){
+			$(".full-screen-div").html("")
+		}
+		
 	})
 }
 
