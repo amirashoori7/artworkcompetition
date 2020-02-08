@@ -14,11 +14,6 @@
 <!-- 		Inspiring artistic connections with Maths</div> -->
 <!-- </div> -->
 
-<div class="row" id="banner-top">
-	<div class="col-md-12 banners-text-content">
-		<img alt="" src="static/img/graphics/Inspiringbar2.png">
-	</div>
-</div>
 <style>
 p {
 	display: list-item;
@@ -49,15 +44,24 @@ p {
 	height: 48px;
 	margin-bottom: 11px;
 	line-height: 22px;
-	box-shadow: 0px 7px 7px -7px #3b2f8b, inset 7px 7px 7px -7px #f1e106,
-		-7px -7px 7px -7px #f1e106, inset -7px -7px 7px -7px #3b2f8b;
-	background-color: #3b2f8b;
-	color: white;
+	box-shadow: 0px 3px 3px -3px #001132, inset 3px 3px 3px -3px
+		rgba(241, 227, 6, .8), -3px -3px 3px -3px rgba(241, 227, 6, .8), inset
+		-3px -3px 3px -3px #001132;
+	background-color: #001132;
+	color: #F1E306;
 	font-size: 22px;
-	box-shadow: 0px 7px 7px -7px #3b2f8b, inset 7px 7px 7px -7px #f1e106,
-		-7px -7px 7px -7px #f1e106, inset -7px -7px 7px -7px #3b2f8b;
-	background-color: #3b2f8b;
-	color: white;
+	box-shadow: 0px 3px 3px -3px #001132, inset 3px 3px 3px -3px
+		rgba(241, 227, 6, .8), -3px -3px 3px -3px rgba(241, 227, 6, .8), inset
+		-3px -3px 3px -3px #001132;
+	background-color: #001132;
+}
+
+.replaced-svg.svgNonMenu {
+	width: 222px;
+}
+
+.replaced-svg.svgNonMenu * {
+	fill: rgb(0, 17, 50);
 }
 
 @media ( max-width :800px) {
@@ -66,6 +70,11 @@ p {
 	}
 }
 </style>
+<div class="row" id="banner-top">
+	<div class="col-md-12 banners-text-content">
+		<img alt="" src="static/img/graphics/Inspiringbar2.png">
+	</div>
+</div>
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -74,7 +83,7 @@ p {
 		</div>
 		<div class="col-md-12" style="text-align: center;">
 			<img alt="" src="static/img/graphics/Big Buttons/Printbutton.svg"
-				style="width: 222px;">
+				class="svgNonMenu">
 		</div>
 		<br>
 		<div class="row">

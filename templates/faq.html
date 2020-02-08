@@ -1,45 +1,148 @@
+<style>
+p {
+	display: list-item;
+	/* This has to be "list-item"                                               */
+	list-style-type: disc;
+	/* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+	list-style-position: inside;
+}
+
+.card-header:before {
+	content: "\f077";
+	font-size: 26px;
+	position: absolute;
+	right: 13px;
+	font-family: "Font Awesome 5 Free";
+	top: 13px;
+	font-weight: bold;
+}
+
+.card-header.collapsed:before {
+	content: "\f078";
+}
+
+.card-header {
+	cursor: pointer;
+	font-weight: normal;
+	font-family: sans-serif;
+	height: 48px;
+	margin-bottom: 11px;
+	line-height: 22px;
+	box-shadow: 0px 3px 3px -3px #9ed5df, inset 3px 3px 3px -3px
+		rgba(0, 17, 50, .8), -3px -3px 3px -3px rgba(0, 17, 50, .8), inset
+		-3px -3px 3px -3px #9ed5df;
+	background-color: #9ed5df;
+	color: #001132 !important;
+	font-size: 22px;
+	box-shadow: 0px 3px 7px3px -3px #9ed5df, inset 3px 3px 3px -3px
+		rgba(0, 17, 50, .8), -3px -3px 3px -3px rgba(0, 17, 50, .8), inset
+		-3px -3px 3px -3px #9ed5df;
+	background-color: #9ed5df;
+}
+
+.replaced-svg.svgNonMenu {
+	width: 222px;
+}
+
+.replaced-svg.svgNonMenu * {
+	fill: rgb(0, 17, 50);
+}
+
+@media ( max-width :800px) {
+	.card-title {
+		font-size: 17px;
+	}
+}
+</style>
 <div class="row" id="banner-top">
 	<div class="col-md-12 banners-text-content">
 		<img alt="" src="static/img/graphics/Inspiringbar4.png">
 	</div>
 </div>
-<div class="row page-content-holder">
+<div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
+		<div class="col-md-12 page-title">
+			<h2>Frequently Asked Questions</h2>
+		</div>
+		<div class="col-md-12" style="text-align: center;">
+			<img alt="" src="static/img/graphics/Big Buttons/Printbutton.svg"
+				style="width: 222px;" class="svgNonMenu">
+		</div>
+		<br>
 		<div class="row">
-			<div class="page-title"><h2>Frequently asked Questions?</h2></div>
 			<div class="col-md-12">
-				<p>What is MathArt?</p>
-				<p>
-					What is the theme?<br>"My Universe"
-				</p>
-				<p>Who can enter?</p>
-				<p>
-					How much does it cost?<br>Free entry
-				</p>
-				<p>
-					When is the closing date?<br>"My Universe"
-				</p>
-				<p>Is it a Mathematics competition or an Art competition?</p>
-				<p>Must I make a physical artwork or this a digital competition?</p>
-				<p>Can we enter as a group?</p>
-				<p>Where can I find out more about MathArt?</p>
-				<p>Can I enter from my phone?</p>
-				<p>I don't have an email address? Can I still enter?</p>
-				<p>Can I enter more than one artwork?</p>
-				<p>What can I win?</p>
-				<p>I take Mathematical Literacy at school, can I still enter?</p>
-				<p>I am homeschooled how do I enter?</p>
-				<p>Can I submit a photograph as my artwork?</p>
-				<p>My battery died and I didn't finish submitting my entry, what
-					must I do?</p>
-				<p>Photography is art, My data ran out and I have lost my entry,
-					what must I do? Who must send their art to Port Elizabeth?</p>
-				<p>How do you send art to Port Elizabeth?</p>
-				<p>What if I can't afford to send my art to Port Elizabeth?</p>
+				<div class="card-header collapsed row" data-toggle="collapse"
+					aria-expanded="false" href="#about-mathart">
+					<div class="col-md-12">
+						<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;&nbsp;About
+							MathArt</a>
+					</div>
+				</div>
+				<div class="row card-body" id="about-mathart">
+					<div class="row">
+						<div class="col-md-12 q">Is this Maths competition or an Art
+							competition?</div>
+						<div class="col-md-12 a">Neither! It is a combination of
+							both. We are looking for the original way you combine Maths and
+							Art. Both the image of the artwork and your answers to the
+							questions will be considered during judging.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card-header collapsed row" data-toggle="collapse"
+					aria-expanded="false" href="#photo-rules-section">
+					<div class="col-md-12">
+						<i class="fa fa-palette"></i><a class="card-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Photo
+							Requirements</a>
+					</div>
+				</div>
+				<div class="row collapse card-body" id="photo-rules-section">
+					<p>Take a good quality photo of your artwork (only have your
+						artwork in the photo) using a cellphone with a 5 megapixel camera
+						or greater.</p>
+					<p>The artwork must be clear and in focus.</p>
+					<p>Artwork photo must be uploaded to the Website in
+						high-resolution (300dpi) digital format using either of the file
+						types: jpg or png;</p>
+					<p>Artwork photo must have a maximum size of no more than 5 Mb;</p>
+					<p>No editing of the photograph will be accepted.</p>
+					<p>Any artworks that are found to have been altered after the
+						photograph was taken and entered into the competition will be
+						disqualified.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card-header collapsed row" data-toggle="collapse"
+					aria-expanded="false" href="#original-rules-section">
+					<div class="col-md-12">
+						<i class="fa fa-award"></i><a class="card-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Originality
+							Requirements</a>
+					</div>
+				</div>
+				<div class="row collapse card-body" id="original-rules-section">
+					<p>Copying an image can be illegal and you should be aware of
+						these implications if you're making art based on someone else's
+						work.</p>
+					<p>Technically it is NOT illegal to use something that you see
+						online drawn by someone else. However, it is a breach of copyright
+						to pass this drawing as your own.</p>
+					<p>Examples of copying are:</p>
+					<p>Redrawing a picture and just changing the colour</p>
+					<p>Using the same drawing with small changes or additions here
+						and there</p>
+					<p>This is an example of a copy</p>
+					<p>This is example of using another person's work as a base for
+						your artwork.</p>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-2"></div>
 </div>
-

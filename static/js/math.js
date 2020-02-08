@@ -62,6 +62,7 @@ function loadContent(liItem) {
 				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area"))
 				$(".page-content-area").html(response)
+				convertImg2SVG("svgNonMenu")
 				$("#page-content").prepend(
 						$("<div/>").addClass("page-content-area-bg"))
 				$(".page-content-area-bg").html($(".menu-item.active").find("a").html())
@@ -79,37 +80,7 @@ function loadContent(liItem) {
 
 $(document).ready(function() {
 	runTimer()
-	$('img.svg').each(function() {
-		var $img = jQuery(this);
-		var imgID = $img.attr('id');
-		var imgClass = $img.attr('class');
-		var imgURL = $img.attr('src');
-
-		jQuery.get(imgURL, function(data) {
-			// Get the SVG tag, ignore the rest
-			var $svg = jQuery(data).find('svg');
-
-			// Add replaced image's ID to the new SVG
-			if (typeof imgID !== 'undefined') {
-				$svg = $svg.attr('id', imgID);
-			}
-			// Add replaced image's classes to the new SVG
-			if (typeof imgClass !== 'undefined') {
-				$svg = $svg.attr('class', imgClass + ' replaced-svg');
-			}
-
-			// Remove any invalid XML tags as per http://validator.w3.org
-			$svg = $svg.removeAttr('xmlns:a');
-
-			// Replace image with new SVG
-			$img.replaceWith($svg);
-
-			// // Add an handler
-			// jQuery('path').each(function() {
-			// jQuery(this).click(function() {alert(jQuery(this).attr('id'));});
-			// });
-		})
-	})
+	convertImg2SVG("svg")
 	$("#login-div").load('/account/login/')
 	TweenLite.to(".full-screen-div", 1, {
 		scale : 0,
@@ -117,6 +88,32 @@ $(document).ready(function() {
 	})
 
 })
+
+function convertImg2SVG(className){
+		$('img.'+className).each(function() {
+			var $img = jQuery(this);
+			var imgID = $img.attr('id');
+			var imgClass = $img.attr('class');
+			var imgURL = $img.attr('src');
+	
+			jQuery.get(imgURL, function(data) {
+				var $svg = jQuery(data).find('svg');
+				if (typeof imgID !== 'undefined') {
+					$svg = $svg.attr('id', imgID);
+				}
+				if (typeof imgClass !== 'undefined') {
+					$svg = $svg.attr('class', imgClass + ' replaced-svg');
+				}
+				$svg = $svg.removeAttr('xmlns:a');
+				$img.replaceWith($svg);
+	
+				// // Add an handler
+				// jQuery('path').each(function() {
+				// jQuery(this).click(function() {alert(jQuery(this).attr('id'));});
+				// });
+			})
+		})
+}
 
 $(window).on("load", function() {
 	$(".frameLoding").fadeOut()
