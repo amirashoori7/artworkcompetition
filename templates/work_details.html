@@ -13,6 +13,7 @@
 		</h5>
 	</div>
 </div>
+<hr/>
 <div class="row report-section normaldata">
 	<div class="col-md-6">
 		<h6>
@@ -39,7 +40,7 @@
 	</div>
 </div>
 
-
+<hr/>
 <div class="row report-section">
 	<div class="col-md-6">
 		<h6>
@@ -76,12 +77,12 @@
 	<div class="col-md-6">
 		<span id="answer3">{{ work.question3 }}</span>
 	</div>
-	<input type="text" name="id" id="work_id" value="{{ work.id }}"
+	<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
 				class="form-control form-input"> <input type="hidden"
 				name="status" id="status" value="{{ work.status }}"
 				class="form-control form-input">
 </div>
-
+<hr/>
 {%if work.status == 0 or work.status == 2%}
 <div class="row form-section normaldata"
 	data-title="Eligible/Revision/Reject">
@@ -142,7 +143,7 @@
 
 <div class="row form-section evaldata"
 	data-title="Evaluation Form Stage 1">
-	<div class="col-md-10" id="form-d1-a"></div>
+	<div class="col-md-12" id="form-d1-a"></div>
 </div>
 
 
