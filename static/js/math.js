@@ -30,6 +30,7 @@ function populateDangerMessageField(fieldId, text) {
 }
 
 function loadContent(liItem) {
+	$(".navbar-collapse").removeClass("show")
 	$("div#page-content").hide()
 	$("#banner-bottom-1").fadeIn()
 	var url = ""
@@ -54,7 +55,6 @@ function loadContent(liItem) {
 					opacity : 1,
 					transformOrigin : "top"
 				}, "-= .4")
-				$(".navbar-collapse").removeClass("show")
 				$("#page-content").fadeIn()
 				$("#page-content").html("")
 				$(".page-content-holder").prepend($("<div/>").addClass("page-bg-svg"))

@@ -12,6 +12,7 @@ from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
+from django.core.exceptions import ValidationError
 
 
 def index(request):
@@ -108,10 +109,17 @@ def entry_form(request):
     if request.method == 'POST':
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
         artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
-        print(request.POST['imagefilesize'])
+        
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
+            file = request.FILES['workfile']
+            if int(request.POST['imagefilesize']) > 0 and file.size != int(request.POST['imagefilesize']):
+                artwork_form.workfile = ""
+                raise ValidationError({'workfile': ["File was not uploaded properly",]})
+            school = get_object_or_404(School, id=request.POST["school"])
+            artwork_form.school = school
+            artwork_form.school_id = request.POST["school"]
             artwork_form.save()
             response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
             response_data['id'] = artwork_form.id
