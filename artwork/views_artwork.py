@@ -12,8 +12,6 @@ from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
-from django.core.exceptions import ValidationError
-import artwork
 
 
 def index(request):
