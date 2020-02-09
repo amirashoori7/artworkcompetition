@@ -307,7 +307,7 @@ p {
 	background: rgba(0, 0, 0, .666);
 	display: none;
 	padding: 33px;
-	text-align: center;
+	text-align: left;
 }
 
 .full-screen-div img {
@@ -390,4 +390,23 @@ p {
 	.timeCounterDiv ul {
 		padding: 0;
 	}
+	
+	.message-box {
+		padding: 11px 11px;
+		font-size: 19px;
+	}
+	.return-button i {
+		font-size: 44px;
+	}
+	.message-box-container{
+	height: 177px;
+	}
+	.return-button {
+    position: absolute;
+    height: 66px;
+    width: 52px;
+    right: 0;
+    bottom: 0px;
+    cursor: pointer;
+}
 }

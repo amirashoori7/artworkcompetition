@@ -119,9 +119,7 @@ function convertImg2SVG(className){
 $(window).on("load", function() {
 	$(".frameLoding").fadeOut()
 	$(".menu-item").attr("onclick", "loadContent(this)")
-	loadContent($("<li/>").attr({
-		"data-href" : "/home/"
-	}))
+	$(".menu-item[data-href='/home/']").trigger("click")
 	toggleMessageBox(null, null)
 })
 

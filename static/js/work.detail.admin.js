@@ -88,6 +88,8 @@ function updateTheArtwork() {
 				success : function(response) {
 					if (response.successResult != null) {
 						toggleMessageBox(response.successResult, false)
+						closeFullScreenDiv()
+						$(".menu-item[data-href='/work_lists/']").trigger("click")
 					} else if (response.errorResult != null) {
 						Object.keys(JSON.parse(response.errorResult)).forEach(
 								function(key, value) {
@@ -95,7 +97,7 @@ function updateTheArtwork() {
 											errorList)
 								})
 						toggleMessageBox(
-								"<span>Registration unsuccessful. <br>Please fill the following fields:</span>"
+								"<span>Unsuccessful."
 										+ $('<div>').append(errorList.clone())
 												.html(), true)
 					}

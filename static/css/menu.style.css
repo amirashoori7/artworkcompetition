@@ -135,6 +135,12 @@
 	top: -17px;
 }
 
+.navbar-right{
+	padding: 7px;
+    border-radius: 7px;
+    border: 1px solid black;
+}
+
 @media ( max-width : 800px) {
 	#banner-top, #banner-top .banners-text-content, #banner-top .banners-text-content img
 		{

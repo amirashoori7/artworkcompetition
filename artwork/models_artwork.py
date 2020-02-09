@@ -1,13 +1,9 @@
 from django.db import models
-from django.template.defaultfilters import default
 import os
 from uuid import uuid4
 from .utils import Status
-from account.models_account import ProjectUser
-from django.dispatch.dispatcher import receiver
-from django.db.models.signals import post_save
 from django.conf import settings
-from PIL.Image import Image, LANCZOS, open
+from PIL.Image import LANCZOS, open
 from _io import BytesIO
 from django.core.files.base import ContentFile
 
@@ -52,6 +48,7 @@ class Artwork(models.Model):
     workfile = models.FileField(blank=True, null=True, upload_to='works')
     thumbnail = models.FileField(blank=True, null=True, upload_to='works')
     workfileCropped = models.TextField(blank=True, default="", null=True)
+    comment = models.TextField(blank=True, default="", null=True)
     workformulafile = models.FileField(null=True, blank='True',upload_to='formulas')
     workapproved = models.BooleanField(default=False)
     bioapproved = models.BooleanField(default=False)
@@ -83,7 +80,7 @@ class Artwork(models.Model):
         return Status(self.status).name
 
     def make_thumbnail(self):
-        if len(self.workfile.name) <=0:
+        if self.workfile.name is None or len(self.workfile.name) <=0:
             return False
         image = open(self.workfile)
         ratio = image.width / 200

@@ -26,7 +26,7 @@ function fetchEntryForm(url) {
 			$("[data-required='1']").on("focusout", function() {
 				checkValidation()
 			})
-			checkValidation()
+			setTimeout(checkValidation,50)
 			getSchoolVal(1)
 		},
 		error : function(request, status, error) {
@@ -116,7 +116,7 @@ function checkValidation() {
 			$("#buttonSubmit").addClass("disabled")
 			$("#buttonSaveContinue").removeClass("disabled")
 		}
-	}, 1000)
+	}, 200)
 }
 
 function submitRegistryForm(url) {
@@ -172,7 +172,7 @@ function submitRegistryForm(url) {
 }
 
 function submitEntryForm(url) {
-	checkValidation()
+	$("input[name='status']").remove()
 	if(totalFields == filledFields){
 		$('#entry-form-id').append('<input type="hidden" name="status" value="0">')
 	}

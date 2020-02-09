@@ -85,9 +85,10 @@ def work_detail_update(request):
         workapproved = request.POST.get('workapproved', '') == 'False'
         bioapproved = request.POST.get('bioapproved', '') == 'False'
         qapproved = request.POST.get('qapproved', '') == 'False'
+        comment = request.POST.get('comment', '')
         Artwork.objects.filter(id=request.POST['id']).update(status=request.POST['status'], workapproved=workapproved,
-                                                     bioapproved=bioapproved, qapproved=qapproved)
-        response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
+                                                     bioapproved=bioapproved, qapproved=qapproved, comment=comment)
+        response_data['successResult'] = 'Successful.'
         
     return HttpResponse(json.dumps(response_data),
                 content_type="application/json")

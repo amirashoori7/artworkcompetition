@@ -23,10 +23,10 @@
 				<div class="input-group-prepend">
 					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
 				</div>
-				<input type="text" class="form-control" placeholder="cellphone"
+				<input type="text" class="form-control" name="cellphone"
 					required="required" id="cellphone"
 					value="{{ user.cellphone|default:'0712345678' }}"
-					name="Cellphone Number">
+					placeholder="Cellphone Number">
 			</div>
 		</div>
 
@@ -37,7 +37,7 @@
 			<!-- 					NAME -->
 
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
 					<span class="input-group-text">First Name</span>
 				</div>
@@ -47,7 +47,7 @@
 			</div>
 			<!-- 				SURNAME -->
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Last Name</span>
 				</div>
@@ -84,7 +84,7 @@
 			<!-- 					PARENT NAME -->
 
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Parent's Full-Name</span>
 				</div>
@@ -98,14 +98,13 @@
 
 			<!-- 				PARENT PHONE NUMBER -->
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Parent's Cell phone Number</span>
 				</div>
 				<input type="phone" class="form-control" name="parentphone"
 					placeholder="012 345 67 89" id="parentphone"
-					value="{{ user.parentphone|default:'081234567' }}"
-					required>
+					value="{{ user.parentphone|default:'081234567' }}" required>
 			</div>
 		</div>
 

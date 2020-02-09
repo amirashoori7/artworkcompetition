@@ -22,7 +22,7 @@
 			<td>{{ work.get_status_display }}</td>
 			<td>{{ work.worktitle }}
 				<div class="artwork-thumbnail">
-					<img class="img-thumbnail" src='{{ work.workfileCropped }}'>
+					<img class="img-thumbnail" src='{{ work.thumbnail.url }}'>
 				</div>
 			</td>
 			<td>{{ work.owner.email }}</td>
