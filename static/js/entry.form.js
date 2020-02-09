@@ -34,7 +34,8 @@ function fetchEntryForm(url) {
 		}
 	});
 }
-
+var totalFields = 0
+var filledFields = 0
 function checkValidation() {
 	var totalFields = 0
 	var filledFields = 0
@@ -107,6 +108,7 @@ function checkValidation() {
 					})
 	setTimeout(function() {
 		$("#buttonSubmit").html("Submit " + filledFields + "/" + totalFields)
+		$("#buttonSubmit").val("Submit " + filledFields + "/" + totalFields)
 		if (filledFields == totalFields) {
 			$("#buttonSubmit").removeClass("disabled")
 			$("#buttonSaveContinue").addClass("disabled")
@@ -170,6 +172,10 @@ function submitRegistryForm(url) {
 }
 
 function submitEntryForm(url) {
+	checkValidation()
+	if(totalFields == filledFields){
+		$('#entry-form-id').append('<input type="hidden" name="status" value="0">')
+	}
 	var form = $('#entry-form-id')[0];
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true);
 	var data = new FormData(form);
@@ -186,7 +192,8 @@ function submitEntryForm(url) {
 			xhr.upload.addEventListener("progress", function(evt) {
 				if (evt.lengthComputable) {
 					var percentComplete = ((evt.loaded / evt.total) * 100)
-					  $('.progress-bar').css('width', percentComplete+'%').attr('aria-valuenow', percentComplete);    
+					$('.progress-bar').css('width', percentComplete + '%')
+							.attr('aria-valuenow', percentComplete);
 
 				}
 			}, false);

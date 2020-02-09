@@ -221,20 +221,20 @@ p {
 /* MESSAGE BOXE START  */
 .message-box-container {
 	position: fixed;
-	color: white;
-	z-index: 100000;
-	opacity: 0;
-	text-align: center;
-	margin: 0 auto;
-	left: 0;
-	top: 0;
-	height: 222px;
-	width: 100%;
-	opacity: 1;
-	font-size: 22px;
-	border-radius: 0 0 33px 33px;
-	background: rgba(1, 82, 10, 0.66);
-	box-shadow: 0px 0px 33px -11px #2eda08;
+    color: white;
+    z-index: 100000;
+    text-align: center;
+    margin: 0 auto;
+    left: 11px;
+    top: 0;
+    height: 222px;
+    right: 11px;
+    opacity: 1;
+    font-size: 22px;
+    border-radius: 0 0 33px 33px;
+    background: rgba(1, 82, 10, 1);
+    box-shadow: 0px 0px 33px -11px #2eda08;
+    padding: 11px;
 }
 
 .message-box-container.red {
@@ -268,13 +268,9 @@ p {
 }
 
 .error-message-box {
-	background: rgba(252, 227, 232, 0.95);
-	border: 1px solid rgb(264, 3, 33);
-	font-size: 17px;
-	text-align: left;
-	color: black;
-	overflow-x: hidden;
-	max-height: 111px;
+    color: white;
+    overflow-x: hidden;
+    max-height: 111px;
 }
 
 .error-message-box ul {
@@ -282,11 +278,9 @@ p {
 }
 
 .success-message-box {
-	background: rgba(225, 244, 227, 0.95);
-	border: 1px solid #2eda08;
-	color: #517813;
-	overflow-x: hidden;
-	max-height: 111px;
+	color: white;
+    overflow-x: hidden;
+    max-height: 111px;
 }
 
 .dialog-popup-content {

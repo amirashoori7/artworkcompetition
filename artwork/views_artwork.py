@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
 from django.core.exceptions import ValidationError
+import artwork
 
 
 def index(request):
@@ -65,7 +66,7 @@ def gallery(request):
 
 
 def work_lists(request):
-    works = Artwork.objects.all()
+    works = Artwork.objects.filter(status__gte=0)
     context = {'works': works}
     return render(request, 'work_lists.html', context)
  
@@ -96,9 +97,11 @@ def signup_page(request):
     context = {}
     return render(request, 'signup_page.html', context)
 
+
 def signup_page_view(request):   
     context = {}
     return render(request, 'signup_page_view.html', context)
+
 
 @login_required
 @transaction.atomic
@@ -109,18 +112,22 @@ def entry_form(request):
     if request.method == 'POST':
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
         artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
-        
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
-            file = request.FILES['workfile']
-            if int(request.POST['imagefilesize']) > 0 and file.size != int(request.POST['imagefilesize']):
-                artwork_form.workfile = ""
-                raise ValidationError({'workfile': ["File was not uploaded properly",]})
-            school = get_object_or_404(School, id=request.POST["school"])
-            artwork_form.school = school
-            artwork_form.school_id = request.POST["school"]
+#             file = request.FILES['workfile']
+#             if int(request.POST['imagefilesize']) > 0 and file.size != int(request.POST['imagefilesize']):
+#                 artwork_form.workfile = ""
+#                 raise ValidationError({'workfile': ["File was not uploaded properly",]})
+            if request.POST.get('status', '-1') != '-1':
+                artwork_form.status = request.POST.get("status")
+            if int(request.POST.get("school", 0)) > 0:
+                school = get_object_or_404(School, id=request.POST["school"])
+                artwork_form.school = school
+                artwork_form.school_id = int(request.POST["school"])
             artwork_form.save()
+#             if request.FILES['workfile'] != None:
+#                 artwork_form.ge
             response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
             response_data['id'] = artwork_form.id
             return HttpResponse(json.dumps(response_data),
@@ -134,7 +141,7 @@ def entry_form(request):
             artwork_model = get_object_or_404(Artwork, owner=request.user)
             artwork_form = EntryForm(instance=artwork_model)
         except:
-            artwork_form, artwork_obj= Artwork.objects.get_or_create(owner=request.user)
+            artwork_form, artwork_obj = Artwork.objects.get_or_create(owner=request.user)
     else:
         artwork_form = EntryForm()
     context = {'form': artwork_form, 'user_form': user_form}

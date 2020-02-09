@@ -1,6 +1,6 @@
-from django.urls import path, re_path
-from . import views_artwork
+from django.urls import path
 from . import rest_views
+from artwork import views_artwork
 
 app_name = 'artwork'
 
@@ -24,6 +24,4 @@ urlpatterns = [
     path('work_lists/', views_artwork.work_lists, name='work_lists'),
     path('work_detail_update/', views_artwork.work_detail_update, name='work_detail_update'),
     path('<int:id>/', views_artwork.work_details, name='work_details'),
-    path('<school>/', views_artwork.work_lists,
-          name='work_lists_by_school'),
 ]

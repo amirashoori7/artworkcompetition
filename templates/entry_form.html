@@ -95,10 +95,28 @@
 				return false
 			}
 		}
-		$(".progress").show()
+		readURL(this)
+		$(".progress").css("display","flex")
 // 		createCroppie();
 // 		readFile(this);
-	});
+	})
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+            	$('.artwork-image').find("img").remove()
+                $('.artwork-image').append($("<img/>")
+                    .attr('src', e.target.result)
+                    .css({
+                    	"width": "100%",
+                    	"height": "auto"
+                    }))
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 	$('#cropIcon').on('click', function(ev) {
 		$('#main-cropper').croppie('result', {
@@ -145,6 +163,7 @@
 	left: 0;
 	right: 0;
 	padding: 11px;
+	background: white;
 }
 
 .disabled {
@@ -420,13 +439,15 @@
 					<label for="workfile">Upload image of my artwork</label> <input
 						type="file" class="form-control form-input" id="workfile"
 						name="workfile" placeholder="" value="Browse" data-required="1"
-						value="{{ form.instance.workfile|default_if_none:'' }}"
 						accept="image/*" required> <input type="hidden"
 						name="imagefilesize" id="imagefilesize" value="0">
 				</div>
-				<div class="col-md-12">
-				{% if form.instance.workfile != None %}
-				<img src="{{ form.instance.workfile }}" width="100%" height="auto">
+				<div class="col-md-12 artwork-image">
+				{% if form.instance.workfile %}
+				<script type="text/javascript">
+				$("#workfile").removeAttr('data-required')
+				</script>
+				<img src="{{ form.instance.workfile.url }}" width="100%" height="auto">
 				{% endif %}
 				</div>
 				<div class="col-md-12">

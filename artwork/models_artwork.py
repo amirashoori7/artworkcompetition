@@ -7,6 +7,9 @@ from account.models_account import ProjectUser
 from django.dispatch.dispatcher import receiver
 from django.db.models.signals import post_save
 from django.conf import settings
+from PIL.Image import Image, LANCZOS, open
+from _io import BytesIO
+from django.core.files.base import ContentFile
 
 
 class School(models.Model):
@@ -47,6 +50,7 @@ class Artwork(models.Model):
     teacheremail = models.CharField(blank=True, null=True, max_length=100)
     worktitle = models.CharField(blank=True, null=True, max_length=300)
     workfile = models.FileField(blank=True, null=True, upload_to='works')
+    thumbnail = models.FileField(blank=True, null=True, upload_to='works')
     workfileCropped = models.TextField(blank=True, default="", null=True)
     workformulafile = models.FileField(null=True, blank='True',upload_to='formulas')
     workapproved = models.BooleanField(default=False)
@@ -62,6 +66,7 @@ class Artwork(models.Model):
         ordering = ['submitted']
 
     def save(self, *args, **kwargs):
+        self.make_thumbnail()
         print("save initiation >>> ", self)
 #         if(self.id == 0):
 #             handleFile()
@@ -77,7 +82,34 @@ class Artwork(models.Model):
     def get_artwork_status(self):
         return Status(self.status).name
 
+    def make_thumbnail(self):
+        if len(self.workfile.name) <=0:
+            return False
+        image = open(self.workfile)
+        ratio = image.width / 200
+        THUMB_SIZE = (200, image.height/ratio)
+        image.thumbnail(THUMB_SIZE, LANCZOS)
 
+        thumb_name, thumb_extension = os.path.splitext(self.workfile.name)
+        thumb_extension = thumb_extension.lower()
+
+        thumb_filename = thumb_name + '_thumb' + thumb_extension
+
+        if thumb_extension in ['.jpg', '.jpeg']:
+            FTYPE = 'JPEG'
+        else:
+            return False    # Unrecognized file type
+
+        # Save thumbnail to in-memory file as StringIO
+        temp_thumb = BytesIO()
+        image.save(temp_thumb, FTYPE)
+        temp_thumb.seek(0)
+
+        # set save=False, otherwise it will run in an infinite loop
+        self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
+        temp_thumb.close()
+
+        return True
 '''
 #Custom Object Manager
 class CustomManager(models.Model):
