@@ -2,7 +2,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from account.models_account import ProjectUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
-from django.core import validators
 
 
 class LoginForm(forms.Form):

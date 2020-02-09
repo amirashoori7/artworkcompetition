@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from .models_account import ProjectUser
 from .forms_account import UserRegistrationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
 import json
 from django.contrib.auth import authenticate, login

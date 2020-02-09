@@ -13,6 +13,7 @@
 		</h5>
 	</div>
 </div>
+<hr/>
 <div class="row report-section normaldata">
 	<div class="col-md-6">
 		<h6>
@@ -39,7 +40,7 @@
 	</div>
 </div>
 
-
+<hr/>
 <div class="row report-section">
 	<div class="col-md-6">
 		<h6>
@@ -76,9 +77,13 @@
 	<div class="col-md-6">
 		<span id="answer3">{{ work.question3 }}</span>
 	</div>
+	<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
+				class="form-control form-input"> <input type="hidden"
+				name="status" id="status" value="{{ work.status }}"
+				class="form-control form-input">
 </div>
-
-{%if work.status == 0 %}
+<hr/>
+{%if work.status == 0 or work.status == 2%}
 <div class="row form-section normaldata"
 	data-title="Eligible/Revision/Reject">
 	<div class="col-md-12" id="">
@@ -86,6 +91,7 @@
 			action="{% url 'artwork:work_detail_update' %}"
 			class="needs-validation form-general-style"
 			enctype="multipart/form-data" novalidate>
+			{% csrf_token %}
 			<div class="row form-section" data-title="Validate the entry format">
 				<div class="col-md-3 form-group">
 					<label for="bioapproved">Bio is acceptable</strong> <input
@@ -109,7 +115,7 @@
 							rows="5" cols="100" placeholder="Any comments">{{ work.comment }}</textarea>
 				</div>
 			</div>
-			<input type="hidden" name="id" id="id" value="{{ work.id }}"
+			<input type="text" name="id" value="{{ work.id }}"
 				class="form-control form-input"> <input type="hidden"
 				name="status" id="status" value="{{ work.status }}"
 				class="form-control form-input">
@@ -132,12 +138,12 @@
 
 <!-- 	FORM D1-a -->
 
-{% elif work.status == 3 %}
+{% elif work.status == 4 %}
 
 
 <div class="row form-section evaldata"
 	data-title="Evaluation Form Stage 1">
-	<div class="col-md-10" id="form-d1-a"></div>
+	<div class="col-md-12" id="form-d1-a"></div>
 </div>
 
 

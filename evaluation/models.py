@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
-from account.models_account import ProjectUser
 from django.db import models
+from artwork.models_artwork import Artwork
+from account.models_account import ProjectUser
 
 WEIGHT = (
     ('5', 'Excellent'),
@@ -54,7 +55,7 @@ MATH = (
 
 
 class D1A(models.Model):
-    artwork = models.ForeignKey('artwork.Artwork', blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
     imgq = models.IntegerField(blank=True, null=True)
     answersq = models.IntegerField(blank=True, null=True)
     originq = models.IntegerField(blank=True, null=True)
@@ -73,7 +74,7 @@ class D1A(models.Model):
 
 
 class D1B(models.Model):
-    artwork = models.ForeignKey('artwork.Artwork', blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
     workis = models.IntegerField(blank=True, null=True)
     comment = models.TextField(blank=True)
     author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
@@ -82,7 +83,7 @@ class D1B(models.Model):
 
 
 class D2(models.Model):
-    artwork = models.ForeignKey('artwork.Artwork', blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
     math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True),)
     q1 = models.IntegerField(blank=True, null=True)
     q2 = models.IntegerField(blank=True, null=True)
@@ -99,7 +100,7 @@ class D2(models.Model):
 
 
 class D3(models.Model):
-    artwork = models.ForeignKey('artwork.Artwork', blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
     q1 = models.IntegerField(blank=True, null=True)
     q2 = models.IntegerField(blank=True, null=True)
     q3 = models.IntegerField(blank=True, null=True)

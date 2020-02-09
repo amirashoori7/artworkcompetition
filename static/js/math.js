@@ -41,6 +41,7 @@ function loadContent(liItem) {
 	$(".page-content-area").remove()
 // var contentHeight = $(".fixed-bottom").position().top -
 // ($("#banner-top").position().top + $("#banner-top").height())
+//	$("#page-content").append()
 	$("#page-content").load(
 			url,
 			function(response) {

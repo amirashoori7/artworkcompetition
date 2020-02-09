@@ -64,7 +64,7 @@ def gallery(request):
 
 
 def work_lists(request):
-    works = Artwork.objects.filter(status__gte=0)
+    works = Artwork.objects.filter(status__gte=0).exclude(status=1)
     context = {'works': works}
     return render(request, 'work_lists.html', context)
  
