@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from evaluation.forms_evaluation import FormD1A
 from django.http.response import HttpResponse
 import json
+from artwork.models_artwork import Artwork
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def create_d1a(request):
-#     work = get_object_or_404(Artwork, id=id)
+    work = get_object_or_404(Artwork, id=int(request.GET['work_id']))
     if request.method == 'POST':
         response_data = {}
         form = FormD1A(request.POST, request.FILES)

@@ -6,14 +6,14 @@ function validateSubmission(reason) {
 				&& $("#qapproved").prop("checked")) {
 			var r = confirm("Are you sure that work is approved?");
 			if (r == true) {
-				$("#status").val("3")
+				$("#status").val("4")
 				updateTheArtwork()
 			} else {
 				return
 			}
 		} else
 			toggleMessageBox(
-					"Please make sure that the bio, artwork and questions of the entry are right",
+					"Please make sure that the bio, artwork and questions of the entry are correctly submitted",
 					true)
 		break;
 	case 1:
@@ -37,7 +37,7 @@ function validateSubmission(reason) {
 	case 2:
 		var r = confirm("Are you sure that the artwork is rejected?");
 		if (r == true) {
-			$("#status").val("2")
+			$("#status").val("3")
 			updateTheArtwork()
 		} else {
 			return
@@ -51,7 +51,6 @@ function validateSubmission(reason) {
 
 function updateTheArtwork() {
 	var form = $('#entry-approval-form')[0];
-	$("#approveBTNTMP").prop("disabled", true);
 	var data = new FormData(form);
 	$
 			.ajax({
@@ -107,14 +106,14 @@ function updateTheArtwork() {
 					toggleMessageBox(xhr.responseText, true)
 				},
 				complete : function(response) {
-					$("#approveBTNTMP").prop("disabled", false)
 					return -1
 				}
 			})
 }
 
 $(document).ready(function() {
-	$("#form-d1-a").load('/evaluation/formd1a/', function() {
+	$("#form-d1-a").load('/evaluation/formd1a?work_id='+$("#work_id").val(), function() {
+//	$("#form-d1-a").load('/evaluation/formd1a/', function() {
 		$("#buttonSubmitD1AForm").click(function(ev) {
 			ev.preventDefault()
 			$(".normaldata").show()

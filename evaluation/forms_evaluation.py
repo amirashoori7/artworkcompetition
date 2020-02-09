@@ -1,4 +1,3 @@
-from . import models
 from django import forms
 from evaluation.models import D1A
 

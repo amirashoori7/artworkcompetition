@@ -44,11 +44,11 @@ function checkValidation() {
 	$(".exteded-class").removeClass("text-danger")
 	$("i.exteded-class").removeClass("fa-thumbs-up")
 	$("i.exteded-class").removeClass("fa-thumbs-down")
-	$(".card").removeClass("border-danger")
-	$(".card").removeClass("border-warning")
-	$(".card").removeClass("border-success")
+	$("#entry-form-id").find(".card").removeClass("border-danger")
+	$("#entry-form-id").find(".card").removeClass("border-warning")
+	$("#entry-form-id").find(".card").removeClass("border-success")
 	$(".exteded-class").removeClass("exteded-class")
-	$(".card")
+	$("#entry-form-id").find(".card")
 			.each(
 					function(i, j) {
 						var sectionTotalFields = $(j).find(

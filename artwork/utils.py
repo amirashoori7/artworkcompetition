@@ -1,19 +1,20 @@
-from enum import *
+from enum import IntEnum
 
 class Status(IntEnum):
     Pending = -1
     Submitted = 0
     Requires_Revision = 1
-    Rejected_Stage_0 = 2
-    Accepted_Stage_0 = 3
-    Waiting_For_Decision = 4
-    Accepted_Stage_1 = 5
-    Rejected_Stage_1 = 6
-    Waiting_For_Artpost = 7
-    Rejected_Stage_2 = 8
-    Artpost_Recieved = 9
-    Rejected_Stage_3 = 10
-    Winner = 11
+    Revised_work = 2
+    Rejected_Stage_0 = 3
+    Accepted_Stage_0 = 4
+    Waiting_For_Decision = 5
+    Accepted_Stage_1 = 6
+    Rejected_Stage_1 = 7
+    Waiting_For_Artpost = 8
+    Rejected_Stage_2 = 9
+    Artpost_Recieved = 10
+    Rejected_Stage_3 = 11
+    Winner = 12
 
     @classmethod
     def statuslist(cls):
