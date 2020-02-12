@@ -297,7 +297,7 @@
 
 
 					<div class="form-group col-md-6">
-						<label for="first_name">Parent's Full-Name</label> <input
+						<label for="first_name">Parent/Guardian's Full-Name</label> <input
 							data-required="1" type="text" class="form-control"
 							placeholder="i.e. Jack Scholtz" required id="parentname"
 							name="parentname"
@@ -309,7 +309,7 @@
 					<!-- 				PARENT PHONE NUMBER -->
 
 					<div class="form-group col-md-6">
-						<label for="first_name">Parent's Cell phone Number</label> <input
+						<label for="first_name">Parent/Guardian's Cell phone Number</label> <input
 							data-required="1" type="phone" class="form-control"
 							name="parentphone" placeholder="012 345 67 89" id="parentphone"
 							value="{{ user.parentphone|default:'081234567' }}" required>
@@ -321,7 +321,7 @@
 
 
 					<div class="form-group col-md-6">
-						<label for="parentemail">Parent's Email Address</label> <input
+						<label for="parentemail">Parent/Guardian's Email Address</label> <input
 							data-required="1" type="email" class="form-control"
 							id="parentemail" name="parentemail" placeholder="you@example.com"
 							value="{{ user.parentemail|default:'testparent@test.com' }}"
