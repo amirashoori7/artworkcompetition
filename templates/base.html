@@ -114,11 +114,12 @@
 						data-href="/signup_page/"><a class="nav-link" href="#"><img
 							class="svg" src="static/img/icons/Enter.svg"><span>Enter
 								Now ADMIN</span></a></li>
-
+								
+					{% if user.is_authenticated and user.user_type == 6%}
 					<li class="menu-item" data-href-html="signup_page.html"
 						data-href="/work_lists/"><a class="nav-link" href="#"><img
 							class="svg" src="static/img/icons/Enter.svg"><span>worklist</span></a></li>
-
+					{% endif %}
 					<li class="nav-item menu-item" data-href-html="history.html"
 						data-color="--main-color-pink" data-href="/history/"><a
 						class="nav-link" href="#"><img class="svg"
