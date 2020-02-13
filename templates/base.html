@@ -35,6 +35,7 @@
 <script async=""
 	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
 <script type="text/javascript">
+var version = {{ version }}
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
@@ -77,8 +78,9 @@
 		<nav
 			class="navbar navbar-expand-sm sticky-top navbar-light bg-light row">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"> <img
-					src="static/img/MAlogo.png" width="30" height="30" alt="">
+				<a class="navbar-brand" href="#"> <img id="enter-now-btn"
+					src="static/img/MAlogo.png" width="30" height="30" alt=""
+					data-href="/home/" class="menu-item">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -104,21 +106,16 @@
 						class="nav-link" href="#"><img class="svg"
 							src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
-					<li class="nav-item menu-item"
+					<li class="nav-item menu-item" 
 						data-href-html="signup_page_view.html"
 						data-href="/signup_page_view/"><a class="nav-link" href="#"><img
 							class="svg" src="static/img/icons/Enter.svg"><span>Enter
 								Now</span></a></li>
 
-					<li class="menu-item" data-href-html="signup_page.html"
-						data-href="/signup_page/"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/Enter.svg"><span>Enter
-								Now ADMIN</span></a></li>
-								
 					{% if user.is_authenticated and user.user_type == 6%}
 					<li class="menu-item" data-href-html="signup_page.html"
 						data-href="/work_lists/"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/Enter.svg"><span>worklist</span></a></li>
+							class="svg" src="static/img/icons/Enter.svg"><span>Worklist</span></a></li>
 					{% endif %}
 					<li class="nav-item menu-item" data-href-html="history.html"
 						data-color="--main-color-pink" data-href="/history/"><a

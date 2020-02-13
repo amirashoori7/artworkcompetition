@@ -323,3 +323,59 @@ function runTimer(){
 		}
 	}, 1000);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+var item = document.querySelector("#enter-now-btn");
+
+var timerID;
+var counter = 0;
+
+var pressHoldEvent = new CustomEvent("pressHold");
+var pressHoldDuration = 180;
+item.addEventListener("mousedown", pressingDown, false);
+item.addEventListener("mouseup", notPressingDown, false);
+item.addEventListener("mouseleave", notPressingDown, false);
+
+item.addEventListener("touchstart", pressingDown, false);
+item.addEventListener("touchend", notPressingDown, false);
+
+item.addEventListener("pressHold", showItemMenu, false);
+
+function pressingDown(e) {
+  requestAnimationFrame(timer);
+  e.preventDefault();
+}
+
+function notPressingDown(e) {
+  cancelAnimationFrame(timerID);
+  counter = 0;
+}
+
+//
+// Runs at 60fps when you are pressing down
+//
+function timer() {
+  if (counter < pressHoldDuration) {
+    timerID = requestAnimationFrame(timer);
+    counter++;
+  } else {
+    console.log("Press threshold reached!");
+    item.dispatchEvent(pressHoldEvent);
+  }
+}
+
+function showItemMenu(e) {
+	e.preventDefault()
+	loadContent($("<li/>").attr("data-href", "/signup_page/"))
+}
