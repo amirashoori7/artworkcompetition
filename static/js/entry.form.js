@@ -107,8 +107,7 @@ function checkValidation() {
 										})
 					})
 	setTimeout(function() {
-		$("#buttonSubmit").html("Saved " + filledFields + "/" + totalFields)
-		$("#buttonSubmit").val("Submit " + filledFields + "/" + totalFields)
+		$("#buttonSubmit").html("<i class='fa fa-save'></i>   Saved " + filledFields + "/" + totalFields)
 		if (filledFields == totalFields) {
 			$("#buttonSubmit").removeClass("disabled")
 			$("#buttonSaveContinue").addClass("disabled")

@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{% with version=0.1 %}
+{% with version=0.3 %}
 <title>{% block title %} {% endblock title %}</title>
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
 <!-- <link -->
@@ -108,7 +108,7 @@ var version = {{ version }}
 
 					{% if request.GET.req and request.GET.req == "dev" %}
 					<li class="nav-item menu-item" data-href-html="signup_page.html"
-						data-href="/signup_page/"><a class="nav-link" href="#"><img
+						data-href="/signup_page?ver={{ version }}"><a class="nav-link" href="#"><img
 							class="svg" src="static/img/icons/Enter.svg"><span>Enter
 								Now Admin</span></a></li> {% else %}
 					<li class="nav-item menu-item"
