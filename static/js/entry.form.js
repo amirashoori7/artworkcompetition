@@ -193,7 +193,6 @@ function submitEntryForm(url) {
 					var percentComplete = ((evt.loaded / evt.total) * 100)
 					$('.progress-bar').css('width', percentComplete + '%')
 							.attr('aria-valuenow', percentComplete);
-
 				}
 			}, false);
 			return xhr;
@@ -203,7 +202,6 @@ function submitEntryForm(url) {
 					.test(settings.url))) {
 				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
 			}
-
 		},
 		success : function(response) {
 			if (response.successResult != null) {
