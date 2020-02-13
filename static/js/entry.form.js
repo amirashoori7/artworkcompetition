@@ -8,7 +8,6 @@ function fetchEntryForm(url) {
 				$("#region-dropdownDIV").fadeOut()
 				$("#schoolDIV").fadeOut()
 			}
-
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
 				$(
 						"input[name='learnergradeRadio'][value='"
@@ -21,12 +20,16 @@ function fetchEntryForm(url) {
 			})
 			$('#entry-form-id').submit(function(event) {
 				event.preventDefault()
-				submitEntryForm($('#entry-form-id').attr("action"))
+				checkValidation().done(function() {
+					submitEntryForm($('#entry-form-id').attr("action"))
+				})
 			})
 			$("[data-required='1']").on("focusout", function() {
-				checkValidation()
+				checkValidation().done()
 			})
-			setTimeout(checkValidation,50)
+			setTimeout(function(){
+				checkValidation().done()
+			}, 50)
 			getSchoolVal(1)
 		},
 		error : function(request, status, error) {
@@ -34,11 +37,17 @@ function fetchEntryForm(url) {
 		}
 	});
 }
+
+function gradeChose(radioBTN) {
+	$('.btn-outline-secondary.btn-group').removeClass('active');
+	$('#currentlearnergrade').val($(radioBTN).val())
+}
 var totalFields = 0
 var filledFields = 0
 function checkValidation() {
-	var totalFields = 0
-	var filledFields = 0
+	totalFields = 0
+	filledFields = 0
+	var checkValidProcess = $.Deferred();
 	$(".exteded-class").removeClass("text-success")
 	$(".exteded-class").removeClass("text-warning")
 	$(".exteded-class").removeClass("text-danger")
@@ -48,7 +57,8 @@ function checkValidation() {
 	$("#entry-form-id").find(".card").removeClass("border-warning")
 	$("#entry-form-id").find(".card").removeClass("border-success")
 	$(".exteded-class").removeClass("exteded-class")
-	$("#entry-form-id").find(".card")
+	$("#entry-form-id")
+			.find(".card")
 			.each(
 					function(i, j) {
 						var sectionTotalFields = $(j).find(
@@ -107,15 +117,22 @@ function checkValidation() {
 										})
 					})
 	setTimeout(function() {
-		$("#buttonSubmit").html("<i class='fa fa-save'></i>   Saved " + filledFields + "/" + totalFields)
+		$("#buttonSubmit").html(
+				"<i class='fa fa-save'></i>   Saved " + filledFields + "/"
+						+ totalFields)
 		if (filledFields == totalFields) {
 			$("#buttonSubmit").removeClass("disabled")
 			$("#buttonSaveContinue").addClass("disabled")
+			$("#buttonSubmit").html(
+					"<i class='fa fa-telegram-plane'></i>   Submit The Entry")
 		} else {
 			$("#buttonSubmit").addClass("disabled")
 			$("#buttonSaveContinue").removeClass("disabled")
 		}
+		checkValidProcess.resolve()
 	}, 200)
+	return $.when(checkValidProcess).done(function() {
+	}).promise()
 }
 
 function submitRegistryForm(url) {
@@ -172,10 +189,10 @@ function submitRegistryForm(url) {
 
 function submitEntryForm(url) {
 	$("input[name='status']").remove()
-	if(totalFields == filledFields){
-		$('#entry-form-id').append('<input type="hidden" name="status" value="0">')
+	if (totalFields == filledFields) {
+		$('#entry-form-id').append('<input type="text" name="status" value="0">')
 	}
-	var form = $('#entry-form-id')[0];
+	var form = $('#entry-form-id')[0]
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true);
 	var data = new FormData(form);
 	$.ajax({
@@ -207,12 +224,12 @@ function submitEntryForm(url) {
 			if (response.successResult != null) {
 				$("#id").val(response.id)
 				toggleMessageBox(response.successResult, false)
+				$("#footer-form-btns").remove()
 			}
 			if (response.errorResultUser != null)
 				populateErrorMessageFields(response.errorResultUser)
 			if (response.errorResultWork != null) {
 				populateErrorMessageFields(response.errorResultWork)
-				$("#id").val(0)
 			}
 		},
 		error : function(xhr, errmsg, err) {

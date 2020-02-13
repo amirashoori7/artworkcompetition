@@ -375,8 +375,6 @@
 							id="school-id-val" data-required="1">
 					</div>
 					<div class="row">
-						<!-- 				<div class="col-md-12 btn-group btn-group-toggle" -->
-						<!-- 					data-toggle="buttons"> -->
 						<input type="hidden" data-required="1"
 							class="form-control form-input" id="currentlearnergrade"
 							value="{{ form.instance.learnergrade|default:'' }}" required
@@ -388,7 +386,7 @@
 								<input type="radio"
 								class="btn btn-outline-secondary btn-group btn-group-sm"
 								name="learnergradeRadio" value="Grade 7"
-								onclick="$('#currentlearnergrade').val($(this).val())">Grade
+								onclick="gradeChose(this)">Grade
 								7
 							</label>
 						</div>
@@ -396,7 +394,7 @@
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 8"
-								onclick="$('#currentlearnergrade').val($(this).val())">
+								onclick="gradeChose(this)">
 								Grade 8
 							</label>
 						</div>
@@ -404,7 +402,7 @@
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 9"
-								onclick="$('#currentlearnergrade').val($(this).val())">
+								onclick="gradeChose(this)">
 								Grade 9
 							</label>
 						</div>
@@ -412,7 +410,7 @@
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 10"
-								onclick="$('#currentlearnergrade').val($(this).val())">
+								onclick="gradeChose(this)">
 								Grade 10
 							</label>
 						</div>
@@ -420,7 +418,7 @@
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 11"
-								onclick="$('#currentlearnergrade').val($(this).val())">
+								onclick="gradeChose(this)">
 								Grade 11
 							</label>
 						</div>
@@ -428,7 +426,7 @@
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 12"
-								onclick="$('#currentlearnergrade').val($(this).val())">
+								onclick="gradeChose(this)">
 								Grade 12
 							</label>
 						</div>

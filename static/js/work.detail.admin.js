@@ -6,7 +6,7 @@ function validateSubmission(reason) {
 				&& $("#qapproved").prop("checked")) {
 			var r = confirm("Are you sure that work is approved?");
 			if (r == true) {
-				$("#status").val("4")
+				$(".status-values").val("4")
 				updateTheArtwork()
 			} else {
 				return
@@ -27,7 +27,7 @@ function validateSubmission(reason) {
 		} else {
 			var r = confirm("Are you sure that work requires revision?");
 			if (r == true) {
-				$("#status").val("1")
+				$(".status-values").val("1")
 				updateTheArtwork()
 			} else {
 				return
@@ -37,7 +37,7 @@ function validateSubmission(reason) {
 	case 2:
 		var r = confirm("Are you sure that the artwork is rejected?");
 		if (r == true) {
-			$("#status").val("3")
+			$(".status-values").val("3")
 			updateTheArtwork()
 		} else {
 			return
@@ -111,25 +111,3 @@ function updateTheArtwork() {
 			})
 }
 
-$(document).ready(function() {
-	$("#form-d1-a").load('/evaluation/formd1a?work_id='+$("#work_id").val(), function() {
-//	$("#form-d1-a").load('/evaluation/formd1a/', function() {
-		$("#buttonSubmitD1AForm").click(function(ev) {
-			ev.preventDefault()
-			$(".normaldata").show()
-			$(".evaldata").hide()
-		})
-	})
-	$("#approveBTN0").click(function(ev) {
-		ev.preventDefault()
-		validateSubmission(0)
-	})
-	$("#reviseBTN0").click(function(ev) {
-		ev.preventDefault()
-		validateSubmission(1)
-	})
-	$("#rejectBTN0").click(function(ev) {
-		ev.preventDefault()
-		validateSubmission(2)
-	})
-})

@@ -13,14 +13,15 @@
 		</h5>
 	</div>
 </div>
-<hr/>
+<hr />
 <div class="row report-section normaldata">
 	<div class="col-md-6">
 		<h6>
 			<strong>Born in </strong>{{ work.owner.dob }}
 		</h6>
 		<h6>
-			<strong>Email </strong>{{ work.owner.username }}, <strong>Cell </strong>{{work.owner.cellphone}}
+			<strong>Email </strong>{{ work.owner.username }}, <strong>Cell
+			</strong>{{work.owner.cellphone}}
 			<h6>
 	</div>
 	<div class="col-md-6">
@@ -40,7 +41,7 @@
 	</div>
 </div>
 
-<hr/>
+<hr />
 <div class="row report-section">
 	<div class="col-md-6">
 		<h6>
@@ -53,10 +54,14 @@
 	</div>
 	{% if work.workformulafile %}
 	<div class="col-md-6">
-		<label for="formulaImg"><h6><strong>Formula Image</strong></h6></label>
+		<label for="formulaImg"><h6>
+				<strong>Formula Image</strong>
+			</h6></label>
 	</div>
-	<div class="col-md-6"><img id="formulaImg"
-			src="{{ work.workformulafile.url }}" width="100%" height="auto"></div>
+	<div class="col-md-6">
+		<img id="formulaImg" src="{{ work.workformulafile.url }}" width="100%"
+			height="auto">
+	</div>
 	{% endif %}
 
 	<div class="col-md-6">
@@ -78,11 +83,11 @@
 		<span id="answer3">{{ work.question3 }}</span>
 	</div>
 	<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
-				class="form-control form-input"> <input type="hidden"
-				name="status" id="status" value="{{ work.status }}"
-				class="form-control form-input">
+		class="form-control form-input"> <input type="hidden"
+		name="status" value="{{ work.status }}"
+		class="form-control form-input status-values">
 </div>
-<hr/>
+<hr />
 {%if work.status == 0 or work.status == 2%}
 <div class="row form-section normaldata"
 	data-title="Eligible/Revision/Reject">
@@ -101,13 +106,13 @@
 				<div class="col-md-3 form-group">
 					<label for="workapproved">Artwork is uploaded properly</strong> <input
 						type="checkbox" name="workapproved" id="workapproved"
-						class="form-control form-input" value="{{ work.workapproved|default_if_none:'on'}}">
+						class="form-control form-input"
+						value="{{ work.workapproved|default_if_none:'on'}}">
 				</div>
 				<div class="col-md-3 form-group">
-					<label for="qapproved">All 3 questions are answered</strong>
-						<input type="checkbox" name="qapproved"
-						id="qapproved" value="{{ work.qapproved }}"
-						class="form-control form-input">
+					<label for="qapproved">All 3 questions are answered</strong> <input
+						type="checkbox" name="qapproved" id="qapproved"
+						value="{{ work.qapproved }}" class="form-control form-input">
 				</div>
 				<div class="col-md-3 form-group">
 					<label for="comment1">Comment</strong> <textarea type="checkbox"
@@ -115,20 +120,20 @@
 							rows="5" cols="100" placeholder="Any comments">{{ work.comment }}</textarea>
 				</div>
 			</div>
-			<input type="text" name="id" value="{{ work.id }}"
+			<input type="hidden" name="id" value="{{ work.id }}"
 				class="form-control form-input"> <input type="hidden"
-				name="status" id="status" value="{{ work.status }}"
-				class="form-control form-input">
+				name="status" value="{{ work.status }}"
+				class="form-control form-input status-values">
 			<div class="row form-section" data-title="Decision">
 				<div class="col-md-4">
-					<button class="action-button green" id="approveBTN0">Approve</button>
+					<button class="action-button green" type="button" id="approveBTN0">Approve</button>
 				</div>
 				<div class="col-md-4">
-					<button class="action-button orange" id="reviseBTN0">Requires
+					<button class="action-button orange" type="button" id="reviseBTN0">Requires
 						Revision</button>
 				</div>
 				<div class="col-md-4">
-					<button class="action-button red" id="rejectBTN0">Reject</button>
+					<button class="action-button red" type="button" id="rejectBTN0">Reject</button>
 				</div>
 			</div>
 		</form>
@@ -152,23 +157,13 @@
 
 
 
-{% elif work.status == 5 %}
-<form method="post" id="" action="/"
-	class="needs-validation form-general-style"
-	enctype="multipart/form-data" novalidate>
-	FORM D2
-	<div class="row form-section" data-title="Decision">
-		<div class="col-md-6">
-			<button class="action-button green" id="buttonSubmit">Submit</button>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<button class="action-button red"
-			onclick="alert('update status to 6, visibility to 0')">Reject</button>
+{% elif work.status == 6 %}
+<div class="row form-section evaldata"
+	data-title="Evaluation Form Stage 2">
+	<div class="col-md-12" id="form-d2"></div>
+</div>
 
-	</div>
-</form>
-{%elif work.status == 7 %}
+{%elif work.status == 10 %}
 <form method="post" id="" action="/"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
@@ -181,5 +176,42 @@
 </form>
 {%endif%}
 
-<script type="text/javascript" src="static/js/work.detail.admin.js">
-	
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				{% if work.status == 4 %}
+				$("#form-d1-a").load(
+						'/evaluation/formd1a?work_id=' + $("#work_id").val(),
+						function() {
+							$("#buttonSubmitD1AForm").click(function(ev) {
+								ev.preventDefault()
+								$(".normaldata").show()
+								$(".evaldata").hide()
+							})
+						})
+						{% elif work.status == 6 %}
+
+				$("#form-d2").load(
+						'/evaluation/formd2?work_id=' + $("#work_id").val(),
+						function() {
+							$("#buttonSubmitD1AForm").click(function(ev) {
+								ev.preventDefault()
+								$(".normaldata").show()
+								$(".evaldata").hide()
+							})
+						})
+				{%endif%}
+				$("#approveBTN0").click(function(ev) {
+					ev.preventDefault()
+					validateSubmission(0)
+				})
+				$("#reviseBTN0").click(function(ev) {
+					ev.preventDefault()
+					validateSubmission(1)
+				})
+				$("#rejectBTN0").click(function(ev) {
+					ev.preventDefault()
+					validateSubmission(2)
+				})
+			})
+</script>

@@ -4,8 +4,8 @@ import json
 from artwork.models_artwork import Artwork
 from django.contrib.auth.decorators import login_required
 from account.models_account import ProjectUser
-from evaluation.models import D1A
-from evaluation.forms_evaluation import FormD1A
+from evaluation.models import D1A, D2
+from evaluation.forms_evaluation import FormD1A, FormD2
 
 @login_required
 def create_d1a(request):
@@ -34,6 +34,35 @@ def create_d1a(request):
         formd1A_form = FormD1A()
     context = {'form': formd1A_form}
     return render(request, 'evaluationForms/D1A_form.html', context)
+
+
+@login_required
+def create_d2(request):
+    userModel = ProjectUser.objects.get(username=request.user)
+    artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
+    if request.method == 'POST':
+        response_data = {}
+        formd2_form = FormD2(request.POST, request.FILES)
+        if formd2_form.is_valid():
+            formd2_form = formd2_form.save()
+            response_data['successResult'] = 'D2 form submitted successfully!'
+            response_data['id'] = formd2_form.id
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+        else:
+            response_data['errorResult'] = formd2_form.errors.as_json(True)
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+    elif userModel.user_type == 1:
+        try:
+            formd2_model = get_object_or_404(D2, author=request.user)
+            formd2_form = FormD1A(instance=formd2_model)
+        except:
+            formd2_form, formd2_obj = D1A.objects.get_or_create(author=request.user, artwork=artwork)
+    else:
+        formd2_form = FormD2()
+    context = {'form': formd2_form}
+    return render(request, 'evaluationForms/D2_form.html', context)
 
 
 '''
