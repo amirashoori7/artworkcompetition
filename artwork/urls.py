@@ -15,6 +15,7 @@ urlpatterns = [
     path('contactus/', views_artwork.contactus, name='contactus'),
     path('faq/', views_artwork.faq, name='faq'),
     path('history/', views_artwork.history, name='history'),
+    path('manager_console/', views_artwork.managerConsole, name='manager_console'),
     path('howtoenter/', views_artwork.howtoenter, name='howtoenter'),
     path('rules/', views_artwork.rules, name='rules'),
     path('signup_page/', views_artwork.signup_page, name='signup_page'),

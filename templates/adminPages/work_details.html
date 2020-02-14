@@ -1,0 +1,217 @@
+<div class="row report-section">
+	<div class="col-md-12">
+		<img type="file" id="workfileCropped" src="{{ work.workfile.url }}">
+	</div>
+	<div class="col-md-12">
+		<h3>
+			<strong>Artwork </strong>"{{ work.worktitle }}"
+		</h3>
+	</div>
+	<div class="col-md-12 normaldata">
+		<h5>
+			<strong>By </strong>{{ work.owner.last_name }}, {{ work.owner.first_name }}
+		</h5>
+	</div>
+</div>
+<hr />
+<div class="row report-section normaldata">
+	<div class="col-md-6">
+		<h6>
+			<strong>Born in </strong>{{ work.owner.dob }}
+		</h6>
+		<h6>
+			<strong>Email </strong>{{ work.owner.username }}, <strong>Cell
+			</strong>{{work.owner.cellphone}}
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<h6>
+			{{ work.learnergrade }}, <strong>School</strong> {{ work.school.name }} ({{ work.school.region }},&nbsp;{{ work.school.province }}).
+		</h6>
+		<h6>
+			<strong>Teacher</strong> {{ work.teachername }}, <strong>Email</strong>
+			{{ work.teacheremail }}
+		</h6>
+	</div>
+	<div class="col-md-12">
+		<h6>
+			<strong>Parent</strong> {{ work.parentname }}, <strong>Cell</strong>
+			{{ work.parentphone }}
+			<h6>
+	</div>
+</div>
+
+<hr />
+<div class="row report-section">
+	<div class="col-md-6">
+		<h6>
+			<strong>Question 1: What Mathematics did you use in your
+				artwork?</strong>
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<span id="answer1">{{ work.question1 }}</span>
+	</div>
+	{% if work.workformulafile %}
+	<div class="col-md-6">
+		<label for="formulaImg"><h6>
+				<strong>Formula Image</strong>
+			</h6></label>
+	</div>
+	<div class="col-md-6">
+		<img id="formulaImg" src="{{ work.workformulafile.url }}" width="100%"
+			height="auto">
+	</div>
+	{% endif %}
+
+	<div class="col-md-6">
+		<h6>
+			<strong>Question 2: How did you use creativity to connect
+				Mathematics with "My Universe" to make your artwork?</strong>
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<span id="answer2">{{ work.question2 }}</span>
+	</div>
+	<div class="col-md-6">
+		<h6>
+			<strong>Question 3: Do you think creativity could be used to
+				teach Mathematics?</strong>
+			<h6>
+	</div>
+	<div class="col-md-6">
+		<span id="answer3">{{ work.question3 }}</span>
+	</div>
+	<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
+		class="form-control form-input"> <input type="hidden"
+		name="status" value="{{ work.status }}"
+		class="form-control form-input status-values">
+</div>
+<hr />
+{%if work.status == 0 or work.status == 2%}
+<div class="row form-section normaldata"
+	data-title="Eligible/Revision/Reject">
+	<div class="col-md-12" id="">
+		<form method="post" id="entry-approval-form"
+			action="{% url 'artwork:work_detail_update' %}"
+			class="needs-validation form-general-style"
+			enctype="multipart/form-data" novalidate>
+			{% csrf_token %}
+			<div class="row form-section" data-title="Validate the entry format">
+				<div class="col-md-3 form-group">
+					<label for="bioapproved">Bio is acceptable</strong> <input
+						type="checkbox" name="bioapproved" id="bioapproved"
+						value="{{ work.bioapproved }}" class="form-control form-input">
+				</div>
+				<div class="col-md-3 form-group">
+					<label for="workapproved">Artwork is uploaded properly</strong> <input
+						type="checkbox" name="workapproved" id="workapproved"
+						class="form-control form-input"
+						value="{{ work.workapproved|default_if_none:'on'}}">
+				</div>
+				<div class="col-md-3 form-group">
+					<label for="qapproved">All 3 questions are answered</strong> <input
+						type="checkbox" name="qapproved" id="qapproved"
+						value="{{ work.qapproved }}" class="form-control form-input">
+				</div>
+				<div class="col-md-3 form-group">
+					<label for="comment1">Comment</strong> <textarea type="checkbox"
+							name="comment" id="comment" class="form-control form-input"
+							rows="5" cols="100" placeholder="Any comments">{{ work.comment }}</textarea>
+				</div>
+			</div>
+			<input type="hidden" name="id" value="{{ work.id }}"
+				class="form-control form-input"> <input type="hidden"
+				name="status" value="{{ work.status }}"
+				class="form-control form-input status-values">
+			<div class="row form-section" data-title="Decision">
+				<div class="col-md-4">
+					<button class="action-button green" type="button" id="approveBTN0">Approve</button>
+				</div>
+				<div class="col-md-4">
+					<button class="action-button orange" type="button" id="reviseBTN0">Requires
+						Revision</button>
+				</div>
+				<div class="col-md-4">
+					<button class="action-button red" type="button" id="rejectBTN0">Reject</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!-- 	FORM D1-a -->
+
+{% elif work.status == 4 %}
+
+
+<div class="row form-section evaldata"
+	data-title="Evaluation Form Stage 1">
+	<div class="col-md-12" id="form-d1-a"></div>
+</div>
+
+
+
+<!-- 	FORM D2 -->
+
+
+
+{% elif work.status == 6 %}
+<div class="row form-section evaldata"
+	data-title="Evaluation Form Stage 2">
+	<div class="col-md-12" id="form-d2"></div>
+</div>
+
+{%elif work.status == 10 %}
+<form method="post" id="" action="/"
+	class="needs-validation form-general-style"
+	enctype="multipart/form-data" novalidate>
+	FORM D3
+	<div class="row form-section" data-title="Decision">
+		<div class="col-md-12">
+			<button class="action-button green" id="buttonSubmit">Submit</button>
+		</div>
+	</div>
+</form>
+{%endif%}
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				{% if work.status == 4 %}
+				$("#form-d1-a").load(
+						'/evaluation/formd1a?work_id=' + $("#work_id").val(),
+						function() {
+							$("#buttonSubmitD1AForm").click(function(ev) {
+								ev.preventDefault()
+								$(".normaldata").show()
+								$(".evaldata").hide()
+							})
+						})
+						{% elif work.status == 6 %}
+
+				$("#form-d2").load(
+						'/evaluation/formd2?work_id=' + $("#work_id").val(),
+						function() {
+							$("#buttonSubmitD1AForm").click(function(ev) {
+								ev.preventDefault()
+								$(".normaldata").show()
+								$(".evaldata").hide()
+							})
+						})
+				{%endif%}
+				$("#approveBTN0").click(function(ev) {
+					ev.preventDefault()
+					validateSubmission(0)
+				})
+				$("#reviseBTN0").click(function(ev) {
+					ev.preventDefault()
+					validateSubmission(1)
+				})
+				$("#rejectBTN0").click(function(ev) {
+					ev.preventDefault()
+					validateSubmission(2)
+				})
+			})
+</script>

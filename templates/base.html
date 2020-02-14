@@ -119,8 +119,8 @@ var version = {{ version }}
 					<!-- 								CMNT -->
 					{% if user.is_authenticated and user.user_type == 6%}
 					<li class="menu-item" data-href-html="signup_page.html"
-						data-href="/work_lists?ver={{ version }}"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/Enter.svg"><span>Worklist</span></a></li>
+						data-href="/manager_console?ver={{ version }}"><a class="nav-link" href="#"><img
+							class="svg" src="static/img/icons/Enter.svg"><span>Admin</span></a></li>
 					{% endif %}
 					<li class="nav-item menu-item" data-href-html="history.html"
 						data-color="--main-color-pink" data-href="/history/"><a

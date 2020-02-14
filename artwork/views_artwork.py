@@ -18,6 +18,9 @@ def index(request):
     context = {}
     return render(request, 'index.html', context)
 
+def managerConsole(request):
+    context = {}
+    return render(request, 'adminPages/admin_console.html', context)
 
 def home(request):
     num_works = Artwork.objects.all().count()
@@ -66,7 +69,7 @@ def gallery(request):
 def work_lists(request):
     works = Artwork.objects.filter(status__gte=0).exclude(status=1)
     context = {'works': works}
-    return render(request, 'work_lists.html', context)
+    return render(request, 'adminPages/work_lists.html', context)
  
 
 def work_details(request, id):
@@ -74,7 +77,7 @@ def work_details(request, id):
         Artwork.objects.filter(id=id).update(status='updated_name')
     work = get_object_or_404(Artwork, id=id)
     context = {'work': work}
-    return render(request, 'work_details.html', context)
+    return render(request, 'adminPages/work_details.html', context)
 
 
 def work_detail_update(request):
@@ -87,7 +90,6 @@ def work_detail_update(request):
         Artwork.objects.filter(id=request.POST['id']).update(status=request.POST['status'], workapproved=workapproved,
                                                      bioapproved=bioapproved, qapproved=qapproved, comment=comment)
         response_data['successResult'] = 'Successful.'
-        
     return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
 

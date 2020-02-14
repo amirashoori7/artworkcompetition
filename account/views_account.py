@@ -1,14 +1,16 @@
-from django.views.generic import ListView
-from .models_account import ProjectUser
 from .forms_account import UserRegistrationForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import json
 from django.contrib.auth import authenticate, login
+from account.forms_account import AdvancedUserRegistrationForm
+from account.models_account import ProjectUser
 
 
-class ProjectUserList(ListView):
-    model = ProjectUser
+def projectUserList(request):
+    userList = ProjectUser.objects.all()
+    context = {'userlist': userList}
+    return render(request, 'adminPages/user_list.html', context)
 
 
 def registration(request):
@@ -34,17 +36,33 @@ def registration(request):
     return render(request, 'register.html', context)
 
 
+def registerJudge(request):
+    response_data = {}
+    if request.method == 'POST':
+        form = AdvancedUserRegistrationForm(request.POST)
+        if form.is_valid():
+            form = form.save()
+            response_data['successResult'] = 'Registration succeed'
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+        else:
+            response_data['errorResult'] = form.errors.as_json(True)
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+    elif request.method == 'GET' and 'username' in request.GET and request.GET['username'] is not None and request.GET['username'] != '':
+        try:
+            user_model = get_object_or_404(ProjectUser, username=request.GET["username"])
+            form = AdvancedUserRegistrationForm(instance=user_model)
+        except:
+            form, user_obj = ProjectUser.objects.get_or_create(username=request.user)
+    else:
+        form = AdvancedUserRegistrationForm()
+    context = {'form': form}
+    return render(request, 'adminPages/registerJudge.html', context)
+
+
 def registration_view(request):
     form = UserRegistrationForm()
     context = {'form': form}
-    return render(request, 'register_view.html', context)
+    return render(request, 'adminPages/register_view.html', context)
 
-# def getUser(request):
-#     form = UserRegistrationForm(request.GET)
-#     if form.is_valid():
-#         user = form.save()
-#         return render(request, 'register.html', {'user': user})
-#     else:
-#         form = UserRegistrationForm()
-#     context = {'form': form}
-#     return render(request, 'register.html', context)

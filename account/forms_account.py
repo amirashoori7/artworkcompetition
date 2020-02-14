@@ -24,3 +24,17 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = ProjectUser
         fields = ('username', 'first_name', 'last_name', 'parentname', 'parentphone', 'dob', 'parentemail', 'password1', 'password2', 'cellphone')
+
+
+class AdvancedUserRegistrationForm(UserCreationForm):
+    username_validator = UnicodeUsernameValidator()
+    default_validators = [username_validator]
+    
+    first_name = forms.CharField(error_messages={'required': 'Please enter your name'})
+    last_name = forms.CharField(error_messages={'required': 'Please enter your last name'})
+    username = forms.EmailField(error_messages={'required': 'Please enter a valid email address'}, validators=default_validators)
+    dob = forms.DateField(error_messages={'required': 'Please enter your birth date'})
+ 
+    class Meta:
+        model = ProjectUser
+        fields = ('username', 'first_name', 'last_name', 'dob', 'user_type', 'password1', 'password2', 'cellphone')

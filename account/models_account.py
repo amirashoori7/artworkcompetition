@@ -17,3 +17,6 @@ class ProjectUser(AbstractUser):
     parentname = models.CharField(blank=True, null=True, max_length=200)
     parentphone = models.CharField(blank=True, null=True, max_length=100)
     parentemail = models.CharField(blank=True, null=True, max_length=100)
+
+
+
