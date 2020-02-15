@@ -9,12 +9,19 @@ from evaluation.forms_evaluation import FormD1A, FormD2
 
 @login_required
 def create_d1a(request):
-    userModel = ProjectUser.objects.get(username=request.user)
-    artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
     if request.method == 'POST':
         response_data = {}
-        formd1A_form = FormD1A(request.POST, request.FILES)
+        if request.POST['work_id'] is None or request.POST['work_id'] == '':
+            response_data['errorResult'] = "Illegal access to the form"
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+        old_data = get_object_or_404(D1A, id=request.POST["id"])
+        formd1A_form = FormD1A(request.POST, instance=old_data)
         if formd1A_form.is_valid():
+            formd1A_form = formd1A_form.save(commit=False)
+            formd1A_form.author = request.user
+            artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
+            formd1A_form.artwork = artwork
             formd1A_form = formd1A_form.save()
             response_data['successResult'] = 'D1A form submitted successfully!'
             response_data['id'] = formd1A_form.id
@@ -24,16 +31,19 @@ def create_d1a(request):
             response_data['errorResult'] = formd1A_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
-    elif userModel.user_type == 1:
+    elif request.method == 'GET':
+        artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         try:
-            formd1A_model = get_object_or_404(D1A, author=request.user)
+            formd1A_model = get_object_or_404(D1A, author=request.user, artwork=artwork)
             formd1A_form = FormD1A(instance=formd1A_model)
         except:
             formd1A_form, formd1A_obj = D1A.objects.get_or_create(author=request.user, artwork=artwork)
+        context = {'form': formd1A_form}
+        return render(request, 'evaluationForms/D1A_form.html', context)
     else:
-        formd1A_form = FormD1A()
-    context = {'form': formd1A_form}
-    return render(request, 'evaluationForms/D1A_form.html', context)
+        response_data['errorResult'] = "Illegal access to the form"
+        return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
 
 
 @login_required

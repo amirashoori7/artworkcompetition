@@ -55,13 +55,13 @@ MATH = (
 
 
 class D1A(models.Model):
-    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
     imgq = models.IntegerField(blank=True, null=True)
     answersq = models.IntegerField(blank=True, null=True)
     originq = models.IntegerField(blank=True, null=True)
     revisit = models.BooleanField(default=False)
     comment = models.TextField(blank=True)
-    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -74,16 +74,16 @@ class D1A(models.Model):
 
 
 class D1B(models.Model):
-    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
     workis = models.IntegerField(blank=True, null=True)
     comment = models.TextField(blank=True)
-    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
 class D2(models.Model):
-    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
     math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True),)
     q1 = models.IntegerField(blank=True, null=True, default=0)
     q2 = models.IntegerField(blank=True, null=True, default=0)
@@ -91,7 +91,7 @@ class D2(models.Model):
     q4 = models.IntegerField(blank=True, null=True, default=0)
     comment = models.TextField(blank=True)
     score = models.FloatField(null=True, blank=True)
-    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -101,14 +101,14 @@ class D2(models.Model):
 
 
 class D3(models.Model):
-    artwork = models.ForeignKey(Artwork, blank=True, null=True, on_delete=models.CASCADE)
+    artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
     q1 = models.IntegerField(blank=True, null=True, default=0)
     q2 = models.IntegerField(blank=True, null=True, default=0)
     q3 = models.IntegerField(blank=True, null=True, default=0)
     q4 = models.IntegerField(blank=True, null=True, default=0)
     comment = models.TextField(blank=True)
     score = models.FloatField(null=True, blank=True)
-    author = models.ForeignKey(ProjectUser, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

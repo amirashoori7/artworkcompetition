@@ -1,10 +1,18 @@
 <hr>
-<div class="page-title">
-	<h4>Evaluation Form Stage 1</h4>
+<div class="row page-title">
+	<div class="col-md-4">
+		<strong>User:</strong>&nbsp; {{ form.instance.author }}
+	</div>
+	<div class="col-md-8">
+		<h5>Evaluation Form Stage 1</h5>
+	</div>
 </div>
 <form method="post" action="{% url 'evaluation:formd1a' %}"
 	class="needs-validation form-general-style" id="formd1aId"
 	enctype="multipart/form-data" novalidate>
+	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
+	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
+		name="id" id="id">
 	<div class="row">
 		<div class="col-md-4">
 			<label for="ImageQuality">Image Quality</label> <select
@@ -14,7 +22,13 @@
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
-			</select>
+			</select> <input type="hidden" value="{{ form.instance.imgq|default:'0' }}"
+				id="imgqid">
+			<script type="text/javascript">
+			$("#ImageQuality option[value="
+					+ $("#imgqid").val() + "]").attr(
+			'selected','selected')
+			</script>
 		</div>
 		<div class="col-md-4">
 			<label for="AnswersScore">Answers to the questions</label> <select
@@ -24,7 +38,13 @@
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
-			</select>
+			</select> <input type="hidden"
+				value="{{ form.instance.answersq|default:'0' }}" id="answerqid">
+			<script type="text/javascript">
+			$("#AnswersScore option[value="
+					+ $("#answerqid").val() + "]").attr(
+			'selected','selected')
+			</script>
 		</div>
 		<div class="col-md-4">
 			<label for="OriginQuality">Originiality of the work</label> <select
@@ -34,54 +54,28 @@
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
-			</select>
+			</select> <input type="hidden" value="{{ form.instance.originq|default:'0' }}"
+				id="originq">
+			<script type="text/javascript">
+			$("#OriginQuality option[value="
+					+ $("#originq").val() + "]").attr(
+			'selected','selected')
+			</script>
 		</div>
-		<div class="col-md-6">
-			<label for="comment"> <strong>Comments</strong></label>
+		<br>
+		<div class="col-md-12">
+			<label for="comment"> Comments</label>
 			<textarea class="form-control form-input" id="comment"
 				placeholder="Please add any comments, if there are some..."
 				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 		</div>
-		<hr>
+	</div>
+	<hr>
+	<div class="row">
 		<div class="col-md-12 text-center">
-			<button class="action-button" type="button" id="buttonSubmitD1AForm" onclick="submitThisForm('{% url 'evaluation:formd1a' %}')">Submit</button>
+			<button class="action-button" type="button" id="buttonSubmitD1AForm"
+				onclick="submitAForm('{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm')">Submit</button>
 		</div>
 	</div>
 	{% csrf_token %}
 </form>
-<script type="text/javascript">
-function submitThisForm(url) {
-	var form = $('#formd1aId')[0]
-	$("#buttonSubmitD1AForm").prop("disabled", true);
-	var data = new FormData(form);
-	$.ajax({
-		type : "POST",
-		enctype : 'multipart/form-data',
-		data : data,
-		cache : false,
-		url : url,
-		beforeSend : function(xhr, settings) {
-			if (!(/^http:.*/.test(settings.url) || /^https:.*/
-					.test(settings.url))) {
-				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-			}
-		},
-		success : function(response) {
-			if (response.successResult != null) {
-				toggleMessageBox(response.successResult, false)
-			}
-			if (response.errorResult != null) {
-				populateErrorMessageFields(response.errorResultWork)
-			}
-		},
-		error : function(xhr, errmsg, err) {
-			console.log(xhr.status + ": " + xhr.responseText)
-			toggleMessageBox(xhr.responseText, true)
-		},
-		complete : function(response) {
-			$("#buttonSubmitD1AForm").prop("disabled", false)
-			return -1
-		}
-	})
-}
-</script>

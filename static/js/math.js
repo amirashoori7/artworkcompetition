@@ -5,14 +5,7 @@ var testData = [ {
 	surname : "smith"
 } ]
 
-function populateErrorMessageFields(errorString) {
-	Object.keys(JSON.parse(errorString)).forEach(function(key, value) {
-		var errorSection = $("<small/>").addClass("text-danger")
-		$("<br/>").appendTo(errorSection)
-		errorSection.append(JSON.parse(errorString)[key][0].message)
-		$("#" + key).after(errorSection)
-	})
-}
+
 
 function populateWarningMessageField(fieldId, text) {
 	var errorSection = $("<small/>").addClass("text-warning")
@@ -29,6 +22,42 @@ function populateDangerMessageField(fieldId, text) {
 	$("#" + fieldId).before(errorSection)
 }
 
+//FOR MANY FIELDS
+function populateErrorMessageFields(errorString) {
+	Object.keys(JSON.parse(errorString)).forEach(function(key, value) {
+		var errorSection = $("<small/>").addClass("text-danger")
+		$("<br/>").appendTo(errorSection)
+		errorSection.append(JSON.parse(errorString)[key][0].message)
+		$("#" + key).after(errorSection)
+	})
+}
+
+function openFullScreenDiv(htmlContenet) {
+	$(".full-screen-div").html(htmlContenet)
+	$(".full-screen-div").css("display", "block")
+	$(this).find(".close-button").load('static/img/icons/close.svg')
+	$(".dialog-popup-content").append($("<div/>").addClass("close-button").attr("onclick","closeFullScreenDiv()"))
+	TweenLite.to(".full-screen-div", 1, {
+		scale : 1,
+		top : 0,
+		right : 0,
+		left : 0,
+		bottom : 0,
+		transformOrigin : "center"
+	})
+}
+
+function closeFullScreenDiv(){
+	TweenLite.to(".full-screen-div", 1, {
+		scale : 0,
+		transformOrigin : "center",
+		onComplete: function(){
+			$(".full-screen-div").html("")
+		}
+		
+	})
+}
+
 function loadContent(liItem) {
 	$(".navbar-collapse").removeClass("show")
 	$("div#page-content").hide()
@@ -39,9 +68,6 @@ function loadContent(liItem) {
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-// var contentHeight = $(".fixed-bottom").position().top -
-// ($("#banner-top").position().top + $("#banner-top").height())
-//	$("#page-content").append()
 	$("#page-content").load(
 			url,
 			function(response) {
@@ -107,12 +133,6 @@ function convertImg2SVG(className){
 				}
 				$svg = $svg.removeAttr('xmlns:a');
 				$img.replaceWith($svg);
-	
-				// // Add an handler
-				// jQuery('path').each(function() {
-				// jQuery(this).click(function()
-				// {alert(jQuery(this).attr('id'));});
-				// });
 			})
 		})
 }
@@ -209,32 +229,6 @@ function showDialogPage(element, url) {
 	return -1
 }
 
-function openFullScreenDiv(htmlContenet) {
-	$(".full-screen-div").html(htmlContenet)
-	$(".full-screen-div").css("display", "block")
-	$(this).find(".close-button").load('static/img/icons/close.svg')
-	$(".dialog-popup-content").append($("<div/>").addClass("close-button").attr("onclick","closeFullScreenDiv()"))
-	TweenLite.to(".full-screen-div", 1, {
-		scale : 1,
-		top : 0,
-		right : 0,
-		left : 0,
-		bottom : 0,
-		transformOrigin : "center"
-	})
-}
-
-function closeFullScreenDiv(){
-	TweenLite.to(".full-screen-div", 1, {
-		scale : 0,
-		transformOrigin : "center",
-		onComplete: function(){
-			$(".full-screen-div").html("")
-		}
-		
-	})
-}
-
 function getCookie(name) {
 	var cookieValue = null;
 	if (document.cookie && document.cookie != '') {
@@ -325,57 +319,40 @@ function runTimer(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-var item = document.querySelector("#enter-now-btn");
-
-var timerID;
-var counter = 0;
-
-var pressHoldEvent = new CustomEvent("pressHold");
-var pressHoldDuration = 180;
-item.addEventListener("mousedown", pressingDown, false);
-item.addEventListener("mouseup", notPressingDown, false);
-item.addEventListener("mouseleave", notPressingDown, false);
-
-item.addEventListener("touchstart", pressingDown, false);
-item.addEventListener("touchend", notPressingDown, false);
-
-item.addEventListener("pressHold", showItemMenu, false);
-
-function pressingDown(e) {
-  requestAnimationFrame(timer);
-  e.preventDefault();
-}
-
-function notPressingDown(e) {
-  cancelAnimationFrame(timerID);
-  counter = 0;
-}
-
-//
-// Runs at 60fps when you are pressing down
-//
-function timer() {
-  if (counter < pressHoldDuration) {
-    timerID = requestAnimationFrame(timer);
-    counter++;
-  } else {
-    console.log("Press threshold reached!");
-    item.dispatchEvent(pressHoldEvent);
-  }
-}
-
 function showItemMenu(e) {
 	e.preventDefault()
 	loadContent($("<li/>").attr("data-href", "/signup_page/"))
+}
+
+function submitAForm(url, formId, submitBTNId) {
+	var form = $('#'+formId)[0]
+	$("#"+submitBTNId).prop("disabled", true)
+	var data = new FormData(form)
+	$.ajax({
+		type : "POST",
+		data : data,
+		processData : false,
+		contentType : false,
+		cache : false,
+		url : url,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+			}
+		}, success : function(response) {
+			if (response.successResult != null) {
+				toggleMessageBox(response.successResult, false)
+				$('#'+formId).find("input#id").val(response.id)
+			} else if (response.errorResult != null) {
+				populateErrorMessageFields(response.errorResultWork)
+			}
+		}, error : function(xhr, errmsg, err) {
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		}, complete : function(response) {
+			$("#"+submitBTNId).prop("disabled", false)
+			return -1
+		}
+	})
 }
