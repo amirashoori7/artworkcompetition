@@ -283,17 +283,16 @@ p {
 }
 
 .dialog-popup-content {
-	border-radius: 0 22px 22px 0;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	position: absolute;
-	background: white;
-	bottom: 11px;
-	overflow-x: hidden;
-	overflow-y: auto;
-	padding: 33px;
+    border-radius: 22px;
+    background: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 33px;
+    position: absolute;
+    top: 33px;
+    bottom: 33px;
+    left: 33px;
+    right: 33px;
 }
 
 .full-screen-div {

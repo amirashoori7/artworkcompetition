@@ -1,11 +1,12 @@
+
 <div class="page-title">
 	<h4>Register a Judge</h4>
 </div>
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8" id="content-judge">
-		<form method="post" action="/"
-			class="needs-validation form-general-style" id="registry-form"
+		<form method="post"
+			class="needs-validation form-general-style" id="registry-form" action="{% url 'account:registerJudge' %}"
 			enctype="multipart/form-data" novalidate>
 			<div class="form-section" data-title="Registration">
 				<div class="form-group row">
@@ -99,9 +100,6 @@
 					</div>
 				</div>
 
-
-
-
 				<div class="row form-group">
 					<div class="input-group col-sm-6">
 						<div class="input-group-prepend">
@@ -121,16 +119,67 @@
 							value="abcdefg12345" required>
 					</div>
 				</div>
-
 				{% csrf_token %}
 				<div class="row form-group">
 					<div class="input-group col-sm-2"></div>
 					<div class="input-group col-sm-8">
 						<button class="btn btn-primary btn-success col-sm-12"
-							type="submit" id="register-btn">Register Now</button>
+							type="button" id="register-btn" onclick="submitRegistryForm('{% url 'account:registerJudge' %}')">Save</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+<script>
+function submitRegistryForm(url) {
+	var form = $('#registry-form')[0]
+	$("#register-btn").prop("disabled", true)
+	var data = new FormData(form)
+	$.ajax({
+		type : "POST",
+		enctype : 'multipart/form-data',
+		data : data,
+		processData : false,
+		contentType : false,
+		cache : false,
+		timeout : 60000,
+		url : url,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
+			}
+		},
+		success : function(response) {
+			if (response.successResult != null) {
+				toggleMessageBox(response.successResult, false)
+				$(".form-signin.form-general-style").find("input#inputEmail")
+						.val($("#registry-form").find("input#username").val())
+				$(".form-signin.form-general-style")
+						.find("input#inputPassword").val($("#registry-form").find("input#password1")
+										.val())
+				$(".form-signin.form-general-style").submit()
+				loadContent($("<li/>").attr({
+					"data-href" : "/signup_page/"
+				}))
+				$("#login-div").load('/account/login/')
+			} else if (response.errorResult != null) {
+				$("#registry-form").find("small").remove()
+				populateErrorMessageFields(response.errorResult)
+				toggleMessageBox("<span>Registration unsuccessful.</span>",
+						true)
+
+			}
+		},
+		error : function(xhr, errmsg, err) {
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		},
+		complete : function(response) {
+			$("#register-btn").prop("disabled", false);
+			return -1
+		}
+	})
+}
+</script>

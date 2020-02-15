@@ -159,7 +159,7 @@
 	color: white;
 }
 
-.form-section::after {
+.form-section::before {
 	content: attr(data-title);
 	font-size: 19px;
 	line-height: 1.1;

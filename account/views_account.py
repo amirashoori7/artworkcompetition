@@ -42,6 +42,7 @@ def registerJudge(request):
         form = AdvancedUserRegistrationForm(request.POST)
         if form.is_valid():
             form = form.save()
+#             CREATE OR UPDATE
             response_data['successResult'] = 'Registration succeed'
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")

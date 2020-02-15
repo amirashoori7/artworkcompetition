@@ -9,12 +9,10 @@ function fetchEntryForm(url) {
 				$("#schoolDIV").fadeOut()
 			}
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$(
-						"input[name='learnergradeRadio'][value='"
+				$("input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']").prop(
 						'checked', true)
-				$(
-						"input[name='learnergradeRadio'][value='"
+				$("input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']")
 						.parent().addClass("active")
 			})
@@ -27,7 +25,7 @@ function fetchEntryForm(url) {
 			$("[data-required='1']").on("focusout", function() {
 				checkValidation().done()
 			})
-			setTimeout(function(){
+			setTimeout(function() {
 				checkValidation().done()
 			}, 50)
 			getSchoolVal(1)
@@ -42,6 +40,7 @@ function gradeChose(radioBTN) {
 	$('.btn-outline-secondary.btn-group').removeClass('active');
 	$('#currentlearnergrade').val($(radioBTN).val())
 }
+
 var totalFields = 0
 var filledFields = 0
 function checkValidation() {
@@ -59,17 +58,14 @@ function checkValidation() {
 	$(".exteded-class").removeClass("exteded-class")
 	$("#entry-form-id")
 			.find(".card")
-			.each(
-					function(i, j) {
+			.each(function(i, j) {
 						var sectionTotalFields = $(j).find(
 								"[data-required='1']").length
 						totalFields += sectionTotalFields
 						var sectionFilledFields = 0
 						var card = j
-						$(card)
-								.find("[data-required='1']")
-								.each(
-										function(k, l) {
+						$(card).find("[data-required='1']")
+								.each(function(k, l) {
 											if ($(l).val().length > 0
 													&& $(l).val() != 0) {
 												filledFields = filledFields + 1
@@ -123,8 +119,7 @@ function checkValidation() {
 		if (filledFields == totalFields) {
 			$("#buttonSubmit").removeClass("disabled")
 			$("#buttonSaveContinue").addClass("disabled")
-			$("#buttonSubmit").html(
-					"<i class='fa fa-telegram-plane'></i>   Submit The Entry")
+			$("#buttonSubmit").html("<i class='fa fa-telegram-plane'></i> Submit The Entry")
 		} else {
 			$("#buttonSubmit").addClass("disabled")
 			$("#buttonSaveContinue").removeClass("disabled")
@@ -136,9 +131,9 @@ function checkValidation() {
 }
 
 function submitRegistryForm(url) {
-	var form = $('#registry-form')[0];
-	$("#register-btn").prop("disabled", true);
-	var data = new FormData(form);
+	var form = $('#registry-form')[0]
+	$("#register-btn").prop("disabled", true)
+	var data = new FormData(form)
 	$.ajax({
 		type : "POST",
 		enctype : 'multipart/form-data',
@@ -151,7 +146,7 @@ function submitRegistryForm(url) {
 		beforeSend : function(xhr, settings) {
 			if (!(/^http:.*/.test(settings.url) || /^https:.*/
 					.test(settings.url))) {
-				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
 			}
 		},
 		success : function(response) {
@@ -160,8 +155,7 @@ function submitRegistryForm(url) {
 				$(".form-signin.form-general-style").find("input#inputEmail")
 						.val($("#registry-form").find("input#username").val())
 				$(".form-signin.form-general-style")
-						.find("input#inputPassword").val(
-								$("#registry-form").find("input#password1")
+						.find("input#inputPassword").val($("#registry-form").find("input#password1")
 										.val())
 				$(".form-signin.form-general-style").submit()
 				loadContent($("<li/>").attr({

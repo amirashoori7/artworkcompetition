@@ -3,8 +3,8 @@
 		<h2>User List</h2>
 	</div>
 	<div class="col-md-2">
-		<button class="btn btn-sm btn-success"
-			onclick="showDialogPage(this, '/account/register_judge/')">
+		<button class="btn btn-sm btn-success" 
+			onclick="showDialogPage(this, '{% url 'account:registerJudge' %}')">
 			<i class="fa fa-plus"></i>&nbsp;
 		</button>
 	</div>
@@ -15,9 +15,9 @@
 			<thead>
 				<tr>
 					<th scope="col">Full Name</th>
-					<th scope="col">Status</th>
 					<th scope="col">User Type</th>
 					<th scope="col">Email</th>
+					<th scope="col">Cellphone</th>
 					<th scope="col">DOB</th>
 				</tr>
 			</thead>
@@ -25,10 +25,10 @@
 				{% for user in userlist %}
 				<tr
 					onclick="showDialogPage(this, '/account/register_judge?username={{ user.username }}')">
-					<th scope="row"</th>
-					<td>{{ user.last_name }}, {{ user.first_name }}</td>
+					<th scope="row">{{ user.last_name }}, {{ user.first_name }}</th>
 					<td>{{ user.user_type }}</td>
 					<td>{{ user.username }}</td>
+					<td>{{ user.cellphone }}</td>
 					<td>{{ user.dob }}</td> {% endfor %}
 				</tr>
 			</tbody>

@@ -3,7 +3,7 @@
 	<h4>Evaluation Form Stage 1</h4>
 </div>
 <form method="post" action="{% url 'evaluation:formd1a' %}"
-	class="needs-validation form-general-style" id="formd1aId"
+	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
 	<div class="row">
 		<div class="col-md-4">
@@ -17,7 +17,7 @@
 			</select>
 		</div>
 		<div class="col-md-4">
-			<label for="AnswersScore">Answers to the questions</label> <select
+			<label for="AnswersScore">Answers Score</label> <select
 				class="custom-select" name="answersq" id="AnswersScore">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
@@ -27,7 +27,7 @@
 			</select>
 		</div>
 		<div class="col-md-4">
-			<label for="OriginQuality">Originiality of the work</label> <select
+			<label for="OriginQuality">Originiality Score</label> <select
 				class="custom-select" name="originq" id="OriginQuality">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
@@ -44,44 +44,7 @@
 		</div>
 		<hr>
 		<div class="col-md-12 text-center">
-			<button class="action-button" type="button" id="buttonSubmitD1AForm" onclick="submitThisForm('{% url 'evaluation:formd1a' %}')">Submit</button>
+			<button class="action-button" type="button" id="buttonSubmitD1AForm">Submit</button>
 		</div>
 	</div>
-	{% csrf_token %}
 </form>
-<script type="text/javascript">
-function submitThisForm(url) {
-	var form = $('#formd1aId')[0]
-	$("#buttonSubmitD1AForm").prop("disabled", true);
-	var data = new FormData(form);
-	$.ajax({
-		type : "POST",
-		enctype : 'multipart/form-data',
-		data : data,
-		cache : false,
-		url : url,
-		beforeSend : function(xhr, settings) {
-			if (!(/^http:.*/.test(settings.url) || /^https:.*/
-					.test(settings.url))) {
-				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-			}
-		},
-		success : function(response) {
-			if (response.successResult != null) {
-				toggleMessageBox(response.successResult, false)
-			}
-			if (response.errorResult != null) {
-				populateErrorMessageFields(response.errorResultWork)
-			}
-		},
-		error : function(xhr, errmsg, err) {
-			console.log(xhr.status + ": " + xhr.responseText)
-			toggleMessageBox(xhr.responseText, true)
-		},
-		complete : function(response) {
-			$("#buttonSubmitD1AForm").prop("disabled", false)
-			return -1
-		}
-	})
-}
-</script>
