@@ -187,7 +187,7 @@ function submitEntryForm(url) {
 		$('#entry-form-id').append('<input type="text" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
-	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true);
+	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)
 	var data = new FormData(form);
 	$.ajax({
 		type : "POST",
