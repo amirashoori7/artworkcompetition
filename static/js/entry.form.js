@@ -204,6 +204,7 @@ function submitEntryForm(url) {
 					var percentComplete = ((evt.loaded / evt.total) * 100)
 					$('.progress-bar').css('width', percentComplete + '%')
 							.attr('aria-valuenow', percentComplete);
+					$('.progress-bar').html(percentComplete + '%')
 				}
 			}, false);
 			return xhr;
