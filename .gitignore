@@ -2,3 +2,6 @@
 *.pyc
 *.pyc
 *.jpg
+*/migrations/
+*/__pycache__/
+mathart/settings.py
