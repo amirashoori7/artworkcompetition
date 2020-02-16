@@ -8,7 +8,7 @@
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
-				submitRegistryForm("{% url 'account:register' %}")
+				submitRegistryForm("{% url 'account:register' %}",'{{ request.GET.req }}')
 			})
 			{%if request.GET.req == 'dev' %}
 				$("#registry-form").append($("<input type='hidden' name='req' value='{{ request.GET.req }}' />"))

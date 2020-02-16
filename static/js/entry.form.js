@@ -141,7 +141,7 @@ function checkValidation() {
 	}).promise()
 }
 
-function submitRegistryForm(url) {
+function submitRegistryForm(url, req) {
 	var form = $('#registry-form')[0]
 	$("#register-btn").prop("disabled", true)
 	var data = new FormData(form)

@@ -124,10 +124,6 @@ def entry_form(request):
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
-#             file = request.FILES['workfile']
-#             if int(request.POST['imagefilesize']) > 0 and file.size != int(request.POST['imagefilesize']):
-#                 artwork_form.workfile = ""
-#                 raise ValidationError({'workfile': ["File was not uploaded properly",]})
             if request.POST.get('status', '-1') != '-1':
                 artwork_form.status = request.POST.get("status")
             if int(request.POST.get("school", 0)) > 0:
@@ -135,8 +131,6 @@ def entry_form(request):
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
             artwork_form.save()
-#             if request.FILES['workfile'] != None:
-#                 artwork_form.ge
             response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
             response_data['id'] = artwork_form.id
             return HttpResponse(json.dumps(response_data),
