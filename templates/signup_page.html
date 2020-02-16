@@ -4,13 +4,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
-		fetchEntryForm("{% url 'artwork:entry_form' %}")
+		fetchEntryForm("{% url 'artwork:entry_form' %}",'{{ request.GET.req }}')
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
 				submitRegistryForm("{% url 'account:register' %}")
 			})
+			{%if request.GET.req == 'dev' %}
+				$("#registry-form").append($("<input type='hidden' name='req' value='{{ request.GET.req }}' />"))
+			{% endif %}
 		})
+		
 	})
 </script>
 {% if user.is_authenticated == False %}

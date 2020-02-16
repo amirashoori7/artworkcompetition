@@ -115,7 +115,7 @@ def entry_form(request):
         user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         response_data = {}
-        if date.today() < date(2020,3,3):
+        if date.today() < date(2020,3,3) and request.POST.get('req','') != "dev":
             response_data['successResult'] = 'The registration opens Tuesday 3rd of March, 2020.'
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")

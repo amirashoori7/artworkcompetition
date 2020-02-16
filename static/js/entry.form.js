@@ -1,4 +1,4 @@
-function fetchEntryForm(url) {
+function fetchEntryForm(url, req) {
 	$.ajax({
 		url : url,
 		async : true,
@@ -9,19 +9,26 @@ function fetchEntryForm(url) {
 				$("#schoolDIV").fadeOut()
 			}
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$("input[name='learnergradeRadio'][value='"
+				$(
+						"input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']").prop(
 						'checked', true)
-				$("input[name='learnergradeRadio'][value='"
+				$(
+						"input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']")
 						.parent().addClass("active")
 			})
 			$('#entry-form-id').submit(function(event) {
 				event.preventDefault()
 				checkValidation().done(function() {
-					submitEntryForm($('#entry-form-id').attr("action"))
+					submitEntryForm($('#entry-form-id').attr("action"), req)
 				})
 			})
+			$("input[name='req']").remove()
+			if (req != null && req.length > 0)
+				$("#entry-form-id").append(
+						$("<input type='hidden' name='req' value='" + req
+								+ "' />"))
 			$("[data-required='1']").on("focusout", function() {
 				checkValidation().done()
 			})
@@ -58,14 +65,17 @@ function checkValidation() {
 	$(".exteded-class").removeClass("exteded-class")
 	$("#entry-form-id")
 			.find(".card")
-			.each(function(i, j) {
+			.each(
+					function(i, j) {
 						var sectionTotalFields = $(j).find(
 								"[data-required='1']").length
 						totalFields += sectionTotalFields
 						var sectionFilledFields = 0
 						var card = j
-						$(card).find("[data-required='1']")
-								.each(function(k, l) {
+						$(card)
+								.find("[data-required='1']")
+								.each(
+										function(k, l) {
 											if ($(l).val().length > 0
 													&& $(l).val() != 0) {
 												filledFields = filledFields + 1
@@ -119,7 +129,8 @@ function checkValidation() {
 		if (filledFields == totalFields) {
 			$("#buttonSubmit").removeClass("disabled")
 			$("#buttonSaveContinue").addClass("disabled")
-			$("#buttonSubmit").html("<i class='fa fa-telegram-plane'></i> Submit The Entry")
+			$("#buttonSubmit").html(
+					"<i class='fa fa-telegram-plane'></i> Submit The Entry")
 		} else {
 			$("#buttonSubmit").addClass("disabled")
 			$("#buttonSaveContinue").removeClass("disabled")
@@ -155,16 +166,23 @@ function submitRegistryForm(url) {
 				$(".form-signin.form-general-style").find("input#inputEmail")
 						.val($("#registry-form").find("input#username").val())
 				$(".form-signin.form-general-style")
-						.find("input#inputPassword").val($("#registry-form").find("input#password1")
+						.find("input#inputPassword").val(
+								$("#registry-form").find("input#password1")
 										.val())
 				$(".form-signin.form-general-style").submit()
 				loadContent($("<li/>").attr({
 					"data-href" : "/signup_page/"
 				}))
 				$("#login-div").load('/account/login/')
+				$("input[name='req']").remove()
+				$(".nav-item menu-item.active").trigger("click")
+				if (req != null && req.length > 0)
+					$("#entry-form-id").append(
+							$("<input type='hidden' name='req' value='" + req
+									+ "' />"))
 			} else if (response.errorResult != null) {
 				$("#registry-form").find("small").remove()
-				toggleMessageBox(response.errorResult, true)
+				populateErrorMessageFields(response.errorResult, true)
 			}
 		},
 		error : function(xhr, errmsg, err) {
@@ -178,10 +196,11 @@ function submitRegistryForm(url) {
 	})
 }
 
-function submitEntryForm(url) {
+function submitEntryForm(url, req) {
 	$("input[name='status']").remove()
 	if (totalFields == filledFields) {
-		$('#entry-form-id').append('<input type="text" name="status" value="0">')
+		$('#entry-form-id').append(
+				'<input type="hidden" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)
@@ -214,9 +233,13 @@ function submitEntryForm(url) {
 		},
 		success : function(response) {
 			if (response.successResult != null) {
-				$("#id").val(response.id)
 				toggleMessageBox(response.successResult, false)
-				$("#footer-form-btns").remove()
+				$("input[name='req']").remove()
+				if (req != null && req.length > 0)
+					$("#entry-form-id").append(
+							$("<input type='hidden' name='req' value='" + req
+									+ "' />"))
+				$(".nav-item menu-item.active").trigger("click")
 			}
 			if (response.errorResultUser != null)
 				populateErrorMessageFields(response.errorResultUser)
