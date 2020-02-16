@@ -5,6 +5,7 @@ import json
 from django.contrib.auth import authenticate, login
 from account.forms_account import AdvancedUserRegistrationForm
 from account.models_account import ProjectUser
+from datetime import date
 
 
 def projectUserList(request):
@@ -16,6 +17,10 @@ def projectUserList(request):
 def registration(request):
     response_data = {}
     if request.method == 'POST':
+        if date.today() < date(2020,3,3):
+            response_data['successResult'] = 'The registration opens Tuesday 3rd of March, 2020.'
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form = form.save()

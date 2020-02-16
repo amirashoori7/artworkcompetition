@@ -164,10 +164,7 @@ function submitRegistryForm(url) {
 				$("#login-div").load('/account/login/')
 			} else if (response.errorResult != null) {
 				$("#registry-form").find("small").remove()
-				populateErrorMessageFields(response.errorResult)
-				toggleMessageBox("<span>Registration unsuccessful.</span>",
-						true)
-
+				toggleMessageBox(response.errorResult, true)
 			}
 		},
 		error : function(xhr, errmsg, err) {

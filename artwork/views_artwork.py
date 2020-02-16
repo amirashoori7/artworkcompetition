@@ -12,6 +12,7 @@ from artwork.forms_artwork import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
+from _datetime import date
 
 
 def index(request):
@@ -104,13 +105,20 @@ def signup_page_view(request):
     return render(request, 'signup_page_view.html', context)
 
 
-@login_required
-@transaction.atomic
+# @login_required
+# @transaction.atomic
 def entry_form(request):
-    response_data = {}
-    userModel = ProjectUser.objects.get(username=request.user)
-    user_form = UserForm(instance=request.user)
+    if request.user.is_anonymous:
+        userModel = None
+    else:
+        userModel = ProjectUser.objects.get(username=request.user)
+        user_form = UserForm(instance=request.user)
     if request.method == 'POST':
+        response_data = {}
+        if date.today() < date(2020,3,3):
+            response_data['successResult'] = 'The registration opens Tuesday 3rd of March, 2020.'
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
         artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
         if artwork_form.is_valid():
@@ -137,7 +145,7 @@ def entry_form(request):
             response_data['errorResultWork'] = artwork_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
-    elif userModel.user_type == 1:
+    elif userModel is not None and userModel.user_type == 1:
         try:
             artwork_model = get_object_or_404(Artwork, owner=request.user)
             artwork_form = EntryForm(instance=artwork_model)
@@ -145,6 +153,7 @@ def entry_form(request):
             artwork_form, artwork_obj = Artwork.objects.get_or_create(owner=request.user)
     else:
         artwork_form = EntryForm()
+        user_form = UserForm()
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
 
