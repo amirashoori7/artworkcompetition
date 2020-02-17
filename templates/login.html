@@ -6,7 +6,7 @@
 		</div>
 		<br>
 		<div class="col-md-12">
-			<button type="button" class="btn btn-outline-dark btn-sm" onclick="">Change
+			<button type="button" class="btn btn-outline-dark btn-sm" onclick="$('#login-div').load('/account/change_password/')">Change
 				Password</button>
 			<button type="button" class="btn btn-outline-dark btn-sm"
 				onclick="window.location.replace('{% url 'account:logout' %}')">
@@ -41,5 +41,3 @@
 		</li>
 	</ul></li>
 {% endif %}
-
-

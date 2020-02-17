@@ -96,7 +96,17 @@
 					</select>
 				</div>
 			</div>
+			<div class="row form-group">
 
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Organisation</span>
+					</div>
+					<input type="text" class="form-control" id="organisation"
+						name="organization" placeholder="Repeat Password"
+						value="{{ form.instance.dob|default:'2013-01-08' }}" required>
+				</div>
+			</div>
 			<div class="row form-group">
 				<div class="input-group col-sm-6">
 					<div class="input-group-prepend">

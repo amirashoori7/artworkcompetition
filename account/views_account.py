@@ -3,9 +3,16 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import json
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import PasswordChangeView
 from account.forms_account import AdvancedUserRegistrationForm
 from account.models_account import ProjectUser
 from datetime import date
+from django.contrib import messages
+
+class CustomPasswordChangeView(PasswordChangeView):
+    def form_valid(self, form):
+        messages.success(self.request, 'Your password has been changed.')
+        return super().form_valid(form)
 
 
 def projectUserList(request):
@@ -71,4 +78,3 @@ def registration_view(request):
     form = UserRegistrationForm()
     context = {'form': form}
     return render(request, 'adminPages/register_view.html', context)
-

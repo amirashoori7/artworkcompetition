@@ -243,7 +243,7 @@
 							data-required="1" class="form-control" placeholder="Email"
 							required autocomplete="off" id="username" name="username"
 							disabled="disabled"
-							value="{{ user.username|default:'test@test.com' }}">
+							value="{{ user.username|default:'' }}">
 					</div>
 
 					<!-- 				CELLPHONE -->
@@ -252,7 +252,7 @@
 						<label for="cellphone">Cell Phone Number</label> <input
 							data-required="1" type="text" class="form-control"
 							placeholder="cellphone" required="required" id="cellphone"
-							value="{{ user.cellphone|default:'0712345678' }}"
+							value="{{ user.cellphone|default:'' }}"
 							name="Cellphone Number">
 					</div>
 
@@ -266,7 +266,7 @@
 						<label for="first_name">First Name </label> <input
 							data-required="1" type="text" class="form-control"
 							placeholder="i.e. Joe" required id="first_name" name="first_name"
-							value="{{ user.first_name | default:'testname' }}">
+							value="{{ user.first_name | default:'' }}">
 					</div>
 					<!-- 				SURNAME -->
 
@@ -274,7 +274,7 @@
 						<label for="last_name">Last Name</label> <input data-required="1"
 							type="text" class="form-control" placeholder="i.e. Scholtz"
 							required id="last_name"
-							value="{{ user.last_name | default:'lastname' }}"
+							value="{{ user.last_name | default:'' }}"
 							name="last_name">
 					</div>
 
@@ -301,7 +301,7 @@
 							data-required="1" type="text" class="form-control"
 							placeholder="i.e. Jack Scholtz" required id="parentname"
 							name="parentname"
-							value="{{ user.parentname|default:'testparentname' }}">
+							value="{{ user.parentname|default:'' }}">
 					</div>
 
 
@@ -312,7 +312,7 @@
 						<label for="first_name">Parent/Guardian's Cell phone Number</label> <input
 							data-required="1" type="phone" class="form-control"
 							name="parentphone" placeholder="012 345 67 89" id="parentphone"
-							value="{{ user.parentphone|default:'081234567' }}" required>
+							value="{{ user.parentphone|default:'' }}" required>
 					</div>
 
 
@@ -324,7 +324,7 @@
 						<label for="parentemail">Parent/Guardian's Email Address</label> <input
 							data-required="1" type="email" class="form-control"
 							id="parentemail" name="parentemail" placeholder="you@example.com"
-							value="{{ user.parentemail|default:'testparent@test.com' }}"
+							value="{{ user.parentemail|default:'' }}"
 							required>
 					</div>
 				</div>
@@ -439,7 +439,7 @@
 								type="text" data-required="1" class="form-control form-input"
 								id="teachername" name="teachername"
 								placeholder="i.e. Edvard Harry"
-								value="{{ form.instance.teachername|default_if_none:'Teacher Name' }}"
+								value="{{ form.instance.teachername|default_if_none:'' }}"
 								required>
 						</div>
 						<div class="form-group col-md-4">
@@ -447,7 +447,7 @@
 								type="email" class="form-control form-input" id="teacheremail"
 								name="teacheremail" placeholder="you@example.com"
 								data-required="1"
-								value="{{ form.instance.teacheremail|default_if_none:'you@example.com' }}"
+								value="{{ form.instance.teacheremail|default_if_none:'' }}"
 								required>
 						</div>
 						<div class="form-group col-md-4">
@@ -455,7 +455,7 @@
 								type="tel" class="form-control form-input" id="teacherphone"
 								data-required="1" name="teacherphone"
 								placeholder="012 345 67 89"
-								value="{{ form.instance.teacherphone|default_if_none:'0123456789' }}"
+								value="{{ form.instance.teacherphone|default_if_none:'' }}"
 								required>
 						</div>
 					</div>
