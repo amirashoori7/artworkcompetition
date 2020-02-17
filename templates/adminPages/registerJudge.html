@@ -21,7 +21,7 @@
 					</div>
 					<input type="email" class="form-control" placeholder="Email"
 						required autocomplete="off" id="username" name="username"
-						value="{{ form.instance.username|default:'test@test.com' }}">
+						value="{{ form.instance.username|default:'' }}">
 				</div>
 
 				<!-- 				CELLPHONE -->
@@ -32,7 +32,7 @@
 					</div>
 					<input type="text" class="form-control" name="cellphone"
 						required="required" id="cellphone"
-						value="{{ form.instance.cellphone|default:'0712345678' }}"
+						value="{{ form.instance.cellphone|default:'' }}"
 						placeholder="Cellphone Number">
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 					</div>
 					<input type="text" class="form-control" placeholder="i.e. Joe"
 						required id="first_name" name="first_name"
-						value="{{ form.instance.first_name | default:'testname' }}">
+						value="{{ form.instance.first_name | default:'' }}">
 				</div>
 
 				<!-- 				SURNAME -->
@@ -61,7 +61,7 @@
 					</div>
 					<input type="text" class="form-control" placeholder="i.e. Scholtz"
 						required id="last_name"
-						value="{{ form.instance.last_name | default:'lastname' }}"
+						value="{{ form.instance.last_name | default:'' }}"
 						name="last_name">
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 				<div class="input-group col-sm-6">
 					<div class="input-group-prepend">
 						<span class="input-group-addon"><i
-							class="fa fa-birthday-cake"></i></span>
+							class="fa fa-user"></i></span>
 					</div>
 					<select name="gender" class="selectpicker"
 						data-title="Select Gender" data-style="btn-default btn-block"
@@ -103,8 +103,8 @@
 						<span class="input-group-text">Organisation</span>
 					</div>
 					<input type="text" class="form-control" id="organisation"
-						name="organization" placeholder="Repeat Password"
-						value="{{ form.instance.dob|default:'2013-01-08' }}" required>
+						name="organisation" placeholder="i.e. Nelson Mandela High School"
+						value="{{ form.instance.organisation|default:'' }}" required>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -114,7 +114,7 @@
 					</div>
 					<input type="password" class="form-control" id="password1"
 						name="password1" placeholder="Password" required
-						value="abcdefg12345">
+						value="">
 				</div>
 
 				<div class="input-group col-sm-6">
@@ -123,7 +123,7 @@
 					</div>
 					<input type="password" class="form-control" id="password2"
 						name="password2" placeholder="Repeat Password"
-						value="abcdefg12345" required>
+						value="" required>
 				</div>
 			</div>
 			{% csrf_token %}
