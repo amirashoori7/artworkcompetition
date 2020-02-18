@@ -68,41 +68,41 @@ function loadContent(liItem) {
 	url = $(liItem).attr("data-href")
 	$(".page-content-area-bg").remove()
 	$(".page-content-area").remove()
-	$("#page-content").load(
-			url,
-			function(response) {
-				var tl = new TimelineLite({
-					paused : true,
-					ease : Power4.easeOut
-				})
-				tl.to("#page-content", 1, {
-					opacity : 0,
-					transformOrigin : "top"
-				}).to("#page-content", 1.2, {
-					opacity : 1,
-					transformOrigin : "top"
-				}, "-= .4")
-				$("#page-content").fadeIn()
-				$("#page-content").html("")
-				$(".page-content-holder").prepend($("<div/>").addClass("page-bg-svg"))
-				$(".page-bg-svg").find("span").remove()
-				$("#page-content").prepend(
-						$("<div/>").addClass("page-content-area"))
-				$(".page-content-area").html(response)
-				convertImg2SVG("svgNonMenu")
-				$("#page-content").prepend(
-						$("<div/>").addClass("page-content-area-bg"))
-				$(".page-content-area-bg").html($(".menu-item.active").find("a").html())
-				$(".banners-background-image").css(
-			"background-position",
-			Math.floor(Math.random() * 333) + "px "
-					+ Math.floor(Math.random() * 333) + "px")
-				tl.play()
-				if($(liItem).attr("data-color")!=null){
-					var color = "var("+$(liItem).attr("data-color")+")";
-					$("#banner-top").css("background-color", "var("+$(liItem).attr("data-color")+")")
-				}
+	$.ajax({
+		url: url,
+		cache: false,
+		success: function(response) {
+			var tl = new TimelineLite({
+				paused : true,
+				ease : Power4.easeOut
 			})
+			tl.to("#page-content", 1, {
+				opacity : 0
+			}).to("#page-content", 1.2, {
+				opacity : 1
+			}, "-= .4")
+			$("#page-content").fadeIn()
+			$("#page-content").html("")
+			$(".page-content-holder").prepend($("<div/>").addClass("page-bg-svg"))
+			$(".page-bg-svg").find("span").remove()
+			$("#page-content").prepend(
+					$("<div/>").addClass("page-content-area"))
+			$(".page-content-area").html(response)
+			convertImg2SVG("svgNonMenu")
+			$("#page-content").prepend(
+					$("<div/>").addClass("page-content-area-bg"))
+			$(".page-content-area-bg").html($(".menu-item.active").find("a").html())
+			$(".banners-background-image").css(
+		"background-position",
+		Math.floor(Math.random() * 333) + "px "
+				+ Math.floor(Math.random() * 333) + "px")
+			tl.play()
+			if($(liItem).attr("data-color")!=null){
+				var color = "var("+$(liItem).attr("data-color")+")";
+				$("#banner-top").css("background-color", "var("+$(liItem).attr("data-color")+")")
+			}
+		}
+	})
 }
 
 $(document).ready(function() {
