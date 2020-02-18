@@ -110,4 +110,7 @@
 	#timeCounterDivId ul {
 		padding: 0;
 	}
+	.mid-div-icons{
+	text-align: left !important;
+}
 }

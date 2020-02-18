@@ -375,6 +375,16 @@
 							id="school-id-val" data-required="1">
 					</div>
 					<div class="row">
+						<div class="col-md-12">
+							<span class="text-warning">Can't find your school? </span> <span class="text-secondary">Tell
+							Us, your province, region and school name.</span>
+							<button class="btn btn-sm btn-link"
+								onclick="loadContent($('<li/>').attr('data-href','/contactus'))">Contact
+								Us</button>
+							<span>
+						</div>
+					</div>
+					<div class="row">
 						<input type="hidden" data-required="1"
 							class="form-control form-input" id="currentlearnergrade"
 							value="{{ form.instance.learnergrade|default:'' }}" required
@@ -557,9 +567,9 @@
 								name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
 						</div>
 						<div class="col-md-6">
-							<label for="formulafile">Upload Mathematics Image (If a
+							<label for="formulafile">If a
 								photo of your mathematics would help your explanation, upload an
-								image here)</label> <input type="file" class="form-control form-input"
+								image here (*optional)</label> <input type="file" class="form-control form-input"
 								id="workformulafile" name="workformulafile" placeholder=""
 								value="Browse"
 								value="{{ form.instance.workformulafile|default_if_none:'' }}"
@@ -569,7 +579,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<label for="question2"> <strong>Question 2:</strong> How
-								did you creatively connect Mathematics with "My Universe" to
+								did you creatively connect Mathematics with "My Universe" to make
 								your artwork? (Explain your answer)
 							</label>
 							<textarea class="form-control form-input" id="question2"

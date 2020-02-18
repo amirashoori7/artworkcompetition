@@ -1,23 +1,42 @@
+@font-face {
+	font-family: "luna";
+	src:
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.eot");
+	src:
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.eot?#iefix")
+		format("embedded-opentype"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.woff2")
+		format("woff2"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.woff")
+		format("woff"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.ttf")
+		format("truetype"),
+		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.svg#luna")
+		format("svg");
+}
+
 /* @font-face { */
-/* 	font-family: "luna"; */
+/* 	font-family: "Harmonia Sans"; */
 /* 	src: */
-/* 		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.eot"); */
+/* 		url("//db.onlinewebfonts.com/t/feb28c6cf029b15c551ac6f3ce8b47dd.eot"); */
 /* 	src: */
-/* 		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.eot?#iefix") */
+/* 		url("//db.onlinewebfonts.com/t/feb28c6cf029b15c551ac6f3ce8b47dd.eot?#iefix") */
 /* 		format("embedded-opentype"), */
-/* 		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.woff2") */
+/* 		url("//db.onlinewebfonts.com/t/feb28c6cf029b15c551ac6f3ce8b47dd.woff2") */
 /* 		format("woff2"), */
-/* 		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.woff") */
+/* 		url("//db.onlinewebfonts.com/t/feb28c6cf029b15c551ac6f3ce8b47dd.woff") */
 /* 		format("woff"), */
-/* 		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.ttf") */
+/* 		url("//db.onlinewebfonts.com/t/feb28c6cf029b15c551ac6f3ce8b47dd.ttf") */
 /* 		format("truetype"), */
-/* 		url("//db.onlinewebfonts.com/t/07d3973894be3bed33aa1447c022b323.svg#luna") */
-/* 		format("svg"); */
+/* 		url("// db.onlinewebfonts.com/ t/ feb28c6cf029b15c551ac6f3ce8b47dd.svg#Harmonia Sans ")  */
+/* 		format(" svg "); */
 /* } */
 html, body {
 	height: 100%;
 	align-items: center;
+	/* 	font-family: "Harmonia Sans" !important; */
 	font-family: sans-serif !important;
+	/* 	letter-spacing: 2px; */
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -426,6 +445,13 @@ p {
 	background-repeat: no-repeat;
 }
 
+.luna-text {
+	font-size: 44px;
+	text-align: center;
+	font-family: "luna";
+	color: var(--main-color-pink);
+}
+
 @media ( max-width :800px) {
 	.container {
 		overflow-x: hidden;
@@ -462,4 +488,7 @@ p {
 		bottom: 0px;
 		cursor: pointer;
 	}
+	.luna-text {
+	font-size: 22px;
+}
 }

@@ -8,7 +8,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 {% with version=0.48 %}
 <title>{% block title %} {% endblock title %}</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
@@ -110,15 +111,15 @@ var version = {{ version }}
 							src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
 					<li class="nav-item menu-item" data-href-html="signup_page.html"
-						data-href="/signup_page?ver={{ version }}&req={{ request.GET.req }}"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/Enter.svg"><span>Enter
-								Now</span></a></li> 
+						data-href="/signup_page?ver={{ version }}&req={{ request.GET.req }}"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/Enter.svg"><span>Enter Now</span></a></li>
 					<!-- 								CMNT -->
 					{% if user.is_authenticated and user.user_type == 6%}
 					<li class="menu-item" data-href-html="signup_page.html"
-						data-href="/manager_console?ver={{ version }}"><a class="nav-link" href="#"><img
-							class="svg" src="static/img/icons/Enter.svg"><span>Admin</span></a></li>
-					{% endif %}
+						data-href="/manager_console?ver={{ version }}"><a
+						class="nav-link" href="#"><img class="svg"
+							src="static/img/icons/Enter.svg"><span>Admin</span></a></li> {%	endif %}
 					<li class="nav-item menu-item" data-href-html="history.html"
 						data-color="--main-color-pink" data-href="/history/"><a
 						class="nav-link" href="#"><img class="svg"
