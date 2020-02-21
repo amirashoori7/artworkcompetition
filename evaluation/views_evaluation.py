@@ -12,7 +12,7 @@ def create_d1a(request):
     if request.method == 'POST':
         response_data = {}
         if request.POST['work_id'] is None or request.POST['work_id'] == '':
-            response_data['errorResult'] = "Illegal access to the form"
+            response_data['errorResult'] = "Illegal access to the form, The work id is null."
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         old_data = get_object_or_404(D1A, id=request.POST["id"])
@@ -24,7 +24,6 @@ def create_d1a(request):
             formd1A_form.artwork = artwork
             formd1A_form = formd1A_form.save()
             response_data['successResult'] = 'D1A form submitted successfully!'
-            response_data['id'] = formd1A_form.id
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
