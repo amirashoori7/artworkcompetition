@@ -1,4 +1,19 @@
-from enum import IntEnum
+from enum import IntEnum, Enum
+
+class Province(Enum):
+    Eastern_Cape = "EC"
+    Free_State = "FS"
+    Gauteng = "GT"
+    KwaZulu_Natal = "KZW"
+    Limpopo = "LP"
+    Mpumalanga = "MP"
+    North_West = "NW"
+    Northern_Cape = "NC"
+    Western_Cape = "WC"
+
+    @classmethod
+    def provincelist(cls):
+        return((key.value, key.name.replace('_', ' ')) for key in cls)
 
 class Status(IntEnum):
     Pending = -1
