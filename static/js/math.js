@@ -284,8 +284,9 @@ function getSchoolVal(reason) {
 				$("#region-dropdownDIV").fadeIn()
 				$("#school-dropdown").removeClass("disabled")
 				$(response).each(function(i,j){
+					console.log(j)
 					if(!$('#school-dropdown option[value="'+j[1]+'"]').length)
-						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[1]))
+						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[4]))
 				})
 			}
 		},
