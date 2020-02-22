@@ -1,7 +1,7 @@
 from django.db import models
 import os
 from uuid import uuid4
-from .utils import Status
+from .utils import *
 from django.conf import settings
 from PIL.Image import LANCZOS, open
 from _io import BytesIO
@@ -9,9 +9,11 @@ from django.core.files.base import ContentFile
 
 
 class School(models.Model):
+    natemis = models.IntegerField(unique=True)
+    province = models.CharField(blank=True, null=True, max_length=100, choices=Province.provincelist())
     name = models.CharField(max_length=200, db_index=True)
     region = models.CharField(blank=True, null=True, max_length=200)
-    province = models.CharField(blank=True, null=True, max_length=200)
+
     class Meta:
         ordering = ('name',)
 
@@ -74,7 +76,7 @@ class Artwork(models.Model):
         return "work_details/{self.id}"
 
     def __str__(self):
-        return '' 
+        return ''
 
     def get_artwork_status(self):
         return Status(self.status).name
