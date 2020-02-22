@@ -12,7 +12,7 @@ def create_d1a(request):
     if request.method == 'POST':
         response_data = {}
         if request.POST['work_id'] is None or request.POST['work_id'] == '':
-            response_data['errorResult'] = "Illegal access to the form, The work id is null."
+            response_data['errorResult'] = "Illegal access to the form, the work id is null."
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         old_data = get_object_or_404(D1A, id=request.POST["id"])
