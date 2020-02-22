@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models_artwork import Artwork
+from artwork.artwork_models import Artwork
 
 class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:

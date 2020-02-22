@@ -6,10 +6,11 @@ from django.conf import settings
 from PIL.Image import LANCZOS, open
 from _io import BytesIO
 from django.core.files.base import ContentFile
+from django.template.defaultfilters import default
 
 
 class School(models.Model):
-    natemis = models.IntegerField(unique=True)
+    natemis = models.IntegerField(blank=True, null=True, default=0)
     province = models.CharField(blank=True, null=True, max_length=100, choices=Province.provincelist())
     name = models.CharField(max_length=200, db_index=True)
     region = models.CharField(blank=True, null=True, max_length=200)
@@ -24,7 +25,9 @@ class School(models.Model):
         print("save initiation >>> ", self)
         super(School, self).save(*args, **kwargs)
 
+
 def path_and_rename(path):
+
     def wrapper(instance, filename):
         ext = filename.split('.')[-1]
         # get filename
@@ -35,7 +38,9 @@ def path_and_rename(path):
             filename = '{}.{}'.format(uuid4().hex, ext)
         # return the whole path to the file
         return os.path.join(path, filename)
+
     return wrapper
+
 
 class Artwork(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -50,7 +55,7 @@ class Artwork(models.Model):
     thumbnail = models.FileField(blank=True, null=True, upload_to='works')
     workfileCropped = models.TextField(blank=True, default="", null=True)
     comment = models.TextField(blank=True, default="", null=True)
-    workformulafile = models.FileField(null=True, blank='True',upload_to='formulas')
+    workformulafile = models.FileField(null=True, blank='True', upload_to='formulas')
     workapproved = models.BooleanField(default=False)
     bioapproved = models.BooleanField(default=False)
     qapproved = models.BooleanField(default=False)
@@ -82,11 +87,11 @@ class Artwork(models.Model):
         return Status(self.status).name
 
     def make_thumbnail(self):
-        if self.workfile.name is None or len(self.workfile.name) <=0:
+        if self.workfile.name is None or len(self.workfile.name) <= 0:
             return False
         image = open(self.workfile)
         ratio = image.width / 200
-        THUMB_SIZE = (200, image.height/ratio)
+        THUMB_SIZE = (200, image.height / ratio)
         image.thumbnail(THUMB_SIZE, LANCZOS)
 
         thumb_name, thumb_extension = os.path.splitext(self.workfile.name)
@@ -97,7 +102,7 @@ class Artwork(models.Model):
         if thumb_extension in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
         else:
-            return False    # Unrecognized file type
+            return False  # Unrecognized file type
 
         # Save thumbnail to in-memory file as StringIO
         temp_thumb = BytesIO()
@@ -109,6 +114,7 @@ class Artwork(models.Model):
         temp_thumb.close()
 
         return True
+
 '''
 #Custom Object Manager
 class CustomManager(models.Model):

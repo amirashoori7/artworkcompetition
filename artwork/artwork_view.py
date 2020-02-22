@@ -5,10 +5,10 @@ and then routing requests with an appropriate response.
 '''
 
 from django.shortcuts import render, get_object_or_404
-from .models_artwork import Artwork, School
+from artwork.artwork_models import Artwork, School
 from django.http import HttpResponse
 import json
-from artwork.forms_artwork import EntryForm, UserForm
+from artwork.artwork_forms import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser

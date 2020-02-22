@@ -1,6 +1,6 @@
 from django.urls import path
 from . import rest_views
-from artwork import views_artwork
+from artwork import artwork_view
 
 app_name = 'artwork'
 
@@ -8,21 +8,21 @@ urlpatterns = [
     # re_path(r'^index/$', views.index, name='index'),
     path('rest_list', rest_views.worklists),
     path('get_school', rest_views.get_school),
-    path('', views_artwork.index, name='index'),
-    path('entry_form/', views_artwork.entry_form, name='entry_form'),
-    path('entry_form_view/', views_artwork.entry_form_view, name='entry_form_view'),
-    path('aboutus/', views_artwork.aboutus, name='aboutus'),
-    path('contactus/', views_artwork.contactus, name='contactus'),
-    path('faq/', views_artwork.faq, name='faq'),
-    path('history/', views_artwork.history, name='history'),
-    path('manager_console/', views_artwork.managerConsole, name='manager_console'),
-    path('howtoenter/', views_artwork.howtoenter, name='howtoenter'),
-    path('rules/', views_artwork.rules, name='rules'),
-    path('signup_page/', views_artwork.signup_page, name='signup_page'),
-    path('signup_page_view/', views_artwork.signup_page_view, name='signup_page_view'),
-    path('home/', views_artwork.home, name='home'),
-    path('gallery/', views_artwork.gallery, name='gallery'),
-    path('work_lists/', views_artwork.work_lists, name='work_lists'),
-    path('work_detail_update/', views_artwork.work_detail_update, name='work_detail_update'),
-    path('<int:id>/', views_artwork.work_details, name='work_details'),
+    path('', artwork_view.index, name='index'),
+    path('entry_form/', artwork_view.entry_form, name='entry_form'),
+    path('entry_form_view/', artwork_view.entry_form_view, name='entry_form_view'),
+    path('aboutus/', artwork_view.aboutus, name='aboutus'),
+    path('contactus/', artwork_view.contactus, name='contactus'),
+    path('faq/', artwork_view.faq, name='faq'),
+    path('history/', artwork_view.history, name='history'),
+    path('manager_console/', artwork_view.managerConsole, name='manager_console'),
+    path('howtoenter/', artwork_view.howtoenter, name='howtoenter'),
+    path('rules/', artwork_view.rules, name='rules'),
+    path('signup_page/', artwork_view.signup_page, name='signup_page'),
+    path('signup_page_view/', artwork_view.signup_page_view, name='signup_page_view'),
+    path('home/', artwork_view.home, name='home'),
+    path('gallery/', artwork_view.gallery, name='gallery'),
+    path('work_lists/', artwork_view.work_lists, name='work_lists'),
+    path('work_detail_update/', artwork_view.work_detail_update, name='work_detail_update'),
+    path('<int:id>/', artwork_view.work_details, name='work_details'),
 ]

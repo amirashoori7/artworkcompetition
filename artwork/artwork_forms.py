@@ -1,5 +1,5 @@
 from django import forms
-from .models_artwork import Artwork
+from artwork.artwork_models import Artwork
 from account.models_account import ProjectUser
 
 class EntryForm(forms.ModelForm):

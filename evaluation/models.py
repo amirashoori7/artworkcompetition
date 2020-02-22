@@ -1,6 +1,6 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from artwork.models_artwork import Artwork
+from artwork.artwork_models import Artwork
 from account.models_account import ProjectUser
 
 WEIGHT = (

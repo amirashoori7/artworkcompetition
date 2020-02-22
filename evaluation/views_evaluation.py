@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse
 import json
-from artwork.models_artwork import Artwork
+from artwork.artwork_models import Artwork
 from django.contrib.auth.decorators import login_required
 from account.models_account import ProjectUser
 from evaluation.models import D1A, D2

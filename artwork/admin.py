@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models_artwork import School, Artwork
+from artwork.artwork_models import School, Artwork
 
 @admin.register(School)
 class SchoolAdmin(admin.ModelAdmin):

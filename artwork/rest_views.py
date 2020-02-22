@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from .serializer import ArtworkSerializer
-from .models_artwork import Artwork
-from artwork.models_artwork import School
+from artwork.artwork_models import Artwork
+from artwork.artwork_models import School
 import json
 from django.http.response import HttpResponse
 
