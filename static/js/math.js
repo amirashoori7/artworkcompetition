@@ -265,7 +265,6 @@ function getSchoolVal(reason) {
 				$("#province-dropdown").html('<option value="" selected="selected">Province</option>')
 				$("#province-dropdown").removeClass("disabled")
 				$(response).each(function(i,j){
-					console.log(j)
 					if(!$('#province-dropdown option[value="'+j+'"]').length)
 						$("#province-dropdown").append($("<option/>").attr("value",j).text(getProvince(""+j+"")))
 					

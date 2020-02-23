@@ -13,6 +13,9 @@
 			{%if request.GET.req == 'dev' %}
 				$("#registry-form").append($("<input type='hidden' name='req' value='{{ request.GET.req }}' />"))
 			{% endif %}
+				$(function () {
+					  $('[data-toggle="tooltip"]').tooltip()
+					})
 		})
 		
 	})

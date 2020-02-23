@@ -74,6 +74,20 @@
 					true);
 		}
 	}
+
+	$('#cropIcon').on('click', function(ev) {
+		$('#main-cropper').croppie('result', {
+			type : 'canvas',
+			size : 'viewport',
+			format : 'jpeg'
+		}).then(function(resp) {
+			$("#croppedImage").attr('src', resp)
+			$("#workfileCropped").val(resp)
+			return false
+		});
+		$("#main-cropper").empty()
+		return false
+	})
 	var allowedTypes = [ 'image/jpeg', 'image/jpg' ];
 	$("#workfile")
 			.change(
@@ -99,18 +113,49 @@
 								return false
 							}
 						}
-						readURL(this)
+						readURL(this, '.artwork-image')
 						$(".progress").css("display", "flex")
-						// 		createCroppie();
-						// 		readFile(this);
+						// createCroppie();
+						// readFile(this);
 					})
-	function readURL(input) {
+
+	$("#workformulafile")
+			.change(
+					function() {
+						$("#main-cropper").empty();
+						var input = this
+						var filesToUploads = this.files;
+						var file = filesToUploads[0]
+						var fileType = file.type
+						$("small.workfile").remove()
+						if (!allowedTypes.includes(fileType)) {
+							populateDangerMessageField("workfile",
+									'Please select a valid file format (JPEG or JPG).');
+							$("#workfile").val('')
+							return false
+						}
+						$("#imagefilesize").val(input.files[0].size)
+						if (input.files && input.files[0]) {
+							if (input.files[0].size > 5000000) {
+								populateDangerMessageField("workfile",
+										"The file size cannot be larger than 5MB.")
+								$('#workfile').val('')
+								return false
+							}
+						}
+						readURL(this, '.formula-image')
+						$(".progress").css("display", "flex")
+						// createCroppie();
+						// readFile(this);
+					})
+
+	function readURL(input, classNameStr) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
-				$('.artwork-image').find("img").remove()
-				$('.artwork-image').append(
+				$(classNameStr).find("img").remove()
+				$(classNameStr).append(
 						$("<img/>").attr('src', e.target.result).css({
 							"width" : "100%",
 							"height" : "auto"
@@ -120,20 +165,6 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
-	$('#cropIcon').on('click', function(ev) {
-		$('#main-cropper').croppie('result', {
-			type : 'canvas',
-			size : 'viewport',
-			format : 'jpeg'
-		}).then(function(resp) {
-			$("#croppedImage").attr('src', resp)
-			$("#workfileCropped").val(resp)
-			return false
-		});
-		$("#main-cropper").empty()
-		return false
-	});
 </script>
 <style>
 .entry-form-warning {
@@ -187,30 +218,25 @@
 		</h5>
 	</div>
 </div>
-<hr/>
+<hr />
 <div class="row">
 	{% if form.instance.status == 1 %}
 	<div class="col-sm-12 card" style="border-color: #dc3545 !important;">
 		<h6 class="text-danger">
-			<strong style="font-style: italic;">Comment: </strong>{{ form.instance.comment }}
+			<strong style="font-style: italic;">Comment: </strong>{{
+			form.instance.comment }}
 		</h6>
 		{% if form.instance.bioapproved == False %}
-		<h6 class="text-danger">
-			Bio Requires Revision
-		</h6>
+		<h6 class="text-danger">Bio Requires Revision</h6>
 		{% endif %} {% if form.instance.workapproved == False %}
-		<h6 class="text-danger">
-			Artwork Requires Revision
-		</h6>
+		<h6 class="text-danger">Artwork Requires Revision</h6>
 		{% endif %} {% if form.instance.qapproved == False %}
-		<h6 class="text-danger">
-			Questions Require Revision
-		</h6>
+		<h6 class="text-danger">Questions Require Revision</h6>
 		{% endif %}
 	</div>
-	 {% endif %}
+	{% endif %}
 </div>
-<hr/>
+<hr />
 <div class="row">
 	<div class="col-md-12">
 		<form method="post" id="entry-form-id"
@@ -242,8 +268,7 @@
 						<label for="username"> Username </label> <input type="email"
 							data-required="1" class="form-control" placeholder="Email"
 							required autocomplete="off" id="username" name="username"
-							disabled="disabled"
-							value="{{ user.username|default:'' }}">
+							disabled="disabled" value="{{ user.username|default:'' }}">
 					</div>
 
 					<!-- 				CELLPHONE -->
@@ -252,8 +277,7 @@
 						<label for="cellphone">Cell Phone Number</label> <input
 							data-required="1" type="text" class="form-control"
 							placeholder="cellphone" required="required" id="cellphone"
-							value="{{ user.cellphone|default:'' }}"
-							name="Cellphone Number">
+							value="{{ user.cellphone|default:'' }}" name="Cellphone Number">
 					</div>
 
 
@@ -273,8 +297,7 @@
 					<div class="form-group col-md-6">
 						<label for="last_name">Last Name</label> <input data-required="1"
 							type="text" class="form-control" placeholder="i.e. Scholtz"
-							required id="last_name"
-							value="{{ user.last_name | default:'' }}"
+							required id="last_name" value="{{ user.last_name | default:'' }}"
 							name="last_name">
 					</div>
 
@@ -300,8 +323,7 @@
 						<label for="first_name">Parent/Guardian's Full-Name</label> <input
 							data-required="1" type="text" class="form-control"
 							placeholder="i.e. Jack Scholtz" required id="parentname"
-							name="parentname"
-							value="{{ user.parentname|default:'' }}">
+							name="parentname" value="{{ user.parentname|default:'' }}">
 					</div>
 
 
@@ -309,8 +331,8 @@
 					<!-- 				PARENT PHONE NUMBER -->
 
 					<div class="form-group col-md-6">
-						<label for="first_name">Parent/Guardian's Cell phone Number</label> <input
-							data-required="1" type="phone" class="form-control"
+						<label for="first_name">Parent/Guardian's Cell phone
+							Number</label> <input data-required="1" type="phone" class="form-control"
 							name="parentphone" placeholder="012 345 67 89" id="parentphone"
 							value="{{ user.parentphone|default:'' }}" required>
 					</div>
@@ -324,8 +346,7 @@
 						<label for="parentemail">Parent/Guardian's Email Address</label> <input
 							data-required="1" type="email" class="form-control"
 							id="parentemail" name="parentemail" placeholder="you@example.com"
-							value="{{ user.parentemail|default:'' }}"
-							required>
+							value="{{ user.parentemail|default:'' }}" required>
 					</div>
 				</div>
 			</div>
@@ -333,7 +354,7 @@
 
 			<!-- 			SCHOOL -->
 
-<hr/>
+			<hr />
 
 			<div class="card">
 				<div class="card-header collapsed row" data-toggle="collapse"
@@ -360,14 +381,16 @@
 							<label for="region-dropdown">Region of the School</label> <select
 								class="form-control form-input disabled" id="region-dropdown"
 								onchange="getSchoolVal(3)">
-								<option value="" selected="selected">{{ form.instance.school.region|default:'Select' }}</option>
+								<option value="" selected="selected">{{
+									form.instance.school.region|default:'Select' }}</option>
 							</select>
 						</div>
 						<div class="form-group col-md-4" id="schoolDIV">
 							<label for="school-dropdown">School</label> <select
 								class="form-control form-input disabled" id="school-dropdown"
 								onchange="$('#school-id-val').val($('#school-dropdown').val())">
-								<option value="0" selected="selected">{{ form.instance.school.name|default:'Select' }}</option>
+								<option value="0" selected="selected">{{
+									form.instance.school.name|default:'Select' }}</option>
 							</select>
 						</div>
 						<input type="hidden" name="school"
@@ -376,8 +399,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<span class="text-warning">Can't find your school? </span> <span class="text-secondary">Tell
-							Us, your province, region and school name.</span>
+							<span class="text-warning">Can't find your school? </span> <span
+								class="text-secondary">Tell Us, your province, region and
+								school name.</span>
 							<button class="btn btn-sm btn-link"
 								onclick="loadContent($('<li/>').attr('data-href','/contactus'))">Contact
 								Us</button>
@@ -396,48 +420,42 @@
 								<input type="radio"
 								class="btn btn-outline-secondary btn-group btn-group-sm"
 								name="learnergradeRadio" value="Grade 7"
-								onclick="gradeChose(this)">Grade
-								7
+								onclick="gradeChose(this)">Grade 7
 							</label>
 						</div>
 						<div class="col-md-2 btn-group btn-group-toggle btn-sm"
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 8"
-								onclick="gradeChose(this)">
-								Grade 8
+								onclick="gradeChose(this)"> Grade 8
 							</label>
 						</div>
 						<div class="col-md-2 btn-group btn-group-toggle btn-sm"
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 9"
-								onclick="gradeChose(this)">
-								Grade 9
+								onclick="gradeChose(this)"> Grade 9
 							</label>
 						</div>
 						<div class="col-md-2 btn-group btn-group-toggle btn-sm"
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 10"
-								onclick="gradeChose(this)">
-								Grade 10
+								onclick="gradeChose(this)"> Grade 10
 							</label>
 						</div>
 						<div class="col-md-2 btn-group btn-group-toggle btn-sm"
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 11"
-								onclick="gradeChose(this)">
-								Grade 11
+								onclick="gradeChose(this)"> Grade 11
 							</label>
 						</div>
 						<div class="col-md-2 btn-group btn-group-toggle btn-sm"
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 12"
-								onclick="gradeChose(this)">
-								Grade 12
+								onclick="gradeChose(this)"> Grade 12
 							</label>
 						</div>
 						<!-- 				</div> -->
@@ -474,7 +492,7 @@
 
 
 
-<hr/>
+			<hr />
 
 			<!-- 			UPLOAD ARTWORK -->
 
@@ -542,7 +560,7 @@
 
 			<!-- 			QUESTIONS -->
 
-<hr/>
+			<hr />
 
 
 			<div class="card">
@@ -567,25 +585,32 @@
 								name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
 						</div>
 						<div class="col-md-6">
-							<label for="formulafile">If a
-								photo of your mathematics would help your explanation, upload an
-								image here (*optional)</label> <input type="file" class="form-control form-input"
-								id="workformulafile" name="workformulafile" placeholder=""
-								value="Browse"
-								value="{{ form.instance.workformulafile|default_if_none:'' }}"
-								accept="image/*" required>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
 							<label for="question2"> <strong>Question 2:</strong> How
-								did you creatively connect Mathematics with "My Universe" to make
-								your artwork? (Explain your answer)
+								did you creatively connect Mathematics with "My Universe" to
+								make your artwork? (Explain your answer)
 							</label>
 							<textarea class="form-control form-input" id="question2"
 								data-required="1" placeholder="Explain it in 50-100 words"
 								name="question2" rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="workformulafile">If a photo of your
+								mathematics would help your explanation, upload an image here
+								(*optional)</label> <input type="file" class="form-control form-input"
+								id="workformulafile" name="workformulafile" placeholder=""
+								value="Browse"
+								value="{{ form.instance.workformulafile|default_if_none:'' }}"
+								accept="image/*" required>
+						</div>
+						<div class="col-md-6 formula-image">
+							{% if form.instance.workformulafile %}
+							<img src="{{ form.instance.workformulafile.url }}" width="100%"
+								height="auto"> {% endif %}
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-6">
 							<label for="question3"> <strong>Question 3:</strong> Do
 								you think creativity could be used to teach Mathematics?
@@ -603,11 +628,11 @@
 				<div class="col-md-6 text-center" data-toggle="tooltip"
 					data-placement="top" title="Fill the required forms to activate me">
 					<button class="btn btn-warning btn-sm col-md-12 disabled"
-						type="submit" id="buttonSubmit">Submit</button>
+						type="button" id="buttonSubmit">Submit</button>
 				</div>
 				<div class="col-md-6 text-center">
 					<button class="btn btn-outline-success btn-sm col-md-12"
-						type="submit" id="buttonSaveContinue">Save & Continue
+						type="button" id="buttonSaveContinue">Save & Continue
 						Later</button>
 				</div>
 				<div class="col-md-12 progress">

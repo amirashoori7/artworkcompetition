@@ -198,7 +198,7 @@
 	}
 }
 
-.input-group small{
+.input-group small, .form-group small{
 	position: absolute;
 	top: -31px;
 }

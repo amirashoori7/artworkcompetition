@@ -8,25 +8,26 @@
 			<!-- 					EMAIL -->
 
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-at"></i></span>
+					<span class="input-group-addon"><i class="fa fa-at"></i></span> <input
+						type="email" class="form-control" placeholder="Email" required
+						autocomplete="off" id="username" name="username"
+						value="{{ user.username|default:'' }}">
 				</div>
-				<input type="email" class="form-control" placeholder="Email"
-					required autocomplete="off" id="username" name="username"
-					value="{{ user.username|default:'' }}">
 			</div>
 
 			<!-- 				CELLPHONE -->
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
 					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+
+					<input type="text" class="form-control" name="cellphone"
+						required="required" id="cellphone"
+						value="{{ user.cellphone|default:'' }}"
+						placeholder="Cellphone Number">
 				</div>
-				<input type="text" class="form-control" name="cellphone"
-					required="required" id="cellphone"
-					value="{{ user.cellphone|default:'' }}"
-					placeholder="Cellphone Number">
 			</div>
 		</div>
 
@@ -44,6 +45,7 @@
 				<input type="text" class="form-control" placeholder="i.e. Joe"
 					required id="first_name" name="first_name"
 					value="{{ user.first_name | default:'' }}">
+
 			</div>
 			<!-- 				SURNAME -->
 
@@ -52,8 +54,7 @@
 					<span class="input-group-text">Last Name</span>
 				</div>
 				<input type="text" class="form-control" placeholder="i.e. Scholtz"
-					required id="last_name"
-					value="{{ user.last_name | default:'' }}"
+					required id="last_name" value="{{ user.last_name | default:'' }}"
 					name="last_name">
 			</div>
 		</div>
@@ -69,10 +70,10 @@
 			<div class="input-group col-sm-6">
 				<div class="input-group-prepend">
 					<span class="input-group-addon"><i
-						class="fa fa-birthday-cake"></i></span>
+						class="fa fa-birthday-cake"></i></span> <input type="date"
+						class="form-control" required id="dob" name="dob"
+						value="{{ user.dob|default:'' }}">
 				</div>
-				<input type="date" class="form-control" required id="dob" name="dob"
-					value="{{ user.dob|default:'2013-01-08' }}">
 			</div>
 		</div>
 
@@ -90,8 +91,8 @@
 				</div>
 				<input type="text" class="form-control"
 					placeholder="i.e. Jack Scholtz" required id="parentname"
-					name="parentname"
-					value="{{ user.parentname|default:'' }}">
+					name="parentname" value="{{ user.parentname|default:'' }}">
+
 			</div>
 
 
@@ -100,11 +101,13 @@
 
 			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
-					<span class="input-group-text">Parent/Guardian's Cell phone Number</span>
+					<span class="input-group-text">Parent/Guardian's Cell phone
+						Number</span>
 				</div>
 				<input type="phone" class="form-control" name="parentphone"
 					placeholder="012 345 67 89" id="parentphone"
 					value="{{ user.parentphone|default:'' }}" required>
+
 			</div>
 		</div>
 
@@ -114,12 +117,13 @@
 
 		<div class="row form-group">
 
-			<div class="input-group col-sm-6">
+			<div class="form-group col-sm-6">
 				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-at"></i></span>
+					<span class="input-group-text">Parent/Guardian's Email </span>
 				</div>
 				<input type="email" class="form-control" id="parentemail"
-					name="parentemail" placeholder="you@example.com" value="{{ user.parentemail|default:'' }}" required>
+					name="parentemail" placeholder="you@example.com"
+					value="{{ user.parentemail|default:'' }}" required>
 			</div>
 
 		</div>
@@ -130,18 +134,22 @@
 		<div class="row form-group">
 			<div class="input-group col-sm-6">
 				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
+						type="password" class="form-control" id="password1"
+						name="password1" placeholder="Password" required value=""
+						data-toggle="tooltip" data-placement="auto"
+						title="Password must be at least 8 charachters, including numbers and charachters.">
 				</div>
-				<input type="password" class="form-control" id="password1"
-					name="password1" placeholder="Password" required value="">
+
 			</div>
 
 			<div class="input-group col-sm-6">
 				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
+						type="password" class="form-control" id="password2"
+						name="password2" placeholder="Repeat Password" value="" required>
 				</div>
-				<input type="password" class="form-control" id="password2"
-					name="password2" placeholder="Repeat Password" value="" required>
+
 			</div>
 		</div>
 
@@ -149,7 +157,8 @@
 		<div class="row form-group">
 			<div class="input-group col-sm-2"></div>
 			<div class="input-group col-sm-8">
-				<button class="btn btn-primary btn-success col-sm-12" type="submit" id="register-btn">Register Now</button>
+				<button class="btn btn-primary btn-success col-sm-12" type="submit"
+					id="register-btn">Register Now</button>
 			</div>
 		</div>
 	</div>

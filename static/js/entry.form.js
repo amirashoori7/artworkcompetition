@@ -1,47 +1,53 @@
 function fetchEntryForm(url, req) {
-	$.ajax({
-		url : url,
-		async : true,
-		success : function(response) {
-			$("#artwork-submit-form-holder-id").html(response)
-			if ($("#school-id-val").val() == "0") {
-				$("#region-dropdownDIV").fadeOut()
-				$("#schoolDIV").fadeOut()
-			}
-			$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$(
-						"input[name='learnergradeRadio'][value='"
-								+ $("#currentlearnergrade").val() + "']").prop(
-						'checked', true)
-				$(
-						"input[name='learnergradeRadio'][value='"
-								+ $("#currentlearnergrade").val() + "']")
-						.parent().addClass("active")
-			})
-			$('#entry-form-id').submit(function(event) {
-				event.preventDefault()
-				checkValidation().done(function() {
-					submitEntryForm($('#entry-form-id').attr("action"), req)
-				})
-			})
-			$("input[name='req']").remove()
-			if (req != null && req.length > 0)
-				$("#entry-form-id").append(
-						$("<input type='hidden' name='req' value='" + req
-								+ "' />"))
-			$("[data-required='1']").on("focusout", function() {
-				checkValidation().done()
-			})
-			setTimeout(function() {
-				checkValidation().done()
-			}, 50)
-			getSchoolVal(1)
-		},
-		error : function(request, status, error) {
-			console.log(request.responseText);
-		}
-	});
+	$
+			.ajax({
+				url : url,
+				async : true,
+				success : function(response) {
+					$("#artwork-submit-form-holder-id").html(response)
+					if ($("#school-id-val").val() == "0") {
+						$("#region-dropdownDIV").fadeOut()
+						$("#schoolDIV").fadeOut()
+					}
+					$.each($("input[name='learnergradeRadio']"), function(i,
+							val) {
+						$(
+								"input[name='learnergradeRadio'][value='"
+										+ $("#currentlearnergrade").val()
+										+ "']").prop('checked', true)
+						$(
+								"input[name='learnergradeRadio'][value='"
+										+ $("#currentlearnergrade").val()
+										+ "']").parent().addClass("active")
+					})
+					$('#entry-form-id').submit(
+							function(event) {
+								event.preventDefault()
+								checkValidation().done(
+										function() {
+											submitEntryForm($('#entry-form-id')
+													.attr("action"), req)
+										})
+							})
+					$("input[name='req']").remove()
+					if (req != null && req.length > 0)
+						$("#entry-form-id").append(
+								$("<input type='hidden' name='req' value='"
+										+ req + "' />"))
+					$("[data-required='1']").on("focusout", function() {
+						checkValidation().done()
+					})
+					setTimeout(function() {
+						checkValidation().done()
+					}, 50)
+					getSchoolVal(1)
+				},
+				error : function(request, status, error) {
+					console.log(request.responseText);
+				}
+			});
 }
+
 
 function gradeChose(radioBTN) {
 	$('.btn-outline-secondary.btn-group').removeClass('active');

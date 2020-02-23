@@ -20,6 +20,7 @@ class UserRegistrationForm(UserCreationForm):
     parentphone = forms.CharField(error_messages={'required': 'Please enter your parent\'s cell phone number'})
     username = forms.EmailField(error_messages={'required': 'Please enter a valid email address'}, validators=default_validators)
     dob = forms.DateField(error_messages={'required': 'Please enter your birth date'})
+    cellphone = forms.DateField(error_messages={'required': 'Please enter your cell phone number'})
  
     class Meta:
         model = ProjectUser
