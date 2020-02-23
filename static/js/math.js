@@ -22,7 +22,7 @@ function populateDangerMessageField(fieldId, text) {
 	$("#" + fieldId).before(errorSection)
 }
 
-//FOR MANY FIELDS
+// FOR MANY FIELDS
 function populateErrorMessageFields(errorString) {
 	Object.keys(JSON.parse(errorString)).forEach(function(key, value) {
 		var errorSection = $("<small/>").addClass("text-danger")
@@ -265,8 +265,9 @@ function getSchoolVal(reason) {
 				$("#province-dropdown").html('<option value="" selected="selected">Province</option>')
 				$("#province-dropdown").removeClass("disabled")
 				$(response).each(function(i,j){
+					console.log(j)
 					if(!$('#province-dropdown option[value="'+j+'"]').length)
-						$("#province-dropdown").append($("<option/>").attr("value",j).text(j))
+						$("#province-dropdown").append($("<option/>").attr("value",j).text(getProvince(""+j+"")))
 					
 				})
 			} else if(reason==2){
@@ -286,7 +287,7 @@ function getSchoolVal(reason) {
 				$(response).each(function(i,j){
 					console.log(j)
 					if(!$('#school-dropdown option[value="'+j[1]+'"]').length)
-						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[4]))
+						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[3]))
 				})
 			}
 		},
@@ -298,6 +299,29 @@ function getSchoolVal(reason) {
 			return -1
 		}
 	})
+}
+
+function getProvince(str){
+    switch(str){
+        case "EC":
+        	return "Eastern Cape"
+        case "FS":
+        	return "Free State"
+        case "GT":
+        	return "Gauteng"
+        case "KZN":
+        	return "KwaZulu Natal"
+        case "LP":
+        	return "Limpopo"
+        case "MP":
+        	return "Mpumalanga"
+        case "NW":
+        	return "North West"
+        case "NC":
+        	return "Northern Cape"
+        case "WC":
+        	return "Western Cape"
+    }
 }
 var countDownDate = new Date("Mar 3, 2020 00:00:00").getTime();
 function runTimer(){
@@ -344,10 +368,49 @@ function submitAForm(url, formId, submitBTNId) {
 		}, success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$('#'+formId).find("input#id").val(response.id)
-			} else if (response.errorResult != null) {
-				populateErrorMessageFields(response.errorResultWork)
+				$('#admin-console-content').load('/work_lists/')
+			} else if (response.errorResults != null) {
+				populateErrorMessageFields(response.errorResults)
+			} else if (response.errorResult != null)
+			toggleMessageBox("<span>"+response.errorResult+"</span>",
+					true)
+		}, error : function(xhr, errmsg, err) {
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		}, complete : function(response) {
+			$("#"+submitBTNId).prop("disabled", false)
+			return -1
+		}
+	})
+}
+
+function loginForm(url, formId, submitBTNId) {
+	var form = $('#'+formId)[0]
+	$("#"+submitBTNId).prop("disabled", true)
+	var data = new FormData(form)
+	$.ajax({
+		type : "POST",
+		data : data,
+		processData : false,
+		contentType : false,
+		cache : false,
+		url : url,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
 			}
+		}, success : function(response) {
+			if (response.successResult != null) {
+				toggleMessageBox(response.successResult, false)
+				$('#'+formId).find("input#id").val(response.id)
+			} else if (response.errorResults != null) {
+				populateErrorMessageFields(response.errorResults)
+			} else if (response.errorResult != null)
+			toggleMessageBox("<span>"+response.errorResult+"</span>",
+					true)
+			else
+				$("#login-div").load('/account/login/')
 		}, error : function(xhr, errmsg, err) {
 			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)

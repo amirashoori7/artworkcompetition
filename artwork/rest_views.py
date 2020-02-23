@@ -4,6 +4,7 @@ from artwork.artwork_models import Artwork
 from artwork.artwork_models import School
 import json
 from django.http.response import HttpResponse
+from django.db.models.functions.text import Lower
 
 def worklists(request):
     works = Artwork.objects.all()
@@ -14,7 +15,7 @@ def get_school(request):
     if request.GET['reason'] == '1':#gets all the provinces
         data = list(School.objects.order_by().values_list("province").distinct("province"))
     elif request.GET['reason'] == '2':#gets all the regions for a province
-        data = list(School.objects.filter(province=request.GET['prov']).order_by().values_list("region").distinct("region"))
+        data = list(School.objects.filter(province=request.GET['prov']).order_by().values_list("region", flat=True).distinct("region"))
     elif request.GET['reason'] == '3':#gets all the schools
         data = list(School.objects.filter(province=request.GET['prov'], region=request.GET['reg']).order_by().values_list())
     else:

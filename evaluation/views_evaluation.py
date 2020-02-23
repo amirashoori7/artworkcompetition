@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from account.models_account import ProjectUser
 from evaluation.models import D1A, D2
 from evaluation.forms_evaluation import FormD1A, FormD2
+import artwork
+from rest_framework import status
+from artwork.artwork_forms import EntryForm
+
 
 @login_required
 def create_d1a(request):
@@ -15,19 +19,23 @@ def create_d1a(request):
             response_data['errorResult'] = "Illegal access to the form, the work id is null."
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
+        artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
         old_data = get_object_or_404(D1A, id=request.POST["id"])
         formd1A_form = FormD1A(request.POST, instance=old_data)
         if formd1A_form.is_valid():
+            d1as = D1A.objects.filter(artwork=artwork)
+            judges = ProjectUser.objects.filter(user_type=2)
+            if len(d1as) == len(judges):
+                update_worklist(int(request.POST['work_id']), 5)
             formd1A_form = formd1A_form.save(commit=False)
             formd1A_form.author = request.user
-            artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
             formd1A_form.artwork = artwork
             formd1A_form = formd1A_form.save()
             response_data['successResult'] = 'D1A form submitted successfully!'
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            response_data['errorResult'] = formd1A_form.errors.as_json(True)
+            response_data['errorResults'] = formd1A_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif request.method == 'GET':
@@ -45,6 +53,14 @@ def create_d1a(request):
             content_type="application/json")
 
 
+def update_worklist(workid, status):
+    artwork = get_object_or_404(Artwork, id=workid)
+    artwork_form = EntryForm(instance=artwork)
+    artwork_form = artwork_form.save(commit=False)
+    artwork_form.status = status
+    artwork_form = artwork_form.save()
+
+
 @login_required
 def create_d2(request):
     userModel = ProjectUser.objects.get(username=request.user)
@@ -59,7 +75,7 @@ def create_d2(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            response_data['errorResult'] = formd2_form.errors.as_json(True)
+            response_data['errorResults'] = formd2_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif userModel.user_type == 1:
@@ -72,7 +88,6 @@ def create_d2(request):
         formd2_form = FormD2()
     context = {'form': formd2_form}
     return render(request, 'evaluationForms/D2_form.html', context)
-
 
 '''
 def create_evald1b(request, id):

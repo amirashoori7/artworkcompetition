@@ -89,8 +89,8 @@ function updateTheArtwork() {
 						toggleMessageBox(response.successResult, false)
 						closeFullScreenDiv()
 						$(".menu-item[data-href='/work_lists/']").trigger("click")
-					} else if (response.errorResult != null) {
-						Object.keys(JSON.parse(response.errorResult)).forEach(
+					} else if (response.errorResults != null) {
+						Object.keys(JSON.parse(response.errorResults)).forEach(
 								function(key, value) {
 									$('<li/>').text("* " + key).appendTo(
 											errorList)

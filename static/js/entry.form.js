@@ -180,9 +180,9 @@ function submitRegistryForm(url, req) {
 					$("#entry-form-id").append(
 							$("<input type='hidden' name='req' value='" + req
 									+ "' />"))
-			} else if (response.errorResult != null) {
+			} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
-				populateErrorMessageFields(response.errorResult, true)
+				populateErrorMessageFields(response.errorResults, true)
 			}
 		},
 		error : function(xhr, errmsg, err) {
@@ -241,10 +241,10 @@ function submitEntryForm(url, req) {
 									+ "' />"))
 				$(".nav-item menu-item.active").trigger("click")
 			}
-			if (response.errorResultUser != null)
-				populateErrorMessageFields(response.errorResultUser)
-			if (response.errorResultWork != null) {
-				populateErrorMessageFields(response.errorResultWork)
+			if (response.errorResults != null)
+				populateErrorMessageFields(response.errorResults)
+			if (response.errorResults != null) {
+				populateErrorMessageFields(response.errorResults)
 			}
 		},
 		error : function(xhr, errmsg, err) {

@@ -23,6 +23,9 @@
 						required autocomplete="off" id="username" name="username"
 						value="{{ form.instance.username|default:'' }}">
 				</div>
+				<input type="hidden" class="form-control" 
+						required autocomplete="off" name="id"
+						value="{{ form.instance.id|default:'0' }}">
 
 				<!-- 				CELLPHONE -->
 
@@ -88,9 +91,9 @@
 						<span class="input-group-addon"><i
 							class="fa fa-user"></i></span>
 					</div>
-					<select name="gender" class="selectpicker"
+					<select name="user_type" class="selectpicker"
 						data-title="Select Gender" data-style="btn-default btn-block"
-						data-menu-style="dropdown-blue"> {% for x, y in form.fields.user_type.choices %} {% if x != 1 and x != 6 %}
+						data-menu-style="dropdown-blue"> {% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
 						<option value="{{ x }}" {% if form.instance.user_type.value == x %} selected {% endif %}>
 							{% endif %} {{ y }}</option> {% endfor %}
 					</select>
@@ -171,9 +174,9 @@ function submitRegistryForm(url) {
 					"data-href" : "/signup_page/"
 				}))
 				$("#login-div").load('/account/login/')
-			} else if (response.errorResult != null) {
+			} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
-				populateErrorMessageFields(response.errorResult)
+				populateErrorMessageFields(response.errorResults)
 				toggleMessageBox("<span>Registration unsuccessful.</span>",
 						true)
 

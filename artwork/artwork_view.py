@@ -1,9 +1,3 @@
-'''
-A view method acts as the C(ontroller) in an MVC Framework
-Charged with handling incoming requests, applying business logic
-and then routing requests with an appropriate response.
-'''
-
 from django.shortcuts import render, get_object_or_404
 from artwork.artwork_models import Artwork, School
 from django.http import HttpResponse
@@ -136,7 +130,7 @@ def entry_form(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            response_data['errorResultWork'] = artwork_form.errors.as_json(True)
+            response_data['errorResults'] = artwork_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif userModel is not None and userModel.user_type == 1:

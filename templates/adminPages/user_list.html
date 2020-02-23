@@ -26,7 +26,7 @@
 				<tr
 					onclick="showDialogPage(this, '/account/register_judge?username={{ user.username }}')">
 					<th scope="row">{{ user.last_name }}, {{ user.first_name }}</th>
-					<td>{{ user.user_type }}</td>
+					<td>{{ user.get_user_type_display }}</td>
 					<td>{{ user.username }}</td>
 					<td>{{ user.cellphone }}</td>
 					<td>{{ user.dob }}</td> {% endfor %}

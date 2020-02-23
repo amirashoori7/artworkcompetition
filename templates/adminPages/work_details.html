@@ -2,7 +2,8 @@
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="card">
-			{%if work.status == 0 or work.status == 2%}
+			{%if work.status == 0 or work.status == 2 %} 
+				{%if user.user_type == 6 %}
 			<div class="row" data-title="Eligible/Revision/Reject">
 				<div class="col-md-12" id="">
 					<form method="post" id="entry-approval-form"
@@ -54,37 +55,39 @@
 					</form>
 				</div>
 
-
-				<!-- 	FORM D1-a -->
-
-				{% elif work.status == 4 %}
-
-
-				<div class="row">
-					<div class="col-md-12" id="form-d1-a"></div>
-				</div>
+			</div>
+			<!-- 	FORM D1-a -->
+				{% endif %}
+			{% elif work.status == 4 %}
+				{%if user.user_type == 2 or user.user_type == 6 %}
 
 
-				<!-- 	FORM D2 -->
+			<div class="row">
+				<div class="col-md-12" id="form-d1-a"></div>
+			</div>
 
 
-				{% elif work.status == 6 %}
-				<div class="row form-section" data-title="Evaluation Form Stage 2">
-					<div class="col-md-12" id="form-d2"></div>
-				</div>
-				{%elif work.status == 10 %}
-				<form method="post" id="" action="/"
-					class="needs-validation form-general-style"
-					enctype="multipart/form-data" novalidate>
-					FORM D3
-					<div class="row form-section" data-title="Decision">
-						<div class="col-md-12">
-							<button class="action-button green" id="buttonSubmit">Submit</button>
-						</div>
+			<!-- 	FORM D2 -->
+
+				{% endif %}
+			{% elif work.status == 6 %}
+			<div class="row form-section" data-title="Evaluation Form Stage 2">
+				<div class="col-md-12" id="form-d2"></div>
+			</div>
+			{%elif work.status == 10 %}
+			<form method="post" id="" action="/"
+				class="needs-validation form-general-style"
+				enctype="multipart/form-data" novalidate>
+				FORM D3
+				<div class="row form-section" data-title="Decision">
+					<div class="col-md-12">
+						<button class="action-button green" id="buttonSubmit">Submit</button>
 					</div>
-				</form>
-				{%endif%}
-				<hr>
+				</div>
+			</form>
+			{%endif%}
+			<hr>
+			<div class="card">
 				<div class="card-header collapsed row" data-toggle="collapse"
 					aria-expanded="false" href="#artwork-section">
 					<div class="col-md-11">
@@ -108,6 +111,9 @@
 						<div class="col-md-12 ">
 							<h5>
 								<strong>By </strong>{{ work.owner.last_name }}, {{ work.owner.first_name }}
+							</h5>
+							<h5>
+								<strong>Serial</strong> {{ work.school.province }}_{{ work.school.natemis }}_{{ work.id }}
 							</h5>
 						</div>
 					</div>
@@ -135,7 +141,8 @@
 						</div>
 						<div class="col-md-6">
 							<h6>
-								{{ work.learnergrade }}, <strong>School</strong> {{ work.school.name }} ({{ work.school.region }}, &nbsp;{{	work.school.province }}).
+								{{ work.learnergrade }}, <strong>School</strong> {{ work.school.name }} ({{ work.school.region }}, 
+								&nbsp;{{ work.school.get_province_display }}).
 							</h6>
 							<h6>
 								<strong>Teacher</strong> {{ work.teachername }}, <strong>Email</strong>

@@ -16,10 +16,24 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 
 def projectUserList(request):
-    userList = ProjectUser.objects.all()
+    userList = ProjectUser.objects.exclude(user_type=1)
     context = {'userlist': userList}
     return render(request, 'adminPages/user_list.html', context)
 
+
+def login_form(request):
+    response_data = {}
+    if request.method == 'POST':
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+        except:
+            response_data['errorResult'] = "Invalid username or password"
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+    return render(request, 'login.html')
 
 def registration(request):
     response_data = {}
@@ -39,7 +53,7 @@ def registration(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            response_data['errorResult'] = form.errors.as_json(True)
+            response_data['errorResults'] = form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     else:
@@ -52,6 +66,13 @@ def registerJudge(request):
     response_data = {}
     if request.method == 'POST':
         form = AdvancedUserRegistrationForm(request.POST)
+        if int(request.POST.get("id", 0)) > 0:
+#                 school = get_object_or_404(School, id=request.POST["school"])
+#                 artwork_form.school = school
+#                 artwork_form.school_id = int(request.POST["school"])
+            old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
+            form = AdvancedUserRegistrationForm(request.POST, request.FILES, instance=old_data)
+        
         if form.is_valid():
             form = form.save()
 #             CREATE OR UPDATE
@@ -59,7 +80,7 @@ def registerJudge(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
-            response_data['errorResult'] = form.errors.as_json(True)
+            response_data['errorResults'] = form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif request.method == 'GET' and 'username' in request.GET and request.GET['username'] is not None and request.GET['username'] != '':
