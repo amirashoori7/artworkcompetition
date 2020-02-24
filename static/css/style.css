@@ -347,7 +347,6 @@ p {
 /* } */
 .page-content-area-bg {
 	height: 66%;
-	z-index: -1;
 	position: absolute;
 	left: 0;
 	background-size: cover;

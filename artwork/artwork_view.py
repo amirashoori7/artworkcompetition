@@ -125,7 +125,7 @@ def entry_form(request):
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
             artwork_form.save()
-            response_data['successResult'] = 'Congratulations. You have submitted your artwork successfully!'
+            response_data['successResult'] = 'Saved successfully!'
             response_data['id'] = artwork_form.id
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")

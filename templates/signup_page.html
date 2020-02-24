@@ -11,7 +11,9 @@
 				submitRegistryForm("{% url 'account:register' %}",'{{ request.GET.req }}')
 			})
 			{%if request.GET.req == 'dev' %}
+			setTimeout(function(){
 				$("#registry-form").append($("<input type='hidden' name='req' value='{{ request.GET.req }}' />"))
+			},2000)
 			{% endif %}
 				$(function () {
 					  $('[data-toggle="tooltip"]').tooltip()
