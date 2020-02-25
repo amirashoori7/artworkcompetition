@@ -4,20 +4,20 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
-		fetchEntryForm("{% url 'artwork:entry_form' %}",'{{ request.GET.req }}')
+		fetchEntryForm("{% url 'artwork:entry_form' %}")
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
-				submitRegistryForm("{% url 'account:register' %}",'{{ request.GET.req }}')
+				if(window.location.href.indexOf("?req")>0)
+					submitRegistryForm("{% url 'account:register' %}")
+				else{
+					toggleMessageBox("The registration opens Tuesday 3rd of March, 2020.",true)
+					return false
+				}
 			})
-			{%if request.GET.req == 'dev' %}
-			setTimeout(function(){
-				$("#registry-form").append($("<input type='hidden' name='req' value='{{ request.GET.req }}' />"))
-			},2000)
-			{% endif %}
-				$(function () {
-					  $('[data-toggle="tooltip"]').tooltip()
-					})
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip()
+			})
 		})
 		
 	})

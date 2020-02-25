@@ -1,4 +1,4 @@
-function fetchEntryForm(url, req) {
+function fetchEntryForm(url) {
 	$
 			.ajax({
 				url : url,
@@ -11,12 +11,10 @@ function fetchEntryForm(url, req) {
 					}
 					$.each($("input[name='learnergradeRadio']"), function(i,
 							val) {
-						$(
-								"input[name='learnergradeRadio'][value='"
+						$("input[name='learnergradeRadio'][value='"
 										+ $("#currentlearnergrade").val()
 										+ "']").prop('checked', true)
-						$(
-								"input[name='learnergradeRadio'][value='"
+						$("input[name='learnergradeRadio'][value='"
 										+ $("#currentlearnergrade").val()
 										+ "']").parent().addClass("active")
 					})
@@ -26,14 +24,9 @@ function fetchEntryForm(url, req) {
 								checkValidation().done(
 										function() {
 											submitEntryForm($('#entry-form-id')
-													.attr("action"), req)
+													.attr("action"))
 										})
 							})
-					$("input[name='req']").remove()
-					if (req != null && req.length > 0)
-						$("#entry-form-id").append(
-								$("<input type='hidden' name='req' value='"
-										+ req + "' />"))
 					$("[data-required='1']").on("focusout", function() {
 						checkValidation().done()
 					})
@@ -147,7 +140,7 @@ function checkValidation() {
 	}).promise()
 }
 
-function submitRegistryForm(url, req) {
+function submitRegistryForm(url) {
 	var form = $('#registry-form')[0]
 	$("#register-btn").prop("disabled", true)
 	var data = new FormData(form)
@@ -182,10 +175,6 @@ function submitRegistryForm(url, req) {
 				$("#login-div").load('/account/login/')
 				$("input[name='req']").remove()
 				$(".nav-item menu-item.active").trigger("click")
-				if (req != null && req.length > 0)
-					$("#entry-form-id").append(
-							$("<input type='hidden' name='req' value='" + req
-									+ "' />"))
 			} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
 				populateErrorMessageFields(response.errorResults, true)
@@ -202,7 +191,7 @@ function submitRegistryForm(url, req) {
 	})
 }
 
-function submitEntryForm(url, req) {
+function submitEntryForm(url) {
 	$("input[name='status']").remove()
 	if (totalFields == filledFields) {
 		$('#entry-form-id').append(
@@ -240,11 +229,6 @@ function submitEntryForm(url, req) {
 		success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$("input[name='req']").remove()
-				if (req != null && req.length > 0)
-					$("#entry-form-id").append(
-							$("<input type='hidden' name='req' value='" + req
-									+ "' />"))
 				$(".nav-item menu-item.active").trigger("click")
 			}
 			if (response.errorResults != null)

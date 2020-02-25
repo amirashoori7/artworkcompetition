@@ -88,7 +88,7 @@
 		$("#main-cropper").empty()
 		return false
 	})
-	var allowedTypes = [ 'image/jpeg', 'image/jpg' ];
+	var allowedTypes = [ 'image/jpeg', 'image/jpg' , 'image/png'];
 	$("#workfile")
 			.change(
 					function() {
@@ -628,11 +628,11 @@
 				<div class="col-md-6 text-center" data-toggle="tooltip"
 					data-placement="top" title="Fill the required forms to activate me">
 					<button class="btn btn-warning btn-sm col-md-12 disabled"
-						type="submit" id="buttonSubmit">Submit</button>
+						type="button" id="buttonSubmit">Submit</button>
 				</div>
 				<div class="col-md-6 text-center">
 					<button class="btn btn-outline-success btn-sm col-md-12"
-						type="submit" id="buttonSaveContinue">Save & Continue
+						type="button" id="buttonSaveContinue">Save & Continue
 						Later</button>
 				</div>
 				<div class="col-md-12 progress">

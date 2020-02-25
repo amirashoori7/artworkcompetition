@@ -45,7 +45,7 @@ Username: *********
 Password: *********
 
 
-#Update:
+##Update:
 1- to login as root: 
 	sudo -s
 2- go to the production folder and activate the virtual environment:

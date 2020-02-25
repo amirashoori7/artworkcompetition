@@ -38,10 +38,6 @@ def login_form(request):
 def registration(request):
     response_data = {}
     if request.method == 'POST':
-        if date.today() < date(2020,3,3) and request.POST.get('req','') != "dev":
-            response_data['successResult'] = 'The registration opens Tuesday 3rd of March, 2020.'
-            return HttpResponse(json.dumps(response_data),
-                content_type="application/json")
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form = form.save()

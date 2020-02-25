@@ -94,25 +94,16 @@ def signup_page(request):
     return render(request, 'signup_page.html', context)
 
 
-def signup_page_view(request):   
-    context = {}
-    return render(request, 'signup_page_view.html', context)
-
-
 # @login_required
 # @transaction.atomic
 def entry_form(request):
+    response_data = {}
     if request.user.is_anonymous:
         userModel = None
     else:
         userModel = ProjectUser.objects.get(username=request.user)
         user_form = UserForm(instance=request.user)
     if request.method == 'POST':
-        response_data = {}
-        if date.today() < date(2020,3,3) and request.POST.get('req','') != "dev":
-            response_data['successResult'] = 'The registration opens Tuesday 3rd of March, 2020.'
-            return HttpResponse(json.dumps(response_data),
-                content_type="application/json")
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
         artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
         if artwork_form.is_valid():
@@ -145,8 +136,4 @@ def entry_form(request):
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
 
-    
-def entry_form_view(request):
-    context = {'form': EntryForm(), 'user_form': UserForm()}
-    return render(request, 'entry_form_view.html', context)
     
