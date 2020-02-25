@@ -275,7 +275,7 @@
 
 					<div class="form-group col-md-6">
 						<label for="cellphone">Cell Phone Number</label> <input
-							data-required="1" type="text" class="form-control"
+							data-required="1" type="tel" class="form-control"
 							placeholder="cellphone" required="required" id="cellphone"
 							value="{{ user.cellphone|default:'' }}" name="Cellphone Number">
 					</div>
@@ -332,7 +332,7 @@
 
 					<div class="form-group col-md-6">
 						<label for="first_name">Parent/Guardian's Cell phone
-							Number</label> <input data-required="1" type="phone" class="form-control"
+							Number</label> <input data-required="1" type="tel" class="form-control"
 							name="parentphone" placeholder="012 345 67 89" id="parentphone"
 							value="{{ user.parentphone|default:'' }}" required>
 					</div>

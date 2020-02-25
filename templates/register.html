@@ -23,7 +23,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
 
-					<input type="text" class="form-control" name="cellphone"
+					<input type="number" class="form-control" name="cellphone"
 						required="required" id="cellphone"
 						value="{{ user.cellphone|default:'' }}"
 						placeholder="Cellphone Number">
@@ -104,7 +104,7 @@
 					<span class="input-group-text">Parent/Guardian's Cell phone
 						Number</span>
 				</div>
-				<input type="phone" class="form-control" name="parentphone"
+				<input type="tel" class="form-control" name="parentphone"
 					placeholder="012 345 67 89" id="parentphone"
 					value="{{ user.parentphone|default:'' }}" required>
 
@@ -157,7 +157,7 @@
 		<div class="row form-group">
 			<div class="input-group col-sm-2"></div>
 			<div class="input-group col-sm-8">
-				<button class="btn btn-primary btn-success col-sm-12" type="button"
+				<button class="btn btn-primary btn-success col-sm-12" type="submit"
 					id="register-btn">Register Now</button>
 			</div>
 		</div>

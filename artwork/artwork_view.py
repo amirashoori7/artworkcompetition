@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from artwork.artwork_models import Artwork, School
+from artwork.artwork_models import Artwork, School, convert_to_df
 from django.http import HttpResponse
 import json
 from artwork.artwork_forms import EntryForm, UserForm
@@ -7,15 +7,22 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
 from _datetime import date
+import csv
+import os
+from _io import StringIO
+from django.core.files.base import File
+from django.http.response import StreamingHttpResponse
 
 
 def index(request):
     context = {}
     return render(request, 'index.html', context)
 
+
 def managerConsole(request):
     context = {}
     return render(request, 'adminPages/admin_console.html', context)
+
 
 def home(request):
     num_works = Artwork.objects.all().count()
@@ -65,7 +72,18 @@ def work_lists(request):
     works = Artwork.objects.filter(status__gte=0).exclude(status=1)
     context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
+
  
+def getfile(request):  
+    artworks = Artwork.objects.filter(status__gte=0)
+    df = convert_to_df(artworks)
+    os.path.dirname(os.path.abspath(__file__))
+    filename = os.path.dirname(os.path.abspath(__file__))+'/artworks.csv'
+    with open(filename, 'rb') as fh:
+        response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(filename)
+    return response
+
 
 def work_details(request, id):
     if request.method == 'POST':
@@ -135,5 +153,8 @@ def entry_form(request):
         user_form = UserForm()
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
-
     
+
+class Echo:
+    def write(self, value):
+        return value
