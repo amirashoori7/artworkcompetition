@@ -37,11 +37,11 @@ html, body {
 	/* 	font-family: "Harmonia Sans" !important; */
 	font-family: sans-serif !important;
 	/* 	letter-spacing: 2px; */
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+/* 	-webkit-user-select: none; */
+/* 	-moz-user-select: none; */
+/* 	-ms-user-select: none; */
+/* 	-o-user-select: none; */
+/* 	user-select: none; */
 	background: #f8f9fa;
 	overflow-x: hidden;
 }
