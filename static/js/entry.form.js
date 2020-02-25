@@ -1,46 +1,44 @@
 function fetchEntryForm(url) {
-	$
-			.ajax({
-				url : url,
-				async : true,
-				success : function(response) {
-					$("#artwork-submit-form-holder-id").html(response)
-					if ($("#school-id-val").val() == "0") {
-						$("#region-dropdownDIV").fadeOut()
-						$("#schoolDIV").fadeOut()
-					}
-					$.each($("input[name='learnergradeRadio']"), function(i,
-							val) {
-						$("input[name='learnergradeRadio'][value='"
-										+ $("#currentlearnergrade").val()
-										+ "']").prop('checked', true)
-						$("input[name='learnergradeRadio'][value='"
-										+ $("#currentlearnergrade").val()
-										+ "']").parent().addClass("active")
-					})
-					$('#entry-form-id').submit(
-							function(event) {
-								event.preventDefault()
-								checkValidation().done(
-										function() {
-											submitEntryForm($('#entry-form-id')
-													.attr("action"))
-										})
-							})
-					$("[data-required='1']").on("focusout", function() {
-						checkValidation().done()
-					})
-					setTimeout(function() {
-						checkValidation().done()
-					}, 50)
-					getSchoolVal(1)
-				},
-				error : function(request, status, error) {
-					console.log(request.responseText);
-				}
-			});
+	$.ajax({
+		url : url,
+		async : true,
+		success : function(response) {
+			$("#artwork-submit-form-holder-id").html(response)
+			if ($("#school-id-val").val() == "0") {
+				$("#region-dropdownDIV").fadeOut()
+				$("#schoolDIV").fadeOut()
+			}
+			$.each($("input[name='learnergradeRadio']"), function(i, val) {
+				$(
+						"input[name='learnergradeRadio'][value='"
+								+ $("#currentlearnergrade").val() + "']").prop(
+						'checked', true)
+				$(
+						"input[name='learnergradeRadio'][value='"
+								+ $("#currentlearnergrade").val() + "']")
+						.parent().addClass("active")
+			})
+			$('#buttonSaveContinue, #buttonSubmit').on("click", function(event) {
+				event.preventDefault()
+				checkValidation().done(function() {
+					submitEntryForm($('#entry-form-id').attr("action"))
+				})
+			})
+			$("[data-required='1']").change(function() {
+				checkValidation().done(function() {
+				})
+			})
+			setTimeout(function() {
+				checkValidation().done(function() {
+				})
+			}, 50)
+			getSchoolVal(1)
+		},
+		error : function(request, status, error) {
+			console.log(request.responseText);
+		}
+	});
 }
-
 
 function gradeChose(radioBTN) {
 	$('.btn-outline-secondary.btn-group').removeClass('active');
@@ -64,17 +62,14 @@ function checkValidation() {
 	$(".exteded-class").removeClass("exteded-class")
 	$("#entry-form-id")
 			.find(".card")
-			.each(
-					function(i, j) {
+			.each(function(i, j) {
 						var sectionTotalFields = $(j).find(
 								"[data-required='1']").length
 						totalFields += sectionTotalFields
 						var sectionFilledFields = 0
 						var card = j
-						$(card)
-								.find("[data-required='1']")
-								.each(
-										function(k, l) {
+						$(card).find("[data-required='1']")
+								.each(function(k, l) {
 											if ($(l).val().length > 0
 													&& $(l).val() != 0) {
 												filledFields = filledFields + 1
@@ -228,6 +223,7 @@ function submitEntryForm(url) {
 		},
 		success : function(response) {
 			if (response.successResult != null) {
+				$(".nav-item menu-item.active").trigger("click")
 				toggleMessageBox(response.successResult, false)
 				$(".nav-item menu-item.active").trigger("click")
 			}

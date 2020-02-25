@@ -8,7 +8,7 @@
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
-				if(window.location.href.indexOf("?req")>0)
+				if(window.location.href.indexOf("?req") > 0)
 					submitRegistryForm("{% url 'account:register' %}")
 				else{
 					toggleMessageBox("The registration opens Tuesday 3rd of March, 2020.",true)
