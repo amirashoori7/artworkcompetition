@@ -4,132 +4,139 @@
 </div>
 <div class="row">
 	<div class="col-md-2"></div>
+	<label for="content-judge"></label>
 	<div class="col-md-8" id="content-judge">
-		<form method="post"
-			class="needs-validation form-general-style" id="registry-form" action="{% url 'account:registerJudge' %}"
+		<form method="post" class="needs-validation form-general-style"
+			id="registry-form" action="{% url 'account:registerJudge' %}"
 			enctype="multipart/form-data" novalidate>
-			<div class="form-section" data-title="Registration">
-				<div class="form-group row">
+			<div class="form-group row" >
 
 
-					<!-- 					EMAIL -->
+				<!-- 					EMAIL -->
 
 
-					<div class="input-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-addon"><i class="fa fa-at"></i></span>
-						</div>
-						<input type="email" class="form-control" placeholder="Email"
-							required autocomplete="off" id="username" name="username"
-							value="{{ form.instance.username|default:'test@test.com' }}">
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-at"></i></span>
 					</div>
-
-					<!-- 				CELLPHONE -->
-
-					<div class="input-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-						</div>
-						<input type="text" class="form-control" name="cellphone"
-							required="required" id="cellphone"
-							value="{{ form.instance.cellphone|default:'0712345678' }}"
-							placeholder="Cellphone Number">
-					</div>
+					<input type="email" class="form-control" placeholder="Email"
+						required autocomplete="off" id="username" name="username"
+						value="{{ form.instance.username|default:'' }}">
 				</div>
 
+				<!-- 				CELLPHONE -->
 
-				<div class="row form-group">
-
-
-					<!-- 					NAME -->
-
-
-					<div class="form-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-text">First Name</span>
-						</div>
-						<input type="text" class="form-control" placeholder="i.e. Joe"
-							required id="first_name" name="first_name"
-							value="{{ form.instance.first_name | default:'testname' }}">
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
 					</div>
-					
-					<!-- 				SURNAME -->
-
-					<div class="form-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Last Name</span>
-						</div>
-						<input type="text" class="form-control" placeholder="i.e. Scholtz"
-							required id="last_name"
-							value="{{ form.instance.last_name | default:'lastname' }}"
-							name="last_name">
-					</div>
-				</div>
-
-
-
-				<div class="row form-group">
-
-
-					<!-- 					Date of Birth -->
-
-
-					<div class="input-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-addon"><i
-								class="fa fa-birthday-cake"></i></span>
-						</div>
-						<input type="date" class="form-control" required id="dob"
-							name="dob" value="{{ form.instance.dob|default:'2013-01-08' }}">
-					</div>
-
-					<div class="input-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-addon"><i
-								class="fa fa-birthday-cake"></i></span>
-						</div>
-						<select name="gender" class="selectpicker"
-							data-title="Select Gender" data-style="btn-default btn-block"
-							data-menu-style="dropdown-blue"> 
-							{% for x, y in form.fields.user_type.choices %} 
-							{% if x != 1 and x != 6%}
-							<option value="{{ x }}" {% if form.instance.user_type.value == x %} selected {% endif %}>
-								{% endif %} {{ y }}</option>
-							{% endfor %}
-						</select>
-					</div>
-				</div>
-
-				<div class="row form-group">
-					<div class="input-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-addon"><i class="fa fa-key"></i></span>
-						</div>
-						<input type="password" class="form-control" id="password1"
-							name="password1" placeholder="Password" required
-							value="abcdefg12345">
-					</div>
-
-					<div class="input-group col-sm-6">
-						<div class="input-group-prepend">
-							<span class="input-group-addon"><i class="fa fa-key"></i></span>
-						</div>
-						<input type="password" class="form-control" id="password2"
-							name="password2" placeholder="Repeat Password"
-							value="abcdefg12345" required>
-					</div>
-				</div>
-				{% csrf_token %}
-				<div class="row form-group">
-					<div class="input-group col-sm-2"></div>
-					<div class="input-group col-sm-8">
-						<button class="btn btn-primary btn-success col-sm-12"
-							type="button" id="register-btn" onclick="submitRegistryForm('{% url 'account:registerJudge' %}')">Save</button>
-					</div>
+					<input type="text" class="form-control" name="cellphone"
+						required="required" id="cellphone"
+						value="{{ form.instance.cellphone|default:'' }}"
+						placeholder="Cellphone Number">
 				</div>
 			</div>
-		</form>
+
+
+			<div class="row form-group">
+
+
+				<!-- 					NAME -->
+
+
+				<div class="form-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-text">First Name</span>
+					</div>
+					<input type="text" class="form-control" placeholder="i.e. Joe"
+						required id="first_name" name="first_name"
+						value="{{ form.instance.first_name | default:'' }}">
+				</div>
+
+				<!-- 				SURNAME -->
+
+				<div class="form-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Last Name</span>
+					</div>
+					<input type="text" class="form-control" placeholder="i.e. Scholtz"
+						required id="last_name"
+						value="{{ form.instance.last_name | default:'' }}"
+						name="last_name">
+				</div>
+			</div>
+
+
+
+			<div class="row form-group">
+
+
+				<!-- 					Date of Birth -->
+
+
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i
+							class="fa fa-birthday-cake"></i></span>
+					</div>
+					<input type="date" class="form-control" required id="dob"
+						name="dob" value="{{ form.instance.dob|default:'2013-01-08' }}">
+				</div>
+
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i
+							class="fa fa-user"></i></span>
+					</div>
+					<select name="gender" class="selectpicker"
+						data-title="Select Gender" data-style="btn-default btn-block"
+						data-menu-style="dropdown-blue"> {% for x, y in form.fields.user_type.choices %} {% if x != 1 and x != 6 %}
+						<option value="{{ x }}" {% if form.instance.user_type.value == x %} selected {% endif %}>
+							{% endif %} {{ y }}</option> {% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="row form-group">
+
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Organisation</span>
+					</div>
+					<input type="text" class="form-control" id="organisation"
+						name="organisation" placeholder="i.e. Nelson Mandela High School"
+						value="{{ form.instance.organisation|default:'' }}" required>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					</div>
+					<input type="password" class="form-control" id="password1"
+						name="password1" placeholder="Password" required
+						value="">
+				</div>
+
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					</div>
+					<input type="password" class="form-control" id="password2"
+						name="password2" placeholder="Repeat Password"
+						value="" required>
+				</div>
+			</div>
+			{% csrf_token %}
+			<div class="row form-group">
+				<div class="input-group col-sm-2"></div>
+				<div class="input-group col-sm-8">
+					<button class="btn btn-primary btn-success col-sm-12" type="button"
+						id="register-btn"
+						onclick="submitRegistryForm('{% url 'account:registerJudge' %}')">Save</button>
+				</div>
+			</div>
 	</div>
+	</form>
 </div>
 <script>
 function submitRegistryForm(url) {

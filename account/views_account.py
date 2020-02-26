@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordChangeView
 from account.forms_account import AdvancedUserRegistrationForm
 from account.models_account import ProjectUser
+from datetime import date
 from django.contrib import messages
 
 class CustomPasswordChangeView(PasswordChangeView):
@@ -23,6 +24,10 @@ def projectUserList(request):
 def registration(request):
     response_data = {}
     if request.method == 'POST':
+        if date.today() < date(2020,3,3) and request.POST.get('req','') != "dev":
+            response_data['successResult'] = 'The registration opens Tuesday 3rd of March, 2020.'
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form = form.save()

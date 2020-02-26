@@ -22,6 +22,8 @@
     min-width: 36px;
     text-align: center;
     color: var(--main-color-green);
+    white-space: normal;
+    text-align: left;
 }
 
 .input-group-text {
