@@ -17,14 +17,13 @@ class UserRegistrationForm(UserCreationForm):
     last_name = forms.CharField(error_messages={'required': 'Please enter your last name'})
     parentname = forms.CharField(error_messages={'required': 'Please enter your parent\'s full-name'})
     parentemail = forms.EmailField(error_messages={'required': 'Please enter your parent\'s email address'})
-    parentphone = forms.CharField(error_messages={'required': 'Please enter your parent\'s cell phone number'})
     username = forms.EmailField(error_messages={'required': 'Please enter a valid email address'}, validators=default_validators)
     dob = forms.DateField(error_messages={'required': 'Please enter your birth date'})
     cellphone = forms.CharField(error_messages={'required': 'Please enter your cell phone number'})
  
     class Meta:
         model = ProjectUser
-        fields = ('username', 'first_name', 'last_name', 'parentname', 'parentphone', 'dob', 'parentemail', 'password1', 'password2', 'cellphone')
+        fields = ('username', 'first_name', 'last_name', 'parentname', 'dob', 'parentemail', 'password1', 'password2', 'cellphone')
 
 
 class AdvancedUserRegistrationForm(UserCreationForm):

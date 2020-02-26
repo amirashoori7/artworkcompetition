@@ -76,9 +76,10 @@ def work_lists(request):
  
 def getfile(request):  
     artworks = Artwork.objects.filter(status__gte=0)
-    df = convert_to_df(artworks)
-    os.path.dirname(os.path.abspath(__file__))
-    filename = os.path.dirname(os.path.abspath(__file__))+'/artworks.csv'
+    fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone', 'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone', 'learnergrade']
+    df = convert_to_df(artworks, fields=fields)
+    filename = os.path.dirname(os.path.abspath(__file__)) + '\\artworks.csv'
+    df.to_csv(filename)
     with open(filename, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(filename)
@@ -156,5 +157,6 @@ def entry_form(request):
     
 
 class Echo:
+
     def write(self, value):
         return value

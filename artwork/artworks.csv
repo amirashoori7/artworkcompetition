@@ -1,3 +1,4 @@
-id,qapproved,comment,question1,submitted,teacheremail,worktitle,workformulafile,question3,d3,workfile,owner,workapproved,teachername,school,teacherphone,status,thumbnail,d1b,question2,d2,flagged,d1a,bioapproved,workfileCropped,learnergrade
-1,True,,dddd,2020-02-22 23:23:47.722931+00:00,json.denton@outlook.com,ddd,formulas/download.jpg,dscsdcsd,,works/download.jpg,2,True,sdfsdf,5402,22222,5,works/works/download_thumb_jOS6Tqo.jpg,,dsdsdsdsd,,False,2.0,True,,Grade 9
-2,False,,q1,2020-02-24 11:23:04.890018+00:00,afasdf@asdfadf.com,adsfasdf,,q3,,works/2019-02.jpg,4,False,asdfasdf,2241,12323123,0,works/2019-02_thumb.jpg,,q2,,False,,False,,Grade 8
+,owner__username,owner__first_name,owner__last_name,owner__cellphone,owner__dob,owner__parentname,owner__parentemail,owner__parentphone,learnergrade
+0,test33@test.com,amirsaleh,salehzadeh,0724547056,2013-01-08,asdf,json.denton@outlook.com,0724547056,Grade 9
+1,11@test.com,amirsaleh,salehzadeh,0724547056,1985-11-11,adsfadsf,asdfadsf@sdaf.com,0724547056,Grade 8
+2,test22@test.com,amirsaleh,salehzadeh,0724547056,1982-11-11,dddd,dfssf@dfsf.com,1212121,Grade 8
