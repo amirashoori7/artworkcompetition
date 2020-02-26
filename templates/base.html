@@ -7,7 +7,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{% with version=0.51 %}
+{% with version=0.55 %}
 <title>{% block title %} {% endblock title %}</title>
 <meta http-equiv="Cache-Control"
 	content="no-cache, no-store, must-revalidate" />
@@ -46,7 +46,6 @@ var version = {{ version }}
 		dataLayer.push(arguments);
 	}
 	gtag('js', new Date());
-
 	gtag('config', 'UA-156942839-1');
 </script>
 </head>
@@ -181,5 +180,17 @@ var version = {{ version }}
 	{% block content %} {% endblock %}
 </body>
 <script src="static/js/math.js?ver={{ version }}"></script>
+<script type="text/javascript">
+var ua = window.navigator.userAgent;
+var msie = ua.indexOf("MSIE ");
+if (msie>0) 
+{
+	setTimeout(function(){
+		toggleMessageBox("This web-application is not accessible from the Internet Explorer. "+
+				"For the best performance, use these links to download a browser<br> "+
+				"<a href='https://www.google.com/chrome/?brand=CHBD'>Google Chrome</a> | <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a>", true)
+	},2000)
+}
+</script>
 {% endwith %}
 </html>

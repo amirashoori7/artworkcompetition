@@ -18,12 +18,16 @@ function fetchEntryForm(url) {
 								+ $("#currentlearnergrade").val() + "']")
 						.parent().addClass("active")
 			})
-			$('#buttonSaveContinue, #buttonSubmit').on("click", function(event) {
-				event.preventDefault()
-				checkValidation().done(function() {
-					submitEntryForm($('#entry-form-id').attr("action"))
-				})
-			})
+			$('#buttonSaveContinue, #buttonSubmit').on("click",
+					function(event) {
+						event.preventDefault()
+						if(window.location.href.indexOf("?req") > 0)
+							checkValidation().done(function() {
+								submitEntryForm($('#entry-form-id').attr("action"))
+							})
+						else
+							return
+					})
 			$("[data-required='1']").change(function() {
 				checkValidation().done(function() {
 				})
@@ -62,14 +66,17 @@ function checkValidation() {
 	$(".exteded-class").removeClass("exteded-class")
 	$("#entry-form-id")
 			.find(".card")
-			.each(function(i, j) {
+			.each(
+					function(i, j) {
 						var sectionTotalFields = $(j).find(
 								"[data-required='1']").length
 						totalFields += sectionTotalFields
 						var sectionFilledFields = 0
 						var card = j
-						$(card).find("[data-required='1']")
-								.each(function(k, l) {
+						$(card)
+								.find("[data-required='1']")
+								.each(
+										function(k, l) {
 											if ($(l).val().length > 0
 													&& $(l).val() != 0) {
 												filledFields = filledFields + 1
@@ -187,10 +194,32 @@ function submitRegistryForm(url) {
 }
 
 function submitEntryForm(url) {
+	$("#registry-form").find("small").remove()
 	$("input[name='status']").remove()
 	if (totalFields == filledFields) {
 		$('#entry-form-id').append(
 				'<input type="hidden" name="status" value="0">')
+	}
+	if ($.trim($("#question1").val()).length > 0
+			&& ($.trim($("#question1").val()).split(" ").length <= 50 ||
+					$.trim($("#question1").val()).split(" ").length > 100)) {
+		populateDangerMessageField("question1",
+				"This field must be between 50 and 100 words")
+		return false
+	}
+	if ($.trim($("#question2").val())
+			&& ($.trim($("#question2").val()).split(" ").length <= 50 || 
+					$.trim($("#question2").val()).split(" ").length > 100)) {
+		populateDangerMessageField("question2",
+				"This field must be between 50 and 100 words")
+		return false
+	}
+	if ($.trim($("#question3").val()).length > 0
+			&& ($.trim($("#question3").val()).split(" ").length <= 50 || 
+					$.trim($("#question3").val()).split(" ").length > 100)) {
+		populateDangerMessageField("question3",
+				"This field must be between 50 and 100 words")
+		return false
 	}
 	var form = $('#entry-form-id')[0]
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)
@@ -225,7 +254,8 @@ function submitEntryForm(url) {
 			if (response.successResult != null) {
 				$(".nav-item menu-item.active").trigger("click")
 				toggleMessageBox(response.successResult, false)
-				$(".nav-item menu-item.active").trigger("click")
+				if (totalFields == filledFields)
+					$(".nav-item.menu-item.active").trigger("click")
 			}
 			if (response.errorResults != null)
 				populateErrorMessageFields(response.errorResults)

@@ -50,7 +50,7 @@ class Artwork(models.Model):
     school = models.ForeignKey(School, blank=True, null=True, on_delete=models.SET_NULL)
     teachername = models.CharField(blank=True, max_length=300)
     teacherphone = models.CharField(blank=True, null=True, max_length=100)
-    teacheremail = models.CharField(blank=True, null=True, max_length=100)
+    teacheremail = models.CharField(blank=True, null=True, max_length=200)
     worktitle = models.CharField(blank=True, null=True, max_length=300)
     workfile = models.FileField(blank=True, null=True, upload_to='works')
     thumbnail = models.FileField(blank=True, null=True, upload_to='works')
@@ -61,7 +61,7 @@ class Artwork(models.Model):
     bioapproved = models.BooleanField(default=False)
     qapproved = models.BooleanField(default=False)
     flagged = models.BooleanField(default=False)
-    question1 = models.TextField(blank=True, max_length=100)
+    question1 = models.TextField(blank=True)
     question2 = models.TextField(blank=True)
     question3 = models.TextField(blank=True)
     submitted = models.DateTimeField(auto_now_add=True)
@@ -73,11 +73,8 @@ class Artwork(models.Model):
     def save(self, *args, **kwargs):
         self.make_thumbnail()
         print("save initiation >>> ", self)
-#         if(self.id == 0):
-#             handleFile()
         super(Artwork, self).save(*args, **kwargs)
 
-    # define the returened url when the submit button hit
     def get_absolute_url(self):
         return "work_details/{self.id}"
 
@@ -94,31 +91,26 @@ class Artwork(models.Model):
         ratio = image.width / 200
         THUMB_SIZE = (200, image.height / ratio)
         image.thumbnail(THUMB_SIZE, LANCZOS)
-
         thumb_name, thumb_extension = os.path.splitext(self.workfile.name)
         thumb_extension = thumb_extension.lower()
-
         thumb_filename = thumb_name + '_thumb' + thumb_extension
-
         if thumb_extension in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
         else:
-            return False  # Unrecognized file type
-
-        # Save thumbnail to in-memory file as StringIO
+            return False 
         temp_thumb = BytesIO()
         image.save(temp_thumb, FTYPE)
         temp_thumb.seek(0)
-
-        # set save=False, otherwise it will run in an infinite loop
         self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
         temp_thumb.close()
-
         return True
 
 def get_model_field_names(model, ignore_fields=['content_object']):
+#     model_fields = model.owner._meta.get_fields()
+#     author_field_names = list(set([f.name for f in model_fields if f.name not in ignore_fields]))    
     model_fields = model._meta.get_fields()
     model_field_names = list(set([f.name for f in model_fields if f.name not in ignore_fields]))
+#     author_field_names.append(model_field_names)
     return model_field_names
 
 

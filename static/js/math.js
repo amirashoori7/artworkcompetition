@@ -5,8 +5,6 @@ var testData = [ {
 	surname : "smith"
 } ]
 
-
-
 function populateWarningMessageField(fieldId, text) {
 	var errorSection = $("<small/>").addClass("text-warning")
 	$("<br/>").appendTo(errorSection)
