@@ -12,6 +12,9 @@ import os
 from _io import StringIO
 from django.core.files.base import File
 from django.http.response import StreamingHttpResponse
+import pandas
+from account.forms_account import UserRegistrationForm
+from artwork import artwork_forms
 
 
 def index(request):
@@ -75,8 +78,13 @@ def work_lists(request):
 
  
 def getfile(request):  
-    artworks = Artwork.objects.filter(status__gte=0)
-    fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone', 'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone', 'learnergrade']
+    artworks = Artwork.objects.filter()  # status__gte=0
+    fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
+              'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
+              'worktitle', 'workfile', 'school',
+                  'learnergrade', 'workformulafile', 'teachername',
+                  'teacheremail', 'teacherphone', 'question1',
+                  'question2', 'question3']
     df = convert_to_df(artworks, fields=fields)
     filename = os.path.dirname(os.path.abspath(__file__)) + '\\artworks.csv'
     df.to_csv(filename)
@@ -84,6 +92,60 @@ def getfile(request):
         response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(filename)
     return response
+
+
+def importfile(request):  
+    fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
+              'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
+              'worktitle', 'workfile',
+                  'learnergrade', 'workformulafile', 'teachername',
+                  'teacheremail', 'teacherphone', 'question1',
+                  'question2', 'question3']
+    filename = os.path.dirname(os.path.abspath(__file__)) + '\\artworksd.csv'
+    pd = pandas.read_csv(filename, usecols=fields, header=0)
+    response_data = []
+    for index, row in pd.iterrows():
+        user_data_dict = {}
+        user_data_dict['username'] = row['owner__username']
+        user_data_dict['first_name'] = row['owner__first_name']
+        user_data_dict['last_name'] = row['owner__last_name']
+        user_data_dict['cellphone'] = row['owner__cellphone']
+        user_data_dict['dob'] = row['owner__dob']
+        user_data_dict['parentname'] = row['owner__parentname']
+        user_data_dict['parentemail'] = row['owner__parentemail']
+        user_data_dict['parentphone'] = row['owner__parentphone']
+        user_data_dict['password1'] = "abcdefg12345!@#$%"
+        user_data_dict['password2'] = "abcdefg12345!@#$%"
+        user_form = UserRegistrationForm(user_data_dict)
+        if user_form.is_valid():
+            user_form.save()
+            created_user = ProjectUser.objects.get(username=user_data_dict['username'])
+            artwork_data_dict = {}
+            artwork_data_dict['worktitle'] = row['worktitle']
+            artwork_data_dict['workfile'] = row['workfile']
+            artwork_data_dict['learnergrade'] = row['learnergrade']
+            artwork_data_dict['teacheremail'] = row['teacheremail']
+            artwork_data_dict['teacherphone'] = row['teacherphone']
+            artwork_data_dict['question1'] = row['question1']
+            artwork_data_dict['teachername'] = row['teachername']
+            artwork_data_dict['question2'] = row['question2']
+            artwork_data_dict['question3'] = row['question3']
+            artwork_data_dict['workformulafile'] = row['workformulafile']
+            artwork_form = EntryForm(artwork_data_dict)
+            if artwork_form.is_valid():
+                artwork_form.save(commit=False)
+                school = School().objects.get(id=row['school'])
+                artwork_form.school = school
+                artwork_form.status = 0
+                artwork_form.owner = created_user
+                artwork_form.save()
+        else:
+            response_error = {}
+            response_error['errorResults'] = user_form.errors.as_json(True)
+            response_error['index'] = index
+            response_data.append(response_error)
+    return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
 
 
 def work_details(request, id):
@@ -146,9 +208,9 @@ def entry_form(request):
     elif userModel is not None and userModel.user_type == 1:
         try:
             artwork_model = get_object_or_404(Artwork, owner=request.user)
-            artwork_form = EntryForm(instance=artwork_model)
         except:
-            artwork_form, artwork_obj = Artwork.objects.get_or_create(owner=request.user)
+            artwork_model, artwork_obj = Artwork.objects.get_or_create(owner=request.user)
+        artwork_form = EntryForm(instance=artwork_model)
     else:
         artwork_form = EntryForm()
         user_form = UserForm()

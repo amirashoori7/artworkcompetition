@@ -1,7 +1,7 @@
 <form method="post" action="{% url 'account:register' %}"
 	class="needs-validation form-general-style" id="registry-form"
 	enctype="multipart/form-data" novalidate>
-	<div class="form-section" data-title="Registration">
+	<div class="form-section" data-title="">
 		<div class="form-group row">
 
 
@@ -24,9 +24,9 @@
 					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
 
 					<input type="number" class="form-control" name="cellphone"
-						required="required" id="cellphone"
+						required id="cellphone"
 						value="{{ user.cellphone|default:'' }}"
-						placeholder="Cellphone Number">
+						placeholder="Cell phone Number">
 				</div>
 			</div>
 		</div>
@@ -104,7 +104,7 @@
 					<span class="input-group-text">Parent/Guardian's Cell phone
 						Number</span>
 				</div>
-				<input type="tel" class="form-control" name="parentphone"
+				<input type="number" class="form-control tel-no" name="parentphone"
 					placeholder="012 345 67 89" id="parentphone"
 					value="{{ user.parentphone|default:'' }}" required>
 

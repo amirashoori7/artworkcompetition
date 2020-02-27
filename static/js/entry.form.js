@@ -142,6 +142,9 @@ function checkValidation() {
 	}).promise()
 }
 
+
+
+var phoneno = /^\d{10}$/;
 function submitRegistryForm(url) {
 	var form = $('#registry-form')[0]
 	$("#register-btn").prop("disabled", true)
@@ -179,6 +182,11 @@ function submitRegistryForm(url) {
 				$(".nav-item menu-item.active").trigger("click")
 			} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
+				$(".tel-no").each(function(){
+					if($(this).val().length > 0 && !$(this).val().match(phoneno))
+						populateDangerMessageField($(this).attr("id"),
+						"The phone number must be 10 digits. i.e. 0123456789")
+				})
 				populateErrorMessageFields(response.errorResults, true)
 			}
 		},

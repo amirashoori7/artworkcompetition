@@ -22,6 +22,7 @@ urlpatterns = [
     path('gallery/', artwork_view.gallery, name='gallery'),
     path('work_lists/', artwork_view.work_lists, name='work_lists'),
     path('getfile/', artwork_view.getfile, name='getfile'),
+    path('importfile/', artwork_view.importfile, name='importfile'),
     path('work_detail_update/', artwork_view.work_detail_update, name='work_detail_update'),
     path('<int:id>/', artwork_view.work_details, name='work_details'),
 ]
