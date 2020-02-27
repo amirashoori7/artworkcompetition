@@ -406,8 +406,9 @@ function loginForm(url, formId, submitBTNId) {
 			} else if (response.errorResult != null)
 			toggleMessageBox("<span>"+response.errorResult+"</span>",
 					true)
-			else
+			else{
 				$("#login-div").load('/account/login/')
+			}
 		}, error : function(xhr, errmsg, err) {
 			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)
@@ -418,6 +419,43 @@ function loginForm(url, formId, submitBTNId) {
 	})
 }
 
+function forgotMyPSW(url, formId, submitBTNId) {
+	var form = $('#'+formId)[0]
+	$("#"+submitBTNId).prop("disabled", true)
+	var data = new FormData(form)
+	$.ajax({
+		type : "POST",
+		data : data,
+		processData : false,
+		contentType : false,
+		cache : false,
+		url : url,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+			}
+		}, success : function(response) {
+			if (response.successResult != null) {
+				toggleMessageBox(response.successResult, false)
+				$('#'+formId).find("input#id").val(response.id)
+			} else if (response.errorResults != null) {
+				populateErrorMessageFields(response.errorResults)
+			} else if (response.errorResult != null)
+			toggleMessageBox("<span>"+response.errorResult+"</span>",
+					true)
+			else{
+				$("#login-div").load('/account/login/')
+			}
+		}, error : function(xhr, errmsg, err) {
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		}, complete : function(response) {
+			$("#"+submitBTNId).prop("disabled", false)
+			return -1
+		}
+	})
+}
 function showForgotPsw(){
 	$(".forgot-psw").show()
 	$(".login-ul").hide()

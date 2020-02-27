@@ -39,16 +39,18 @@ def login_form(request):
 def forgot_psw(request):
     response_data = {}
     if request.method == 'POST':
+        username = request.POST['username']
+        cellno = request.POST['cellno']
         try:
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
-            login(request, user)
+            userObj = ProjectUser.objects.get(username=username, cellphone=cellno)
         except:
-            response_data['errorResult'] = "Invalid username or password"
-            return HttpResponse(json.dumps(response_data),
-                content_type="application/json")
-    return render(request, 'login.html')
+            userObj = None
+        if userObj is None:
+            response_data['errorResult'] = "The email address does not match the cell phone number"
+        else:
+            response_data['successResult'] = "The new password is sent to your email address"
+    return HttpResponse(json.dumps(response_data),
+        content_type="application/json")
 
 def registration(request):
     response_data = {}

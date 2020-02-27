@@ -3,6 +3,7 @@
 	{% if user.user_type == 1 %}
 		$("li[data-href='/signup_page']").trigger("click")
 	{% endif %}
+	$(".forgot-psw").remove()
 </script>
 <!-- <li class="nav-item"> -->
 <div class="row" style="position: absolute; top: 3px;">
@@ -23,12 +24,15 @@
 	</button>
 </li>
 {% else %}
-<li class="nav-item dropdown login-psw"><a data-toggle="dropdown"
+<script type="text/javascript">
+	$(".forgot-psw").hide()
+</script>
+<li class="nav-item dropdown"><a data-toggle="dropdown"
 	class="nav-link dropdown-toggle" href="#" role="button"
 	aria-haspopup="true" aria-expanded="false"><i
 		class="fa fa-sign-in-alt"></i>&nbsp;Login</a>
-	<ul class="dropdown-menu login-ul">
-		<li class="nav-item">
+	<ul class="dropdown-menu">
+		<li class="nav-item login-ul">
 			<form action="{% url 'account:login' %}" method="post"
 				class="form-group login-form" id="login-form-id">
 				{% csrf_token %}
@@ -53,12 +57,10 @@
 				</button>
 			</form>
 		</li>
-		<li class="nav-item change-password-li"></li>
-	</ul>
-	<ul class="dropdown-menu forgot-psw">
-		<li class="nav-item">
+		<li class="nav-item change-password-li login-ul"></li>
+		<li class="nav-item forgot-psw">
 			<form action="{% url 'account:forgotpsw' %}" method="post"
-				class="form-group login-form" id="login-form-id">
+				class="form-group login-form" id="forgot-psw-form-id">
 				{% csrf_token %}
 				<div class="input-group  mb-3">
 					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
@@ -68,19 +70,18 @@
 				<div class="input-group  mb-3">
 					<span class="input-group-addon"><i class="fa fa-mobile"></i></span> <input
 						type="text" name="cellno" class="form-control input-group"
-						placeholder="Cell phone number" id="cellphoneno" required>
+						placeholder="Cell phone No" id="cellphoneno" required>
 				</div>
-				<button type="button" id="login-btn-id"
-					onclick="forgotMyPSW('{% url 'account:forgotpsw' %}','login-form-id','login-btn-id')"
+				<button type="button" id="forgot-psw-btn-id"
+					onclick="forgotMyPSW('{% url 'account:forgotpsw' %}','forgot-psw-form-id','forgot-psw-btn-id')"
 					class="input-group btn btn-primary btn-sm mb-3">
-					<i class="fa fa-lock-open"></i>&nbsp;&nbsp;&nbsp;submit
+					<i class="fa fa-play"></i>&nbsp;&nbsp;&nbsp;Reset Password
 				</button>
 				<button class="input-group btn btn-link btn-sm mb-3" type="button" onclick="hideForgotPsw()">
-					<i class="fa fa-undo-alt"></i>&nbsp;&nbsp;&nbsp;Back
+					<i class="fa fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Login
 				</button>
 			</form>
 		</li>
-		<li class="nav-item change-password-li"></li>
 	</ul>
 	</li>
 {% endif %}
