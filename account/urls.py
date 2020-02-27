@@ -6,6 +6,7 @@ app_name = 'account'
 
 urlpatterns = [
     path('login/', views_account.login_form, name='login'),
+    path('forgotpsw/', views_account.forgot_psw, name='forgotpsw'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('change_password/',
           views_account.CustomPasswordChangeView.as_view(

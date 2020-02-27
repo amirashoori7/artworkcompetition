@@ -100,12 +100,12 @@
 							src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
 					<li class="nav-item menu-item" data-href-html="signup_page.html"
-						data-href="/signup_page?ver={{ version }}&req={{ request.GET.req }}"><a
+						data-href="/signup_page"><a
 						class="nav-link" href="#"><img class="svg"
 							src="static/img/icons/Enter.svg"><span>Enter Now</span></a></li>
 					<!-- 								CMNT -->
-					{% if user.is_authenticated and user.user_type != 1%}
-					<li class="menu-item" data-href-html="signup_page.html"
+					{% if user.is_authenticated and user.user_type != 1 %}
+					<li class="menu-item" data-href-html="signup_page.html" id="admin-page-btn"
 						data-href="/manager_console?ver={{ version }}"><a
 						class="nav-link" href="#"><img class="svg"
 							src="static/img/icons/Enter.svg"><span>Admin</span></a></li> {% endif %}
@@ -169,6 +169,8 @@
 	{% block content %} {% endblock %}
 </body>
 <script src="static/js/math.js?ver={{ version }}"></script>
+<script type="text/javascript"
+	src="static/js/entry.form.js?ver={{ version }}"></script>
 <script async=""
 	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
 <script type="text/javascript">

@@ -36,19 +36,6 @@
     line-height: 37px;
 }
 
-.navbar .login-form .btn {
-	border-radius: 2px;
-	color: #fff;
-	border-color: var(--main-color-green);
-	background: var(--main-color-green);
-	outline: none;
-}
-
-.navbar .login-form .btn:hover, .navbar .login-form .btn:focus {
-	border-color: var(--main-color-pink);
-	background: var(--main-color-pink);
-}
-
 .navbar-light .navbar-nav .show>.nav-link {
 	color: white !important;
 	border-color: var(--main-color-green);

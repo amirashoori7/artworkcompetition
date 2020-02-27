@@ -35,6 +35,20 @@ def login_form(request):
                 content_type="application/json")
     return render(request, 'login.html')
 
+def forgot_psw(request):
+    response_data = {}
+    if request.method == 'POST':
+        try:
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+        except:
+            response_data['errorResult'] = "Invalid username or password"
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+    return render(request, 'login.html')
+
 def registration(request):
     response_data = {}
     if request.method == 'POST':
