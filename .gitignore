@@ -1,7 +1,8 @@
 
-*.pyc
-*.pyc
+*.pyc*
+*.pyc*
 *.jpg
-*/migrations/
+*/migrations
 */__pycache__/
 *settings.py*
+*.pyc
