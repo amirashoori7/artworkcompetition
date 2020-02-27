@@ -8,7 +8,7 @@ from account.forms_account import AdvancedUserRegistrationForm
 from account.models_account import ProjectUser
 from datetime import date
 from django.contrib import messages
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import EmailMessage, send_mail, send_mass_mail
 
 class CustomPasswordChangeView(PasswordChangeView):
     def form_valid(self, form):
@@ -55,14 +55,16 @@ def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form = form.save()
             email1 = form.cleaned_data['username']
             email2 = form.cleaned_data['parentemail']
             fname = form.cleaned_data['first_name']
             lname = form.cleaned_data['last_name']
             subject = "Mathart Registeration Successful"
             message = "Dear {0} {1}, you have successfully registered in mathartcompetition.\n\nPlease go on and finish your artwork submission".format(fname, lname)
-            send_mass_mail(subject, message, 'admin@mathart.co.za', [email1, email2])
+            mailmsg1 = (subject, message, 'mathart.co.za@gmail.com', [email1])
+            mailmsg2 = (subject, message, 'mathart.co.za@gmail.com', [email2])
+            send_mass_mail((mailmsg1, mailmsg2))
+            form = form.save()
             response_data['successResult'] = 'Registration succeed'
             username = request.POST['username']
             password = request.POST['password1']
@@ -90,7 +92,7 @@ def registerJudge(request):
 #                 artwork_form.school_id = int(request.POST["school"])
             old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
             form = AdvancedUserRegistrationForm(request.POST, request.FILES, instance=old_data)
-        
+
         if form.is_valid():
             form = form.save()
 #             CREATE OR UPDATE
