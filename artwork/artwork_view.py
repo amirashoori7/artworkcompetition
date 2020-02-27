@@ -72,7 +72,7 @@ def gallery(request):
 
 
 def work_lists(request):
-    works = Artwork.objects.filter(status__gte=0).exclude(status=1)
+    works = Artwork.objects.filter(status__gte=0)
     context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
 
