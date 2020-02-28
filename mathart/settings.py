@@ -97,9 +97,9 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'mathart',
-    'USER': 'postgres',
-    'PASSWORD': 'root',
+    'NAME': 'dev2',
+    'USER': 'mathartuser',
+    'PASSWORD': 'mathartuser',
     'HOST':    'localhost',
     'PORT': '',
     }
@@ -153,6 +153,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+#to test whether email is being generated
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'mathart.co.za@gmail.com'
