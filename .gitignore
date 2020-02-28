@@ -4,8 +4,9 @@
 **/migrations/
 **/migrations
 */migrations/*
+**gitignore
 **\migrations\
-**\migrations\*
+**\migrations
 *migrations*
 */__pycache__/
 *settings.py*
