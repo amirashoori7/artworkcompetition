@@ -340,7 +340,6 @@ function runTimer(){
 	}, 1000);
 }
 
-
 function showItemMenu(e) {
 	e.preventDefault()
 	loadContent($("<li/>").attr("data-href", "/signup_page/"))

@@ -217,7 +217,12 @@ def entry_form(request):
         user_form = UserForm()
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
-    
+ 
+def entry_form_view(request):
+    artwork_form = EntryForm()
+    user_form = UserForm()
+    context = {'form': artwork_form, 'user_form': user_form}
+    return render(request, 'entry_form.html', context)   
 
 class Echo:
 

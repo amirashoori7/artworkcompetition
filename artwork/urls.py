@@ -10,6 +10,7 @@ urlpatterns = [
     path('get_school', rest_views.get_school),
     path('', artwork_view.index, name='index'),
     path('entry_form/', artwork_view.entry_form, name='entry_form'),
+    path('entry_form_view/', artwork_view.entry_form_view, name='entry_form_view'),
     path('aboutus/', artwork_view.aboutus, name='aboutus'),
     path('contactus/', artwork_view.contactus, name='contactus'),
     path('faq/', artwork_view.faq, name='faq'),
