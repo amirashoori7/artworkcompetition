@@ -2,6 +2,7 @@
 **.pyc
 *.jpg
 **/migrations/
+**/migrations
 */migrations/*
 **\migrations\
 **\migrations\*
@@ -9,3 +10,5 @@
 */__pycache__/
 *settings.py*
 *.pyc
+*.pyc
+*.py
