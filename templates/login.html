@@ -51,37 +51,18 @@
 					class="input-group btn btn-primary btn-sm mb-3">
 					<i class="fa fa-lock-open"></i>&nbsp;&nbsp;&nbsp;Login
 				</button>
-				<button class="input-group btn btn-link btn-sm mb-3" onclick="$('.change-password-div').load('/account/forgot_password/')" type="button">
-					<i class="fa fa-question-circle"></i>&nbsp;&nbsp;&nbsp;Forgot the
-					password
-				</button>
+				<button class="input-group btn btn-link btn-sm mb-3"
+					onclick="$('.change-password-div').load('/account/forgot_password/')"
+					type="button">
+					<button class="input-group btn btn-link btn-sm mb-3"
+						onclick="$('.change-password-div').load('/account/reset_password/')"
+						type="button">
+						<i class="fa fa-question-circle"></i>&nbsp;&nbsp;&nbsp;Forgot the
+						password
+					</button>
 			</form>
 		</li>
 		<li class="nav-item change-password-li login-ul"></li>
-		<li class="nav-item forgot-psw">
-			<form action="{% url 'account:forgotpsw' %}" method="post"
-				class="form-group login-form" id="forgot-psw-form-id">
-				{% csrf_token %}
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" name="username" class="form-control input-group"
-						placeholder="Email" id="inputEmail" required>
-				</div>
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-mobile"></i></span> <input
-						type="text" name="cellno" class="form-control input-group"
-						placeholder="Cell phone No" id="cellphoneno" required>
-				</div>
-				<button type="button" id="forgot-psw-btn-id"
-					onclick="forgotMyPSW('{% url 'account:forgotpsw' %}','forgot-psw-form-id','forgot-psw-btn-id')"
-					class="input-group btn btn-primary btn-sm mb-3">
-					<i class="fa fa-play"></i>&nbsp;&nbsp;&nbsp;Reset Password
-				</button>
-				<button class="input-group btn btn-link btn-sm mb-3" type="button" onclick="hideForgotPsw()">
-					<i class="fa fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Login
-				</button>
-			</form>
-		</li>
 	</ul>
-	</li>
+	</ul></li>
 {% endif %}
