@@ -47,7 +47,7 @@
 					class="input-group btn btn-primary btn-sm mb-3">
 					<i class="fa fa-lock-open"></i>&nbsp;&nbsp;&nbsp;Login
 				</button>
-				<button class="input-group btn btn-link btn-sm mb-3" onclick="showForgotPsw()" type="button">
+				<button class="input-group btn btn-link btn-sm mb-3" onclick="$('.login-psw').load('/account/reset_password/')" type="button">
 					<i class="fa fa-question-circle"></i>&nbsp;&nbsp;&nbsp;Forgot the
 					password
 				</button>
@@ -55,32 +55,6 @@
 		</li>
 		<li class="nav-item change-password-li"></li>
 	</ul>
-	<ul class="dropdown-menu forgot-psw">
-		<li class="nav-item">
-			<form action="{% url 'account:forgotpsw' %}" method="post"
-				class="form-group login-form" id="login-form-id">
-				{% csrf_token %}
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" name="username" class="form-control input-group"
-						placeholder="Email" id="inputEmail" required>
-				</div>
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-mobile"></i></span> <input
-						type="text" name="cellno" class="form-control input-group"
-						placeholder="Cell phone number" id="cellphoneno" required>
-				</div>
-				<button type="button" id="login-btn-id"
-					onclick="forgotMyPSW('{% url 'account:forgotpsw' %}','login-form-id','login-btn-id')"
-					class="input-group btn btn-primary btn-sm mb-3">
-					<i class="fa fa-lock-open"></i>&nbsp;&nbsp;&nbsp;submit
-				</button>
-				<button class="input-group btn btn-link btn-sm mb-3" type="button" onclick="hideForgotPsw()">
-					<i class="fa fa-undo-alt"></i>&nbsp;&nbsp;&nbsp;Back
-				</button>
-			</form>
-		</li>
-		<li class="nav-item change-password-li"></li>
-	</ul>
+
 	</li>
 {% endif %}

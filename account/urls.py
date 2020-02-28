@@ -11,6 +11,9 @@ urlpatterns = [
     path('change_password/',
           views_account.CustomPasswordChangeView.as_view(
             template_name='change_password.html', success_url="/"), name='change_password'),
+    path('reset_password',
+          views_account.CustomPasswordResetView.as_view(
+            template_name='reset_password.html', success_url="/"), name='reset_password'),
     path('userlist/', views_account.projectUserList, name='userlist'),
     path('register/', views_account.registration, name='register'),
     path('register_judge/', views_account.registerJudge, name='registerJudge'),
