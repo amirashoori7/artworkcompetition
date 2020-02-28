@@ -1,5 +1,5 @@
 <form method="post" action="{% url 'account:register' %}"
-	class="needs-validation form-general-style" id="registry-form"
+	class="was-validated"novalidate="" form-general-style" id="registry-form"
 	enctype="multipart/form-data" novalidate>
 	<div class="form-section" data-title="">
 		<div class="form-group row">
@@ -123,7 +123,7 @@
 				</div>
 				<input type="email" class="form-control" id="parentemail"
 					name="parentemail" placeholder="you@example.com"
-					value="{{ user.parentemail|default:'' }}" required>
+					value="{{ user.parentemail|default:'' }}" >
 			</div>
 
 		</div>

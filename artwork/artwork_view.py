@@ -224,7 +224,3 @@ def entry_form_view(request):
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)   
 
-class Echo:
-
-    def write(self, value):
-        return value

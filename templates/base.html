@@ -40,13 +40,56 @@
 </head>
 <body>
 	<div class="container">
-		<div class="message-box-container">
-			<div class="message-box error-message-box alert alert-danger"></div>
-			<div class="message-box success-message-box alert alert-success"></div>
-			<div class="return-button" onclick="toggleMessageBox(null, null)">
-				<i class="fa fa-times-circle"></i>
+
+		<div class="modal fade" id="success-message-modal" tabindex="-1"
+			role="dialog" aria-labelledby="success-message-modal"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content card text-white bg-success">
+					<div class="modal-header card-header">
+						<h5 class="modal-title text-white" id="exampleModalLabel">
+							<i class="fa fa-thumbs-up">&nbsp;&nbsp;&nbsp;</i>Succeed
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body success-message-content">body</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-light" data-dismiss="modal">
+							<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
+
+		<div class="modal fade" id="error-message-modal" tabindex="-1"
+			role="dialog" aria-labelledby="success-message-modal"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content card text-white bg-danger">
+					<div class="modal-header card-header">
+						<h5 class="modal-title text-white" id="exampleModalLabel">
+							<i class="fa fa-thumbs-down">&nbsp;&nbsp;&nbsp;</i>Failed
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body error-message-content">body</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-light" data-dismiss="modal">
+							<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<div class="frameLoding">
 			<div class="frame">
 				<div class="center">
@@ -181,7 +224,7 @@ if (msie>0)
 	setTimeout(function(){
 		toggleMessageBox("This web-application is not accessible from the Internet Explorer. "+
 				"For the best performance, use these links to download a browser<br> "+
-				"<a href='https://www.google.com/chrome/?brand=CHBD'>Google Chrome</a> | <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a>", true)
+				"<a href='https://www.google.com/chrome/?brand=CHBD'>Google Chrome</a> | <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a>", false)
 	},2000)
 }
 var version = {{ version }}

@@ -234,7 +234,7 @@
 	<div class="col-md-12">
 		<form method="post" id="entry-form-id"
 			action="{% url 'artwork:entry_form' %}"
-			class="needs-validation form-general-style"
+			class="was-validated form-general-style"
 			enctype="multipart/form-data" novalidate>
 			{% csrf_token %} <input type="hidden" name="id" id="id"
 				value="{{ form.instance.id|default:'0' }}">
@@ -269,7 +269,7 @@
 					<div class="form-group col-md-6">
 						<label for="cellphone">Cell Phone Number</label> <input
 							data-required="1" type="tel" class="form-control"
-							placeholder="cellphone" required="required" id="cellphone"
+							placeholder="012 345 67 89" required="required" id="cellphone"
 							value="{{ user.cellphone|default:'' }}" name="Cellphone Number">
 					</div>
 
@@ -337,9 +337,9 @@
 
 					<div class="form-group col-md-6">
 						<label for="parentemail">Parent/Guardian's Email Address</label> <input
-							data-required="1" type="email" class="form-control"
+							type="email" class="form-control"
 							id="parentemail" name="parentemail" placeholder="you@example.com"
-							value="{{ user.parentemail|default:'' }}" required>
+							value="{{ user.parentemail|default:'' }}" >
 					</div>
 				</div>
 			</div>
@@ -399,6 +399,7 @@
 							<span>
 						</div>
 					</div>
+					<hr>
 					<div class="row">
 						<input type="hidden" data-required="1"
 							class="form-control form-input" id="currentlearnergrade"
@@ -451,7 +452,7 @@
 						</div>
 						<!-- 				</div> -->
 					</div>
-
+					<hr>
 					<div class="row">
 						<div class="form-group col-md-4">
 							<label for="teachername">Teacher's Name</label> <input
@@ -472,10 +473,10 @@
 						<div class="form-group col-md-4">
 							<label for="teacherphone">Teacher's Phone</label> <input
 								type="tel" class="form-control form-input" id="teacherphone"
-								data-required="1" name="teacherphone"
+								name="teacherphone"
 								placeholder="012 345 67 89"
 								value="{{ form.instance.teacherphone|default_if_none:'' }}"
-								required>
+								>
 						</div>
 					</div>
 				</div>
@@ -512,9 +513,9 @@
 								required>
 						</div>
 					</div>
-
+					<hr>
 					<div class="row">
-						<div class="col-md-12" id="">
+						<div class="col-md-6" id="">
 							<label for="workfile">Upload image of my artwork</label> <input
 								type="file" class="form-control form-input" id="workfile"
 								name="workfile" placeholder="" value="Browse" data-required="1"
@@ -567,47 +568,52 @@
 				<div class="collapse card-body" id="questions-section"
 					data-title="Answering questions">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<label for="question1"> <strong>Question 1: </strong>What
 								Mathematics did you use in your artwork? (Explain your answer)
 							</label>
-							<textarea class="form-control form-input" data-required="1"
+							<textarea class="form-control form-input" data-required="1" required
 								placeholder="Explain it in 50-100 words" id="question1"
 								name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
 						</div>
-						<div class="col-md-6">
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
 							<label for="question2"> <strong>Question 2:</strong> How
 								did you creatively connect Mathematics with "My Universe" to
 								make your artwork? (Explain your answer)
 							</label>
-							<textarea class="form-control form-input" id="question2"
+							<textarea class="form-control form-input" id="question2" required
 								data-required="1" placeholder="Explain it in 50-100 words"
 								name="question2" rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
 						</div>
 					</div>
+					<hr>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<label for="workformulafile">If a photo of your
 								mathematics would help your explanation, upload an image here
 								(*optional)</label> <input type="file" class="form-control form-input"
 								id="workformulafile" name="workformulafile" placeholder=""
 								value="Browse"
 								value="{{ form.instance.workformulafile|default_if_none:'' }}"
-								accept="image/*" required>
+								accept="image/*" >
 						</div>
-						<div class="col-md-6 formula-image">
+						<div class="col-md-12 formula-image">
 							{% if form.instance.workformulafile %}
 							<img src="{{ form.instance.workformulafile.url }}" width="100%"
 								height="auto"> {% endif %}
 						</div>
 					</div>
+					<hr>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<label for="question3"> <strong>Question 3:</strong> Do
 								you think creativity could be used to teach Mathematics?
 								(Explain your answer)
 							</label>
-							<textarea class="form-control form-input" id="question3"
+							<textarea class="form-control form-input" id="question3" required="required"
 								data-required="1" placeholder="Explain it in 50-100 words"
 								name="question3" rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
 						</div>
