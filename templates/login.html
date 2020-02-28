@@ -1,15 +1,8 @@
 {% if user.is_authenticated %}
-<script type="text/javascript">
-	{% if user.user_type == 1 %}
-		$("li[data-href='/signup_page']").trigger("click")
-	{% endif %}
-	$(".forgot-psw").remove()
-</script>
 <!-- <li class="nav-item"> -->
 <div class="row" style="position: absolute; top: 3px;">
 	<div class="col-md-12">
-		<i class="fa fa-user"></i>&nbsp;{{
-		user.last_name}},&nbsp;{{user.first_name }}
+		<i class="fa fa-user"></i>&nbsp;{{ user.last_name}},&nbsp;{{user.first_name }}
 	</div>
 </div>
 <!-- </li> -->
@@ -25,9 +18,6 @@
 	</button>
 </li>
 {% else %}
-<script type="text/javascript">
-	$(".forgot-psw").hide()
-</script>
 <li class="nav-item dropdown"><a data-toggle="dropdown"
 	class="nav-link dropdown-toggle" href="#" role="button"
 	aria-haspopup="true" aria-expanded="false"><i

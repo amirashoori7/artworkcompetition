@@ -456,11 +456,3 @@ function forgotMyPSW(url, formId, submitBTNId) {
 		}
 	})
 }
-function showForgotPsw(){
-	$(".forgot-psw").show()
-	$(".login-ul").hide()
-}
-function hideForgotPsw(){
-	$(".forgot-psw").hide()
-	$(".login-ul").show()
-}
