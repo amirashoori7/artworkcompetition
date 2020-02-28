@@ -17,7 +17,7 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 class CustomPasswordResetView(PasswordResetView):
     def form_valid(self, form):
-        messages.success(self.request, 'Your Password has been Reset.')
+        messages.success(self.request, 'Password Reset Link has been Sent.')
         return super().form_valid(form)
 
 def projectUserList(request):
