@@ -72,7 +72,8 @@ def gallery(request):
 
 
 def work_lists(request):
-    works = Artwork.objects.filter(status__gte=0)
+    works = Artwork.objects.all()
+#     filter(status__gte=0)
     context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
 
@@ -193,7 +194,7 @@ def entry_form(request):
             if request.POST.get('status', '-1') != '-1':
                 artwork_form.status = request.POST.get("status")
             if int(request.POST.get("school", 0)) > 0:
-                school = get_object_or_404(School, id=request.POST["school"])
+                school = get_object_or_404(School, id = request.POST["school"])
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
             artwork_form.save()

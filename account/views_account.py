@@ -57,21 +57,18 @@ def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            email1 = form.cleaned_data['username']
-            email2 = form.cleaned_data['parentemail']
-            fname = form.cleaned_data['first_name']
-            lname = form.cleaned_data['last_name']
-            subject = "Mathart Registeration Successful"
-            message = "Dear {0} {1}, you have successfully registered in mathartcompetition.\n\nPlease go on and finish your artwork submission".format(fname, lname)
-            mailmsg1 = (subject, message, 'mathart.co.za@gmail.com', [email1])
-            mailmsg2 = (subject, message, 'mathart.co.za@gmail.com', [email2])
-            send_mass_mail((mailmsg1, mailmsg2))
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
             username = request.POST['username']
             password = request.POST['password1']
-            user = authenticate(username=username, password=password)
+            user = authenticate(username = username, password=password)
             login(request, user)
+            fname = request.POST.get('first_name')
+            lname = request.POST.get('last_name')
+            subject = "MathArt Portal - Registration Successful"
+            message = "Dear {0} {1}, you have successfully registered in MathArt competition.\n\n Please go on and finish your artwork submission".format(fname, lname)
+            mailmsg1 = (subject, message, 'mathart.co.za@gmail.com', [username])
+            send_mail(subject, message, 'mathart.co.za@gmail.com', [username])
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:

@@ -73,6 +73,12 @@ class Artwork(models.Model):
     def save(self, *args, **kwargs):
         self.make_thumbnail()
         print("save initiation >>> ", self)
+        if self.status == 0:
+            fname = self.owner.first_name
+            lname = self.owner.last_name
+            subject = "MathArt Portal - Registration Successful"
+            message = "Dear {0} {1}, you have successfully registered in mathartcompetition.\n\nPlease go on and finish your artwork submission".format(fname, lname)
+            mailmsg1 = (subject, message, 'mathart.co.za@gmail.com', [self.owner.username])
         super(Artwork, self).save(*args, **kwargs)
 
     def get_absolute_url(self):

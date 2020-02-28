@@ -284,7 +284,7 @@ function getSchoolVal(reason) {
 				$(response).each(function(i,j){
 					console.log(j)
 					if(!$('#school-dropdown option[value="'+j[1]+'"]').length)
-						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[3]))
+						$("#school-dropdown").append($("<option/>").attr("value",j[0]).text(j[3] + " ("+j[4]+")"))
 				})
 			}
 		},
