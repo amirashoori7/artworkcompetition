@@ -181,7 +181,6 @@ def signup_page(request):
 # @login_required
 # @transaction.atomic
 def entry_form(request):
-    response_data = {}
     if request.user.is_anonymous:
         userModel = None
     else:
@@ -204,8 +203,9 @@ def entry_form(request):
                 message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
                 send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
             artwork_form.save()
-            response_data['successResult'] = 'Saved successfully!'
+            response_data = {}
             response_data['id'] = artwork_form.id
+            response_data['successResult'] = "Saved successfully!"
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         else:
