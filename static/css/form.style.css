@@ -157,6 +157,7 @@
     pointer-events: none;
     color: #162830;
     font-style: italic;
+    font-weight: bold;
 }
 .form-section::before {
 	content: attr(data-title);

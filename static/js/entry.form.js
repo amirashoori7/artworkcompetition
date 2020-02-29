@@ -37,9 +37,12 @@ function fetchEntryForm(url) {
 					var ctr = $.trim($(this).val()).split(" ").length
 					if(ctr < 50 || ctr > 100){
 						$(".word-counter."+$(this).attr("id")).addClass("text-danger")
+ 						if(!$(this).hasClass("is-invalid"))
+ 							$(this).addClass("is-invalid")
 						$(".word-counter."+$(this).attr("id")).addClass("text-success")
 					} else {
 						$(".word-counter."+$(this).attr("id")).removeClass("text-danger")
+						$(this).removeClass("is-invalid")
 						$(".word-counter."+$(this).attr("id")).addClass("text-success")
 					}
 					$(".word-counter."+$(this).attr("id")).html("Word Count ("+ctr+" out of [50 - 100] words)")
@@ -105,7 +108,7 @@ function checkValidation() {
 															.addClass(
 																	"fa-thumbs-down text-danger exteded-class")
 													$(card)
-															.find("div")
+															.find(".card-title")
 															.addClass(
 																	"text-danger exteded-class")
 												} else if (sectionFilledFields == sectionTotalFields) {
@@ -116,7 +119,7 @@ function checkValidation() {
 															.addClass(
 																	"fa-thumbs-up text-success exteded-class")
 													$(card)
-															.find("div")
+															.find(".card-title")
 															.addClass(
 																	"text-success exteded-class")
 												} else {
@@ -128,7 +131,7 @@ function checkValidation() {
 															.addClass(
 																	"fa-thumbs-down text-warning exteded-class")
 													$(card)
-															.find("div")
+															.find(".card-title")
 															.addClass(
 																	"text-warning exteded-class")
 												}

@@ -15,6 +15,8 @@ from django.http.response import StreamingHttpResponse
 import pandas
 from account.forms_account import UserRegistrationForm
 from artwork import artwork_forms
+import artwork
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -192,12 +194,17 @@ def entry_form(request):
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
             if request.POST.get('status', '-1') != '-1':
-                artwork_form.status = request.POST.get("status")
+                artwork_form.status = int(request.POST.get("status"))
             if int(request.POST.get("school", 0)) > 0:
                 school = get_object_or_404(School, id = request.POST["school"])
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
             artwork_form.save()
+            if artwork_form.status == 0:
+                subject = "MathArt Portal - Entry Submission Successful"
+                message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
+                mailmsg1 = (subject, message, 'mathart.co.za@gmail.com', [request.user])
+                send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user])
             response_data['successResult'] = 'Saved successfully!'
             response_data['id'] = artwork_form.id
             return HttpResponse(json.dumps(response_data),
