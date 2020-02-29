@@ -17,6 +17,7 @@ from account.forms_account import UserRegistrationForm
 from artwork import artwork_forms
 import artwork
 from django.core.mail import send_mail
+from zipfile import ZipFile
 
 
 def index(request):
@@ -79,7 +80,6 @@ def work_lists(request):
     context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
 
- 
 def getfile(request):  
     artworks = Artwork.objects.filter()  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
@@ -89,12 +89,24 @@ def getfile(request):
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
     df = convert_to_df(artworks, fields=fields)
-    filename = os.path.dirname(os.path.abspath(__file__)) + '\\artworks.csv'
-    df.to_csv(filename)
-    with open(filename, 'rb') as fh:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    SITE_ROOT = os.path.join(BASE_DIR, 'media')
+    csvfilename = SITE_ROOT + '\\artworks.csv'
+    zipfilename = SITE_ROOT + '\\backup.zip'
+    df.to_csv(csvfilename, mode='w')
+    with ZipFile(zipfilename, 'w') as zipObj:
+        for folderName, subfolders, filenames in os.walk(SITE_ROOT):
+            if "gallery" not in folderName:
+                for filename in filenames:
+                    if "zip" not in filename:
+                        filePath = os.path.join(folderName, filename)
+                        zipObj.write(filePath)
+    with open(zipfilename, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(filename)
+        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zipfilename)
     return response
+
+
 
 
 def importfile(request):  
