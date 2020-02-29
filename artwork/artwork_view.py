@@ -202,7 +202,7 @@ def entry_form(request):
             if artwork_form.status == 0:
                 subject = "MathArt Portal - Entry Submission Successful"
                 message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
-                send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user])
+                send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
             artwork_form.save()
             response_data['successResult'] = 'Saved successfully!'
             response_data['id'] = artwork_form.id
