@@ -148,6 +148,17 @@
 	color: white;
 }
 
+.word-counter {
+	font-size: 14px;
+	line-height: 1.1;
+	position: absolute;
+	bottom: 3px;
+	left: 22px;
+	pointer-events: none;
+	color: #162830;
+	font-style: italic;
+}
+
 .form-section::before {
 	content: attr(data-title);
 	font-size: 19px;

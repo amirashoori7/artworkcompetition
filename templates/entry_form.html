@@ -572,7 +572,8 @@
 							<label for="question1"> <strong>Question 1: </strong>What
 								Mathematics did you use in your artwork? (Explain your answer)
 							</label>
-							<textarea class="form-control form-input" data-required="1" required
+							<span class="word-counter question1"></span>
+							<textarea class="form-control form-input questions" data-required="1" required
 								placeholder="Explain it in 50-100 words" id="question1"
 								name="question1" rows="5">{{ form.instance.question1|default_if_none:'Answer 1' }}</textarea>
 						</div>
@@ -584,7 +585,8 @@
 								did you creatively connect Mathematics with "My Universe" to
 								make your artwork? (Explain your answer)
 							</label>
-							<textarea class="form-control form-input" id="question2" required
+							<span class="word-counter question2"></span>
+							<textarea class="form-control form-input questions" id="question2" required
 								data-required="1" placeholder="Explain it in 50-100 words"
 								name="question2" rows="5">{{ form.instance.question2|default_if_none:'Answer 2' }}</textarea>
 						</div>
@@ -613,7 +615,8 @@
 								you think creativity could be used to teach Mathematics?
 								(Explain your answer)
 							</label>
-							<textarea class="form-control form-input" id="question3" required="required"
+							<span class="word-counter question3"></span>
+							<textarea class="form-control form-input questions" id="question3" required="required"
 								data-required="1" placeholder="Explain it in 50-100 words"
 								name="question3" rows="5">{{ form.instance.question3|default_if_none:'Answer 3' }}</textarea>
 						</div>

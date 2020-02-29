@@ -97,9 +97,9 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'dev2',
-    'USER': 'mathartuser',
-    'PASSWORD': 'mathartuser',
+    'NAME': 'mathart',
+    'USER': 'postgres',
+    'PASSWORD': 'root',
     'HOST':    'localhost',
     'PORT': '',
     }

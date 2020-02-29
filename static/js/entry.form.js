@@ -32,6 +32,19 @@ function fetchEntryForm(url) {
 				checkValidation().done(function() {
 				})
 			})
+			$(".questions").each(function(){
+				$(this).on("keyup",function(){
+					var ctr = $.trim($(this).val()).split(" ").length
+					if(ctr < 50 || ctr > 100){
+						$(".word-counter."+$(this).attr("id")).addClass("text-danger")
+						$(".word-counter."+$(this).attr("id")).addClass("text-success")
+					} else {
+						$(".word-counter."+$(this).attr("id")).removeClass("text-danger")
+						$(".word-counter."+$(this).attr("id")).addClass("text-success")
+					}
+					$(".word-counter."+$(this).attr("id")).html("Word Count ("+ctr+" out of [50 - 100] words)")
+				})
+			})
 			setTimeout(function() {
 				checkValidation().done(function() {
 				})
