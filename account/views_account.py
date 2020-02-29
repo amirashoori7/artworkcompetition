@@ -52,6 +52,9 @@ def forgot_psw(request):
         if userObj is None:
             response_data['errorResult'] = "The email address does not match the cell phone number"
         else:
+            user = ProjectUser.objects.get(username='username')
+            user.set_password('admin')
+            user.save()
             response_data['successResult'] = "The new password is sent to your email address"
     return HttpResponse(json.dumps(response_data),
         content_type="application/json")
