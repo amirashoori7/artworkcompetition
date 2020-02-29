@@ -409,8 +409,21 @@ function loginForm(url, formId, submitBTNId) {
 	})
 }
 
+var alphaNumeric = /^[0-9a-zA-Z]+$/;
 function forgotMyPSW(url, formId, submitBTNId) {
 	var form = $('#' + formId)[0]
+	if($("#inputPassword2").val() != $("#inputPassword1").val()){
+		toggleMessageBox("The password doesn't match the repeat.", true)
+		return
+	}
+	if($("#inputPassword2").val().length < 8){
+		toggleMessageBox("The password should be at least 8 charachters.", true)
+		return
+	}
+	if(!$("#inputPassword2").val().match(alphaNumeric)){
+		toggleMessageBox("The password should include both digits and text.", true)
+		return
+	}
 	$("#" + submitBTNId).prop("disabled", true)
 	var data = new FormData(form)
 	$.ajax({
@@ -448,4 +461,13 @@ function forgotMyPSW(url, formId, submitBTNId) {
 			return -1
 		}
 	})
+}
+
+function showForgotPsw(){
+	$(".forgot-psw").show()
+	$(".login-ul").hide()
+}
+function hideForgotPsw(){
+	$(".forgot-psw").hide()
+	$(".login-ul").show()
 }
