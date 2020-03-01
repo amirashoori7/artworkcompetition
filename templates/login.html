@@ -1,69 +1,73 @@
-{% if user.is_authenticated %}
+ {% if user.is_authenticated %}
+<div class="row" style="position: absolute; top: 3px;">
+	<div class="col-md-12">
+		<i class="fa fa-user"></i>&nbsp;{{ user.last_name}},
+		<!-- 		USERNAME & PASSWORD -->
+		&nbsp;{{user.first_name }}
+	</div>
+</div>
 <script type="text/javascript">
 hideForgotPsw()
 	{% if user.user_type == 1 %}
 		$("li[data-href='/signup_page']").trigger("click")
 	{% endif %}
 </script>
-<!-- <li class="nav-item"> -->
-<div class="row" style="position: absolute; top: 3px;">
+<div class="row">
 	<div class="col-md-12">
-		<i class="fa fa-user"></i>&nbsp;{{ user.last_name}},&nbsp;{{user.first_name }}
+		<button data-toggle="dropdown" class="btn btn-link btn-sm dropdown-toggle"
+			onclick="$('.change-password-div').load('/account/change_password/')"
+			href="#">
+			<i class="fa fa-key"></i>&nbsp;Change Password
+		</button>
+		<div class="dropdown-menu change-password-div"></div>
+		<button type="button" class="btn btn-outline-dark btn-sm"
+			onclick="window.location.replace('{% url 'account:logout' %}')">
+			<i class="fa fa-sign-out"></i>&nbsp;Logout
+		</button>
 	</div>
 </div>
-<!-- </li> -->
-<li class="nav-item dropdown"><a data-toggle="dropdown"
-	class="nav-link dropdown-toggle"
-	onclick="$('.change-password-div').load('/account/change_password/')"
-	href="#"><i class="fa fa-key"></i>&nbsp;Change Password</a>
-	<ul class="dropdown-menu change-password-div"></ul></li>
-<li class="nav-item">
-	<button type="button" class="btn btn-outline-dark btn-sm"
-		onclick="window.location.replace('{% url 'account:logout' %}')">
-		<i class="fa fa-sign-out"></i>&nbsp;Logout
-	</button>
-</li>
+
+<!-- WHEN THE USER IS NOT LOGGED IN -->
+
 {% else %}
 <script type="text/javascript">
-hideForgotPsw()
-$(function () {
-	$('[data-toggle="tooltip"]').tooltip()
-})
-</script>
-<li class="nav-item dropdown"><a data-toggle="dropdown"
-	class="nav-link dropdown-toggle" href="#" role="button"
-	aria-haspopup="true" aria-expanded="false"><i
-		class="fa fa-sign-in-alt"></i>&nbsp;Login</a>
-	<ul class="dropdown-menu">
-		<li class="nav-item login-ul">
-			<form action="{% url 'account:login' %}" method="post"
-				class="form-group login-form" id="login-form-id">
-				{% csrf_token %}
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" name="username" class="form-control input-group"
-						placeholder="Email" id="inputEmail" required>
-				</div>
-				<div class="input-group mb-3">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-						type="password" class="form-control" id="inputPassword"
-						name="password" placeholder="Password" required>
-				</div>
-				<button type="button" id="login-btn-id"
-					onclick="loginForm('{% url 'account:login' %}','login-form-id','login-btn-id')"
-					class="input-group btn btn-primary btn-sm mb-3">
-					<i class="fa fa-lock-open"></i>&nbsp;&nbsp;&nbsp;Login
-				</button>
-				<button class="input-group btn btn-link btn-sm mb-3"
-					onclick="showForgotPsw()"
-					type="button">
-					<i class="fa fa-question-circle"></i>&nbsp;&nbsp;&nbsp;Forgot the
-					password
-				</button>
-			</form>
-		</li>
-		<li class="nav-item change-password-li login-ul"></li>
-		<li class="nav-item forgot-psw">
+		hideForgotPsw()
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+<div class="dropdown">
+	<button data-toggle="dropdown" class="btn btn-light dropdown-toggle"
+		style="color: var(--main-color-green);" aria-haspopup="true"
+		aria-expanded="false" id="dropdownMenu2">
+		<i class="fa fa-sign-in-alt">&nbsp;&nbsp;&nbsp;</i>Login
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+		<form action="{% url 'account:login' %}" method="post"
+			class="form-group login-form login-ul" id="login-form-id">
+			{% csrf_token %}
+			<div class="input-group mb-3">
+				<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
+					type="text" name="username" class="form-control input-group"
+					placeholder="Email" id="inputEmail" required>
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
+					type="password" class="form-control" id="inputPassword"
+					name="password" placeholder="Password" required>
+			</div>
+			<button type="button" id="login-btn-id"
+				onclick="loginForm('{% url 'account:login' %}','login-form-id','login-btn-id')"
+				class="input-group btn btn-primary btn-sm mb-3">
+				<i class="fa fa-lock-open"></i>&nbsp;&nbsp;&nbsp;Login
+			</button>
+			<button class="input-group btn btn-link btn-sm mb-3"
+				onclick="showForgotPsw()" type="button">
+				<i class="fa fa-question-circle"></i>&nbsp;&nbsp;&nbsp;Forgot the
+				password
+			</button>
+		</form>
+		<div class="forgot-psw">
 			<form action="{% url 'account:forgotpsw' %}" method="post"
 				class="form-group login-form" id="forgot-psw-form-id">
 				{% csrf_token %}
@@ -73,13 +77,14 @@ $(function () {
 						placeholder="Email" id="inputEmail" required>
 				</div>
 				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-mobile"></i></span> <input
-						type="text" name="cellno" class="form-control input-group"
+					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+					<input type="text" name="cellno" class="form-control input-group"
 						placeholder="Cell phone No" id="cellphoneno" required>
 				</div>
 				<div class="input-group mb-3">
 					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-						type="password" class="form-control" id="inputPassword1" data-toggle="tooltip" data-placement="auto"
+						type="password" class="form-control" id="inputPassword1"
+						data-toggle="tooltip" data-placement="auto"
 						title="Password must be at least 8 charachters, including numbers and charachters."
 						name="password1" placeholder="Password" required>
 				</div>
@@ -90,14 +95,18 @@ $(function () {
 				</div>
 				<button type="button" id="forgot-psw-btn-id"
 					onclick="forgotMyPSW('{% url 'account:forgotpsw' %}','forgot-psw-form-id','forgot-psw-btn-id')"
-					class="input-group btn btn-primary btn-sm mb-3">
+					class="input-group btn btn-sm btn-primary">
 					<i class="fa fa-play"></i>&nbsp;&nbsp;&nbsp;Reset Password
 				</button>
-				<button class="input-group btn btn-link btn-sm mb-3" type="button" onclick="hideForgotPsw()">
+				<button class="input-group btn btn-sm btn-link" type="button"
+					onclick="hideForgotPsw()">
 					<i class="fa fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Login
 				</button>
 			</form>
-		</li>
-	</ul>
-	</ul></li>
+		</div>
+	</div>
+</div>
 {% endif %}
+<script type="text/javascript">
+$('.dropdown-toggle').dropdown()
+</script>

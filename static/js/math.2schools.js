@@ -238,26 +238,26 @@ function getSchoolVal(reason) {
 																		+ "")))
 
 								})
-					} else if (reason == 2) {
-						$("#region-dropdown")
-								.html(
-										'<option value="" selected="selected">Region</option>')
-						$("#region-dropdownDIV").fadeIn()
-						$("#region-dropdown").removeClass("disabled")
-						$(response).each(
-								function(i, j) {
-									if (!$('#region-dropdown option[value="'
-											+ j + '"]').length)
-										$("#region-dropdown").append(
-												$("<option/>").attr("value", j)
-														.text(j))
-								})
+// $('#school-dropdown').select2()
+// } else if (reason == 2) {
+// $("#region-dropdown")
+// .html(
+// '<option value="" selected="selected">Region</option>')
+// $("#region-dropdownDIV").fadeIn()
+// $("#region-dropdown").removeClass("disabled")
+// $(response).each(
+// function(i, j) {
+// if (!$('#region-dropdown option[value="'
+// + j + '"]').length)
+// $("#region-dropdown").append(
+// $("<option/>").attr("value", j)
+// .text(j))
+// })
 					} else {
 						$("#school-dropdown")
-								.html(
-										'<option value="" selected="selected" value="0" disabled="disabled">School</option>')
-						$("#schoolDIV").fadeIn()
-						$("#region-dropdownDIV").fadeIn()
+								.html('<option value="" selected="selected" value="0" disabled="disabled">School</option>')
+// $("#schoolDIV").fadeIn()
+// $("#region-dropdownDIV").fadeIn()
 						$("#school-dropdown").removeClass("disabled")
 						$(response).each(
 								function(i, j) {
@@ -265,11 +265,8 @@ function getSchoolVal(reason) {
 											+ j[1] + '"]').length)
 										$("#school-dropdown").append(
 												$("<option/>").attr("value",
-														j[0]).text(
-														j[3] + " (" + j[4]
-																+ ")"))
+														j[0]).text( j[3] ))
 								})
-//								$('#school-dropdown').select2()
 					}
 				},
 				error : function(xhr, errmsg, err) {

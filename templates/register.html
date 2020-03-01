@@ -1,165 +1,158 @@
 <form method="post" action="{% url 'account:register' %}"
-	class="was-validated"novalidate="" form-general-style" id="registry-form"
-	enctype="multipart/form-data" novalidate>
-	<div class="form-section" data-title="">
-		<div class="form-group row">
+	class="was-validated" novalidate=""
+	form-general-style" id="registry-form" enctype="multipart/form-data"
+	novalidate>
+	<div class="form-group row">
 
 
-			<!-- 					EMAIL -->
+		<!-- 					EMAIL -->
 
 
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-at"></i></span> <input
-						type="email" class="form-control" placeholder="Email" required
-						autocomplete="off" id="username" name="username"
-						value="{{ user.username|default:'' }}">
-				</div>
-			</div>
-
-			<!-- 				CELLPHONE -->
-
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-
-					<input type="number" class="form-control" name="cellphone"
-						required id="cellphone"
-						value="{{ user.cellphone|default:'' }}"
-						placeholder="Cell phone Number">
-				</div>
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-addon"><i class="fa fa-at"></i></span> <input
+					type="email" class="form-control" placeholder="Email" required
+					autocomplete="off" id="username" name="username"
+					value="{{ user.username|default:'' }}">
 			</div>
 		</div>
 
+		<!-- 				CELLPHONE -->
 
-		<div class="row form-group">
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
 
-
-			<!-- 					NAME -->
-
-
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-text">First Name</span>
-				</div>
-				<input type="text" class="form-control" placeholder="i.e. Joe"
-					required id="first_name" name="first_name"
-					value="{{ user.first_name | default:'' }}">
-
-			</div>
-			<!-- 				SURNAME -->
-
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Last Name</span>
-				</div>
-				<input type="text" class="form-control" placeholder="i.e. Scholtz"
-					required id="last_name" value="{{ user.last_name | default:'' }}"
-					name="last_name">
+				<input type="number" class="form-control" name="cellphone" required
+					id="cellphone" value="{{ user.cellphone|default:'' }}"
+					placeholder="Cell phone Number">
 			</div>
 		</div>
+	</div>
 
 
-
-		<div class="row form-group">
-
-
-			<!-- 					Date of Birth -->
+	<div class="row form-group">
 
 
-			<div class="input-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-addon"><i
-						class="fa fa-birthday-cake"></i></span> <input type="date"
-						class="form-control" required id="dob" name="dob"
-						value="{{ user.dob|default:'' }}">
-				</div>
+		<!-- 					NAME -->
+
+
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-text">First Name</span>
 			</div>
+			<input type="text" class="form-control" placeholder="i.e. Joe"
+				required id="first_name" name="first_name"
+				value="{{ user.first_name | default:'' }}">
+
 		</div>
+		<!-- 				SURNAME -->
 
-
-
-		<div class="row form-group">
-
-
-			<!-- 					PARENT NAME -->
-
-
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Parent/Guardian's Full-Name</span>
-				</div>
-				<input type="text" class="form-control"
-					placeholder="i.e. Jack Scholtz" required id="parentname"
-					name="parentname" value="{{ user.parentname|default:'' }}">
-
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Last Name</span>
 			</div>
-
-
-
-			<!-- 				PARENT PHONE NUMBER -->
-
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Parent/Guardian's Cell phone
-						Number</span>
-				</div>
-				<input type="number" class="form-control tel-no" name="parentphone"
-					placeholder="012 345 67 89" id="parentphone"
-					value="{{ user.parentphone|default:'' }}" required>
-
-			</div>
+			<input type="text" class="form-control" placeholder="i.e. Scholtz"
+				required id="last_name" value="{{ user.last_name | default:'' }}"
+				name="last_name">
 		</div>
+	</div>
 
 
-		<!-- 				PARENT EMAIL ADDRESS-->
+
+	<div class="row form-group">
 
 
-		<div class="row form-group">
+		<!-- 					Date of Birth -->
 
-			<div class="form-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Parent/Guardian's Email </span>
-				</div>
-				<input type="email" class="form-control" id="parentemail"
-					name="parentemail" placeholder="you@example.com"
-					value="{{ user.parentemail|default:'' }}" >
+
+		<div class="input-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-addon"><i
+					class="fa fa-birthday-cake"></i></span>
 			</div>
+			<input type="date" class="form-control" required id="dob" name="dob"
+				min="1999-01-01" max="2011-12	-31" value="{{ user.dob|default:'' }}">
+
+		</div>
+	</div>
+	<hr>
+
+
+	<div class="row form-group">
+
+
+		<!-- 					PARENT NAME -->
+
+
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Parent/Guardian's Full-Name</span>
+			</div>
+			<input type="text" class="form-control"
+				placeholder="i.e. Jack Scholtz" required id="parentname"
+				name="parentname" value="{{ user.parentname|default:'' }}">
 
 		</div>
 
 
 
+		<!-- 				PARENT PHONE NUMBER -->
 
-		<div class="row form-group">
-			<div class="input-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-						type="password" class="form-control" id="password1"
-						name="password1" placeholder="Password" required value=""
-						data-toggle="tooltip" data-placement="auto"
-						title="Password must be at least 8 charachters, including numbers and charachters.">
-				</div>
-
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Parent/Guardian's Cell phone
+					Number</span>
 			</div>
+			<input type="number" class="form-control tel-no" name="parentphone"
+				placeholder="012 345 67 89" id="parentphone"
+				value="{{ user.parentphone|default:'' }}" required>
 
-			<div class="input-group col-sm-6">
-				<div class="input-group-prepend">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-						type="password" class="form-control" id="password2"
-						name="password2" placeholder="Repeat Password" value="" required>
-				</div>
+		</div>
+	</div>
 
+
+	<!-- 				PARENT EMAIL ADDRESS-->
+
+
+	<div class="row form-group">
+		<div class="form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Parent/Guardian's Email </span>
 			</div>
+			<input type="email" class="form-control" id="parentemail"
+				name="parentemail" placeholder="you@example.com"
+				value="{{ user.parentemail|default:'' }}">
+		</div>
+	</div>
+	<hr>
+	<div class="row ">
+		<div class="input-group form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-addon"><i class="fa fa-key"></i></span>
+			</div>
+			<input type="password" class="form-control" id="password1"
+				name="password1" placeholder="Password" required
+				data-toggle="tooltip" data-placement="auto"
+				title="Password must be at least 8 charachters, including numbers and charachters.">
 		</div>
 
-		{% csrf_token %}
-		<div class="row form-group">
-			<div class="input-group col-sm-2"></div>
-			<div class="input-group col-sm-8">
-				<button class="btn btn-primary btn-success col-sm-12" type="button"
-					id="register-btn">Register Now</button>
+		<div class="input-group form-group col-sm-6">
+			<div class="input-group-prepend">
+				<span class="input-group-addon"><i class="fa fa-key"></i></span>
 			</div>
+			<input type="password" class="form-control" id="password2"
+				name="password2" placeholder="Repeat Password" required>
+		</div>
+	</div>
+	<hr>
+
+	{% csrf_token %}
+	<div class="row form-group">
+		<div class="input-group col-sm-2"></div>
+		<div class="input-group col-sm-8">
+			<button class="btn btn-primary btn-success col-sm-12" type="button"
+				id="register-btn">Register Now</button>
 		</div>
 	</div>
 </form>

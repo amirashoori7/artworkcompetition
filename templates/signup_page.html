@@ -2,7 +2,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
-		fetchEntryForm("{% url 'artwork:entry_form' %}")
+		fetchEntryForm("{% url 'artwork:entry_form_view' %}")
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()

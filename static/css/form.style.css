@@ -1,6 +1,6 @@
-.navbar-light .navbar-nav .nav-link {
-	color: var(--main-color-green);
-}
+/* .navbar-light .navbar-nav .nav-link { */
+/* 	color: var(--main-color-green); */
+/* } */
 
 .form-control:focus {
 	border-color: var(--main-color-green);
@@ -34,24 +34,6 @@
     font-size: 22px;
     color: var(--main-color-green);
     line-height: 37px;
-}
-
-.navbar-light .navbar-nav .show>.nav-link {
-	color: white !important;
-	border-color: var(--main-color-green);
-	background: var(--main-color-green);
-}
-
-.navbar .search-form {
-	display: inline-block;
-}
-
-.navbar .search-form .btn {
-	margin-left: 4px;
-}
-
-.navbar .search-form .form-control {
-	border-radius: 2px;
 }
 
 .navbar .login-form .input-group {

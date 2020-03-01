@@ -362,23 +362,16 @@
 				<div class="collapse card-body" id="school-section"
 					data-title="My School">
 					<div class="row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-6">
 							<label for="states-dropdown">Province of School</label> <select
 								class="form-control form-input" id="province-dropdown"
 								onchange="getSchoolVal(2)" required>
 								<option value="" selected="selected" disabled="disabled">Select</option>
 							</select>
 						</div>
-						<div class="form-group col-md-4" id="region-dropdownDIV">
-							<label for="region-dropdown">Region of the School</label> <select
-								class="form-control form-input disabled" id="region-dropdown" required
-								onchange="getSchoolVal(3)">
-								<option value="" selected="selected">{{ form.instance.school.region|default:'Select' }}</option>
-							</select>
-						</div>
-						<div class="form-group col-md-4" id="schoolDIV">
+						<div class="form-group col-md-6" id="schoolDIV">
 							<label for="school-dropdown">School</label> <select
-								class="form-control form-input disabled" id="school-dropdown" required
+								class="form-control form-input disabled" id="school-dropdown"
 								onchange="$('#school-id-val').val($('#school-dropdown').val())">
 								<option value="0" selected="selected">{{ form.instance.school.name|default:'Select' }}</option>
 							</select>
@@ -416,7 +409,7 @@
 							data-toggle="buttons">
 							<label class="btn btn-outline-secondary btn-group btn-group-sm">
 								<input type="radio" name="learnergradeRadio" value="Grade 8"
-								 onclick="gradeChose(this)"> Grade 8
+								onclick="gradeChose(this)"> Grade 8
 							</label>
 						</div>
 						<div class="col-md-2 btn-group btn-group-toggle btn-sm"

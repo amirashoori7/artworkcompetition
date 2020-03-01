@@ -6,16 +6,9 @@ from artwork.artwork_forms import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from account.models_account import ProjectUser
-from _datetime import date
-import csv
 import os
-from _io import StringIO
-from django.core.files.base import File
-from django.http.response import StreamingHttpResponse
 import pandas
 from account.forms_account import UserRegistrationForm
-from artwork import artwork_forms
-import artwork
 from django.core.mail import send_mail
 from zipfile import ZipFile
 
@@ -190,8 +183,8 @@ def signup_page(request):
     return render(request, 'signup_page.html', context)
 
 
-# @login_required
-# @transaction.atomic
+@login_required
+@transaction.atomic
 def entry_form(request):
     if request.user.is_anonymous:
         userModel = None
@@ -210,11 +203,11 @@ def entry_form(request):
                 school = get_object_or_404(School, id = request.POST["school"])
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
+            artwork_form.save()
             if artwork_form.status == 0:
                 subject = "MathArt Portal - Entry Submission Successful"
                 message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
                 send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
-            artwork_form.save()
             response_data = {}
             response_data['id'] = artwork_form.id
             response_data['successResult'] = "Saved successfully!"
