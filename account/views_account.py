@@ -15,11 +15,6 @@ class CustomPasswordChangeView(PasswordChangeView):
         messages.success(self.request, 'Your password has been changed.')
         return super().form_valid(form)
 
-class CustomPasswordResetView(PasswordResetView):
-    def form_valid(self, form):
-        messages.success(self.request, 'Password Reset Link has been Sent.')
-        return super().form_valid(form)
-
 def projectUserList(request):
     userList = ProjectUser.objects.exclude(user_type=1)
     context = {'userlist': userList}
@@ -61,6 +56,7 @@ def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+            email = form.cleaned_data['username']
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
             username = request.POST['username']
