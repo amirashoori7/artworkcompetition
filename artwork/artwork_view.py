@@ -194,6 +194,7 @@ def entry_form(request):
     if request.method == 'POST':
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
         artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
+        response_data = {}
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
@@ -203,13 +204,22 @@ def entry_form(request):
                 school = get_object_or_404(School, id = request.POST["school"])
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
-            artwork_form.save()
-            if artwork_form.status == 0:
-                subject = "MathArt Portal - Entry Submission Successful"
-                message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
-                send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
-            response_data = {}
+            try:
+                artwork_form.save()
+            except:
+                response_data['errorResults'] = "Error in saving the artwork. Try again now. If this error occurred again, please contact us."
+                return HttpResponse(json.dumps(response_data),
+                    content_type="application/json")
             response_data['id'] = artwork_form.id
+            if artwork_form.status == 0:
+                try:
+                    subject = "MathArt Portal - Entry Submission Successful"
+                    message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
+                    send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
+                except:
+                    response_data['errorResults'] = "The entry is saved successfully. The system failed to send you the confirmation email, please contact us to ensure that the artwork is received."
+                    return HttpResponse(json.dumps(response_data),
+                        content_type="application/json")
             response_data['successResult'] = "Saved successfully!"
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
