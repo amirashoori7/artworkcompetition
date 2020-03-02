@@ -218,6 +218,9 @@ function getSchoolVal(reason) {
 																getProvince(""
 																		+ j
 																		+ "")))
+																		if(i+1==j.length && $("#province-id-val").val().length>0)
+																			{$("#province-dropdown").val($("#province-id-val").val())
+																				$("#province-dropdown").selectpicker("refresh")}
 
 								})
 						$("#school-dropdown").removeClass("disabled")
@@ -256,8 +259,7 @@ function filterSchool(schoolTXT){
 						$(response).each(
 								function(i, j) {
 									$("#school-dropdown").append(
-											$("<option/>").attr("value",
-													j[0]).text(
+											$("<option/>").attr("value",j[0]).text(
 													j[3]).attr("onclick","selectSchool(this)"))
 								})
 								$("#school-dropdown").selectpicker("refresh")
@@ -275,7 +277,10 @@ function filterSchool(schoolTXT){
 function selectSchool(schoolAnchor){
 	$("small.school-dropdown").remove()
 	$("#school-dropdown").val($(schoolAnchor).val())
+	$("#school-id-val").val($(schoolAnchor).val())
 	$("#school-dropdown").selectpicker("refresh")
+	checkValidation().done(function() {
+				})
 }
 
 function getProvince(str) {
@@ -300,7 +305,7 @@ function getProvince(str) {
 		return "Western Cape"
 	}
 }
-var countDownDate = new Date("Mar 3, 2020 00:00:00").getTime();
+var countDownDate = new Date("Apr 30, 2020 17:00:00").getTime();
 function runTimer() {
 	var x = setInterval(function() {
 		var now = new Date().getTime();

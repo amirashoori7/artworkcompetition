@@ -366,7 +366,7 @@
 					data-title="My School">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="states-dropdown">Province of School</label> <select
+							<label for="province-dropdown">Province of School</label> <select
 								class="form-control form-input" id="province-dropdown"
 								onchange="getSchoolVal(2)" required>
 								<option value="" selected="selected" disabled="disabled">Select</option>
@@ -377,7 +377,7 @@
 								class="form-control form-input disabled selectpicker"
 								id="school-dropdown" data-live-search="true"
 								onchange="$('#school-id-val').val($('#school-dropdown').val())">
-								<option value="1" selected="selected" disabled="disabled">Select
+								<option value="1" selected="selected" disabled="disabled">{{ form.instance.school.name|default:'Select School' }}
 									School</option>
 
 							</select>
@@ -385,6 +385,9 @@
 						<input type="hidden" name="school"
 							value="{{ form.instance.school.id|default:'0' }}"
 							id="school-id-val" data-required="1">
+						<input type="hidden" 
+							value="{{ form.instance.school.province|default:'' }}"
+							id="province-id-val">
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -549,7 +552,7 @@
 			<hr />
 
 
-			<div class="card">
+			<div class="card questions-card">
 				<div class="card-header collapsed row" data-toggle="collapse"
 					aria-expanded="false" href="#questions-section">
 					<div class="col-md-11">
@@ -621,11 +624,11 @@
 			<div class="row" id="footer-form-btns">
 				<div class="col-md-6 text-center" data-toggle="tooltip"
 					data-placement="top" title="Fill the required forms to activate me">
-					<button class="btn btn-warning btn-sm col-md-12 disabled"
+					<button class="btn btn-outline-secondary btn-sm col-md-12 disabled"
 						type="button" id="buttonSubmit">Submit</button>
 				</div>
 				<div class="col-md-6 text-center">
-					<button class="btn btn-outline-success btn-sm col-md-12"
+					<button class="btn btn-outline-primary btn-sm col-md-12"
 						type="button" id="buttonSaveContinue">Save & Continue
 						Later</button>
 				</div>

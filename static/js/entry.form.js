@@ -1,12 +1,28 @@
+var questionsValidationCriteria = [ {
+	id : "question1",
+	title : "Qustion 1",
+	min : 50,
+	max : 100
+}, {
+	id : "question2",
+	title : "Qustion 2",
+	min : 50,
+	max : 100
+}, {
+	id : "question3",
+	title : "Qustion 3",
+	min : 35,
+	max : 100
+} ];
 function fetchEntryForm(url) {
 	$.ajax({
 		url : url,
 		async : true,
 		success : function(response) {
 			$("#artwork-submit-form-holder-id").html(response)
-			 if ($("#school-id-val").val() == "0") {
-				 $("#schoolDIV").fadeOut()
-			 }
+			if ($("#school-id-val").val() == "0") {
+				$("#schoolDIV").fadeOut()
+			}
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
 				$(
 						"input[name='learnergradeRadio'][value='"
@@ -28,20 +44,8 @@ function fetchEntryForm(url) {
 				checkValidation().done(function() {
 				})
 			})
-			$(".questions").each(function(){
-				$(this).on("keyup",function(){
-					var ctr = $.trim($(this).val()).split(" ").length
-					if(ctr < 50 || ctr > 100){
-						$(".word-counter."+$(this).attr("id")).addClass("text-danger")
- 						if(!$(this).hasClass("is-invalid"))
- 							$(this).addClass("is-invalid")
-						$(".word-counter."+$(this).attr("id")).addClass("text-success")
-					} else {
-						$(".word-counter."+$(this).attr("id")).removeClass("text-danger")
-						$(this).removeClass("is-invalid")
-						$(".word-counter."+$(this).attr("id")).addClass("text-success")
-					}
-					$(".word-counter."+$(this).attr("id")).html("Word Count ("+ctr+" out of [50 - 100] words)")
+			$("[data-required='1']").keyup(function() {
+				checkValidation().done(function() {
 				})
 			})
 			setTimeout(function() {
@@ -64,6 +68,7 @@ function gradeChose(radioBTN) {
 
 var totalFields = 0
 var filledFields = 0
+var questionsValidated = 0;
 function checkValidation() {
 	totalFields = 0
 	filledFields = 0
@@ -136,135 +141,133 @@ function checkValidation() {
 
 										})
 					})
-	setTimeout(function() {
-		$("#buttonSubmit").html(
-				"<i class='fa fa-save'></i>   Saved " + filledFields + "/"
-						+ totalFields)
-		if (filledFields == totalFields) {
-			$("#buttonSubmit").removeClass("disabled")
-			$("#buttonSaveContinue").addClass("disabled")
-			$("#buttonSubmit").html(
-					"<i class='fa fa-telegram-plane'></i> Submit The Entry")
-		} else {
-			$("#buttonSubmit").addClass("disabled")
-			$("#buttonSaveContinue").removeClass("disabled")
-		}
-		checkValidProcess.resolve()
-	}, 200)
+	validateQuestions()
+	setTimeout(
+			function() {
+				$("#buttonSubmit").html(
+						"<i class='fa fa-save'>&nbsp;&nbsp;&nbsp;</i>Saved "
+								+ filledFields + "/" + totalFields)
+				if (filledFields == totalFields
+						&& questionsValidated == questionsValidationCriteria.length) {
+					$("#buttonSubmit").removeClass(
+							"btn-outline-secondary disabled")
+					$("#buttonSubmit").addClass("btn-success")
+					$("#buttonSaveContinue").addClass("disabled")
+					$("#buttonSubmit")
+							.html(
+									"<i class='fa fa-telegram-plane'>&nbsp;&nbsp;&nbsp;</i> Submit The Entry")
+				} else {
+					$("#buttonSubmit").addClass("disabled")
+					$("#buttonSaveContinue").removeClass("disabled")
+				}
+				checkValidProcess.resolve()
+			}, 500)
 	return $.when(checkValidProcess).done(function() {
 	}).promise()
 }
-
-
 
 var phoneno = /^\d{10}$/;
 function submitRegistryForm(url) {
 	var form = $('#registry-form')[0]
 	$("#register-btn").prop("disabled", true)
 	var data = new FormData(form)
-	$.ajax({
-		type : "POST",
-		enctype : 'multipart/form-data',
-		data : data,
-		processData : false,
-		contentType : false,
-		cache : false,
-		timeout : 60000,
-		url : url,
-		beforeSend : function(xhr, settings) {
-			if (!(/^http:.*/.test(settings.url) || /^https:.*/
-					.test(settings.url))) {
-				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
-			}
-		},
-		success : function(response) {
-			if (response.successResult != null) {
-				toggleMessageBox(response.successResult, false)
-				$(".form-signin.form-general-style").find("input#inputEmail")
-						.val($("#registry-form").find("input#username").val())
-				$(".form-signin.form-general-style")
-						.find("input#inputPassword").val(
+	$
+			.ajax({
+				type : "POST",
+				enctype : 'multipart/form-data',
+				data : data,
+				processData : false,
+				contentType : false,
+				cache : false,
+				timeout : 60000,
+				url : url,
+				beforeSend : function(xhr, settings) {
+					if (!(/^http:.*/.test(settings.url) || /^https:.*/
+							.test(settings.url))) {
+						xhr.setRequestHeader("X-CSRFToken",
+								getCookie('csrftoken'))
+					}
+				},
+				success : function(response) {
+					if (response.successResult != null) {
+						toggleMessageBox(response.successResult, false)
+						$(".form-signin.form-general-style").find(
+								"input#inputEmail").val(
+								$("#registry-form").find("input#username")
+										.val())
+						$(".form-signin.form-general-style").find(
+								"input#inputPassword").val(
 								$("#registry-form").find("input#password1")
 										.val())
-				$(".form-signin.form-general-style").submit()
-				loadContent($("<li/>").attr({
-					"data-href" : "/signup_page/"
-				}))
-				$("#login-div").load('/account/login/')
-				$("input[name='req']").remove()
-				$(".nav-item menu-item.active").trigger("click")
-			} else if (response.errorResults != null) {
-				$("#registry-form").find("small").remove()
-				$(".tel-no").each(function(){
-					if($(this).val().length > 0 && !$(this).val().match(phoneno))
-						populateDangerMessageField($(this).attr("id"),
-						"The phone number must be 10 digits. i.e. 0123456789")
-				})
-				populateErrorMessageFields(response.errorResults, true)
-			}
-		},
-		error : function(xhr, errmsg, err) {
-			console.log(xhr.status + ": " + xhr.responseText)
-			toggleMessageBox(xhr.responseText, true)
-		},
-		complete : function(response) {
-			$("#register-btn").prop("disabled", false);
-			return -1
-		}
-	})
+						$(".form-signin.form-general-style").submit()
+						loadContent($("<li/>").attr({
+							"data-href" : "/signup_page/"
+						}))
+						$("#login-div").load('/account/login/')
+						$("input[name='req']").remove()
+						$(".nav-item menu-item.active").trigger("click")
+					} else if (response.errorResults != null) {
+						$("#registry-form").find("small").remove()
+						$(".tel-no")
+								.each(
+										function() {
+											if ($(this).val().length > 0
+													&& !$(this).val().match(
+															phoneno))
+												populateDangerMessageField($(
+														this).attr("id"),
+														"The phone number must be 10 digits. i.e. 0123456789")
+										})
+						populateErrorMessageFields(response.errorResults, true)
+					}
+				},
+				error : function(xhr, errmsg, err) {
+					console.log(xhr.status + ": " + xhr.responseText)
+					toggleMessageBox(xhr.responseText, true)
+				},
+				complete : function(response) {
+					$("#register-btn").prop("disabled", false);
+					return -1
+				}
+			})
 }
 
-var questionsValidator = [
-	{id: "question1",
-		title:"Qustion 1",
-		min:50,
-		max:100},
-	{id: "question2",
-		title:"Qustion 2",
-		min:50,
-		max:100},
-	{id: "question3",
-		title:"Qustion 3",
-		min:35,
-		max:100}
-];
+function validateQuestions() {
+	questionsValidated = 0
+	$(questionsValidationCriteria).each(
+			function(i, j) {
+				var ctr = $.trim($("#" + j.id).val()).split(" ").length
+				if (ctr < j.min || ctr > j.max) {
+					$(".word-counter." + j.id).addClass("text-danger")
+					if (!$("#" + j.id).hasClass("is-invalid"))
+						$("#" + j.id).addClass("is-invalid")
+					$(".word-counter." + j.id).addClass("text-success")
+					populateDangerMessageField(j.id,
+							"This field must be between " + j.min + " and "
+									+ j.max + " words")
+					$(".questions-card").addClass(
+							"border-warning exteded-class")
+					$(".questions-card").find(".col-md-1 i").addClass(
+							"fa-thumbs-down text-warning exteded-class")
+					$(".questions-card").find(".card-title").addClass(
+							"text-warning exteded-class")
+				} else {
+					$(".word-counter." + j.id).removeClass("text-danger")
+					$("#" + j.id).removeClass("is-invalid")
+					$(".word-counter." + j.id).addClass("text-success")
+					questionsValidated++
+					$("small." + j.id).remove()
+				}
+				$(".word-counter." + j.id).html(
+						"Word Count (" + ctr + " out of [" + j.min + " - "
+								+ j.max + "] words)")
+			})
+}
 function submitEntryForm(url) {
 	$("#registry-form").find("small").remove()
 	$("input[name='status']").remove()
-	$(questionsValidator).each(function(){
-		var fquestionVal = $.trim($("#"+this.id).val())
-		if (fquestionVal.length > 0
-			&& (fquestionVal.split(" ").length <= this.min ||
-					fquestionVal.split(" ").length > this.max)) {
-			populateDangerMessageField("question1",
-					"This field must be between "+this.min+" and "+this.max+" words")
-			$("body").scrollTop($("#"+this.id).position().top)
-			return false
-		}
-	})
-//	return
-//	if ($.trim($("#question1").val()).length > 0
-//			&& ($.trim($("#question1").val()).split(" ").length <= 50 ||
-//					$.trim($("#question1").val()).split(" ").length > 100)) {
-//		populateDangerMessageField("question1",
-//				"This field must be between 50 and 100 words")
-//		return false
-//	}
-//	if ($.trim($("#question2").val())
-//			&& ($.trim($("#question2").val()).split(" ").length <= 50 || 
-//					$.trim($("#question2").val()).split(" ").length > 100)) {
-//		populateDangerMessageField("question2",
-//				"This field must be between 50 and 100 words")
-//		return false
-//	}
-//	if ($.trim($("#question3").val()).length > 0
-//			&& ($.trim($("#question3").val()).split(" ").length <= 50 || 
-//					$.trim($("#question3").val()).split(" ").length > 100)) {
-//		populateDangerMessageField("question3",
-//				"This field must be between 50 and 100 words")
-//		return false
-//	}
-	if (totalFields == filledFields) {
+	if (totalFields == filledFields
+			&& questionsValidated == questionsValidationCriteria.length) {
 		$('#entry-form-id').append(
 				'<input type="hidden" name="status" value="0">')
 	}

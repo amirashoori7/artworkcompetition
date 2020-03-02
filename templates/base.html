@@ -170,7 +170,7 @@
 				</div>
 				<div class="row second-color" id="banner-bottom-1">
 					<div class="col-md-12 banners-text-content">
-						<label for="signupbuttonIdMain">Registration opens in...</label>
+						<label for="signupbuttonIdMain">Registration will be closed in...</label>
 						<div id="signupbuttonIdMain" class="timeCounterDiv">
 							<ul>
 								<li class="date-counter" data-text="days"
@@ -215,16 +215,16 @@
 <script async=""
 	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
 <script type="text/javascript">
-var ua = window.navigator.userAgent;
-var msie = ua.indexOf("MSIE ");
-if (msie>0) 
-{
-	setTimeout(function(){
+function isIE() {
+	  ua = navigator.userAgent;
+	  var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+	  return is_ie; 
+	}
+	if (isIE()){
 		toggleMessageBox("This web-application is not accessible from the Internet Explorer. "+
 				"For the best performance, use these links to download a browser<br> "+
 				"<a href='https://www.google.com/chrome/?brand=CHBD'>Google Chrome</a> | <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a>", false)
-	},2000)
-}
+	}
 var version = {{ version }}
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {

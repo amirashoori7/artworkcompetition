@@ -2,7 +2,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip()
+{% if user.is_authenticated == True %}
 		fetchEntryForm("{% url 'artwork:entry_form' %}")
+{% endif %}
 		$("#registrationForm").load('/account/register/', function() {
 			$("#register-btn").on("click", function(ev) {
 				ev.preventDefault()
