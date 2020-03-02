@@ -20,12 +20,9 @@ function fetchEntryForm(url) {
 			$('#buttonSaveContinue, #buttonSubmit').on("click",
 					function(event) {
 						event.preventDefault()
-						if(window.location.href.indexOf("?req") > 0)
-							checkValidation().done(function() {
-								submitEntryForm($('#entry-form-id').attr("action"))
-							})
-						else
-							return
+						checkValidation().done(function() {
+							submitEntryForm($('#entry-form-id').attr("action"))
+						})
 					})
 			$("[data-required='1']").change(function() {
 				checkValidation().done(function() {
@@ -216,6 +213,7 @@ function submitRegistryForm(url) {
 		}
 	})
 }
+
 var questionsValidator = [
 	{id: "question1",
 		title:"Qustion 1",
@@ -229,42 +227,43 @@ var questionsValidator = [
 		title:"Qustion 3",
 		min:35,
 		max:100}
-]
+];
 function submitEntryForm(url) {
 	$("#registry-form").find("small").remove()
 	$("input[name='status']").remove()
 	$(questionsValidator).each(function(){
-		var fieldVal = $.trim($("#"+this.id).val())
-		if (fieldVal.val().length > 0)
-			&& (fieldVal.split(" ").length <= 50 ||
-					$.trim($("#question1").val()).split(" ").length > 100)) {
+		var fquestionVal = $.trim($("#"+this.id).val())
+		if (fquestionVal.length > 0
+			&& (fquestionVal.split(" ").length <= this.min ||
+					fquestionVal.split(" ").length > this.max)) {
 			populateDangerMessageField("question1",
-					"This field must be between 50 and 100 words")
+					"This field must be between "+this.min+" and "+this.max+" words")
+			$("body").scrollTop($("#"+this.id).position().top)
 			return false
 		}
-		})
-	return
-	if ($.trim($("#question1").val()).length > 0
-			&& ($.trim($("#question1").val()).split(" ").length <= 50 ||
-					$.trim($("#question1").val()).split(" ").length > 100)) {
-		populateDangerMessageField("question1",
-				"This field must be between 50 and 100 words")
-		return false
-	}
-	if ($.trim($("#question2").val())
-			&& ($.trim($("#question2").val()).split(" ").length <= 50 || 
-					$.trim($("#question2").val()).split(" ").length > 100)) {
-		populateDangerMessageField("question2",
-				"This field must be between 50 and 100 words")
-		return false
-	}
-	if ($.trim($("#question3").val()).length > 0
-			&& ($.trim($("#question3").val()).split(" ").length <= 50 || 
-					$.trim($("#question3").val()).split(" ").length > 100)) {
-		populateDangerMessageField("question3",
-				"This field must be between 50 and 100 words")
-		return false
-	}
+	})
+//	return
+//	if ($.trim($("#question1").val()).length > 0
+//			&& ($.trim($("#question1").val()).split(" ").length <= 50 ||
+//					$.trim($("#question1").val()).split(" ").length > 100)) {
+//		populateDangerMessageField("question1",
+//				"This field must be between 50 and 100 words")
+//		return false
+//	}
+//	if ($.trim($("#question2").val())
+//			&& ($.trim($("#question2").val()).split(" ").length <= 50 || 
+//					$.trim($("#question2").val()).split(" ").length > 100)) {
+//		populateDangerMessageField("question2",
+//				"This field must be between 50 and 100 words")
+//		return false
+//	}
+//	if ($.trim($("#question3").val()).length > 0
+//			&& ($.trim($("#question3").val()).split(" ").length <= 50 || 
+//					$.trim($("#question3").val()).split(" ").length > 100)) {
+//		populateDangerMessageField("question3",
+//				"This field must be between 50 and 100 words")
+//		return false
+//	}
 	if (totalFields == filledFields) {
 		$('#entry-form-id').append(
 				'<input type="hidden" name="status" value="0">')
