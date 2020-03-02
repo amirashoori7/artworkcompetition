@@ -14,7 +14,7 @@ class School(models.Model):
     natemis = models.IntegerField(blank=True, null=True, default=0)
     province = models.CharField(blank=True, null=True, max_length=100, choices=Province.provincelist())
     name = models.CharField(max_length=200, db_index=True)
-    region = models.CharField(blank=True, null=True, max_length=200)
+    region = models.CharField(blank=True, null=True, max_length=200, default="")
 
     class Meta:
         ordering = ('name',)

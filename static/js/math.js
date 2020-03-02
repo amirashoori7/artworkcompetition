@@ -1,9 +1,6 @@
 var tweenMenuShow
 var isHorizontal = false
-var testData = [ {
-	name : "Jack",
-	surname : "smith"
-} ]
+var provinces = ["EC", "FS", "GT", "KZN", "LP", "MP", "NW", "NC", "WC"]
 
 function populateWarningMessageField(fieldId, text) {
 	var errorSection = $("<small/>").addClass("text-warning")
@@ -207,26 +204,13 @@ function getCookie(name) {
 
 function getSchoolVal(reason) {
 	var prov = $("#province-dropdown").val()
-	var reg = $("#region-dropdown").val()
-	$
-			.ajax({
-				type : "POST",
-				url : "/get_school?reason=" + reason + "&prov=" + prov
-						+ "&reg=" + reg,
-				beforeSend : function(xhr, settings) {
-					if (!(/^http:.*/.test(settings.url) || /^https:.*/
-							.test(settings.url))) {
-						xhr.setRequestHeader("X-CSRFToken",
-								getCookie('csrftoken'));
-					}
-				},
-				success : function(response) {
-					if (reason == 1) {
+	var schoolTXT = $(".bs-searchbox").find("input[type='text']").val()
+	if (reason == 1) {
 						$("#province-dropdown").html("")
 						$("#province-dropdown")
 								.html('<option value="" selected="selected">Province</option>')
 						$("#province-dropdown").removeClass("disabled")
-						$(response).each(
+						$(provinces).each(
 								function(i, j) {
 									if (!$('#province-dropdown option[value="'
 											+ j + '"]').length)
@@ -238,39 +222,38 @@ function getSchoolVal(reason) {
 																		+ "")))
 
 								})
-					} else if (reason == 2) {
-						$("#region-dropdown")
-								.html(
-										'<option value="" selected="selected">Region</option>')
-						$("#region-dropdownDIV").fadeIn()
-						$("#region-dropdown").removeClass("disabled")
-						$(response).each(
-								function(i, j) {
-									if (!$('#region-dropdown option[value="'
-											+ j + '"]').length)
-										$("#region-dropdown").append(
-												$("<option/>").attr("value", j)
-														.text(j))
-								})
-					} else {
-						$("#school-dropdown")
-								.html(
-										'<option value="" selected="selected" value="0" disabled="disabled">School</option>')
-						$("#schoolDIV").fadeIn()
-						$("#region-dropdownDIV").fadeIn()
 						$("#school-dropdown").removeClass("disabled")
+						$(".bs-searchbox").find("input[type='text']").change(function(){
+							console.log($(this).val())
+							getSchoolVal(2)
+						})
+								return
+					}
+	$
+			.ajax({
+				type : "POST",
+				url : "/get_school?reason=" + reason + "&prov=" + prov
+						+ "&schooltxt=" + schoolTXT,
+				beforeSend : function(xhr, settings) {
+					if (!(/^http:.*/.test(settings.url) || /^https:.*/
+							.test(settings.url))) {
+						xhr.setRequestHeader("X-CSRFToken",
+								getCookie('csrftoken'));
+					}
+				},
+				success : function(response) {
+						$("#school-dropdown")
+								.html('<option value="" selected="selected" value="0" disabled="disabled">School</option>')
+// $("#schoolDIV").fadeIn()
+// $("#region-dropdownDIV").fadeIn()
 						$(response).each(
 								function(i, j) {
 									if (!$('#school-dropdown option[value="'
 											+ j[1] + '"]').length)
 										$("#school-dropdown").append(
 												$("<option/>").attr("value",
-														j[0]).text(
-														j[3] + " (" + j[4]
-																+ ")"))
+														j[0]).text( j[3] ))
 								})
-//								$('#school-dropdown').select2()
-					}
 				},
 				error : function(xhr, errmsg, err) {
 					console.log(xhr.status + ": " + xhr.responseText)
