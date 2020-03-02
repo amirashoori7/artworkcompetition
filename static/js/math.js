@@ -459,7 +459,12 @@ function forgotMyPSW(url, formId, submitBTNId) {
 }
 
 function showForgotPsw(){
-	$(".forgot-psw").show()
+	if($('.forgot-psw').html().length()<=0)
+		$('.forgot-psw').load('/account/reset_password',function(){
+			$(".forgot-psw").show()
+		})
+	else
+		$(".forgot-psw").show()
 	$(".login-ul").hide()
 }
 function hideForgotPsw(){

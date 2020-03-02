@@ -216,14 +216,34 @@ function submitRegistryForm(url) {
 		}
 	})
 }
-
+var questionsValidator = [
+	{id: "question1",
+		title:"Qustion 1",
+		min:50,
+		max:100},
+	{id: "question2",
+		title:"Qustion 2",
+		min:50,
+		max:100},
+	{id: "question3",
+		title:"Qustion 3",
+		min:35,
+		max:100}
+]
 function submitEntryForm(url) {
 	$("#registry-form").find("small").remove()
 	$("input[name='status']").remove()
-	if (totalFields == filledFields) {
-		$('#entry-form-id').append(
-				'<input type="hidden" name="status" value="0">')
-	}
+	$(questionsValidator).each(function(){
+		var fieldVal = $.trim($("#"+this.id).val())
+		if (fieldVal.val().length > 0)
+			&& (fieldVal.split(" ").length <= 50 ||
+					$.trim($("#question1").val()).split(" ").length > 100)) {
+			populateDangerMessageField("question1",
+					"This field must be between 50 and 100 words")
+			return false
+		}
+		})
+	return
 	if ($.trim($("#question1").val()).length > 0
 			&& ($.trim($("#question1").val()).split(" ").length <= 50 ||
 					$.trim($("#question1").val()).split(" ").length > 100)) {
@@ -244,6 +264,10 @@ function submitEntryForm(url) {
 		populateDangerMessageField("question3",
 				"This field must be between 50 and 100 words")
 		return false
+	}
+	if (totalFields == filledFields) {
+		$('#entry-form-id').append(
+				'<input type="hidden" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)
