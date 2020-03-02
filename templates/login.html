@@ -68,41 +68,6 @@ hideForgotPsw()
 			</button>
 		</form>
 		<div class="forgot-psw">
-			<form action="{% url 'account:forgotpsw' %}" method="post"
-				class="form-group login-form" id="forgot-psw-form-id">
-				{% csrf_token %}
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" name="username" class="form-control input-group"
-						placeholder="Email" id="inputEmail" required>
-				</div>
-				<div class="input-group  mb-3">
-					<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-					<input type="text" name="cellno" class="form-control input-group"
-						placeholder="Cell phone No" id="cellphoneno" required>
-				</div>
-				<div class="input-group mb-3">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-						type="password" class="form-control" id="inputPassword1"
-						data-toggle="tooltip" data-placement="auto"
-						title="Password must be at least 8 charachters, including numbers and charachters."
-						name="password1" placeholder="Password" required>
-				</div>
-				<div class="input-group mb-3">
-					<span class="input-group-addon"><i class="fa fa-key"></i></span> <input
-						type="password" class="form-control" id="inputPassword2"
-						name="password2" placeholder="Password" required>
-				</div>
-				<button type="button" id="forgot-psw-btn-id"
-					onclick="forgotMyPSW('{% url 'account:forgotpsw' %}','forgot-psw-form-id','forgot-psw-btn-id')"
-					class="input-group btn btn-sm btn-primary">
-					<i class="fa fa-play"></i>&nbsp;&nbsp;&nbsp;Reset Password
-				</button>
-				<button class="input-group btn btn-sm btn-link" type="button"
-					onclick="hideForgotPsw()">
-					<i class="fa fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Login
-				</button>
-			</form>
 		</div>
 	</div>
 </div>
