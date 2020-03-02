@@ -4,5 +4,5 @@ COPY tablename (field1, field2....) FROM '/pathto/file.csv' DELIMITER ',' CSV HE
 
 COPY artwork_school(natemis, province, name, region) FROM '/home/mathart/production/artworkcompetition/datatoimport/schools.csv' DELIMITER ',' CSV HEADER;
 
-COPY artwork_school(name, region, province) FROM 'C:\Users\s213457989\Documents\GitHub\artworkcompetition\datatoimport' DELIMITER ',' CSV HEADER;
+COPY artwork_school(NatEmis, Province, name) FROM 'C:\school.csv' DELIMITER ',' CSV HEADER;
 /home/mathart/production/artworkcompetition/datatoimport

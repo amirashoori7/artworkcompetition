@@ -178,7 +178,8 @@
 	}
 }
 
-.input-group small, .form-group small{
-	position: absolute;
-	top: -31px;
+.input-group small, .form-group small {
+    position: absolute;
+    top: -36px;
+    z-index: 1;
 }

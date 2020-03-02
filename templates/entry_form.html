@@ -373,11 +373,13 @@
 							</select>
 						</div>
 						<div class="form-group col-md-6 " id="schoolDIV">
-							<label for="school-dropdown">School</label> <select
-								class="form-control form-input disabled selectpicker" id="school-dropdown"
-								data-live-search="true"
+							<label for="school-dropdown">School Name</label> <select
+								class="form-control form-input disabled selectpicker"
+								id="school-dropdown" data-live-search="true"
 								onchange="$('#school-id-val').val($('#school-dropdown').val())">
-								<option value="0" selected="selected">Select</option>
+								<option value="1" selected="selected" disabled="disabled">Select
+									School</option>
+
 							</select>
 						</div>
 						<input type="hidden" name="school"

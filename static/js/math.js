@@ -203,8 +203,6 @@ function getCookie(name) {
 }
 
 function getSchoolVal(reason) {
-	var prov = $("#province-dropdown").val()
-	var schoolTXT = $(".bs-searchbox").find("input[type='text']").val()
 	if (reason == 1) {
 						$("#province-dropdown").html("")
 						$("#province-dropdown")
@@ -223,16 +221,28 @@ function getSchoolVal(reason) {
 
 								})
 						$("#school-dropdown").removeClass("disabled")
-						$(".bs-searchbox").find("input[type='text']").change(function(){
-							console.log($(this).val())
-							getSchoolVal(2)
-						})
 								return
+					} else {
+						$("#schoolDIV").fadeIn()
+						$(".bs-searchbox").find("input[type='text']").keyup(function(){
+							if($(this).val().length > 2){
+								$("small.school-dropdown").remove()
+								$("#school-dropdown").html("")
+								$("#school-dropdown").selectpicker("refresh")
+								filterSchool($(this).val())
+							} else {
+								populateDangerMessageField("school-dropdown","Please type at least 3 charachters")
+								$("#school-dropdown").html("")
+								$("#school-dropdown").selectpicker("refresh")
+							}
+						})
 					}
-	$
-			.ajax({
+}
+function filterSchool(schoolTXT){
+	var prov = $("#province-dropdown").val()
+	$.ajax({
 				type : "POST",
-				url : "/get_school?reason=" + reason + "&prov=" + prov
+				url : "/get_school?reason=2&prov=" + prov
 						+ "&schooltxt=" + schoolTXT,
 				beforeSend : function(xhr, settings) {
 					if (!(/^http:.*/.test(settings.url) || /^https:.*/
@@ -242,18 +252,15 @@ function getSchoolVal(reason) {
 					}
 				},
 				success : function(response) {
-						$("#school-dropdown")
-								.html('<option value="" selected="selected" value="0" disabled="disabled">School</option>')
-// $("#schoolDIV").fadeIn()
-// $("#region-dropdownDIV").fadeIn()
+					console.log(response)
 						$(response).each(
 								function(i, j) {
-									if (!$('#school-dropdown option[value="'
-											+ j[1] + '"]').length)
-										$("#school-dropdown").append(
-												$("<option/>").attr("value",
-														j[0]).text( j[3] ))
+									$("#school-dropdown").append(
+											$("<option/>").attr("value",
+													j[0]).text(
+													j[3]).attr("onclick","selectSchool(this)"))
 								})
+								$("#school-dropdown").selectpicker("refresh")
 				},
 				error : function(xhr, errmsg, err) {
 					console.log(xhr.status + ": " + xhr.responseText)
@@ -263,6 +270,12 @@ function getSchoolVal(reason) {
 					return -1
 				}
 			})
+}
+
+function selectSchool(schoolAnchor){
+	$("small.school-dropdown").remove()
+	$("#school-dropdown").val($(schoolAnchor).val())
+	$("#school-dropdown").selectpicker("refresh")
 }
 
 function getProvince(str) {

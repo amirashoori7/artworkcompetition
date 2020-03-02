@@ -4,10 +4,9 @@ function fetchEntryForm(url) {
 		async : true,
 		success : function(response) {
 			$("#artwork-submit-form-holder-id").html(response)
-// if ($("#school-id-val").val() == "0") {
-// $("#region-dropdownDIV").fadeOut()
-// $("#schoolDIV").fadeOut()
-// }
+			 if ($("#school-id-val").val() == "0") {
+				 $("#schoolDIV").fadeOut()
+			 }
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
 				$(
 						"input[name='learnergradeRadio'][value='"
