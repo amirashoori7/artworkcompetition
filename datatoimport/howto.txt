@@ -2,7 +2,8 @@ connect to psql database and then:
 
 COPY tablename (field1, field2....) FROM '/pathto/file.csv' DELIMITER ',' CSV HEADER;
 
-COPY artwork_school(natemis, province, name, region) FROM '/home/mathart/production/artworkcompetition/datatoimport/schools.csv' DELIMITER ',' CSV HEADER;
+COPY artwork_school(natemis, province, name) FROM '/home/mathart/production/artworkcompetition/datatoimport/school.csv' DELIMITER ',' CSV HEADER;
+iconv -f  CP1250 -t utf-8 '/home/mathart/production/artworkcompetition/datatoimport/school.csv' > '/home/mathart/production/artworkcompetition/datatoimport/school2.csv'
 
 COPY artwork_school(NatEmis, Province, name) FROM 'C:\school.csv' DELIMITER ',' CSV HEADER;
 /home/mathart/production/artworkcompetition/datatoimport
