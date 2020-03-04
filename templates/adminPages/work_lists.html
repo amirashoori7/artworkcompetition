@@ -21,9 +21,11 @@
 			<td>{{ work.owner.last_name }}, {{ work.owner.first_name }}</td>
 			<td>{{ work.get_status_display }}</td>
 			<td>{{ work.worktitle }}
+				{%if work.thumbnail.url != None %}
 				<div class="artwork-thumbnail">
 					<img class="img-thumbnail" src='{{ work.thumbnail.url }}'>
 				</div>
+				{%endif%}
 			</td>
 			<td>{{ work.owner.username }}</td>
 			<td>{{ work.learnergrade }}</td>
@@ -64,11 +66,8 @@ setTimeout(function(){
 				"box-shadow": "none"
 			})
 		})
-		$(this).click(function(){
-
-		})
 	})
 }, 200)
 </script>
 <script type="text/javascript"
-	src="static/js/work.detail.admin.js?ver={{ request.GET.ver }}">
+	src="static/js/work.detail.admin.js">

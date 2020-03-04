@@ -69,7 +69,6 @@ def gallery(request):
 
 def work_lists(request):
     works = Artwork.objects.all()
-#     filter(status__gte=0)
     context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
 
@@ -193,7 +192,7 @@ def entry_form(request):
         user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
-        artwork_form = EntryForm(request.POST, request.FILES, instance=old_data)
+        artwork_form = EntryForm(data = request.POST, files = request.FILES, instance=old_data)
         response_data = {}
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
