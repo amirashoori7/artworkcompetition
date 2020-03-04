@@ -83,27 +83,27 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'mathart',
-    'USER': 'mathartuser',
-    'PASSWORD': 'mathartuser',
-    'HOST':    'localhost',
-    'PORT': '',
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #     'NAME': 'mathart',
-#     'USER': 'postgres',
-#     'PASSWORD': 'root',
+#     'USER': 'mathartuser',
+#     'PASSWORD': 'mathartuser',
 #     'HOST':    'localhost',
 #     'PORT': '',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'mathart',
+    'USER': 'postgres',
+    'PASSWORD': 'root',
+    'HOST':    'localhost',
+    'PORT': '',
+    }
+}
 
 
 
@@ -143,8 +143,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_ROOT = ''
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = ''
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -161,3 +161,36 @@ EMAIL_HOST_USER = 'mathart.co.za@gmail.com'
 EMAIL_HOST_PASSWORD = 'M@thart2019'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': MEDIA_ROOT+ '/log.log',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}

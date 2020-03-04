@@ -59,6 +59,7 @@ function loadContent(liItem) {
 	$(".navbar-collapse").removeClass("show")
 	$("div#page-content").hide()
 	$("#banner-bottom-1").fadeIn()
+	$(".frameLoding").fadeIn()
 	var url = ""
 	$(".menu-item").removeClass("active")
 	$(liItem).addClass("active")
@@ -101,6 +102,7 @@ function loadContent(liItem) {
 				$("#banner-top").css("background-color",
 						"var(" + $(liItem).attr("data-color") + ")")
 			}
+			$(".frameLoding").fadeOut()
 		}
 	})
 }
@@ -139,6 +141,7 @@ function convertImg2SVG(className) {
 
 $(window).on("load", function() {
 	$(".frameLoding").fadeOut()
+	$(".frameLoding").css("background-color","rgba(255,255,255,.3)")
 	$(".menu-item").attr("onclick", "loadContent(this)")
 	$(".menu-item[data-href='/home/']").trigger("click")
 })

@@ -18,6 +18,9 @@ function fetchEntryForm(url) {
 	$.ajax({
 		url : url,
 		async : true,
+		beforeSend:function(){
+			$(".frameLoding").fadeIn()
+		},
 		success : function(response) {
 			$("#artwork-submit-form-holder-id").html(response)
 			if ($("#school-id-val").val() == "0") {
@@ -57,6 +60,9 @@ function fetchEntryForm(url) {
 		},
 		error : function(request, status, error) {
 			console.log(request.responseText);
+			$(".frameLoding").fadeOut()
+		},complete: function(){
+			$(".frameLoding").fadeOut()
 		}
 	});
 }
@@ -182,6 +188,7 @@ function submitRegistryForm(url) {
 				timeout : 60000,
 				url : url,
 				beforeSend : function(xhr, settings) {
+					$(".frameLoding").fadeIn()
 					if (!(/^http:.*/.test(settings.url) || /^https:.*/
 							.test(settings.url))) {
 						xhr.setRequestHeader("X-CSRFToken",
@@ -223,10 +230,12 @@ function submitRegistryForm(url) {
 				},
 				error : function(xhr, errmsg, err) {
 					console.log(xhr.status + ": " + xhr.responseText)
+					$(".frameLoding").fadeOut()
 					toggleMessageBox(xhr.responseText, true)
 				},
 				complete : function(response) {
 					$("#register-btn").prop("disabled", false);
+					$(".frameLoding").fadeOut()
 					return -1
 				}
 			})
@@ -243,7 +252,7 @@ function validateQuestions() {
 						$("#" + j.id).addClass("is-invalid")
 					$(".word-counter." + j.id).addClass("text-success")
 					populateDangerMessageField(j.id,
-							"This field must be between " + j.min + " and "
+							"Answer in between " + j.min + " and "
 									+ j.max + " words")
 					$(".questions-card").addClass(
 							"border-warning exteded-class")
@@ -263,6 +272,7 @@ function validateQuestions() {
 								+ j.max + "] words)")
 			})
 }
+
 function submitEntryForm(url) {
 	$("#registry-form").find("small").remove()
 	$("input[name='status']").remove()
@@ -272,6 +282,7 @@ function submitEntryForm(url) {
 				'<input type="hidden" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
+	console.log("submitEntryForm")
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)
 	var data = new FormData(form);
 	$.ajax({
@@ -295,6 +306,7 @@ function submitEntryForm(url) {
 			return xhr;
 		},
 		beforeSend : function(xhr, settings) {
+			$(".frameLoding").fadeIn()
 			if (!(/^http:.*/.test(settings.url) || /^https:.*/
 					.test(settings.url))) {
 				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
@@ -314,12 +326,14 @@ function submitEntryForm(url) {
 			}
 		},
 		error : function(xhr, errmsg, err) {
+			$(".frameLoding").fadeOut()
 			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)
 		},
 		complete : function(response) {
+			$(".frameLoding").fadeOut()
 			$("#buttonSubmit, #buttonSaveContinue").prop("disabled", false)
-			return -1
+			return false
 		}
 	})
 }

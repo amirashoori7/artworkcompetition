@@ -53,7 +53,6 @@
 .navbar .dropdown-menu {
 	border-radius: 1px;
 	border-color: #e5e5e5;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
 }
 
 .navbar .dropdown-menu li a {
@@ -91,9 +90,6 @@
 	margin-bottom: 22px;
 	text-align: left;
 	position: relative;
-	box-shadow: 11px 11px 11px -11px white, inset -11px -11px 11px -11px
-		white, -11px -11px 11px -11px #d3e2ec, inset 11px 11px 11px -11px
-		#d3e2ec;
 }
 
 .form-section label {
