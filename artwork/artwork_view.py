@@ -11,6 +11,8 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
+from artwork import utils
+from artwork.utils import Status
 
 
 def index(request):
@@ -67,13 +69,19 @@ def gallery(request):
     return render(request, 'gallery.html', context)
 
 
+@login_required
 def work_lists(request):
-    works = Artwork.objects.all()
+    status = request.GET.get('status',-2)
+    if status == '-2':
+        works = Artwork.objects.all()
+    else:
+        works = Artwork.objects.filter(status=status)
     context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
 
+
 def getfile(request):  
-    artworks = Artwork.objects.filter()  # status__gte=0
+    artworks = Artwork.objects.all()  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
               'worktitle', 'workfile', 'school',
@@ -95,10 +103,9 @@ def getfile(request):
                         zipObj.write(filePath)
     with open(zipfilename, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zipfilename)
+#         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zipfilename)
+        response['Content-Disposition'] = 'inline; filename=' + zipfilename
     return response
-
-
 
 
 def importfile(request):  
@@ -192,7 +199,7 @@ def entry_form(request):
         user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         old_data = get_object_or_404(Artwork, id=request.POST["id"])
-        artwork_form = EntryForm(data = request.POST, files = request.FILES, instance=old_data)
+        artwork_form = EntryForm(data=request.POST, files=request.FILES, instance=old_data)
         response_data = {}
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
@@ -200,7 +207,7 @@ def entry_form(request):
             if request.POST.get('status', '-1') != '-1':
                 artwork_form.status = int(request.POST.get("status"))
             if int(request.POST.get("school", 0)) > 0:
-                school = get_object_or_404(School, id = request.POST["school"])
+                school = get_object_or_404(School, id=request.POST["school"])
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
             try:
@@ -237,6 +244,7 @@ def entry_form(request):
         user_form = UserForm()
     context = {'form': artwork_form, 'user_form': user_form}
     return render(request, 'entry_form.html', context)
+
  
 def entry_form_view(request):
     artwork_form = EntryForm()

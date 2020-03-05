@@ -23,7 +23,7 @@ MATH = (
     ('10', 'Coordinating System'),
     ('11', 'Counting'),
     ('12', 'Curves'),
-    ('13', ' Equation'),
+    ('13', 'Equation'),
     ('14', 'Ethnomathematics'),
     ('15', 'Fibonacci'),
     ('16', 'Formulate, Mathematical Symbols'),

@@ -87,9 +87,6 @@ def registerJudge(request):
     if request.method == 'POST':
         form = AdvancedUserRegistrationForm(request.POST)
         if int(request.POST.get("id", 0)) > 0:
-#                 school = get_object_or_404(School, id=request.POST["school"])
-#                 artwork_form.school = school
-#                 artwork_form.school_id = int(request.POST["school"])
             old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
             form = AdvancedUserRegistrationForm(request.POST, request.FILES, instance=old_data)
 
