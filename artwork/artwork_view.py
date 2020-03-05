@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from zipfile import ZipFile
 from artwork import utils
 from artwork.utils import Status
+from pandas.io.excel._base import ExcelWriter
 
 
 def index(request):
@@ -91,8 +92,8 @@ def getfile(request):
     df = convert_to_df(artworks, fields=fields)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
-    csvfilename = SITE_ROOT + '\\artworks.csv'
-    zipfilename = SITE_ROOT + '\\backup.zip'
+    csvfilename = SITE_ROOT + '\\artworklist.csv'
+    zipfilename = SITE_ROOT + '\\backupFile.zip'
     df.to_csv(csvfilename, mode='w')
     with ZipFile(zipfilename, 'w') as zipObj:
         for folderName, subfolders, filenames in os.walk(SITE_ROOT):
@@ -103,8 +104,7 @@ def getfile(request):
                         zipObj.write(filePath)
     with open(zipfilename, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-#         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zipfilename)
-        response['Content-Disposition'] = 'inline; filename=' + zipfilename
+        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zipfilename)
     return response
 
 
