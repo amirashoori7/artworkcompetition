@@ -39,7 +39,7 @@ function changeView(select){
 			<th scope="col">Full Name</th>
 			<th scope="col">Status</th>
 			<th scope="col">Work Title</th>
-			<th scope="col">Email</th>
+			<th scope="col">School</th>
 			<th scope="col">Grade</th>
 		</tr>
 	</thead>
@@ -57,7 +57,7 @@ function changeView(select){
 					<img class="img-thumbnail" src='{{ work.thumbnail.url }}'>
 				</div> {%endif%}
 			</td>
-			<td>{{ work.owner.username }}</td>
+			<td>{{ work.school.name }}</td>
 			<td>{{ work.learnergrade }}</td>
 		</tr>
 		{% endfor %}
