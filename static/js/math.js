@@ -139,12 +139,6 @@ function convertImg2SVG(className) {
 	})
 }
 
-$(window).on("load", function() {
-	$(".frameLoding").fadeOut()
-	$(".frameLoding").css("background-color","rgba(255,255,255,.3)")
-	$(".menu-item").attr("onclick", "loadContent(this)")
-	$(".menu-item[data-href='/home/']").trigger("click")
-})
 
 function dropDownFunction() {
 	$("#schoolDropdown").toggleClass("show")

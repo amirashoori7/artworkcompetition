@@ -229,6 +229,16 @@ var version = {{ version }}
 	}
 	gtag('js', new Date());
 	gtag('config', 'UA-156942839-1');
+	$(window).on("load", function() {
+		$(".frameLoding").fadeOut()
+		$(".frameLoding").css("background-color","rgba(255,255,255,.3)")
+		$(".menu-item").attr("onclick", "loadContent(this)")
+		{%if request.GET.page != None %}
+			loadContent($("<li/>").attr("data-href", "/{{ request.GET.page }}/"))
+		{% else %}
+		loadContent($("<li/>").attr("data-href", "/home/"))
+		{% endif %}
+	})
 </script>
 <script src="static/js/math.js?ver={{ version }}"></script>
 {% endwith %}
