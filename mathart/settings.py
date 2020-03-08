@@ -42,13 +42,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'dbbackup'
 ]
-# DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-# DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
 # DBBACKUP_STORAGE_OPTIONS = {'location': 'c:\backups'}
-DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DBBACKUP_STORAGE_OPTIONS = {
-    'oauth2_access_token': 'eCeGSu-I54AAAAAAAAAAeAn0MBsWXVXHji2oGZ58-u6lvH2g96kVsmhTxLg4jz8v',
-}
+# DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+# DBBACKUP_STORAGE_OPTIONS = {
+#     'oauth2_access_token': 'eCeGSu-I54AAAAAAAAAAeUjYLUOoAxv08H9E3L8a0nY0kSEwJ9s80h8CxI5_puyd',
+# }
 AUTH_USER_MODEL = 'account.ProjectUser'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
