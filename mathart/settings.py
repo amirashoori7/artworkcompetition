@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'artwork',
     'evaluation',
     'rest_framework',
+    'gdstorage',
+    'dbbackup'
 ]
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
+# DBBACKUP_STORAGE_OPTIONS = {'location': 'c:\backups'}
 
 AUTH_USER_MODEL = 'account.ProjectUser'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
@@ -48,6 +53,7 @@ AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login/'
 LOGOUT_URL = 'logout'
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '<path to your json private key file>'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,27 +89,27 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#     'NAME': 'mathart',
-#     'USER': 'mathartuser',
-#     'PASSWORD': 'mathartuser',
-#     'HOST':    'localhost',
-#     'PORT': '',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': 'mathart',
-    'USER': 'postgres',
-    'PASSWORD': 'root',
+    'USER': 'mathartuser',
+    'PASSWORD': 'mathartuser',
     'HOST':    'localhost',
     'PORT': '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     'NAME': 'mathart',
+#     'USER': 'postgres',
+#     'PASSWORD': 'root',
+#     'HOST':    'localhost',
+#     'PORT': '',
+#     }
+# }
 
 
 

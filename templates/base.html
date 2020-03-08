@@ -236,7 +236,10 @@ var version = {{ version }}
 		{%if request.GET.page != None %}
 			loadContent($("<li/>").attr("data-href", "/{{ request.GET.page }}/"))
 		{% else %}
-		loadContent($("<li/>").attr("data-href", "/home/"))
+			loadContent($("<li/>").attr("data-href", "/home/"))
+		{% endif %}
+		{%if request.GET.message != None %}
+			toggleMessageBox("{{ request.GET.message }}",{{ request.GET.T }})
 		{% endif %}
 	})
 </script>
