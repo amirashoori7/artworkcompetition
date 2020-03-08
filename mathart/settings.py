@@ -42,17 +42,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'dbbackup'
 ]
-DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
+# DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+# DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
 # DBBACKUP_STORAGE_OPTIONS = {'location': 'c:\backups'}
-
+DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DBBACKUP_STORAGE_OPTIONS = {
+    'oauth2_access_token': 'eCeGSu-I54AAAAAAAAAAeAn0MBsWXVXHji2oGZ58-u6lvH2g96kVsmhTxLg4jz8v',
+}
 AUTH_USER_MODEL = 'account.ProjectUser'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login/'
 LOGOUT_URL = 'logout'
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '<path to your json private key file>'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
