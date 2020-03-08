@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'artwork',
     'evaluation',
     'rest_framework',
-    'gdstorage',
     'dbbackup'
 ]
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
