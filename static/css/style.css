@@ -272,7 +272,7 @@ p {
 
 .full-screen-div {
 	position: fixed;
-	z-index: 2000;
+	z-index: 1030;
 	top: 0;
 	bottom: 0;
 	left: 0;

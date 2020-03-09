@@ -1,3 +1,17 @@
+//	  Pending = -1
+//    Submitted = 0
+//    Requires_Revision = 1
+//    Revised_work = 2
+//    Rejected_Stage_0 = 3
+//    Accepted_Stage_0 = 4
+//    Waiting_For_Decision = 5
+//    Accepted_Stage_1 = 6
+//    Rejected_Stage_1 = 7
+//    Waiting_For_Artpost = 8
+//    Rejected_Stage_2 = 9
+//    Artpost_Recieved = 10
+//    Rejected_Stage_3 = 11
+//    Winner = 12
 function validateSubmission(reason) {
 	switch (reason) {
 	case 0:
@@ -50,6 +64,7 @@ function validateSubmission(reason) {
 }
 
 function updateTheArtwork() {
+	$(".frameLoding").fadeIn()
 	var form = $('#entry-approval-form')[0];
 	var data = new FormData(form);
 	$
@@ -85,9 +100,9 @@ function updateTheArtwork() {
 					}
 				},
 				success : function(response) {
+					closeFullScreenDiv()
 					if (response.successResult != null) {
 						toggleMessageBox(response.successResult, false)
-						closeFullScreenDiv()
 						$(".menu-item[data-href='/work_lists/']").trigger("click")
 					} else if (response.errorResults != null) {
 						Object.keys(JSON.parse(response.errorResults)).forEach(
@@ -104,9 +119,14 @@ function updateTheArtwork() {
 				error : function(xhr, errmsg, err) {
 					console.log(xhr.status + ": " + xhr.responseText)
 					toggleMessageBox(xhr.responseText, true)
+					closeFullScreenDiv()
+					$(".frameLoding").fadeOut()
 				},
 				complete : function(response) {
-					return -1
+					closeFullScreenDiv()
+					$(".frameLoding").fadeOut()
+					$('#admin-console-content').load('/work_lists?status=-2')
+					return false
 				}
 			})
 }

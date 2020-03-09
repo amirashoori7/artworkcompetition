@@ -143,6 +143,7 @@
 </div>
 <script>
 function submitRegistryForm(url) {
+	$(".frameLoding").fadeIn()
 	var form = $('#registry-form')[0]
 	$("#register-btn").prop("disabled", true)
 	var data = new FormData(form)
@@ -162,6 +163,7 @@ function submitRegistryForm(url) {
 			}
 		},
 		success : function(response) {
+			closeFullScreenDiv()
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
 				$(".form-signin.form-general-style").find("input#inputEmail")
@@ -170,10 +172,7 @@ function submitRegistryForm(url) {
 						.find("input#inputPassword").val($("#registry-form").find("input#password1")
 										.val())
 				$(".form-signin.form-general-style").submit()
-				loadContent($("<li/>").attr({
-					"data-href" : "/signup_page/"
-				}))
-				$("#login-div").load('/account/login/')
+				$('#admin-console-content').load('/account/userlist/')
 			} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
 				populateErrorMessageFields(response.errorResults)
@@ -185,10 +184,13 @@ function submitRegistryForm(url) {
 		error : function(xhr, errmsg, err) {
 			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)
+			$(".frameLoding").fadeOut()
 		},
 		complete : function(response) {
+			closeFullScreenDiv()
+			$(".frameLoding").fadeOut()
 			$("#register-btn").prop("disabled", false);
-			return -1
+			return false
 		}
 	})
 }

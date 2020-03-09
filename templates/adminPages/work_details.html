@@ -1,9 +1,51 @@
 <div class="row">
 	<div class="col-md-2"></div>
+	<div class="col-md-8"><h4>{{ work.get_status_display }}</h4></div>
+	<div class="col-md-2"></div>
+</div>
+<div class="row">
+	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div class="card">
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#artwork-section">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-palette"></i>&nbsp;&nbsp;&nbsp;Artwork</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="artwork-section"
+				data-title="Upload my artwork">
+
+				<div class="row report-section">
+					<div class="col-md-12">
+						<img type="file" id="workfileCropped"
+							src="{{ work.workfile.url }}">
+					</div>
+					<div class="col-md-12">
+						<h3>
+							<strong>Artwork </strong>"{{ work.worktitle }}"
+						</h3>
+					</div>
+					<div class="col-md-12 ">
+						<h5>
+							<strong>By </strong>
+							<!-- 							MATHARTIS NAME SURNAME -->
+							{{ work.owner.last_name }}, {{ work.owner.first_name }}
+						</h5>
+						<h5>
+							<strong>Serial</strong>
+							<!-- 							SERIAL NUMBER -->
+							{{ work.school.province }}_{{ work.school.natemis }}_{{ work.id }}
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card">
 			{%if work.status == 0 or work.status == 2 %} 
-				{%if user.user_type == 6 %}
+			
+			{%if user.user_type == 6%}
 			<div class="row" data-title="Eligible/Revision/Reject">
 				<div class="col-md-12" id="">
 					<form method="post" id="entry-approval-form"
@@ -57,20 +99,15 @@
 
 			</div>
 			<!-- 	FORM D1-a -->
-				{% endif %}
-			{% elif work.status == 4 %}
-				{%if user.user_type == 2 or user.user_type == 6 %}
-
-
+			{% endif %} {% elif work.status == 4 %} {%if user.user_type == 2 or user.user_type == 6 %}
 			<div class="row">
-				<div class="col-md-12" id="form-d1-a"></div>
+				<div class="col-md-12" id="form-d1a"></div>
 			</div>
 
 
 			<!-- 	FORM D2 -->
 
-				{% endif %}
-			{% elif work.status == 6 %}
+			{% endif %} {% elif work.status == 6 %}
 			<div class="row form-section" data-title="Evaluation Form Stage 2">
 				<div class="col-md-12" id="form-d2"></div>
 			</div>
@@ -87,38 +124,6 @@
 			</form>
 			{%endif%}
 			<hr>
-			<div class="card">
-				<div class="card-header collapsed row" data-toggle="collapse"
-					aria-expanded="false" href="#artwork-section">
-					<div class="col-md-11">
-						<a class="card-title"><i class="fa fa-palette"></i>&nbsp;&nbsp;&nbsp;Artwork</a>
-					</div>
-					<div class="col-md-1"></div>
-				</div>
-				<div class="collapse card-body" id="artwork-section"
-					data-title="Upload my artwork">
-
-					<div class="row report-section">
-						<div class="col-md-12">
-							<img type="file" id="workfileCropped"
-								src="{{ work.workfile.url }}">
-						</div>
-						<div class="col-md-12">
-							<h3>
-								<strong>Artwork </strong>"{{ work.worktitle }}"
-							</h3>
-						</div>
-						<div class="col-md-12 ">
-							<h5>
-								<strong>By </strong>{{ work.owner.last_name }}, {{ work.owner.first_name }}
-							</h5>
-							<h5>
-								<strong>Serial</strong> {{ work.school.province }}_{{ work.school.natemis }}_{{ work.id }}
-							</h5>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="card">
 				<div class="card-header collapsed row" data-toggle="collapse"
 					aria-expanded="false" href="#artist-section">
@@ -141,7 +146,10 @@
 						</div>
 						<div class="col-md-6">
 							<h6>
-								{{ work.learnergrade }}, <strong>School</strong> {{ work.school.name }} ({{ work.school.region }}, 
+								{{ work.learnergrade }}, <strong>School</strong>
+								<!-- 								SCHOOL INFO -->
+								{{work.school.name }} ({{ work.school.region }},
+								<!-- 								PROVINCE -->
 								&nbsp;{{ work.school.get_province_display }}).
 							</h6>
 							<h6>
@@ -158,11 +166,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
 			<div class="card">
 				<div class="card-header collapsed row" data-toggle="collapse"
 					aria-expanded="false" href="#questions-section">
@@ -229,7 +232,7 @@
 	$(document).ready(
 			function() {
 				{% if work.status == 4 %}
-				$("#evaluation-form-holder").load(
+				$("#form-d1a").load(
 						'/evaluation/formd1a?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD1AForm").click(function(ev) {
