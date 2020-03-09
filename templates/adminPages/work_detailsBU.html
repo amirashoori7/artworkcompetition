@@ -5,7 +5,7 @@
 			{%if work.status == 0 or work.status == 2 %} 
 				{%if user.user_type == 6 %}
 			<div class="row" data-title="Eligible/Revision/Reject">
-				<div class="col-md-12" id="evaluation-form-holder">
+				<div class="col-md-12" id="">
 					<form method="post" id="entry-approval-form"
 						action="{% url 'artwork:work_detail_update' %}"
 						class="needs-validation form-general-style"
@@ -56,6 +56,36 @@
 				</div>
 
 			</div>
+			<!-- 	FORM D1-a -->
+				{% endif %}
+			{% elif work.status == 4 %}
+				{%if user.user_type == 2 or user.user_type == 6 %}
+
+
+			<div class="row">
+				<div class="col-md-12" id="form-d1-a"></div>
+			</div>
+
+
+			<!-- 	FORM D2 -->
+
+				{% endif %}
+			{% elif work.status == 6 %}
+			<div class="row form-section" data-title="Evaluation Form Stage 2">
+				<div class="col-md-12" id="form-d2"></div>
+			</div>
+			{%elif work.status == 10 %}
+			<form method="post" id="" action="/"
+				class="needs-validation form-general-style"
+				enctype="multipart/form-data" novalidate>
+				FORM D3
+				<div class="row form-section" data-title="Decision">
+					<div class="col-md-12">
+						<button class="action-button green" id="buttonSubmit">Submit</button>
+					</div>
+				</div>
+			</form>
+			{%endif%}
 			<hr>
 			<div class="card">
 				<div class="card-header collapsed row" data-toggle="collapse"
@@ -199,34 +229,17 @@
 	$(document).ready(
 			function() {
 				{% if work.status == 4 %}
-				$("#evaluation-form-holder").load(
+				$("#form-d1-a").load(
 						'/evaluation/formd1a?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD1AForm").click(function(ev) {
 								ev.preventDefault()
 							})
 						})
-						{% elif work.status == 5 %}
-				$("#evaluation-form-holder").load(
-						'/evaluation/formd1b?work_id=' + $("#work_id").val(),
-						function() {
-							$("#buttonSubmitD2Form").click(function(ev) {
-								ev.preventDefault()
-							})
-						})
 						{% elif work.status == 6 %}
 
-				$("#evaluation-form-holder").load(
+				$("#form-d2").load(
 						'/evaluation/formd2?work_id=' + $("#work_id").val(),
-						function() {
-							$("#buttonSubmitD2Form").click(function(ev) {
-								ev.preventDefault()
-							})
-						})
-					{% elif work.status == 10 %}
-
-				$("#evaluation-form-holder").load(
-						'/evaluation/formd3?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD2Form").click(function(ev) {
 								ev.preventDefault()

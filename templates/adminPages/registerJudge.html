@@ -91,7 +91,7 @@
 						<span class="input-group-addon"><i
 							class="fa fa-user"></i></span>
 					</div>
-					<select name="user_type" class="selectpicker"
+					<select name="user_type" class="form-control form-input"
 						data-title="Select Gender" data-style="btn-default btn-block"
 						data-menu-style="dropdown-blue"> {% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
 						<option value="{{ x }}" {% if form.instance.user_type.value == x %} selected {% endif %}>

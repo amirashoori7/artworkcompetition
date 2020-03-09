@@ -1,0 +1,33 @@
+<hr>
+<div class="row page-title">
+	<div class="col-md-4">
+		<strong>User:</strong>&nbsp; {{ form.instance.author }}
+	</div>
+	<div class="col-md-8">
+		<h5>Evaluation Form</h5>
+	</div>
+</div>
+<form method="post" action="{% url 'evaluation:formd1a' %}"
+	class="needs-validation form-general-style" id="formd1aId"
+	enctype="multipart/form-data" novalidate>
+	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
+	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
+		name="id" id="id">
+	<div class="row">
+		<div class="col-md-12">
+			<label for="comment"> Comments</label>
+			<textarea class="form-control form-input" id="comment"
+				placeholder="Please add any comments, if there are some..."
+				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-12 text-center">
+<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
+			<button class="action-button" type="button" id="buttonSubmitD1AForm"
+				onclick="submitAForm('{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm')">Submit</button>
+		</div>
+	</div>
+	{% csrf_token %}
+</form>
