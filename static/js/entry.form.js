@@ -18,7 +18,7 @@ function fetchEntryForm(url) {
 	$.ajax({
 		url : url,
 		async : true,
-		beforeSend:function(){
+		beforeSend : function() {
 			$(".frameLoding").fadeIn()
 		},
 		success : function(response) {
@@ -61,7 +61,8 @@ function fetchEntryForm(url) {
 		error : function(request, status, error) {
 			console.log(request.responseText);
 			$(".frameLoding").fadeOut()
-		},complete: function(){
+		},
+		complete : function() {
 			$(".frameLoding").fadeOut()
 		}
 	});
@@ -251,9 +252,8 @@ function validateQuestions() {
 					if (!$("#" + j.id).hasClass("is-invalid"))
 						$("#" + j.id).addClass("is-invalid")
 					$(".word-counter." + j.id).addClass("text-success")
-					populateDangerMessageField(j.id,
-							"Answer in between " + j.min + " and "
-									+ j.max + " words")
+					populateDangerMessageField(j.id, "Answer in between "
+							+ j.min + " and " + j.max + " words")
 					$(".questions-card").addClass(
 							"border-warning exteded-class")
 					$(".questions-card").find(".col-md-1 i").addClass(
@@ -316,8 +316,7 @@ function submitEntryForm(url) {
 			if (response.successResult != null) {
 				$(".nav-item menu-item.active").trigger("click")
 				toggleMessageBox(response.successResult, false)
-				if (totalFields == filledFields)
-					$(".nav-item.menu-item.active").trigger("click")
+				$(".nav-item.menu-item.active").trigger("click")
 			}
 			if (response.errorResults != null)
 				populateErrorMessageFields(response.errorResults)

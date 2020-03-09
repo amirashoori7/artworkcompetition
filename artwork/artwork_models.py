@@ -93,6 +93,8 @@ class Artwork(models.Model):
     def make_thumbnail(self):
         if self.workfile.name is None or len(self.workfile.name) <= 0:
             return False
+        if self.workfile.name.split(".")[0] in self.thumbnail.name :
+            return False
         image = open(self.workfile)
         ratio = image.width / 200
         THUMB_SIZE = (200, image.height / ratio)
