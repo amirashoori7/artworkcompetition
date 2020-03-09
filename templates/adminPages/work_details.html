@@ -99,29 +99,35 @@
 
 			</div>
 			<!-- 	FORM D1-a -->
-			{% endif %} {% elif work.status == 4 %} {%if user.user_type == 2 or user.user_type == 6 %}
+			{% endif %} 
+			{% elif work.status == 4 %} 
+			{%if user.user_type == 2 or user.user_type == 6 %}
 			<div class="row">
 				<div class="col-md-12" id="form-d1a"></div>
 			</div>
 
 
+			<!-- 	FORM D1-b -->
+
+			{% endif %} 
+			{% elif work.status == 5 %} 
+			{%if user.user_type == 2 or user.user_type == 6 %}
+			<div class="row">
+				<div class="col-md-12" id="form-d1b"></div>
+			</div>
+
+
 			<!-- 	FORM D2 -->
 
-			{% endif %} {% elif work.status == 6 %}
-			<div class="row form-section" data-title="Evaluation Form Stage 2">
+			{% endif %} 
+			{% elif work.status == 6 %}
+			<div class="row">
 				<div class="col-md-12" id="form-d2"></div>
 			</div>
 			{%elif work.status == 10 %}
-			<form method="post" id="" action="/"
-				class="needs-validation form-general-style"
-				enctype="multipart/form-data" novalidate>
-				FORM D3
-				<div class="row form-section" data-title="Decision">
-					<div class="col-md-12">
-						<button class="action-button green" id="buttonSubmit">Submit</button>
-					</div>
-				</div>
-			</form>
+			<div class="row">
+				<div class="col-md-12" id="form-d3"></div>
+			</div>
 			{%endif%}
 			<hr>
 			<div class="card">
@@ -240,7 +246,7 @@
 							})
 						})
 						{% elif work.status == 5 %}
-				$("#evaluation-form-holder").load(
+				$("#form-d1b").load(
 						'/evaluation/formd1b?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD2Form").click(function(ev) {
@@ -249,7 +255,7 @@
 						})
 						{% elif work.status == 6 %}
 
-				$("#evaluation-form-holder").load(
+				$("#form-d2").load(
 						'/evaluation/formd2?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD2Form").click(function(ev) {
@@ -258,7 +264,7 @@
 						})
 					{% elif work.status == 10 %}
 
-				$("#evaluation-form-holder").load(
+				$("#form-d3").load(
 						'/evaluation/formd3?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD2Form").click(function(ev) {

@@ -64,7 +64,6 @@ def create_d1b(request):
         old_data = get_object_or_404(D1B, id=request.POST["id"])
         formd1B_form = FormD1B(request.POST, instance=old_data)
         if formd1B_form.is_valid():
-            d1as = D1B.objects.filter(artwork=artwork)
             formd1B_form = formd1B_form.save(commit=False)
             formd1B_form.author = request.user
             formd1B_form.artwork = artwork
@@ -153,7 +152,7 @@ def create_d3(request):
     else:
         formd3_form = FormD3()
     context = {'form': formd3_form}
-    return render(request, 'evaluationForms/D2_form.html', context)
+    return render(request, 'evaluationForms/D3_form.html', context)
 
 '''
 def create_evald1b(request, id):
