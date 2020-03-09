@@ -11,6 +11,7 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
+from account.views_account import projectUserList
 
 
 def index(request):
@@ -69,12 +70,14 @@ def gallery(request):
 
 @login_required
 def work_lists(request):
-    status = request.GET.get('status',-2)
+    status = request.GET.get('status', -2)
     if status == '-2':
         works = Artwork.objects.all()
     else:
         works = Artwork.objects.filter(status=status)
-    context = {'works': works}
+    numberofartworks = Artwork.objects.filter(status__gte=0).count()
+    numberoflearners = ProjectUser.objects.filter(user_type=1).count()
+    context = {'works': works, 'numberofartworks': numberofartworks, 'numberoflearners':numberoflearners}
     return render(request, 'adminPages/work_lists.html', context)
 
 

@@ -4,23 +4,30 @@
 <div class="photo-viewer"></div>
 <div class="row">
 	<div class="col-md-3">
-	<label for="status">Filter Status</label>
-		<select onchange="changeView(this)" class="form-control form-input" id="status"><option value="-2">All</option>
-			<option value="-1">Pending</option> 
-			<option value="0">Submitted</option> 
-			<option value="1">Required Revision</option> 
-			<option value="2">Revised Work</option> 
-			<option value="3">Rejected Stage 0</option> 
-			<option value="4">Accepted Stage 0</option> 
-			<option value="5">Waiting for Decision</option> 
-			<option value="6">Accepted Stage 1</option> 
-			<option value="7">Rejected Stage 1</option> 
-			<option value="8">Waiting for Posting Artwork</option> 
-			<option value="9">Rejected Stage 2</option> 
-			<option value="10">Artwork Received</option> 
-			<option value="11">Rejected Stage 3</option> 
-			<option value="12">Winner</option> 
+		<label for="status">Filter Status</label> <select
+			onchange="changeView(this)" class="form-control form-input"
+			id="status"><option value="-2">All</option>
+			<option value="-1">Pending</option>
+			<option value="0">Submitted</option>
+			<option value="1">Required Revision</option>
+			<option value="2">Revised Work</option>
+			<option value="3">Rejected Stage 0</option>
+			<option value="4">Accepted Stage 0</option>
+			<option value="5">Waiting for Decision</option>
+			<option value="6">Accepted Stage 1</option>
+			<option value="7">Rejected Stage 1</option>
+			<option value="8">Waiting for Posting Artwork</option>
+			<option value="9">Rejected Stage 2</option>
+			<option value="10">Artwork Received</option>
+			<option value="11">Rejected Stage 3</option>
+			<option value="12">Winner</option>
 		</select>
+	</div>
+	<div class="col-md-3">
+	Number of learners: {{numberoflearners}}
+	</div>
+	<div class="col-md-3">
+	Submitted works: {{numberofartworks}}
 	</div>
 </div>
 <script type="text/javascript">
