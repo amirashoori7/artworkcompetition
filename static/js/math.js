@@ -385,7 +385,6 @@ function loginForm(url, formId, submitBTNId) {
 		success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$('#' + formId).find("input#id").val(response.id)
 			} else if (response.errorResults != null) {
 				populateErrorMessageFields(response.errorResults)
 			} else if (response.errorResult != null)

@@ -163,7 +163,6 @@ function submitRegistryForm(url) {
 			}
 		},
 		success : function(response) {
-			closeFullScreenDiv()
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
 				$(".form-signin.form-general-style").find("input#inputEmail")
@@ -173,7 +172,8 @@ function submitRegistryForm(url) {
 										.val())
 				$(".form-signin.form-general-style").submit()
 				$('#admin-console-content').load('/account/userlist/')
-			} else if (response.errorResults != null) {
+				closeFullScreenDiv()
+		} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
 				populateErrorMessageFields(response.errorResults)
 				toggleMessageBox("<span>Registration unsuccessful.</span>",
@@ -187,7 +187,6 @@ function submitRegistryForm(url) {
 			$(".frameLoding").fadeOut()
 		},
 		complete : function(response) {
-			closeFullScreenDiv()
 			$(".frameLoding").fadeOut()
 			$("#register-btn").prop("disabled", false);
 			return false

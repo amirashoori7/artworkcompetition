@@ -1,102 +1,173 @@
+<style>
+.row.form-section .col-md-2 {
+	text-align: center;
+}
+</style>
 <div class="page-title">
 	<h2>Evaluation Form Stage 2</h2>
 </div>
+<hr>
 <form method="post" action="{% url 'evaluation:formd2' %}"
 	class="needs-validation form-general-style"
 	enctype="multipart/form-data" novalidate>
-	<div class="form-section" data-title="Image Quality">
-		<div class="row">
-			<div class="col-md-2">
-				<lable for="imagequality">Excellent</lable>
-				<input type="hidden" class="form-control form-input"
-					id="imagequality"
-					value="{{ form.instance.imgq|default_if_none:'' }}" required>
-				<input type="radio" checked class="form-control form-input"
-					name="imgq" value="1">
-			</div>
-			<div class="col-md-2">
-				<lable for="imagequality">Good</lable>
-				<input type="radio" class="form-control form-input" name="imgq"
-					value="2">
-			</div>
-			<div class="col-md-2">
-				<lable for="imagequality">Average</lable>
-				<input type="radio" class="form-control form-input" name="imgq"
-					value="3">
-			</div>
-			<div class="col-md-2">
-				<lable for="imagequality">Minimal</lable>
-				<input type="radio" class="form-control form-input" name="imgq"
-					value="4">
-			</div>
-			<div class="col-md-2">
-				<lable for="imagequality">None</lable>
-				<input type="radio" class="form-control form-input" name="imgq"
-					value="5">
-			</div>
+	<div class="row form-section">
+		{% for x, y in form.fields.math.base_field.choices %} {% if x != '' %}
+		<div class="form-check col-md-4">
+			<input class="form-check-input" type="checkbox"
+				id="inlineCheckbox{{ x }}" value="{{ x }}" {% if form.instance.user_type.value == x %} checked {% endif %}> <label
+				class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
+		</div>
+		{% endif %} {% endfor %}
+	</div>
+	<div class="row form-section"
+		data-title="Was the Mathematics correctly applied?">
+		<div class="col-md-2">
+			<lable>Excellent</lable>
+			<input type="hidden" class="form-control form-input"
+				value="{{ form.instance.imgq|default_if_none:'' }}" required>
+			<input type="radio" class="form-control form-input" name="q1radio"
+				value="4">
+		</div>
+		<div class="col-md-2">
+			<lable>Good</lable>
+			<input type="radio" class="form-control form-input" name="q1radio"
+				value="3">
+		</div>
+		<div class="col-md-2">
+			<lable>Average</lable>
+			<input type="radio" class="form-control form-input" name="q1radio"
+				value="2">
+		</div>
+		<div class="col-md-2">
+			<lable>Minimal</lable>
+			<input type="radio" class="form-control form-input" name="q1radio"
+				value="1">
+		</div>
+		<div class="col-md-2">
+			<lable>None</lable>
+			<input type="radio" class="form-control form-input" name="q1radio"
+				value="0">
+		</div>
+		<div class="col-md-2">
+			<lable>Score</lable>
+			<input type="text" class="form-control form-input" name="q1radioscore"
+				value="">
+			<input type="text" class="form-control form-input" name="q1" value="{{ form.instance.q1 }}">
 		</div>
 	</div>
-
-	<div class="form-section" data-title="Answers Score">
-		<div class="row">
-			<div class="col-md-2">
-				<input type="hidden" class="form-control form-input"
-					id="answerscore"
-					value="{{ form.instance.answersq|default_if_none:'' }}" required>
-				<input type="radio" checked class="form-control form-input"
-					name="answersq" value="1">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="answersq"
-					value="2">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="answersq"
-					value="3">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="answersq"
-					value="4">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="answersq"
-					value="5">
-			</div>
+	<hr>
+	<div class="row form-section"
+		data-title="How well was the connection between Mathematics and the artwork explained in the paragraph?">
+		<div class="col-md-2">
+			<lable>Excellent</lable>
+			<input type="hidden" class="form-control form-input"
+				value="{{ form.instance.imgq|default_if_none:'' }}" required>
+			<input type="radio" class="form-control form-input" name="q2radio"
+				value="4">
+		</div>
+		<div class="col-md-2">
+			<lable>Good</lable>
+			<input type="radio" class="form-control form-input" name="q2radio"
+				value="3">
+		</div>
+		<div class="col-md-2">
+			<lable>Average</lable>
+			<input type="radio" class="form-control form-input" name="q2radio"
+				value="2">
+		</div>
+		<div class="col-md-2">
+			<lable>Minimal</lable>
+			<input type="radio" class="form-control form-input" name="q2radio"
+				value="1">
+		</div>
+		<div class="col-md-2">
+			<lable>None</lable>
+			<input type="radio" class="form-control form-input" name="q2radio"
+				value="0">
+		</div>
+		<div class="col-md-2">
+			<lable>Score</lable>
+			<input type="text" class="form-control form-input" name="q2radioscore"
+				value="">
+			<input type="text" class="form-control form-input" name="q2" value="{{ form.instance.q2 }}">
 		</div>
 	</div>
-
-	<div class="form-section" data-title="Origin Quality">
-		<div class="row">
-			<div class="col-md-2">
-				<input type="hidden" class="form-control form-input"
-					id="originquality"
-					value="{{ form.instance.answersq|default_if_none:'' }}" required>
-				<input type="radio" checked class="form-control form-input"
-					name="originq" value="1">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="originq"
-					value="2">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="originq"
-					value="3">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="originq"
-					value="4">
-			</div>
-			<div class="col-md-2">
-				<input type="radio" class="form-control form-input" name="originq"
-					value="5">
-			</div>
+	<hr>
+	<div class="row form-section"
+		data-title="How creative/original/clever is the connection with Mathematics?">
+		<div class="col-md-2">
+			<lable>Excellent</lable>
+			<input type="hidden" class="form-control form-input"
+				value="{{ form.instance.imgq|default_if_none:'' }}" required>
+			<input type="radio" class="form-control form-input" name="q3radio"
+				value="4">
+		</div>
+		<div class="col-md-2">
+			<lable>Good</lable>
+			<input type="radio" class="form-control form-input" name="q3radio"
+				value="3">
+		</div>
+		<div class="col-md-2">
+			<lable>Average</lable>
+			<input type="radio" class="form-control form-input" name="q3radio"
+				value="2">
+		</div>
+		<div class="col-md-2">
+			<lable>Minimal</lable>
+			<input type="radio" class="form-control form-input" name="q3radio"
+				value="1">
+		</div>
+		<div class="col-md-2">
+			<lable>None</lable>
+			<input type="radio" class="form-control form-input" name="q3radio"
+				value="0">
+		</div>
+		<div class="col-md-2">
+			<lable>Score</lable>
+			<input type="text" class="form-control form-input" name="q3radioscore">
+			<input type="text" class="form-control form-input" name="q3" value="{{ form.instance.q3 }}">
+		</div>
+	</div>
+	<hr>
+	<div class="row form-section"
+		data-title="How clear is the Mathematics visually portrayed in the artwork?">
+		<div class="col-md-2">
+			<lable>Excellent</lable>
+			<input type="hidden" class="form-control form-input"
+				value="{{ form.instance.imgq|default_if_none:'' }}" required>
+			<input type="radio" class="form-control form-input" name="q4radio"
+				value="4">
+		</div>
+		<div class="col-md-2">
+			<lable>Good</lable>
+			<input type="radio" class="form-control form-input" name="q4radio"
+				value="3">
+		</div>
+		<div class="col-md-2">
+			<lable>Average</lable>
+			<input type="radio" class="form-control form-input" name="q4radio"
+				value="2">
+		</div>
+		<div class="col-md-2">
+			<lable>Minimal</lable>
+			<input type="radio" class="form-control form-input" name="q4radio"
+				value="1">
+		</div>
+		<div class="col-md-2">
+			<lable>None</lable>
+			<input type="radio" class="form-control form-input" name="q4radio"
+				value="0">
+		</div>
+		<div class="col-md-2">
+			<lable>Score</lable>
+			<input type="text" class="form-control form-input" name="q4radioscore">
+			<input type="text" class="form-control form-input" name="q4" value="{{ form.instance.q4 }}">
 		</div>
 	</div>
 
 	<div class="form-section" data-title="Comment">
 		<div class="row">
 			<div class="col-md-12">
-				<lable for="comment"> <strong>Comments</strong></lable>
 				<textarea class="form-control form-input" id="comment"
 					placeholder="Dear judge, please add any comments, if there are some..."
 					name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
@@ -105,6 +176,16 @@
 
 	</div>
 	<div class="col-md-12 text-center">
-		<button class="action-button" type="button" id="buttonSubmitD1AForm">Submit</button>
+		<button class="btn btn-success" type="button" id="buttonSubmitD1AForm">Submit</button>
 	</div>
 </form>
+<script>
+	$(document).ready(function() {
+		$("input[type='radio']").each(function() {
+			$(this).change(function() {
+				$("input[type='text'][name='"+$(this).attr("name")+"score']").val(parseInt($(this).val() * 5 ) + "%")
+				
+			})
+		})
+	})
+</script>

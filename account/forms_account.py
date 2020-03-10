@@ -44,7 +44,10 @@ class AdvancedUserRegistrationForm(UserCreationForm):
         model = ProjectUser
         fields = ('username', 'first_name', 'last_name', 'dob', 'user_type', 'organisation', 'password1', 'password2', 'cellphone')
 
-
+    def save(self, commit=True):
+        user = super().save(False)
+        user.email = user.username
+        user = super().save()
 # 1- learner phone (compulsory)
 # 2- learner email  (compulsory)
 # 3- parent email (optional)
