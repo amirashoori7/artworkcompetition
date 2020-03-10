@@ -1,5 +1,5 @@
 from django import forms
-from evaluation.models import D1A, D2, D1B
+from evaluation.models import D1A, D2, D1B, D3
 
 class FormD1A(forms.ModelForm):
     class Meta:
@@ -19,5 +19,5 @@ class FormD2(forms.ModelForm):
 
 class FormD3(forms.ModelForm):
     class Meta:
-        model = D2
-        fields = ['math', 'q1', 'q2', 'q3', 'q4', 'score', 'comment', 'author']
+        model = D3
+        fields = ['q1', 'q2', 'q3', 'q4', 'q5']

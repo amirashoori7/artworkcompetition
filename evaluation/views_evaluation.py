@@ -112,7 +112,6 @@ def create_d2(request):
         math = request.POST.getlist('math')
         if formd2_form.is_valid():
             formd2_form = formd2_form.save(commit=False)
-            artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
             formd2_form.author = request.user
             formd2_form.artwork = artwork
             formd2_form.math = math
@@ -141,13 +140,20 @@ def create_d2(request):
 
 @login_required
 def create_d3(request):
-    userModel = ProjectUser.objects.get(username=request.user)
-    artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
     if request.method == 'POST':
         response_data = {}
-        formd3_form = FormD3(request.POST, request.FILES)
+        if request.POST['work_id'] is None or request.POST['work_id'] == '':
+            response_data['errorResult'] = "Illegal access to the form, the work id is null."
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+        old_data = get_object_or_404(D3, id=request.POST["id"])
+        formd3_form = FormD3(request.POST, instance=old_data)
         if formd3_form.is_valid():
-            formd3_form = formd3_form.save()
+            formd3_form = formd3_form.save(commit=False)
+            artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
+            formd3_form.author = request.user
+            formd3_form.artwork = artwork
+            formd3_form.save()
             response_data['successResult'] = 'The evaluation form submitted successfully!'
             response_data['id'] = formd3_form.id
             return HttpResponse(json.dumps(response_data),
@@ -156,16 +162,19 @@ def create_d3(request):
             response_data['errorResults'] = formd3_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
-    elif userModel.user_type == 1:
+    elif request.method == 'GET':
+        artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         try:
-            formd3_model = get_object_or_404(D3, author=request.user)
+            formd3_model = get_object_or_404(D3, author=request.user, artwork=artwork)
             formd3_form = FormD3(instance=formd3_model)
         except:
             formd3_form, formd3_obj = D3.objects.get_or_create(author=request.user, artwork=artwork)
+        context = {'form': formd3_form}
+        return render(request, 'evaluationForms/D3_form.html', context)
     else:
-        formd3_form = FormD3()
-    context = {'form': formd3_form}
-    return render(request, 'evaluationForms/D3_form.html', context)
+        response_data['errorResult'] = "Illegal access to the form"
+        return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
 
 '''
 def create_evald1b(request, id):

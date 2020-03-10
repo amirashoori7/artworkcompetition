@@ -157,10 +157,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-6">
-			<label>Total Score</label> <input
-				type="text" class="form-control form-input" name="score"
-				value="{{ form.instance.score|default_if_none:'0' }}">
+		<div class="col-md-2">
+			Total Score
+		</div>
+		<div class="col-md-4" id="scorediv">
+			{{ form.instance.score|default_if_none:'0' }}
 		</div>
 		<div class="col-md-6">
 		<label>Comment</label>
@@ -172,10 +173,16 @@
 			</textarea>
 		</div>
 	</div>
-
-	<div class="col-md-12 text-center">
-		<button class="btn btn-success" type="button" id="buttonSubmitD2Form"
-				onclick="submitAForm('{% url 'evaluation:formd2' %}','formd2Id','buttonSubmitD2Form')">Submit</button>
+<hr>
+	<div class="row">
+	<div class="col-md-6 text-center">
+		<button class="btn btn-block btn-success" type="button" id="buttonSubmitD2Form"
+				onclick="submitAForm('{% url 'evaluation:formd2' %}','formd2Id','buttonSubmitD2Form')"><i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Submit</button>
+	</div>
+	<div class="col-md-6 text-center">
+		<button class="btn btn-block btn-outline-warning" type="button" 
+				onclick="closeFullScreenDiv()"><i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close</button>
+	</div>
 	</div>
 </form>
 <script>
@@ -201,7 +208,7 @@
 		var val = 0
 		$(".question-value").each(function(){
 			val += parseInt($(this).val() * 6.25)
-			$("input[name='score']").val(val + "%")
+			$("#scorediv").html(val + "%")
 		})
 	}
 </script>
