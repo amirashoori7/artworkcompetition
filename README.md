@@ -80,3 +80,8 @@ grant all on database mathart to mathartuser;
 	a. systemctl restart gunicorn.socket
 	b. systemctl restart gunicorn.service
 	c. service nginx restart
+	
+	
+To make a backup:
+./manage.py dbbackup
+./manage.py mediabackup

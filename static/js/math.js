@@ -347,7 +347,8 @@ function submitAForm(url, formId, submitBTNId) {
 		success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$('#admin-console-content').load('/work_lists/')
+				$('#admin-console-content').load('/work_lists?status=-2')
+				closeFullScreenDiv()
 			} else if (response.errorResults != null) {
 				populateErrorMessageFields(response.errorResults)
 			} else if (response.errorResult != null)

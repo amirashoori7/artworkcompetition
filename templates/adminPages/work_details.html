@@ -44,7 +44,6 @@
 		</div>
 		<div class="card">
 			{%if work.status == 0 or work.status == 2 %} 
-			
 			{%if user.user_type == 6%}
 			<div class="row" data-title="Eligible/Revision/Reject">
 				<div class="col-md-12" id="">
@@ -256,12 +255,7 @@
 						{% elif work.status == 6 %}
 
 				$("#form-d2").load(
-						'/evaluation/formd2?work_id=' + $("#work_id").val(),
-						function() {
-							$("#buttonSubmitD2Form").click(function(ev) {
-								ev.preventDefault()
-							})
-						})
+						'/evaluation/formd2?work_id=' + $("#work_id").val())
 					{% elif work.status == 10 %}
 
 				$("#form-d3").load(

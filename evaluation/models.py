@@ -2,6 +2,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from artwork.artwork_models import Artwork
 from account.models_account import ProjectUser
+from django.template.defaultfilters import default
 
 WEIGHT = (
     ('5', 'Excellent'),
@@ -84,7 +85,7 @@ class D1B(models.Model):
 
 class D2(models.Model):
     artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
-    math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True),)
+    math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True), default=[])
     q1 = models.IntegerField(blank=True, null=True, default=0)
     q2 = models.IntegerField(blank=True, null=True, default=0)
     q3 = models.IntegerField(blank=True, null=True, default=0)

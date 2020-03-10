@@ -100,13 +100,23 @@ def update_worklist(workid, status):
 
 @login_required
 def create_d2(request):
-    userModel = ProjectUser.objects.get(username=request.user)
-    artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
     if request.method == 'POST':
         response_data = {}
-        formd2_form = FormD2(request.POST, request.FILES)
+        if request.POST['work_id'] is None or request.POST['work_id'] == '':
+            response_data['errorResult'] = "Illegal access to the form, the work id is null."
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+        artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
+        old_data = get_object_or_404(D2, id=request.POST["id"])
+        formd2_form = FormD2(request.POST, instance=old_data)
+        math = request.POST.getlist('math')
         if formd2_form.is_valid():
-            formd2_form = formd2_form.save()
+            formd2_form = formd2_form.save(commit=False)
+            artwork = get_object_or_404(Artwork, id=int(request.POST['work_id']))
+            formd2_form.author = request.user
+            formd2_form.artwork = artwork
+            formd2_form.math = math
+            formd2_form.save()
             response_data['successResult'] = 'The evaluation form submitted successfully!'
             response_data['id'] = formd2_form.id
             return HttpResponse(json.dumps(response_data),
@@ -115,16 +125,19 @@ def create_d2(request):
             response_data['errorResults'] = formd2_form.errors.as_json(True)
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
-    elif userModel.user_type == 1:
+    elif request.method == 'GET':
+        artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         try:
-            formd2_model = get_object_or_404(D2, author=request.user)
+            formd2_model = get_object_or_404(D2, author=request.user, artwork=artwork)
             formd2_form = FormD2(instance=formd2_model)
         except:
             formd2_form, formd2_obj = D2.objects.get_or_create(author=request.user, artwork=artwork)
+        context = {'form': formd2_form}
+        return render(request, 'evaluationForms/D2_form.html', context)
     else:
-        formd2_form = FormD2()
-    context = {'form': formd2_form}
-    return render(request, 'evaluationForms/D2_form.html', context)
+        response_data['errorResult'] = "Illegal access to the form"
+        return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
 
 @login_required
 def create_d3(request):

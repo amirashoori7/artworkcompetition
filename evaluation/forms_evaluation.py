@@ -14,7 +14,7 @@ class FormD1B(forms.ModelForm):
 class FormD2(forms.ModelForm):
     class Meta:
         model = D2
-        fields = ['math', 'q1', 'q2', 'q3', 'q4', 'score', 'comment', 'author']
+        fields = ['math', 'q1', 'q2', 'q3', 'q4']
 
 
 class FormD3(forms.ModelForm):
