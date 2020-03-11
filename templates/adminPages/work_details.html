@@ -44,7 +44,7 @@
 				</div>
 			</div>
 		</div>
-		{%if work.status == 0 or work.status == 2 %} {%if user.user_type == 6%}
+		{%if work.status == 0 or work.status == 2 %} {%if user.user_type == 6 %}
 		<hr>
 		<div class="row" data-title="Eligible/Revision/Reject">
 			<div class="col-md-12" id="">
@@ -100,7 +100,7 @@
 		</div>
 		<!-- 	FORM D1-a - JUDGE 1 -->
 		{% endif %} {% elif work.status == 4 %} 
-		{%if user.user_type == 2 %}
+		{%if user.user_type == 2 or user.user_type == 6 %}
 		<div class="row">
 			<div class="col-md-12" id="form-d1a"></div>
 		</div>
@@ -108,7 +108,7 @@
 
 		<!-- 	FORM D1-b - DECISION MAKER -->
 
-		{% endif %} {% elif work.status == 5 %} {%if user.user_type == 3 %}
+		{% endif %} {% elif work.status == 5 %} {%if user.user_type == 3 or user.user_type == 6 %}
 		<div class="row">
 			<div class="col-md-12" id="form-d1b"></div>
 		</div>
@@ -117,7 +117,7 @@
 		<!-- 	FORM D2 - JUDGE 2 -->
 
 		{% endif %} {% elif work.status == 6 %}
-		{%if user.user_type == 4 %}
+		{%if user.user_type == 4 or user.user_type == 6%}
 		<div class="row">
 			<div class="col-md-12" id="form-d2"></div>
 		</div>
@@ -125,7 +125,7 @@
 		<!-- 	FORM D3 - JUDGE 3 -->
 
 		{% endif %} {%elif work.status == 10 %}
-		{%if user.user_type == 5 %}
+		{%if user.user_type == 5 or user.user_type == 6 %}
 		<div class="row">
 			<div class="col-md-12" id="form-d3"></div>
 		</div>

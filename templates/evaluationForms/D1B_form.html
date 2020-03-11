@@ -23,10 +23,23 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-md-12 text-center">
-<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
-			<button class="action-button" type="button" id="buttonSubmitD1AForm"
-				onclick="submitAForm('{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm')">Submit</button>
+		<div class="col-md-4 text-center">
+			<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
+			<button class="btn btn-block btn-success" type="button" id="buttonSubmitD1AForm"
+				onclick="submitAForm('{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm')">
+				<i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Accept
+			</button>
+		</div>
+		<div class="col-md-4 text-center">
+			<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
+			<button class="btn btn-block btn-outline-danger" type="button"
+				onclick="alert('doesnt work now')"><i class="fa fa-times">&nbsp;&nbsp;&nbsp;</i>Reject</button>
+		</div>
+		<div class="col-md-4 text-center">
+			<button class="btn btn-block btn-outline-warning" type="button"
+				onclick="closeFullScreenDiv()">
+				<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close
+			</button>
 		</div>
 	</div>
 	{% csrf_token %}

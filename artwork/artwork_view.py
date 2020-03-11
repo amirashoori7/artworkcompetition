@@ -11,7 +11,6 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
-from account.views_account import projectUserList
 
 
 def index(request):
