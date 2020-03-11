@@ -161,11 +161,10 @@ def importfile(request):
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
 
-
+@login_required
 def work_details(request, id):
-    if request.method == 'POST':
-        Artwork.objects.filter(id=id).update(status='updated_name')
     work = get_object_or_404(Artwork, id=id)
+    
     context = {'work': work}
     return render(request, 'adminPages/work_details.html', context)
 

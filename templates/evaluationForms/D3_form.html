@@ -7,8 +7,8 @@
 	<h2>Evaluation Form Stage 2</h2>
 </div>
 <hr>
-<form method="post" action="{% url 'evaluation:formd2' %}"
-	class="needs-validation form-general-style" id="formd2Id"
+<form method="post" action="{% url 'evaluation:formd3' %}"
+	class="needs-validation form-general-style" id="formd3Id"
 	enctype="multipart/form-data" novalidate>
 	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
 	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
@@ -16,9 +16,7 @@
 	<div class="row form-section" id="q1"
 		data-title="The Explanation given of the use of Mathematics in the paragraph.">
 		<div class="col-md-2">
-			<label>Excellent</label> <input type="hidden"
-				class="form-control form-input"
-				value="{{ form.instance.imgq|default_if_none:'' }}" required>
+			<label>Excellent</label>
 			<input type="radio" class="form-control form-input" name="q1radio"
 				value="4">
 		</div>
@@ -49,11 +47,8 @@
 	<div class="row form-section" id="q2"
 		data-title="The creative connection of the artwork to Mathematics">
 		<div class="col-md-2">
-			<label>Excellent</label> <input type="hidden"
-				class="form-control form-input"
-				value="{{ form.instance.imgq|default_if_none:'' }}" required>
-			<input type="radio" class="form-control form-input" name="q2radio"
-				value="4">
+			<label>Excellent</label> <input type="radio"
+				class="form-control form-input" name="q2radio" value="4">
 		</div>
 		<div class="col-md-2">
 			<label>Good</label> <input type="radio"
@@ -82,11 +77,8 @@
 	<div class="row form-section" id="q3"
 		data-title="How clearly the maths is depicted in the artwork?">
 		<div class="col-md-2">
-			<label>Excellent</label> <input type="hidden"
-				class="form-control form-input"
-				value="{{ form.instance.imgq|default_if_none:'' }}" required>
-			<input type="radio" class="form-control form-input" name="q3radio"
-				value="4">
+			<label>Excellent</label> <input type="radio"
+				class="form-control form-input" name="q3radio" value="4">
 		</div>
 		<div class="col-md-2">
 			<label>Good</label> <input type="radio"
@@ -185,20 +177,17 @@
 		</div>
 		<div class="col-md-6">
 			<label>Comment</label>
-			<textarea class="
-			form-control form-input" id="comment"
+			<textarea class="form-control form-input" id="comment"
 				placeholder="Dear judge, please add any comments, if there are some..."
-				name="comment" rows="5">
-			{{ form.instance.comment|default_if_none:'' }}
-			</textarea>
+				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
 	<hr>
 	<div class="row">
 		<div class="col-md-6 text-center">
 			<button class="btn btn-block btn-success" type="button"
-				id="buttonSubmitD2Form"
-				onclick="submitAForm('{% url 'evaluation:formd2' %}','formd2Id','buttonSubmitD2Form')">
+				id="buttonSubmitD3Form"
+				onclick="submitAForm('{% url 'evaluation:formd3' %}','formd3Id','buttonSubmitD3Form')">
 				<i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Submit
 			</button>
 		</div>
@@ -211,15 +200,25 @@
 	</div>
 </form>
 <script>
+	var weights=[
+		{q: "q1", w: 10},
+		{q: "q2", w: 30},
+		{q: "q3", w: 20},
+		{q: "q4", w: 25},
+		{q: "q5", w: 15}]
 	$(document).ready(
 			function() {
 				$("input[type='radio']").each(function() {
-					$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * 6.25) + "%")
+					var qu = $(this).attr("name").replace('radio','')
+					var weight = 0
+					for(var i = 0; i < weights.length; i++) {
+						if(qu == weights[i].q)
+							weight = weights[i].w / 4
+					}
+					$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * weight) + "%")
 					$(this).change(function() {
-						$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * 6.25)+ "%")
-						var q = $(this).attr("name").replace('radio','')
-						console.log(q)
-						$("input[name='"+q+"']").val($(this).val())
+						$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * weight)+ "%")
+						$("input[name='"+qu+"']").val($(this).val())
 						calculateTotal()
 					})
 			})
@@ -227,12 +226,17 @@
 					function() {
 						$("input[type='radio'][name='" + $(this).attr("name") + "radio'][value='"+$(this).val()+"']").prop("checked", true)
 					})
-			calculateTotal()
+				calculateTotal()
 			})
 	function calculateTotal() {
 		var val = 0
 		$(".question-value").each(function(){
-			val += parseInt($(this).val() * 6.25)
+			var weight = 0
+			for(var i = 0; i < weights.length; i++) {
+				if($(this).attr("name") == weights[i].q)
+					weight = weights[i].w / 4
+			}
+			val += parseInt($(this).val() * weight)
 			$("#scorediv").html(val + "%")
 		})
 	}

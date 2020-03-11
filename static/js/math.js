@@ -34,7 +34,7 @@ function openFullScreenDiv(htmlContenet) {
 	$(".dialog-popup-content").append(
 			$("<div/>").addClass("close-button").attr("onclick",
 					"closeFullScreenDiv()"))
-	TweenLite.to(".full-screen-div", 1, {
+	TweenLite.to(".full-screen-div", .333, {
 		scale : 1,
 		top : 0,
 		right : 0,
@@ -45,7 +45,7 @@ function openFullScreenDiv(htmlContenet) {
 }
 
 function closeFullScreenDiv() {
-	TweenLite.to(".full-screen-div", 1, {
+	TweenLite.to(".full-screen-div", .333, {
 		scale : 0,
 		transformOrigin : "center",
 		onComplete : function() {

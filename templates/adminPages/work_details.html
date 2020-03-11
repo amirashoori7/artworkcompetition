@@ -1,6 +1,8 @@
 <div class="row">
 	<div class="col-md-2"></div>
-	<div class="col-md-8"><h4>{{ work.get_status_display }}</h4></div>
+	<div class="col-md-8">
+		<h4>{{ work.get_status_display }}</h4>
+	</div>
 	<div class="col-md-2"></div>
 </div>
 <div class="row">
@@ -42,194 +44,195 @@
 				</div>
 			</div>
 		</div>
+		{%if work.status == 0 or work.status == 2 %} {%if user.user_type == 6%}
+		<hr>
+		<div class="row" data-title="Eligible/Revision/Reject">
+			<div class="col-md-12" id="">
+				<form method="post" id="entry-approval-form"
+					action="{% url 'artwork:work_detail_update' %}"
+					class="needs-validation form-general-style"
+					enctype="multipart/form-data" novalidate>
+					{% csrf_token %}
+					<div class="row form-section"
+						data-title="Validate the entry format">
+						<div class="col-md-3 form-group">
+							<label for="bioapproved">Bio is acceptable</strong> <input
+								type="checkbox" name="bioapproved" id="bioapproved"
+								value="{{ work.bioapproved }}" class="form-control form-input">
+						</div>
+						<div class="col-md-3 form-group">
+							<label for="workapproved">Artwork is uploaded properly</strong> <input
+								type="checkbox" name="workapproved" id="workapproved"
+								class="form-control form-input"
+								value="{{ work.workapproved|default_if_none:'on'}}">
+						</div>
+						<div class="col-md-3 form-group">
+							<label for="qapproved">All 3 questions are answered</strong> <input
+								type="checkbox" name="qapproved" id="qapproved"
+								value="{{ work.qapproved }}" class="form-control form-input">
+						</div>
+						<div class="col-md-3 form-group">
+							<label for="comment1">Comment</strong> <textarea type="checkbox"
+									name="comment" id="comment" class="form-control form-input"
+									rows="5" cols="100" placeholder="Any comments">{{ work.comment }}</textarea>
+						</div>
+					</div>
+					<input type="hidden" name="id" value="{{ work.id }}"
+						class="form-control form-input"> <input type="hidden"
+						name="status" value="{{ work.status }}"
+						class="form-control form-input status-values">
+					<div class="row form-section" data-title="Decision">
+						<div class="col-md-4">
+							<button class="action-button green" type="button"
+								id="approveBTN0">Approve</button>
+						</div>
+						<div class="col-md-4">
+							<button class="action-button orange" type="button"
+								id="reviseBTN0">Requires Revision</button>
+						</div>
+						<div class="col-md-4">
+							<button class="action-button red" type="button" id="rejectBTN0">Reject</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+		<!-- 	FORM D1-a - JUDGE 1 -->
+		{% endif %} {% elif work.status == 4 %} 
+		{%if user.user_type == 2 %}
+		<div class="row">
+			<div class="col-md-12" id="form-d1a"></div>
+		</div>
+
+
+		<!-- 	FORM D1-b - DECISION MAKER -->
+
+		{% endif %} {% elif work.status == 5 %} {%if user.user_type == 3 %}
+		<div class="row">
+			<div class="col-md-12" id="form-d1b"></div>
+		</div>
+
+
+		<!-- 	FORM D2 - JUDGE 2 -->
+
+		{% endif %} {% elif work.status == 6 %}
+		{%if user.user_type == 4 %}
+		<div class="row">
+			<div class="col-md-12" id="form-d2"></div>
+		</div>
+
+		<!-- 	FORM D3 - JUDGE 3 -->
+
+		{% endif %} {%elif work.status == 10 %}
+		{%if user.user_type == 5 %}
+		<div class="row">
+			<div class="col-md-12" id="form-d3"></div>
+		</div>
+		{% endif %}<hr> {%endif%}
+		
 		<div class="card">
-			{%if work.status == 0 or work.status == 2 %} 
-			{%if user.user_type == 6%}
-			<div class="row" data-title="Eligible/Revision/Reject">
-				<div class="col-md-12" id="">
-					<form method="post" id="entry-approval-form"
-						action="{% url 'artwork:work_detail_update' %}"
-						class="needs-validation form-general-style"
-						enctype="multipart/form-data" novalidate>
-						{% csrf_token %}
-						<div class="row form-section"
-							data-title="Validate the entry format">
-							<div class="col-md-3 form-group">
-								<label for="bioapproved">Bio is acceptable</strong> <input
-									type="checkbox" name="bioapproved" id="bioapproved"
-									value="{{ work.bioapproved }}" class="form-control form-input">
-							</div>
-							<div class="col-md-3 form-group">
-								<label for="workapproved">Artwork is uploaded properly</strong> <input
-									type="checkbox" name="workapproved" id="workapproved"
-									class="form-control form-input"
-									value="{{ work.workapproved|default_if_none:'on'}}">
-							</div>
-							<div class="col-md-3 form-group">
-								<label for="qapproved">All 3 questions are answered</strong> <input
-									type="checkbox" name="qapproved" id="qapproved"
-									value="{{ work.qapproved }}" class="form-control form-input">
-							</div>
-							<div class="col-md-3 form-group">
-								<label for="comment1">Comment</strong> <textarea type="checkbox"
-										name="comment" id="comment" class="form-control form-input"
-										rows="5" cols="100" placeholder="Any comments">{{ work.comment }}</textarea>
-							</div>
-						</div>
-						<input type="hidden" name="id" value="{{ work.id }}"
-							class="form-control form-input"> <input type="hidden"
-							name="status" value="{{ work.status }}"
-							class="form-control form-input status-values">
-						<div class="row form-section" data-title="Decision">
-							<div class="col-md-4">
-								<button class="action-button green" type="button"
-									id="approveBTN0">Approve</button>
-							</div>
-							<div class="col-md-4">
-								<button class="action-button orange" type="button"
-									id="reviseBTN0">Requires Revision</button>
-							</div>
-							<div class="col-md-4">
-								<button class="action-button red" type="button" id="rejectBTN0">Reject</button>
-							</div>
-						</div>
-					</form>
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#artist-section">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;MathArtist</a>
 				</div>
-
+				<div class="col-md-1"></div>
 			</div>
-			<!-- 	FORM D1-a -->
-			{% endif %} 
-			{% elif work.status == 4 %} 
-			{%if user.user_type == 2 or user.user_type == 6 %}
-			<div class="row">
-				<div class="col-md-12" id="form-d1a"></div>
-			</div>
-
-
-			<!-- 	FORM D1-b -->
-
-			{% endif %} 
-			{% elif work.status == 5 %} 
-			{%if user.user_type == 2 or user.user_type == 6 %}
-			<div class="row">
-				<div class="col-md-12" id="form-d1b"></div>
-			</div>
-
-
-			<!-- 	FORM D2 -->
-
-			{% endif %} 
-			{% elif work.status == 6 %}
-			<div class="row">
-				<div class="col-md-12" id="form-d2"></div>
-			</div>
-			{%elif work.status == 10 %}
-			<div class="row">
-				<div class="col-md-12" id="form-d3"></div>
-			</div>
-			{%endif%}
-			<hr>
-			<div class="card">
-				<div class="card-header collapsed row" data-toggle="collapse"
-					aria-expanded="false" href="#artist-section">
-					<div class="col-md-11">
-						<a class="card-title"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;MathArtist</a>
+			<div class="collapse card-body" id="artist-section"
+				data-title="Upload my artwork">
+				<div class="row report-section ">
+					<div class="col-md-6">
+						<h6>
+							<strong>Born in </strong>{{ work.owner.dob }}
+						</h6>
+						<h6>
+							<strong>Email </strong>{{ work.owner.email }}, <strong>Cell
+							</strong>{{work.owner.cellphone}}
+							<h6>
 					</div>
-					<div class="col-md-1"></div>
-				</div>
-				<div class="collapse card-body" id="artist-section"
-					data-title="Upload my artwork">
-					<div class="row report-section ">
-						<div class="col-md-6">
-							<h6>
-								<strong>Born in </strong>{{ work.owner.dob }}
-							</h6>
-							<h6>
-								<strong>Email </strong>{{ work.owner.username }}, <strong>Cell
-								</strong>{{work.owner.cellphone}}
-								<h6>
-						</div>
-						<div class="col-md-6">
-							<h6>
-								{{ work.learnergrade }}, <strong>School</strong>
-								<!-- 								SCHOOL INFO -->
-								{{work.school.name }} ({{ work.school.region }},
-								<!-- 								PROVINCE -->
-								&nbsp;{{ work.school.get_province_display }}).
-							</h6>
-							<h6>
-								<strong>Teacher</strong> {{ work.teachername }}, <strong>Email</strong>
-								{{ work.teacheremail }}
-							</h6>
-						</div>
-						<div class="col-md-12">
-							<h6>
-								<strong>Parent</strong> {{ work.parentname }}, <strong>Cell</strong>
-								{{ work.parentphone }}
-								<h6>
-						</div>
+					<div class="col-md-6">
+						<h6>
+							{{ work.learnergrade }}, <strong>School</strong>
+							<!-- 								SCHOOL INFO -->
+							{{work.school.name }} ({{ work.school.region }},
+							<!-- 								PROVINCE -->
+							&nbsp;{{ work.school.get_province_display }}).
+						</h6>
+						<h6>
+							<strong>Teacher</strong> {{ work.teachername }}, <strong>Email</strong>
+							{{ work.teacheremail }}
+						</h6>
 					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header collapsed row" data-toggle="collapse"
-					aria-expanded="false" href="#questions-section">
-					<div class="col-md-11">
-						<a class="card-title"><i class="fa fa-square-root-alt"></i>&nbsp;&nbsp;&nbsp;Questions</a>
-					</div>
-					<div class="col-md-1"></div>
-				</div>
-				<div class="collapse card-body" id="questions-section"
-					data-title="Upload my artwork">
-					<div class="row report-section">
-						<div class="col-md-6">
+					<div class="col-md-12">
+						<h6>
+							<strong>Parent</strong> {{ work.parentname }}, <strong>Cell</strong>
+							{{ work.parentphone }}
 							<h6>
-								<strong>Question 1: What Mathematics did you use in
-									your artwork?</strong>
-								<h6>
-						</div>
-						<div class="col-md-6">
-							<span id="answer1">{{ work.question1 }}</span>
-						</div>
-						{% if work.workformulafile %}
-						<div class="col-md-6">
-							<label for="formulaImg"><h6>
-									<strong>Formula Image</strong>
-								</h6></label>
-						</div>
-						<div class="col-md-6">
-							<img id="formulaImg" src="{{ work.workformulafile.url }}"
-								width="100%" height="auto">
-						</div>
-						{% endif %}
-
-						<div class="col-md-6">
-							<h6>
-								<strong>Question 2: How did you use creativity to
-									connect Mathematics with "My Universe" to make your artwork?</strong>
-								<h6>
-						</div>
-						<div class="col-md-6">
-							<span id="answer2">{{ work.question2 }}</span>
-						</div>
-						<div class="col-md-6">
-							<h6>
-								<strong>Question 3: Do you think creativity could be
-									used to teach Mathematics?</strong>
-								<h6>
-						</div>
-						<div class="col-md-6">
-							<span id="answer3">{{ work.question3 }}</span>
-						</div>
-						<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
-							class="form-control form-input"> <input type="hidden"
-							name="status" value="{{ work.status }}"
-							class="form-control form-input status-values">
 					</div>
 				</div>
 			</div>
 		</div>
+		<hr>
+		<div class="card">
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#questions-section">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-square-root-alt"></i>&nbsp;&nbsp;&nbsp;Questions</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="questions-section"
+				data-title="Upload my artwork">
+				<div class="row report-section">
+					<div class="col-md-6">
+						<h6>
+							<strong>Question 1: What Mathematics did you use in your
+								artwork?</strong>
+							<h6>
+					</div>
+					<div class="col-md-6">
+						<span id="answer1">{{ work.question1 }}</span>
+					</div>
+					{% if work.workformulafile %}
+					<div class="col-md-6">
+						<label for="formulaImg"><h6>
+								<strong>Formula Image</strong>
+							</h6></label>
+					</div>
+					<div class="col-md-6">
+						<img id="formulaImg" src="{{ work.workformulafile.url }}"
+							width="100%" height="auto">
+					</div>
+					{% endif %}
+
+					<div class="col-md-6">
+						<h6>
+							<strong>Question 2: How did you use creativity to
+								connect Mathematics with "My Universe" to make your artwork?</strong>
+							<h6>
+					</div>
+					<div class="col-md-6">
+						<span id="answer2">{{ work.question2 }}</span>
+					</div>
+					<div class="col-md-6">
+						<h6>
+							<strong>Question 3: Do you think creativity could be
+								used to teach Mathematics?</strong>
+							<h6>
+					</div>
+					<div class="col-md-6">
+						<span id="answer3">{{ work.question3 }}</span>
+					</div>
+					<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
+						class="form-control form-input"> <input type="hidden"
+						name="status" value="{{ work.status }}"
+						class="form-control form-input status-values">
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 </div>
 
 
@@ -279,13 +282,4 @@
 					validateSubmission(2)
 				})
 			})
-// 	$('#currentlearnergrade').val($(radioBTN).val())
-// 	$.each($("input[name='"+$(radioBTN).attr('name')+"']"), function(i, val) {
-// 								$("input[name='learnergradeRadio'][value='"
-// 												+ $("#currentlearnergrade").val() + "']").prop(
-// 										'checked', true)
-// 								$("input[name='learnergradeRadio'][value='"
-// 												+ $("#currentlearnergrade").val() + "']")
-// 										.parent().addClass("active")
-// 							})
 </script>

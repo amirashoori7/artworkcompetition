@@ -2,7 +2,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from artwork.artwork_models import Artwork
 from account.models_account import ProjectUser
-from django.template.defaultfilters import default
 
 WEIGHT = (
     ('5', 'Excellent'),
@@ -113,7 +112,7 @@ class D3(models.Model):
     author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+ 
     def save(self, *args, **kwargs):
-        self.score = self.q1 + self.q2 + self.q3 + self.q4
-        super(D2, self).save(*args, **kwargs)
+        self.score = self.q1 + self.q2 + self.q3 + self.q4 + self.q5
+        super(D3, self).save(*args, **kwargs)
