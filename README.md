@@ -85,3 +85,6 @@ grant all on database mathart to mathartuser;
 To make a backup:
 ./manage.py dbbackup
 ./manage.py mediabackup
+
+
+https://github.com/django-dbbackup/django-dbbackup
