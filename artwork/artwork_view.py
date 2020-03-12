@@ -101,8 +101,8 @@ def getfile(request):
     df = convert_to_df(artworks, fields=fields)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
-    csvfilename = SITE_ROOT + '\\artworklist.csv'
-    zipfilename = SITE_ROOT + '\\backupFile.zip'
+    csvfilename = SITE_ROOT + '/artworklist.csv'
+    zipfilename = SITE_ROOT + '/backupFile.zip'
     df.to_csv(csvfilename, mode='w')
     with ZipFile(zipfilename, 'w') as zipObj:
         for folderName, subfolders, filenames in os.walk(SITE_ROOT):
