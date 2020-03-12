@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{% with version=0.62 %}
+{% with version=0.64 %}
 <title>{% block title %} {% endblock title %}</title>
 <meta http-equiv="Cache-Control"
 	content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
-<!-- <link -->
-<!-- 	href="//db.onlinewebfonts.com/c/07d3973894be3bed33aa1447c022b323?family=luna" -->
-<!-- 	rel="stylesheet" type="text/css" /> -->
 <link href="{% static 'css/bootstrap/bootstrap.css' %}" rel="stylesheet">
 <link href="{% static 'css/bootstrap/bootstrap-select.min.css' %}" rel="stylesheet" />
 <link href="{% static 'css/constants.css' %}" rel="stylesheet">
@@ -140,7 +136,8 @@
 					<li class="menu-item" data-href-html="signup_page.html" id="admin-page-btn"
 						data-href="/manager_console?ver={{ version }}"><a
 						class="nav-link" href="#"><img class="svg"
-							src="static/img/icons/Enter.svg"><span>Admin</span></a></li> {% endif %}
+							src="static/img/icons/Enter.svg"><span>Admin</span></a></li> 
+					{% endif %}
 <!-- 					<li class="nav-item menu-item" data-href-html="history.html" -->
 <!-- 						data-color="--main-color-pink" data-href="/history/"><a -->
 <!-- 						class="nav-link" href="#"><img class="svg" -->
@@ -233,6 +230,19 @@ var version = {{ version }}
 	}
 	gtag('js', new Date());
 	gtag('config', 'UA-156942839-1');
+	$(window).on("load", function() {
+		$(".frameLoding").fadeOut()
+		$(".frameLoding").css("background-color","rgba(255,255,255,.3)")
+		$(".menu-item").attr("onclick", "loadContent(this)")
+		{%if request.GET.page != None %}
+			loadContent($("<li/>").attr("data-href", "/{{ request.GET.page }}/"))
+		{% else %}
+			loadContent($("<li/>").attr("data-href", "/home/"))
+		{% endif %}
+		{%if request.GET.message != None %}
+			toggleMessageBox("{{ request.GET.message }}",{{ request.GET.T }})
+		{% endif %}
+	})
 </script>
 <script src="static/js/math.js?ver={{ version }}"></script>
 {% endwith %}

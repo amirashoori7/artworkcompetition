@@ -91,7 +91,7 @@
 						<span class="input-group-addon"><i
 							class="fa fa-user"></i></span>
 					</div>
-					<select name="user_type" class="selectpicker"
+					<select name="user_type" class="form-control form-input"
 						data-title="Select Gender" data-style="btn-default btn-block"
 						data-menu-style="dropdown-blue"> {% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
 						<option value="{{ x }}" {% if form.instance.user_type.value == x %} selected {% endif %}>
@@ -143,6 +143,7 @@
 </div>
 <script>
 function submitRegistryForm(url) {
+	$(".frameLoding").fadeIn()
 	var form = $('#registry-form')[0]
 	$("#register-btn").prop("disabled", true)
 	var data = new FormData(form)
@@ -170,11 +171,9 @@ function submitRegistryForm(url) {
 						.find("input#inputPassword").val($("#registry-form").find("input#password1")
 										.val())
 				$(".form-signin.form-general-style").submit()
-				loadContent($("<li/>").attr({
-					"data-href" : "/signup_page/"
-				}))
-				$("#login-div").load('/account/login/')
-			} else if (response.errorResults != null) {
+				$('#admin-console-content').load('/account/userlist/')
+				closeFullScreenDiv()
+		} else if (response.errorResults != null) {
 				$("#registry-form").find("small").remove()
 				populateErrorMessageFields(response.errorResults)
 				toggleMessageBox("<span>Registration unsuccessful.</span>",
@@ -185,10 +184,12 @@ function submitRegistryForm(url) {
 		error : function(xhr, errmsg, err) {
 			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)
+			$(".frameLoding").fadeOut()
 		},
 		complete : function(response) {
+			$(".frameLoding").fadeOut()
 			$("#register-btn").prop("disabled", false);
-			return -1
+			return false
 		}
 	})
 }

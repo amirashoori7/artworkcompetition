@@ -14,22 +14,23 @@
 		<table class="table table-general-style">
 			<thead>
 				<tr>
+					<th scope="col">Email</th>
 					<th scope="col">Full Name</th>
 					<th scope="col">User Type</th>
-					<th scope="col">Email</th>
+					<th scope="col">Organisation</th>
 					<th scope="col">Cellphone</th>
-					<th scope="col">DOB</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for user in userlist %}
 				<tr
 					onclick="showDialogPage(this, '/account/register_judge?username={{ user.username }}')">
+					<td>{{ user.username }}</td>
 					<th scope="row">{{ user.last_name }}, {{ user.first_name }}</th>
 					<td>{{ user.get_user_type_display }}</td>
-					<td>{{ user.username }}</td>
+					<td>{{ user.organisation }}</td> 
 					<td>{{ user.cellphone }}</td>
-					<td>{{ user.dob }}</td> {% endfor %}
+					{% endfor %}
 				</tr>
 			</tbody>
 		</table>

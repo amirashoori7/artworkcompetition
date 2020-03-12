@@ -34,7 +34,7 @@ function openFullScreenDiv(htmlContenet) {
 	$(".dialog-popup-content").append(
 			$("<div/>").addClass("close-button").attr("onclick",
 					"closeFullScreenDiv()"))
-	TweenLite.to(".full-screen-div", 1, {
+	TweenLite.to(".full-screen-div", .333, {
 		scale : 1,
 		top : 0,
 		right : 0,
@@ -45,7 +45,7 @@ function openFullScreenDiv(htmlContenet) {
 }
 
 function closeFullScreenDiv() {
-	TweenLite.to(".full-screen-div", 1, {
+	TweenLite.to(".full-screen-div", .333, {
 		scale : 0,
 		transformOrigin : "center",
 		onComplete : function() {
@@ -139,12 +139,6 @@ function convertImg2SVG(className) {
 	})
 }
 
-$(window).on("load", function() {
-	$(".frameLoding").fadeOut()
-	$(".frameLoding").css("background-color","rgba(255,255,255,.3)")
-	$(".menu-item").attr("onclick", "loadContent(this)")
-	$(".menu-item[data-href='/home/']").trigger("click")
-})
 
 function dropDownFunction() {
 	$("#schoolDropdown").toggleClass("show")
@@ -353,7 +347,8 @@ function submitAForm(url, formId, submitBTNId) {
 		success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$('#admin-console-content').load('/work_lists/')
+				$('#admin-console-content').load('/work_lists?status=-2')
+				closeFullScreenDiv()
 			} else if (response.errorResults != null) {
 				populateErrorMessageFields(response.errorResults)
 			} else if (response.errorResult != null)
@@ -391,7 +386,6 @@ function loginForm(url, formId, submitBTNId) {
 		success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$('#' + formId).find("input#id").val(response.id)
 			} else if (response.errorResults != null) {
 				populateErrorMessageFields(response.errorResults)
 			} else if (response.errorResult != null)

@@ -23,7 +23,7 @@ MATH = (
     ('10', 'Coordinating System'),
     ('11', 'Counting'),
     ('12', 'Curves'),
-    ('13', ' Equation'),
+    ('13', 'Equation'),
     ('14', 'Ethnomathematics'),
     ('15', 'Fibonacci'),
     ('16', 'Formulate, Mathematical Symbols'),
@@ -84,7 +84,7 @@ class D1B(models.Model):
 
 class D2(models.Model):
     artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
-    math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True),)
+    math = ArrayField(models.CharField(choices=MATH, max_length=50, blank=True, null=True), default=list)
     q1 = models.IntegerField(blank=True, null=True, default=0)
     q2 = models.IntegerField(blank=True, null=True, default=0)
     q3 = models.IntegerField(blank=True, null=True, default=0)
@@ -106,12 +106,13 @@ class D3(models.Model):
     q2 = models.IntegerField(blank=True, null=True, default=0)
     q3 = models.IntegerField(blank=True, null=True, default=0)
     q4 = models.IntegerField(blank=True, null=True, default=0)
+    q5 = models.IntegerField(blank=True, null=True, default=0)
     comment = models.TextField(blank=True)
     score = models.FloatField(null=True, blank=True)
     author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+ 
     def save(self, *args, **kwargs):
-        self.score = self.q1 + self.q2 + self.q3 + self.q4
-        super(D2, self).save(*args, **kwargs)
+        self.score = self.q1 + self.q2 + self.q3 + self.q4 + self.q5
+        super(D3, self).save(*args, **kwargs)

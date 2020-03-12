@@ -40,8 +40,15 @@ INSTALLED_APPS = [
     'artwork',
     'evaluation',
     'rest_framework',
+    'dbbackup'
 ]
-
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
+# DBBACKUP_STORAGE_OPTIONS = {'location': 'c:\backups'}
+# DBBACKUP_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+# DBBACKUP_STORAGE_OPTIONS = {
+#     'oauth2_access_token': 'eCeGSu-I54AAAAAAAAAAeUjYLUOoAxv08H9E3L8a0nY0kSEwJ9s80h8CxI5_puyd',
+# }
 AUTH_USER_MODEL = 'account.ProjectUser'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 
@@ -83,27 +90,27 @@ WSGI_APPLICATION = 'mathart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'mathart',
-    'USER': 'mathartuser',
-    'PASSWORD': 'mathartuser',
-    'HOST':    'localhost',
-    'PORT': '',
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #     'NAME': 'mathart',
-#     'USER': 'postgres',
-#     'PASSWORD': 'root',
+#     'USER': 'mathartuser',
+#     'PASSWORD': 'mathartuser',
 #     'HOST':    'localhost',
 #     'PORT': '',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'mathart',
+    'USER': 'postgres',
+    'PASSWORD': 'root',
+    'HOST':    'localhost',
+    'PORT': '',
+    }
+}
 
 
 
@@ -144,7 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_ROOT = ''
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),

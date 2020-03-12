@@ -5,9 +5,11 @@ class ProjectUser(AbstractUser):
     USER_TYPE_CHOICES = (
       (1, 'student'),
       (2, 'judge1'),
-      (3, 'judge2'),
-      (4, 'judge3'),
+      (3, 'decisionmaker'),
+      (4, 'judge2'),
+      (5, 'judge3'),
       (6, 'admin'),
+      (7, 'GMMDC'),
     )
 
     user_type = models.PositiveSmallIntegerField(null=True, choices=USER_TYPE_CHOICES, default=1)
