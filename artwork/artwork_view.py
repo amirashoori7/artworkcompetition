@@ -94,7 +94,7 @@ def getfile(request):
     artworks = Artwork.objects.all()  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-              'worktitle', 'workfile', 'school',
+              'school__province', 'school__name', 'school__natemis', 'worktitle', 'workfile', 
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
