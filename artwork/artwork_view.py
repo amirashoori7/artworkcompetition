@@ -11,6 +11,7 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
+from evaluation.models import D1A, D1B, D3, D2
 
 
 def index(request):
@@ -159,12 +160,24 @@ def importfile(request):
             response_data.append(response_error)
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
+    
+@login_required
+def eval_forms_artwork(request):
+    id = request.GET.get('work_id')
+    work = get_object_or_404(Artwork, id=id)
+    d1as = D1A.objects.filter(artwork=work)
+    d1bs = D1B.objects.filter(artwork=work)
+    d2 = D2.objects.filter(artwork=work)
+    d3 = D3.objects.filter(artwork=work)
+    context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3 }
+    return render(request, 'evaluationForms/eval_forms.html', context)
 
 @login_required
 def work_details(request, id):
     work = get_object_or_404(Artwork, id=id)
-    
-    context = {'work': work}
+    sno = work.school.province + "_" + str(work.school.natemis) + "_" + str(work.id)
+    fname_lname = work.owner.last_name + ", " + work.owner.first_name
+    context = {'work': work, 'sno':sno, 'fname_lname': fname_lname}
     return render(request, 'adminPages/work_details.html', context)
 
 

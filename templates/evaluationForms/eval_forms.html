@@ -1,0 +1,47 @@
+{% if d1as %}
+{% for d1a in d1as %}
+{{ d1a.id }}
+{% endfor %}
+{% endif %}
+
+{% if d1bs %}
+{% for d1b in d1bs %}
+{{ d1b.id }}
+{% endfor %}
+{% endif %}
+
+{% if d2 %}
+{% for evalform2 in d2 %}
+{{ evalform2.id }}
+{% endfor %}
+{% endif %}
+
+{% if d3 %}
+{% for evalform3 in d3 %}
+{{ evalform3.id }}
+{% endfor%}
+{%endif%}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 card">
+		<div class="card-header collapsed row" data-toggle="collapse"
+			aria-expanded="false" href="#eval-forms">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Evaluation
+					Forms</a>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="collapse card-body" id="eval-forms">
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#eval-form1">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Form1</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="eval-form1"></div>
+		</div>
+	</div>
+	<div class="col-md-2"></div>
+</div>

@@ -16,12 +16,12 @@ class Province(Enum):
         return((key.value, key.name.replace('_', ' ')) for key in cls)
 
 class Status(IntEnum):
-    Pending = -1
+    Pending = -1 
     Submitted = 0
     Requires_Revision = 1
     Revised_work = 2
     Rejected_Stage_0 = 3
-    Accepted_Stage_0 = 4
+    Accepted_Stage_0 = 4 
     Waiting_For_Decision = 5
     Accepted_Stage_1 = 6
     Rejected_Stage_1 = 7
