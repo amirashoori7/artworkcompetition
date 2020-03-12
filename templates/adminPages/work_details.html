@@ -152,7 +152,7 @@
 	<div class="col-md-8">
 		{%if work.status == 0 or work.status == 2 %}
 		<!-- 		IF ITS ADMIN -->
-		{%if user.user_type == 6 %}
+		{%if user.user_type == 6 and view == 0 %}
 		<hr>
 		<div class="row" data-title="Eligible/Revision/Reject">
 			<div class="col-md-12" id="">
