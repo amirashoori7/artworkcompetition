@@ -170,9 +170,7 @@
 				<textarea class="
 			form-control form-input" id="comment"
 			placeholder="Dear judge, please add any comments, if there are some..."
-			name="comment" rows="5">
-			{{ form.instance.comment|default_if_none:'' }}
-			</textarea>
+			name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
 <hr>

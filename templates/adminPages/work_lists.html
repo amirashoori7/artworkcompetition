@@ -44,18 +44,25 @@ function changeView(select){
 <table class="table table-general-style">
 	<thead>
 		<tr>
+			<th scope="col">Flag</th>
 			<th scope="col"></th>
 			<th scope="col">Full Name</th>
 			<th scope="col">Status</th>
 			<th scope="col">Work Title</th>
 			<th scope="col">School</th>
 			<th scope="col">Grade</th>
+			<th scope="col">View</th>
+			<th scope="col">Evaluate</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for work in works %}
 		<tr class="row-hover">
-			<th scope="row">{{ forloop.counter }}</th>
+			<td><button class="btn {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}" type="button"
+					onclick="flagit(this, {{ work.id }})">
+					<i class="fa fa-font-awesome-flag"></i>
+				</button></td>
+			<td>{{ forloop.counter }}</td>
 			<td>{{ work.owner.last_name }}, {{ work.owner.first_name }}</td>
 			<td>{{ work.get_status_display }}</td>
 			<td>{{ work.worktitle }} {%if work.thumbnail.url != None %}
@@ -65,13 +72,13 @@ function changeView(select){
 			</td>
 			<td>{{ work.school.name }}</td>
 			<td>{{ work.learnergrade }}</td>
-			<td><button class="btn btn-secondary" type="button"
+			<td><button class="btn btn-outline-info" type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 1 %}')">
-					<i class="fa fa-eye">&nbsp;</i>
+					<i class="fa fa-eye"></i>
 				</button></td>
-			<td><button class="btn btn-outline-warning" type="button"
+			<td><button class="btn btn-outline-secondary" type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 0 %}')">
-					<i class="fa fa-gavel">&nbsp;</i>
+					<i class="fa fa-gavel"></i>
 				</button></td>
 		</tr>
 		{% endfor %}
