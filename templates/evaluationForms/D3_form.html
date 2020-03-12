@@ -187,7 +187,7 @@
 		<div class="col-md-6 text-center">
 			<button class="btn btn-block btn-success" type="button"
 				id="buttonSubmitD3Form"
-				onclick="submitAnEvaluationForm('{% url 'evaluation:formd3' %}','formd3Id','buttonSubmitD3Form', null)">
+				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd3' %}','formd3Id','buttonSubmitD3Form', null)">
 				<i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Submit
 			</button>
 		</div>

@@ -184,14 +184,14 @@ def eval_forms_artwork(request):
 
 
 @login_required
-def work_details(request, id):
+def work_details(request, id, view):
     work = get_object_or_404(Artwork, id=id)
     if work.school is None:
         sno = 'XX_XXXXX_XXXXX'
     else:
         sno = work.school.province + "_" + str(work.school.natemis) + "_" + str(work.id)
     fname_lname = work.owner.last_name + ", " + work.owner.first_name
-    context = {'work': work, 'sno':sno, 'fname_lname': fname_lname}
+    context = {'work': work, 'sno':sno, 'fname_lname': fname_lname, 'view':view}
     return render(request, 'adminPages/work_details.html', context)
 
 

@@ -66,11 +66,11 @@ function changeView(select){
 			<td>{{ work.school.name }}</td>
 			<td>{{ work.learnergrade }}</td>
 			<td><button class="btn btn-secondary" type="button"
-					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
+					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 1 %}')">
 					<i class="fa fa-eye">&nbsp;</i>
 				</button></td>
 			<td><button class="btn btn-outline-warning" type="button"
-					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
+					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 0 %}')">
 					<i class="fa fa-gavel">&nbsp;</i>
 				</button></td>
 		</tr>
@@ -91,7 +91,7 @@ setTimeout(function(){
 			TweenLite.to($(this), .2, {
 				"z-index": 10,
 				transformOrigin: "center",
-				"box-shadow": "black 0px 0px 33px"
+				"box-shadow": "black 0px 0px 11px"
 			})
 		})
 		$(this).mouseleave(function(){

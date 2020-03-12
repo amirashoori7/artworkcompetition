@@ -11,7 +11,6 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-	{% if work.workfile %}
 			<div class="card-header collapsed row" data-toggle="collapse"
 				aria-expanded="false" href="#artwork-section">
 				<div class="col-md-11">
@@ -22,10 +21,12 @@
 			<div class="collapse card-body" id="artwork-section">
 
 				<div class="row report-section">
+					{% if work.workfile %}
 					<div class="col-md-12">
 						<img type="file" id="workfileCropped"
 							src="{{ work.workfile.url }}">
 					</div>
+					{% endif %}
 					<div class="col-md-12">
 						<h3>
 							<strong>Artwork </strong>"{{ work.worktitle | default_if_none:'Not Available'}}"
@@ -40,7 +41,6 @@
 					</div>
 				</div>
 			</div>
-			{% endif %}
 			<div class="card-header collapsed row" data-toggle="collapse"
 				aria-expanded="false" href="#artist-section">
 				<div class="col-md-11">
@@ -72,7 +72,6 @@
 							{% else %}
 							Not Available
 							{% endif %}
-							
 						</h6>
 						<h6>
 							<strong>Teacher</strong> {{ work.teachername | default_if_none:'Not Available'}}<br> <strong>Email</strong>
@@ -251,6 +250,7 @@
 <script type="text/javascript">
 	$(document).ready(
 			function() {
+				{% if view == 0 %}
 				{% if work.status == 4 or work.status == 5 %}
 				$("#form-d1a").load(
 						'/evaluation/formd1a?work_id=' + $("#work_id").val(),
@@ -266,9 +266,10 @@
 							$("#buttonSubmitD2Form").click(function(ev) {
 								ev.preventDefault()
 							})
+							$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
 						})
 						{% endif %}
-						{% elif work.status == 6 %}
+					{% elif work.status == 6 %}
 
 				$("#form-d2").load(
 						'/evaluation/formd2?work_id=' + $("#work_id").val())
@@ -281,7 +282,8 @@
 								ev.preventDefault()
 							})
 						})
-				{%endif%}
+				{% endif %}
+				{% endif %}
 				$("#approveBTN0").click(function(ev) {
 					ev.preventDefault()
 					validateSubmission(0)
@@ -294,8 +296,10 @@
 					ev.preventDefault()
 					validateSubmission(2)
 				})
-				{%if user.user_type == 3 or user.user_type == 6 or user.user_type == 7 %}	
-				$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
+				{%if view == 1 %}
+					{%if user.user_type == 3 or user.user_type == 6 or user.user_type == 7 %}	
+					$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
+					{% endif %}
 				{% endif %}
 			})
 </script>
