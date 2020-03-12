@@ -1,4 +1,25 @@
-{% if d1as %}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 card eval-form">
+		<div class="card-header collapsed row" data-toggle="collapse"
+			href="#eval-forms">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Evaluation
+					Forms</a>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="collapse card-body" id="eval-forms">
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#eval-form1">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Form1</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="eval-form1">
+			
+			{% if d1as %}
 {% for d1a in d1as %}
 {{ d1a.id }}
 {% endfor %}
@@ -21,27 +42,15 @@
 {{ evalform3.id }}
 {% endfor%}
 {%endif%}
-<div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8 card">
-		<div class="card-header collapsed row" data-toggle="collapse"
-			aria-expanded="false" href="#eval-forms">
-			<div class="col-md-11">
-				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Evaluation
-					Forms</a>
 			</div>
-			<div class="col-md-1"></div>
-		</div>
-		<div class="collapse card-body" id="eval-forms">
-			<div class="card-header collapsed row" data-toggle="collapse"
-				aria-expanded="false" href="#eval-form1">
-				<div class="col-md-11">
-					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Form1</a>
-				</div>
-				<div class="col-md-1"></div>
-			</div>
-			<div class="collapse card-body" id="eval-form1"></div>
 		</div>
 	</div>
-	<div class="col-md-2"></div>
 </div>
+<div class="col-md-2"></div>
+</div>
+
+<script type="text/javascript">
+// function addCard(cardName) {
+// 	$(".col-md-8.card.eval-form").html()
+// }
+</script>
