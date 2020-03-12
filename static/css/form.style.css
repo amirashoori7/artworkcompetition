@@ -128,7 +128,6 @@
 
 .word-counter {
     font-size: 13px;
-    /* line-height: 1.1; */
     position: absolute;
     bottom: -18px;
     left: 22px;
@@ -139,14 +138,13 @@
 }
 .form-section::before {
 	content: attr(data-title);
-	font-size: 19px;
-	line-height: 1.1;
-	position: absolute;
-	top: -11px;
-	left: 22px;
-	pointer-events: none;
-	color: #162830;
-	font-weight: bold;
+    font-size: 17px;
+    line-height: 1.1;
+    position: absolute;
+    top: -11px;
+    left: 22px;
+    pointer-events: none;
+    color: #162830;
 }
 
 @media ( min-width : 1200px) {

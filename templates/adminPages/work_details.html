@@ -1,14 +1,16 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<h4>{{ work.get_status_display }}</h4>
+		<h4>
+			<strong>Status&nbsp;</strong>{{ work.get_status_display }}
+		</h4>
 	</div>
 	<div class="col-md-2"></div>
 </div>
+<hr>
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<div class="card">
 			<div class="card-header collapsed row" data-toggle="collapse"
 				aria-expanded="false" href="#artwork-section">
 				<div class="col-md-11">
@@ -16,35 +18,141 @@
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="collapse card-body" id="artwork-section"
-				data-title="Upload my artwork">
+			<div class="collapse card-body" id="artwork-section">
 
 				<div class="row report-section">
+					{% if work.workfile %}
 					<div class="col-md-12">
 						<img type="file" id="workfileCropped"
 							src="{{ work.workfile.url }}">
 					</div>
+					{% endif %}
 					<div class="col-md-12">
 						<h3>
-							<strong>Artwork </strong>"{{ work.worktitle }}"
+							<strong>Artwork </strong>"{{ work.worktitle | default_if_none:'Not Available'}}"
 						</h3>
 					</div>
 					<div class="col-md-12 ">
 						<h5>
-							<strong>By </strong>
-							<!-- 							MATHARTIS NAME SURNAME -->
-							{{ work.owner.last_name }}, {{ work.owner.first_name }}
-						</h5>
-						<h5>
 							<strong>Serial</strong>
 							<!-- 							SERIAL NUMBER -->
-							{{ work.school.province }}_{{ work.school.natemis }}_{{ work.id }}
+							{{ sno }}
 						</h5>
 					</div>
 				</div>
 			</div>
-		</div>
-		{%if work.status == 0 or work.status == 2 %} {%if user.user_type == 6 %}
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#artist-section">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;MathArtist</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="artist-section"
+				data-title="Upload my artwork">
+				<div class="row report-section ">
+					<div class="col-md-6">
+						<h6>
+							<strong> {{ fname_lname }}</strong><br> <br> <strong>Born
+								in </strong>{{ work.owner.dob }} <br>
+							<!-- 								USER EMAIL -->
+							<strong>Email </strong>{{ work.owner.email }} <br> <strong>Cell
+								phone </strong>{{ work.owner.cellphone }}
+						</h6>
+					</div>
+					<div class="col-md-6">
+						<h6>
+							<strong>Grade </strong>{{ work.learnergrade | default_if_none:'Not Available'}}<br>
+							<!-- PROVINCE -->
+							{% if work.school %}
+							{{ work.school.get_province_display }}<br>{% endif %} <strong>School</strong>
+							<!-- SCHOOL INFO -->
+							{% if work.school %}
+							{{work.school.name }}
+							{% else %}
+							Not Available
+							{% endif %}
+						</h6>
+						<h6>
+							<strong>Teacher</strong> {{ work.teachername | default_if_none:'Not Available'}}<br> <strong>Email</strong>
+							{{ work.teacheremail | default_if_none:'Not Available'}}
+						</h6>
+					</div>
+					<div class="col-md-12">
+						<h6>
+							<strong>Parent Name</strong> {{ work.owner.parentname }}<br>
+							<strong>Cell</strong> {{ work.owner.parentphone }}<br> <strong>Email</strong>
+							{{ work.owner.parentemail | default_if_none:'Not Available'}}
+						</h6>
+					</div>
+				</div>
+			</div>
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#questions-section">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-square-root-alt"></i>&nbsp;&nbsp;&nbsp;Questions</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="questions-section">
+				<div class="row report-section">
+				<div class="col-md-6">
+					<h6>
+						<strong>Question 1: What Mathematics did you use in your
+							artwork?</strong>
+						<h6>
+				</div>
+				<div class="col-md-6">
+					<h6>{{ work.question1 | default:'Not Available'}}</h6>
+				</div>
+				{% if work.workformulafile %}
+				<div class="col-md-6">
+					<label for="formulaImg"><h6>
+							<strong>Formula Image</strong>
+						</h6></label>
+				</div>
+				<div class="col-md-6">
+					<img id="formulaImg" src="{{ work.workformulafile.url }}"
+						width="100%" height="auto">
+				</div>
+				{% endif %} 
+				<div class="col-md-6">
+					<h6>
+						<strong>Question 2: How did you use creativity to connect
+							Mathematics with "My Universe" to make your artwork?</strong>
+						<h6>
+				</div>
+				<div class="col-md-6">
+					<h6>{{ work.question2 | default:'Not Available'}}</h6>
+				</div>
+				<div class="col-md-6">
+					<h6>
+						<strong>Question 3: Do you think creativity could be used
+							to teach Mathematics?</strong>
+						<h6>
+				</div>
+				<div class="col-md-6">
+					<h6>{{ work.question3 | default:'Not Available'}}</h6>
+				</div>
+				<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
+					class="form-control form-input"> <input type="hidden"
+					name="status" value="{{ work.status }}"
+					class="form-control form-input status-values">
+			</div>
+			</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
+<hr>
+<div class="evaluation-forms-div">
+</div>
+<hr>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		{%if work.status == 0 or work.status == 2 %}
+		<!-- 		IF ITS ADMIN -->
+		{%if user.user_type == 6 and view == 0 %}
 		<hr>
 		<div class="row" data-title="Eligible/Revision/Reject">
 			<div class="col-md-12" id="">
@@ -83,40 +191,45 @@
 						class="form-control form-input status-values">
 					<div class="row form-section" data-title="Decision">
 						<div class="col-md-4">
-							<button class="action-button green" type="button"
-								id="approveBTN0">Approve</button>
+							<button class="btn btn-success btn-block" type="button"
+								id="approveBTN0"><i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Approve</button>
 						</div>
 						<div class="col-md-4">
-							<button class="action-button orange" type="button"
-								id="reviseBTN0">Requires Revision</button>
+							<button class="btn btn-outline-warning btn-block" type="button"
+								id="reviseBTN0"><i class="fa fa-edit">&nbsp;&nbsp;&nbsp;</i>Requires Revision</button>
 						</div>
 						<div class="col-md-4">
-							<button class="action-button red" type="button" id="rejectBTN0">Reject</button>
+							<button class="btn btn-outline-danger btn-block" type="button"
+								id="rejectBTN0">
+								<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Reject
+							</button>
 						</div>
 					</div>
 				</form>
 			</div>
-
 		</div>
 		<!-- 	FORM D1-a - JUDGE 1 -->
-		{% endif %} {% elif work.status == 4 %} 
+		{% endif %} {% elif work.status == 4 or work.status == 5 %}
+		<!-- 		IF ADMIN OR JUDGE 1 -->
 		{%if user.user_type == 2 or user.user_type == 6 %}
 		<div class="row">
 			<div class="col-md-12" id="form-d1a"></div>
 		</div>
 
-
 		<!-- 	FORM D1-b - DECISION MAKER -->
 
-		{% endif %} {% elif work.status == 5 %} {%if user.user_type == 3 or user.user_type == 6 %}
+		{% endif %} 
+		<!-- 		IF ADMIN OR Decision Maker -->
+		{%if user.user_type == 3 or user.user_type == 6 %}
 		<div class="row">
 			<div class="col-md-12" id="form-d1b"></div>
 		</div>
 
-
-		<!-- 	FORM D2 - JUDGE 2 -->
+		<!-- 	FORM D2  -->
 
 		{% endif %} {% elif work.status == 6 %}
+		<!-- 		IF ADMIN OR JUDGE 2 -->
+
 		{%if user.user_type == 4 or user.user_type == 6%}
 		<div class="row">
 			<div class="col-md-12" id="form-d2"></div>
@@ -125,121 +238,20 @@
 		<!-- 	FORM D3 - JUDGE 3 -->
 
 		{% endif %} {%elif work.status == 10 %}
+		<!-- 		IF ADMIN OR JUDGE 3 -->
 		{%if user.user_type == 5 or user.user_type == 6 %}
 		<div class="row">
 			<div class="col-md-12" id="form-d3"></div>
 		</div>
-		{% endif %}<hr> {%endif%}
-		
-		<div class="card">
-			<div class="card-header collapsed row" data-toggle="collapse"
-				aria-expanded="false" href="#artist-section">
-				<div class="col-md-11">
-					<a class="card-title"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;MathArtist</a>
-				</div>
-				<div class="col-md-1"></div>
-			</div>
-			<div class="collapse card-body" id="artist-section"
-				data-title="Upload my artwork">
-				<div class="row report-section ">
-					<div class="col-md-6">
-						<h6>
-							<strong>Born in </strong>{{ work.owner.dob }}
-						</h6>
-						<h6>
-							<strong>Email </strong>{{ work.owner.email }}, <strong>Cell
-							</strong>{{work.owner.cellphone}}
-							<h6>
-					</div>
-					<div class="col-md-6">
-						<h6>
-							{{ work.learnergrade }}, <strong>School</strong>
-							<!-- 								SCHOOL INFO -->
-							{{work.school.name }} ({{ work.school.region }},
-							<!-- 								PROVINCE -->
-							&nbsp;{{ work.school.get_province_display }}).
-						</h6>
-						<h6>
-							<strong>Teacher</strong> {{ work.teachername }}, <strong>Email</strong>
-							{{ work.teacheremail }}
-						</h6>
-					</div>
-					<div class="col-md-12">
-						<h6>
-							<strong>Parent</strong> {{ work.parentname }}, <strong>Cell</strong>
-							{{ work.parentphone }}
-							<h6>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="card">
-			<div class="card-header collapsed row" data-toggle="collapse"
-				aria-expanded="false" href="#questions-section">
-				<div class="col-md-11">
-					<a class="card-title"><i class="fa fa-square-root-alt"></i>&nbsp;&nbsp;&nbsp;Questions</a>
-				</div>
-				<div class="col-md-1"></div>
-			</div>
-			<div class="collapse card-body" id="questions-section"
-				data-title="Upload my artwork">
-				<div class="row report-section">
-					<div class="col-md-6">
-						<h6>
-							<strong>Question 1: What Mathematics did you use in your
-								artwork?</strong>
-							<h6>
-					</div>
-					<div class="col-md-6">
-						<span id="answer1">{{ work.question1 }}</span>
-					</div>
-					{% if work.workformulafile %}
-					<div class="col-md-6">
-						<label for="formulaImg"><h6>
-								<strong>Formula Image</strong>
-							</h6></label>
-					</div>
-					<div class="col-md-6">
-						<img id="formulaImg" src="{{ work.workformulafile.url }}"
-							width="100%" height="auto">
-					</div>
-					{% endif %}
-
-					<div class="col-md-6">
-						<h6>
-							<strong>Question 2: How did you use creativity to
-								connect Mathematics with "My Universe" to make your artwork?</strong>
-							<h6>
-					</div>
-					<div class="col-md-6">
-						<span id="answer2">{{ work.question2 }}</span>
-					</div>
-					<div class="col-md-6">
-						<h6>
-							<strong>Question 3: Do you think creativity could be
-								used to teach Mathematics?</strong>
-							<h6>
-					</div>
-					<div class="col-md-6">
-						<span id="answer3">{{ work.question3 }}</span>
-					</div>
-					<input type="hidden" name="id" id="work_id" value="{{ work.id }}"
-						class="form-control form-input"> <input type="hidden"
-						name="status" value="{{ work.status }}"
-						class="form-control form-input status-values">
-				</div>
-			</div>
-		</div>
+		{% endif %} {%endif%}
 	</div>
+	<div class="col-md-2"></div>
 </div>
-</div>
-
-
 <script type="text/javascript">
 	$(document).ready(
 			function() {
-				{% if work.status == 4 %}
+				{% if view == 0 %}
+				{% if work.status == 4 or work.status == 5 %}
 				$("#form-d1a").load(
 						'/evaluation/formd1a?work_id=' + $("#work_id").val(),
 						function() {
@@ -247,15 +259,17 @@
 								ev.preventDefault()
 							})
 						})
-						{% elif work.status == 5 %}
+					{%if user.user_type == 3 or user.user_type == 6 %}	
 				$("#form-d1b").load(
 						'/evaluation/formd1b?work_id=' + $("#work_id").val(),
 						function() {
 							$("#buttonSubmitD2Form").click(function(ev) {
 								ev.preventDefault()
 							})
+							$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
 						})
-						{% elif work.status == 6 %}
+						{% endif %}
+					{% elif work.status == 6 %}
 
 				$("#form-d2").load(
 						'/evaluation/formd2?work_id=' + $("#work_id").val())
@@ -268,7 +282,8 @@
 								ev.preventDefault()
 							})
 						})
-				{%endif%}
+				{% endif %}
+				{% endif %}
 				$("#approveBTN0").click(function(ev) {
 					ev.preventDefault()
 					validateSubmission(0)
@@ -281,5 +296,10 @@
 					ev.preventDefault()
 					validateSubmission(2)
 				})
+				{%if view == 1 %}
+					{%if user.user_type == 3 or user.user_type == 6 or user.user_type == 7 %}	
+					$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
+					{% endif %}
+				{% endif %}
 			})
 </script>

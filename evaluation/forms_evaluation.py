@@ -4,7 +4,7 @@ from evaluation.models import D1A, D2, D1B, D3
 class FormD1A(forms.ModelForm):
     class Meta:
         model = D1A
-        fields = ['imgq', 'answersq', 'originq', 'id']
+        fields = ['imgq', 'answersq', 'originq', 'id', 'comment']
 
 class FormD1B(forms.ModelForm):
     class Meta:

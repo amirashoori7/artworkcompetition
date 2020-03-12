@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{% with version=0.64 %}
+{% with version=0.7 %}
 <title>{% block title %} {% endblock title %}</title>
 <meta http-equiv="Cache-Control"
 	content="no-cache, no-store, must-revalidate" />
@@ -15,19 +15,45 @@
 <link rel="stylesheet" href="static/css/font-awesome/css/all.min.css">
 <link href="{% static 'css/bootstrap/bootstrap.css' %}" rel="stylesheet">
 <link href="{% static 'css/bootstrap/bootstrap-select.min.css' %}" rel="stylesheet" />
-<link href="{% static 'css/constants.css' %}" rel="stylesheet">
-<link href="{% static 'css/animation.css' %}" rel="stylesheet">
-<link href="{% static 'css/buttons.style.css' %}" rel="stylesheet">
-<link href="{% static 'css/form.style.css' %}" rel="stylesheet">
-<link href="{% static 'css/table.style.css' %}" rel="stylesheet">
-<link href="{% static 'css/menu.style.css' %}" rel="stylesheet">
-<link href="{% static 'css/home.style.css' %}" rel="stylesheet">
-<link href="{% static 'css/content.style.css' %}" rel="stylesheet">
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/constants.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/animation.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/buttons.style.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/form.style.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/table.style.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/menu.style.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/home.style.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/content.style.css' %}?ver={{ version }}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}?ver={{ version }}" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
-
+		<div class="modal fade" id="confirmation-box-modal" tabindex="-1"
+			role="dialog" aria-labelledby="confirmation-box-modal"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content card">
+					<div class="modal-header card-header bg-success">
+						<h5 class="modal-title text-white">
+							<i class="fa fa-thumbs-up">&nbsp;&nbsp;&nbsp;</i>Form Submission
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body confirmation-message-content">body</div>
+					<div class="modal-footer col-md-12">
+						<button type="button" class="btn btn-success" id="confirmation-box-btn">
+							<i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Confirm
+						</button>
+						<button type="button" class="btn btn-outline-warning"
+							data-dismiss="modal">
+							<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="success-message-modal" tabindex="-1"
 			role="dialog" aria-labelledby="success-message-modal"
 			aria-hidden="true">
@@ -209,6 +235,7 @@
 	type="text/javascript"></script>
 <script type="text/javascript"
 	src="static/js/entry.form.js?ver={{ version }}"></script>
+<script type="text/javascript" src="static/js/work.detail.admin.js?ver={{ version }}">
 <script async=""
 	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
 <script type="text/javascript">

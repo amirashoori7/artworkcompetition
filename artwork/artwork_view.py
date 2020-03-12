@@ -5,12 +5,14 @@ import json
 from artwork.artwork_forms import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.db.models import Q
 from account.models_account import ProjectUser
 import os
 import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
+from evaluation.models import D1A, D1B, D3, D2
 
 
 def index(request):
@@ -70,7 +72,15 @@ def gallery(request):
 @login_required
 def work_lists(request):
     status = request.GET.get('status', -2)
-    if status == '-2':
+    if request.user.user_type == 2:#judge 1
+        works = Artwork.objects.filter(Q (status=4) | Q (status=5))
+    elif request.user.user_type == 3:#decision maker
+        works = Artwork.objects.filter(Q (status=5))
+    elif request.user.user_type == 4:#Judge 2
+        works = Artwork.objects.filter(Q (status=6))
+    elif request.user.user_type == 5:#judge 3
+        works = Artwork.objects.filter(Q (status=10))
+    elif status == '-2':
         works = Artwork.objects.all()
     else:
         works = Artwork.objects.filter(status=status)
@@ -84,15 +94,15 @@ def getfile(request):
     artworks = Artwork.objects.all()  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-              'worktitle', 'workfile', 'school',
+              'school__province', 'school__name', 'school__natemis', 'worktitle', 'workfile', 
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
     df = convert_to_df(artworks, fields=fields)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
-    csvfilename = SITE_ROOT + '\\artworklist.csv'
-    zipfilename = SITE_ROOT + '\\backupFile.zip'
+    csvfilename = SITE_ROOT + '/artworklist.csv'
+    zipfilename = SITE_ROOT + '/backupFile.zip'
     df.to_csv(csvfilename, mode='w')
     with ZipFile(zipfilename, 'w') as zipObj:
         for folderName, subfolders, filenames in os.walk(SITE_ROOT):
@@ -160,11 +170,28 @@ def importfile(request):
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
 
-@login_required
-def work_details(request, id):
-    work = get_object_or_404(Artwork, id=id)
     
-    context = {'work': work}
+@login_required
+def eval_forms_artwork(request):
+    id = request.GET.get('work_id')
+    work = get_object_or_404(Artwork, id=id)
+    d1as = D1A.objects.filter(artwork=work)
+    d1bs = D1B.objects.filter(artwork=work)
+    d2 = D2.objects.filter(artwork=work)
+    d3 = D3.objects.filter(artwork=work)
+    context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3 }
+    return render(request, 'evaluationForms/eval_forms.html', context)
+
+
+@login_required
+def work_details(request, id, view):
+    work = get_object_or_404(Artwork, id=id)
+    if work.school is None:
+        sno = 'XX_XXXXX_XXXXX'
+    else:
+        sno = work.school.province + "_" + str(work.school.natemis) + "_" + str(work.id)
+    fname_lname = work.owner.last_name + ", " + work.owner.first_name
+    context = {'work': work, 'sno':sno, 'fname_lname': fname_lname, 'view':view}
     return render(request, 'adminPages/work_details.html', context)
 
 
