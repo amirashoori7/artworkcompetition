@@ -5,6 +5,7 @@ import json
 from artwork.artwork_forms import EntryForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.db.models import Q
 from account.models_account import ProjectUser
 import os
 import pandas
@@ -71,7 +72,15 @@ def gallery(request):
 @login_required
 def work_lists(request):
     status = request.GET.get('status', -2)
-    if status == '-2':
+    if request.user.user_type == 2:#judge 1
+        works = Artwork.objects.filter(Q (status=4) | Q (status=5))
+    elif request.user.user_type == 3:#decision maker
+        works = Artwork.objects.filter(Q (status=5))
+    elif request.user.user_type == 4:#Judge 2
+        works = Artwork.objects.filter(Q (status=6))
+    elif request.user.user_type == 5:#judge 3
+        works = Artwork.objects.filter(Q (status=10))
+    elif status == '-2':
         works = Artwork.objects.all()
     else:
         works = Artwork.objects.filter(status=status)
@@ -160,6 +169,7 @@ def importfile(request):
             response_data.append(response_error)
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
+
     
 @login_required
 def eval_forms_artwork(request):
@@ -172,10 +182,14 @@ def eval_forms_artwork(request):
     context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3 }
     return render(request, 'evaluationForms/eval_forms.html', context)
 
+
 @login_required
 def work_details(request, id):
     work = get_object_or_404(Artwork, id=id)
-    sno = work.school.province + "_" + str(work.school.natemis) + "_" + str(work.id)
+    if work.school is None:
+        sno = 'XX_XXXXX_XXXXX'
+    else:
+        sno = work.school.province + "_" + str(work.school.natemis) + "_" + str(work.id)
     fname_lname = work.owner.last_name + ", " + work.owner.first_name
     context = {'work': work, 'sno':sno, 'fname_lname': fname_lname}
     return render(request, 'adminPages/work_details.html', context)

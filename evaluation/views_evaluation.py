@@ -22,9 +22,11 @@ def create_d1a(request):
         old_data = get_object_or_404(D1A, id=request.POST["id"])
         formd1A_form = FormD1A(request.POST, instance=old_data)
         if formd1A_form.is_valid():
-            d1as = D1A.objects.filter(artwork=artwork)
-            judges = ProjectUser.objects.filter(user_type=2)
-            if len(d1as) == len(judges):
+#             d1as = D1A.objects.filter(artwork=artwork)
+#             judges = ProjectUser.objects.filter(user_type=2)
+#             if len(d1as) == len(judges):
+#                 update_worklist(int(request.POST['work_id']), 5)
+            if artwork.status != 5:
                 update_worklist(int(request.POST['work_id']), 5)
             formd1A_form = formd1A_form.save(commit=False)
             formd1A_form.author = request.user
@@ -38,9 +40,16 @@ def create_d1a(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif request.method == 'GET':
-        artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
+        workid = int(request.GET.get("work_id", 0))
+        if workid > 0:
+            artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         try:
-            formd1A_model = get_object_or_404(D1A, author=request.user, artwork=artwork)
+            formid = int(request.GET.get("formid", 0))
+            if formid > 0 :
+                formd1A_model = D1A.objects.get(id=formid)
+                artwork = formd1A_model.artwork
+            else:
+                formd1A_model = get_object_or_404(D1A, author=request.user, artwork=artwork)
             formd1A_form = FormD1A(instance=formd1A_model)
         except:
             formd1A_form, formd1A_obj = D1A.objects.get_or_create(author=request.user, artwork=artwork)
@@ -65,6 +74,7 @@ def create_d1b(request):
         if formd1B_form.is_valid():
             formd1B_form = formd1B_form.save(commit=False)
             formd1B_form.author = request.user
+            update_worklist(int(request.POST['work_id']), int(request.POST['status']))
             formd1B_form.artwork = artwork
             formd1B_form = formd1B_form.save()
             response_data['successResult'] = 'Evaluation form submitted successfully!'

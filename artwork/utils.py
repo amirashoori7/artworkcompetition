@@ -20,15 +20,15 @@ class Status(IntEnum):
     Submitted = 0
     Requires_Revision = 1
     Revised_work = 2
-    Rejected_Stage_0 = 3
-    Accepted_Stage_0 = 4 
-    Waiting_For_Decision = 5
-    Accepted_Stage_1 = 6
-    Rejected_Stage_1 = 7
+    Rejected_Entry = 3
+    Accepted_Entry = 4 
+    Waiting_For_GMMDC_Decision = 5
+    Accepted_By_GMMDC = 6
+    Rejected_By_GMMDC = 7
     Waiting_For_Artpost = 8
-    Rejected_Stage_2 = 9
+    Rejected_By_Judge2 = 9
     Artpost_Recieved = 10
-    Rejected_Stage_3 = 11
+    Rejected_At_Final_Stage = 11
     Winner = 12
 
     @classmethod

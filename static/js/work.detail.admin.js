@@ -18,16 +18,9 @@ function validateSubmission(reason) {
 		if ($("#bioapproved").prop("checked")
 				&& $("#workapproved").prop("checked")
 				&& $("#qapproved").prop("checked")) {
-			var r = confirm("Are you sure that work is approved?");
-			if (r == true) {
-				$(".status-values").val("4")
-				updateTheArtwork()
-			} else {
-				return
-			}
+			toggleConfirmationBox(updateTheArtwork,"Are you sure that work is approved?", "4")
 		} else
-			toggleMessageBox(
-					"Please make sure that the bio, artwork and questions of the entry are correctly submitted",
+			toggleMessageBox("Please make sure that the learner has been submitted the bio, artwork and questions correctly",
 					true)
 		break;
 	case 1:
@@ -39,23 +32,11 @@ function validateSubmission(reason) {
 					true)
 			return
 		} else {
-			var r = confirm("Are you sure that work requires revision?");
-			if (r == true) {
-				$(".status-values").val("1")
-				updateTheArtwork()
-			} else {
-				return
-			}
+			toggleConfirmationBox(updateTheArtwork,"Are you sure that work requires revision?", "1")
 		}
 		break;
 	case 2:
-		var r = confirm("Are you sure that the artwork is rejected?");
-		if (r == true) {
-			$(".status-values").val("3")
-			updateTheArtwork()
-		} else {
-			return
-		}
+		toggleConfirmationBox(updateTheArtwork,"Are you sure that the artwork is rejected?", "3")
 		break;
 	default:
 		alert("Please contact the Technicians")
@@ -64,6 +45,7 @@ function validateSubmission(reason) {
 }
 
 function updateTheArtwork() {
+	$(".status-values").val(arguments[0][2])
 	$(".frameLoding").fadeIn()
 	var form = $('#entry-approval-form')[0];
 	var data = new FormData(form);

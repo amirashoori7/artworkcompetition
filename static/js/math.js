@@ -140,10 +140,6 @@ function convertImg2SVG(className) {
 }
 
 
-function dropDownFunction() {
-	$("#schoolDropdown").toggleClass("show")
-}
-
 function filterFunction() {
 	var input, filter, a, i;
 	input = $(".school-input")
@@ -171,6 +167,16 @@ function toggleMessageBox(messageText, isError) {
 		$(".success-message-content").html(messageText)
 		$("#success-message-modal").modal("show")
 	}
+}
+
+function toggleConfirmationBox(callback) {
+	$(".confirmation-message-content").html(arguments[1])
+	$("#confirmation-box-modal").modal("show")
+	var args = [].slice.call(arguments)
+	$("#confirmation-box-btn").on("click",function(){
+		callback(args)
+		$("#confirmation-box-modal").modal("hide")
+	})
 }
 
 function showDialogPage(element, url) {
@@ -327,7 +333,10 @@ function showItemMenu(e) {
 	loadContent($("<li/>").attr("data-href", "/signup_page/"))
 }
 
-function submitAForm(url, formId, submitBTNId) {
+function submitAnEvaluationForm() {
+	var url = arguments[0][2], formId = arguments[0][3], submitBTNId = arguments[0][4], newStatus = arguments[0][5]
+	if (newStatus != null)
+		$('#' + formId).find('#statusfield').val(newStatus)
 	var form = $('#' + formId)[0]
 	$("#" + submitBTNId).prop("disabled", true)
 	var data = new FormData(form)

@@ -1,56 +1,113 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8 card eval-form">
+		{% if d1as or d1bs or d2 or d3%}
 		<div class="card-header collapsed row" data-toggle="collapse"
 			href="#eval-forms">
 			<div class="col-md-11">
 				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Evaluation
-					Forms</a>
+					Results</a>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 		<div class="collapse card-body" id="eval-forms">
+			{% if d1as %} {% for d1a in d1as %}
 			<div class="card-header collapsed row" data-toggle="collapse"
-				aria-expanded="false" href="#eval-form1">
+				aria-expanded="false" href="#eval-form-1-{{ forloop.counter }}">
 				<div class="col-md-11">
-					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Form1</a>
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
+						<!-- 					CARD HEADING --> 
+						Judge 1 ({{ d1a.author.last_name }}, {{ d1a.author.first_name }})</a>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="collapse card-body" id="eval-form1">
+			<div class="collapse card-body" id="eval-form-1-{{ forloop.counter }}" data-id="{{ d1a.id }}"></div>
+			<script type="text/javascript">
+			var url = '/evaluation/formd1a?formid={{ d1a.id }}' 
+					console.log(url)
+				$("#eval-form-1-{{ forloop.counter }}").load(
+						url,
+						function() {
+							$("#eval-form-1-{{ forloop.counter }}").find(".buttons-holder-div").remove()
+							$("#eval-form-1-{{ forloop.counter }}").find("textarea").attr("disabled", "disabled")
+							$("#eval-form-1-{{ forloop.counter }}").find("select").attr("disabled", "disabled")
+							$("#eval-form-1-{{ forloop.counter }}").find(".page-title").remove()
+						})
+			</script>
+			{% endfor %}<hr> {% endif %}
 			
-			{% if d1as %}
-{% for d1a in d1as %}
-{{ d1a.id }}
-{% endfor %}
-{% endif %}
-
-{% if d1bs %}
-{% for d1b in d1bs %}
-{{ d1b.id }}
-{% endfor %}
-{% endif %}
-
-{% if d2 %}
-{% for evalform2 in d2 %}
-{{ evalform2.id }}
-{% endfor %}
-{% endif %}
-
-{% if d3 %}
-{% for evalform3 in d3 %}
-{{ evalform3.id }}
-{% endfor%}
-{%endif%}
+			{% if d1bs %} {% for d1b in d1bs %}
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#eval-form-dm-{{ forloop.counter }}">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
+						<!-- 					CARD HEADING --> 
+						Decision Maker ({{ d1b.author.last_name }}, {{ d1b.author.first_name }})</a>
+				</div>
+				<div class="col-md-1"></div>
 			</div>
+			<div class="collapse card-body" id="eval-form-dm-{{ forloop.counter }}" data-id="{{ d1b.id }}"></div>
+			<script type="text/javascript">
+			$("#eval-form-dm-{{ forloop.counter }}").load(
+					'/evaluation/formd1b?work_id=' + $("#work_id").val(),function(){
+						$("#eval-form-dm-{{ forloop.counter }}").find(".buttons-holder-div").remove()
+						$("#eval-form-dm-{{ forloop.counter }}").find("textarea").attr("disabled","disabled")
+						$("#eval-form-dm-{{ forloop.counter }}").find(".page-title").remove()
+					})
+			</script>
+			{% endfor %}<hr> {% endif %}
+			{% if d2 %} {% for evalform2 in d2 %}
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#eval-form-2-{{ forloop.counter }}">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
+						<!-- 					CARD HEADING --> 
+						Judge 2 ({{ evalform2.author.last_name }}, {{ evalform2.author.first_name }})</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="eval-form-2-{{ forloop.counter }}" data-id="{{ evalform2.id }}">
+			</div>
+			<script type="text/javascript">
+			$("#eval-form-2-{{ forloop.counter }}").load(
+					'/evaluation/formd2?work_id=' + $("#work_id").val(),function(){
+						$("#eval-form-2-{{ forloop.counter }}").find(".buttons-holder-div").remove()
+						$("#eval-form-2-{{ forloop.counter }}").find("input[type='radio']").each(function(){
+							$(this).attr("disabled","disabled")
+						})
+						$("#eval-form-2-{{ forloop.counter }}").find(".form-check-input").each(function(){
+							if($(this).attr("checked") != "checked")
+								$(this).parent().remove()
+							else
+								$(this).attr("disabled","disabled")
+						})
+						$("#eval-form-2-{{ forloop.counter }}").find("textarea").attr("disabled","disabled")
+						$("#eval-form-2-{{ forloop.counter }}").find(".page-title").remove()
+					})
+			</script>
+			{% endfor %} <hr>{% endif %}
+			{% if d3 %} {% for evalform3 in d3 %}
+			<div class="card-header collapsed row" data-toggle="collapse"
+				aria-expanded="false" href="#eval-form-3-{{ forloop.counter }}">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
+						<!-- 					CARD HEADING --> 
+						Judge 3 ({{ evalform3.author.last_name }}, {{ evalform3.author.first_name }})</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="collapse card-body" id="eval-form-3-{{ forloop.counter }}" data-id="{{ evalform3.id }}"></div>
+			{% endfor%}<hr> {%endif%}
 		</div>
+		{%endif%}
+
 	</div>
 </div>
 <div class="col-md-2"></div>
 </div>
 
 <script type="text/javascript">
-// function addCard(cardName) {
-// 	$(".col-md-8.card.eval-form").html()
-// }
+	// function addCard(cardName) {
+	// 	$(".col-md-8.card.eval-form").html()
+	// }
 </script>

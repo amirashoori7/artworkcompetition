@@ -26,6 +26,7 @@
 	</div>
 	<div class="row form-section" id="q1"
 		data-title="Was the Mathematics correctly applied?">
+		<br>
 		<div class="col-md-2">
 			<label>Excellent</label> <input type="hidden"
 				class="form-control form-input"
@@ -59,6 +60,7 @@
 	<hr>
 	<div class="row form-section" id="q2"
 		data-title="How well was the connection between Mathematics and the artwork explained in the paragraph?">
+		<br>
 		<div class="col-md-2">
 			<label>Excellent</label> <input type="hidden"
 				class="form-control form-input"
@@ -174,10 +176,10 @@
 		</div>
 	</div>
 <hr>
-	<div class="row">
+	<div class="row buttons-holder-div">
 	<div class="col-md-6 text-center">
 		<button class="btn btn-block btn-success" type="button" id="buttonSubmitD2Form"
-				onclick="submitAForm('{% url 'evaluation:formd2' %}','formd2Id','buttonSubmitD2Form')"><i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Submit</button>
+				onclick="submitAnEvaluationForm('{% url 'evaluation:formd2' %}','formd2Id','buttonSubmitD2Form', null)"><i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Submit</button>
 	</div>
 	<div class="col-md-6 text-center">
 		<button class="btn btn-block btn-outline-warning" type="button" 

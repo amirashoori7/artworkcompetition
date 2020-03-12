@@ -2,24 +2,25 @@
 	<h2>Artwork List</h2>
 </div>
 <div class="photo-viewer"></div>
+{% if user.user_type == 6 or user.user_type == 7 %}
 <div class="row">
 	<div class="col-md-3">
 		<label for="status">Filter Status</label> <select
 			onchange="changeView(this)" class="form-control form-input"
-			id="status"><option value="-2">All</option>
+			id="statuses"><option value="-2">All</option>
 			<option value="-1">Pending</option>
 			<option value="0">Submitted</option>
 			<option value="1">Required Revision</option>
 			<option value="2">Revised Work</option>
-			<option value="3">Rejected Stage 0</option>
-			<option value="4">Accepted Stage 0</option>
-			<option value="5">Waiting for Decision</option>
-			<option value="6">Accepted Stage 1</option>
-			<option value="7">Rejected Stage 1</option>
+			<option value="3">Rejected Entry</option>
+			<option value="4">Accepted Entry</option>
+			<option value="5">Waiting for GMMDC Decision</option>
+			<option value="6">Accepted by GMMDC</option>
+			<option value="7">Rejected by GMMDC</option>
 			<option value="8">Waiting for Posting Artwork</option>
-			<option value="9">Rejected Stage 2</option>
+			<option value="9">Rejected by Judge2</option>
 			<option value="10">Artwork Received</option>
-			<option value="11">Rejected Stage 3</option>
+			<option value="11">Rejected at the Final Stage</option>
 			<option value="12">Winner</option>
 		</select>
 	</div>
@@ -30,8 +31,9 @@
 	Submitted works: {{numberofartworks}}
 	</div>
 </div>
+{%endif%}
 <script type="text/javascript">
-$("#status").val({{request.GET.status}})
+$("#statuses").val({{request.GET.status}})
 function changeView(select){
 	$(".frameLoding").fadeIn()
 	$('#admin-console-content').load("/work_lists?status="+$(select).val(),function(){
@@ -52,10 +54,7 @@ function changeView(select){
 	</thead>
 	<tbody>
 		{% for work in works %}
-		<tr class="row-hover" {% if work.status == -1 %}
-				onclick="toggleMessageBox('There is no artwork for this entry', true)"
-			{% else %} 
-				onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')"{%endif%}>
+		<tr class="row-hover">
 			<th scope="row">{{ forloop.counter }}</th>
 			<td>{{ work.owner.last_name }}, {{ work.owner.first_name }}</td>
 			<td>{{ work.get_status_display }}</td>
@@ -66,6 +65,14 @@ function changeView(select){
 			</td>
 			<td>{{ work.school.name }}</td>
 			<td>{{ work.learnergrade }}</td>
+			<td><button class="btn btn-secondary" type="button"
+					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
+					<i class="fa fa-eye">&nbsp;</i>
+				</button></td>
+			<td><button class="btn btn-outline-warning" type="button"
+					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id %}')">
+					<i class="fa fa-gavel">&nbsp;</i>
+				</button></td>
 		</tr>
 		{% endfor %}
 	</tbody>
@@ -82,7 +89,6 @@ setTimeout(function(){
 				transformOrigin: "center"
 			})
 			TweenLite.to($(this), .2, {
-				scale: 1.02,
 				"z-index": 10,
 				transformOrigin: "center",
 				"box-shadow": "black 0px 0px 33px"
@@ -97,7 +103,6 @@ setTimeout(function(){
 				transformOrigin: "center"
 			})
 			TweenLite.to($(this), .2, {
-				scale: 1,
 				"z-index": 1,
 				transformOrigin: "center",
 				"box-shadow": "none"
@@ -106,4 +111,3 @@ setTimeout(function(){
 	})
 }, 200)
 </script>
-<script type="text/javascript" src="static/js/work.detail.admin.js">

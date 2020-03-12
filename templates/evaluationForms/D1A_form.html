@@ -1,12 +1,9 @@
-<hr>
 <div class="row page-title">
-	<div class="col-md-4">
-		<strong>User:</strong>&nbsp; {{ form.instance.author }}
-	</div>
-	<div class="col-md-8">
-		<h5>Evaluation Form Stage 1</h5>
+	<div class="col-md-12">
+		<h5>Evaluation Form, Primary Decision</h5>
 	</div>
 </div>
+<hr>
 <form method="post" action="{% url 'evaluation:formd1a' %}"
 	class="needs-validation form-general-style" id="formd1aId"
 	enctype="multipart/form-data" novalidate>
@@ -15,68 +12,72 @@
 		name="id" id="id">
 	<div class="row">
 		<div class="col-md-4">
-			<label for="ImageQuality">Image Quality</label> <select
-				class="custom-select" name="imgq" id="ImageQuality">
+			<label for="ImageQuality{{ form.instance.id }}">Image Quality</label> <select
+				class="custom-select" name="imgq" id="ImageQuality{{ form.instance.id }}">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
 			</select> <input type="hidden" value="{{ form.instance.imgq|default:'0' }}"
-				id="imgqid">
-			<script type="text/javascript">
-			$("#ImageQuality option[value="
-					+ $("#imgqid").val() + "]").attr(
-			'selected','selected')
-			</script>
+				id="imgqid{{ form.instance.id }}">
 		</div>
 		<div class="col-md-4">
-			<label for="AnswersScore">Answers to the questions</label> <select
-				class="custom-select" name="answersq" id="AnswersScore">
+			<label for="AnswersScore{{ form.instance.id }}">Answers to the questions</label> <select
+				class="custom-select" name="answersq" id="AnswersScore{{ form.instance.id }}">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
 			</select> <input type="hidden"
-				value="{{ form.instance.answersq|default:'0' }}" id="answerqid">
-			<script type="text/javascript">
-			$("#AnswersScore option[value="
-					+ $("#answerqid").val() + "]").attr(
-			'selected','selected')
-			</script>
+				value="{{ form.instance.answersq|default:'0' }}" id="answerqid{{ form.instance.id }}">
 		</div>
 		<div class="col-md-4">
-			<label for="OriginQuality">Originiality of the work</label> <select
-				class="custom-select" name="originq" id="OriginQuality">
+			<label for="OriginQuality{{ form.instance.id }}">Originiality of the work</label> <select
+				class="custom-select" name="originq" id="OriginQuality{{ form.instance.id }}">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
 			</select> <input type="hidden" value="{{ form.instance.originq|default:'0' }}"
-				id="originq">
-			<script type="text/javascript">
-			$("#OriginQuality option[value="
-					+ $("#originq").val() + "]").attr(
-			'selected','selected')
-			</script>
+				id="originq{{ form.instance.id }}">
 		</div>
 		<br>
 		<div class="col-md-12">
-			<label for="comment"> Comments</label>
+			<label for="comment">Comments</label>
 			<textarea class="form-control form-input" id="comment"
 				placeholder="Please add any comments, if there are some..."
 				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
 	<hr>
-	<div class="row">
-		<div class="col-md-12 text-center">
+	<div class="row buttons-holder-div">
+		<div class="col-md-6 text-center">
 <!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
-			<button class="action-button" type="button" id="buttonSubmitD1AForm"
-				onclick="submitAForm('{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm')">Submit</button>
+			<button class="btn btn-block btn-success" type="button" id="buttonSubmitD1AForm"
+				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)"><i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Submit</button>
+		</div>
+		<div class="col-md-6 text-center">
+			<button class="btn btn-block btn-outline-warning" type="button"
+				onclick="closeFullScreenDiv()">
+				<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close
+			</button>
 		</div>
 	</div>
 	{% csrf_token %}
 </form>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#OriginQuality{{ form.instance.id }} option[value="
+			+ $("#originq{{ form.instance.id }}").val() + "]").attr(
+	'selected','selected')
+	$("#AnswersScore{{ form.instance.id }} option[value="
+					+ $("#answerqid{{ form.instance.id }}").val() + "]").attr(
+			'selected','selected')
+	$("#ImageQuality{{ form.instance.id }} option[value="
+					+ $("#imgqid{{ form.instance.id }}").val() + "]").attr(
+			'selected','selected')
+})
+</script>

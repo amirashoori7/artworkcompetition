@@ -99,7 +99,12 @@ class D2(models.Model):
         self.score = self.q1 + self.q2 + self.q3 + self.q4
         super(D2, self).save(*args, **kwargs)
 
-
+#     var weights=[
+#         {q: "q1", w: 10},
+#         {q: "q2", w: 30},
+#         {q: "q3", w: 20},
+#         {q: "q4", w: 25},
+#         {q: "q5", w: 15}]
 class D3(models.Model):
     artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
     q1 = models.IntegerField(blank=True, null=True, default=0)
@@ -114,5 +119,5 @@ class D3(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
  
     def save(self, *args, **kwargs):
-        self.score = self.q1 + self.q2 + self.q3 + self.q4 + self.q5
+        self.score = (self.q1 * 10/4) + (self.q2 * 30/4) + (self.q3 * 20/4) + (self.q4 * 25/4) + (self.q5 * 15/4)
         super(D3, self).save(*args, **kwargs)
