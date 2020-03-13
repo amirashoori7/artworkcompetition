@@ -72,13 +72,13 @@ def gallery(request):
 @login_required
 def work_lists(request):
     status = request.GET.get('status', -2)
-    if request.user.user_type == 2:#judge 1
+    if request.user.user_type == 2:  # judge 1
         works = Artwork.objects.filter(Q (status=4) | Q (status=5))
-    elif request.user.user_type == 3:#decision maker
+    elif request.user.user_type == 3:  # decision maker
         works = Artwork.objects.filter(Q (status=5))
-    elif request.user.user_type == 4:#Judge 2
+    elif request.user.user_type == 4:  # Judge 2
         works = Artwork.objects.filter(Q (status=6))
-    elif request.user.user_type == 5:#judge 3
+    elif request.user.user_type == 5:  # judge 3
         works = Artwork.objects.filter(Q (status=10))
     elif status == '-2':
         works = Artwork.objects.all()
@@ -94,15 +94,17 @@ def getfile(request):
     artworks = Artwork.objects.all()  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-              'school__province', 'school__name', 'school__natemis', 'worktitle', 'workfile', 
+              'school__province', 'school__name', 'school__natemis', 'worktitle', 'workfile',
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
     df = convert_to_df(artworks, fields=fields)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
-    csvfilename = SITE_ROOT + '/artworklist.csv'
-    zipfilename = SITE_ROOT + '/backupFile.zip'
+#     csvfilename =  + '/artworklist.csv'
+    csvfilename = os.path.join(SITE_ROOT, "artworklist.csv")
+    zipfilename = os.path.join(SITE_ROOT, "backupFile.zip")
+#     zipfilename = SITE_ROOT + '/backupFile.zip'
     df.to_csv(csvfilename, mode='w')
     with ZipFile(zipfilename, 'w') as zipObj:
         for folderName, subfolders, filenames in os.walk(SITE_ROOT):
@@ -120,12 +122,13 @@ def getfile(request):
 def importfile(request):  
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-              'worktitle', 'workfile',
+              'worktitle', 'workfile', 'school',
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
-    filename = os.path.dirname(os.path.abspath(__file__)) + '\\artworksd.csv'
-    pd = pandas.read_csv(filename, usecols=fields, header=0)
+#     filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'artworklist.csv')
+    filename = 'c:/backups/artwork.xlsx'
+    pd = pandas.read_excel(filename, usecols=fields, header=0, converters={'owner__cellphone':str, 'owner__parentphone':str, 'teacherphone':str, 'workformulafile':str})
     response_data = []
     for index, row in pd.iterrows():
         user_data_dict = {}
@@ -141,11 +144,9 @@ def importfile(request):
         user_data_dict['password2'] = "abcdefg12345!@#$%"
         user_form = UserRegistrationForm(user_data_dict)
         if user_form.is_valid():
-            user_form.save()
-            created_user = ProjectUser.objects.get(username=user_data_dict['username'])
             artwork_data_dict = {}
             artwork_data_dict['worktitle'] = row['worktitle']
-            artwork_data_dict['workfile'] = row['workfile']
+            artwork_data_dict['workfile'] = 'c:/backups/works/' + row['workfile']
             artwork_data_dict['learnergrade'] = row['learnergrade']
             artwork_data_dict['teacheremail'] = row['teacheremail']
             artwork_data_dict['teacherphone'] = row['teacherphone']
@@ -153,11 +154,14 @@ def importfile(request):
             artwork_data_dict['teachername'] = row['teachername']
             artwork_data_dict['question2'] = row['question2']
             artwork_data_dict['question3'] = row['question3']
-            artwork_data_dict['workformulafile'] = row['workformulafile']
+            if isNaN(row['workformulafile']) != True and len(str(row['workformulafile'])) > 0:
+                artwork_data_dict['workformulafile'] = 'c:/backups/works/' + row['workformulafile']
             artwork_form = EntryForm(artwork_data_dict)
+            school = School.objects.get(natemis=int(row['school']))
             if artwork_form.is_valid():
-                artwork_form.save(commit=False)
-                school = School().objects.get(id=row['school'])
+                user_form.save()
+                created_user = ProjectUser.objects.get(username=user_data_dict['username'])
+                artwork_form = artwork_form.save(commit=False)
                 artwork_form.school = school
                 artwork_form.status = 0
                 artwork_form.owner = created_user
@@ -170,6 +174,8 @@ def importfile(request):
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
 
+def isNaN(string):
+    return string != string
     
 @login_required
 def eval_forms_artwork(request):
