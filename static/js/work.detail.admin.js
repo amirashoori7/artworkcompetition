@@ -113,3 +113,44 @@ function updateTheArtwork() {
 			})
 }
 
+function flagit(btn, workid){
+	flag = 0
+	if($(btn).hasClass('btn-outline-warning'))
+		flag = 1
+	$.ajax({
+		type : "POST",
+		url : "/flag_work?work_id="+workid+"&flag=" + flag,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken",
+						getCookie('csrftoken'));
+			}
+			$(".frameLoding").fadeIn()
+		},
+		success : function(response) {
+			console.log(response)
+			$(".frameLoding").fadeOut()
+			if (response.successResult != null) {
+				toggleMessageBox(response.successResult, false)
+				if($(btn).hasClass('btn-outline-warning')){
+					$(btn).removeClass('btn-outline-warning')
+					$(btn).addClass('btn-warning')
+				}else{
+					$(btn).removeClass('btn-warning')
+					$(btn).addClass('btn-outline-warning')
+				}
+			}  else if (response.errorResult != null)
+				toggleMessageBox("<span>" + response.errorResult + "</span>",
+						true)
+		},
+		error : function(xhr, errmsg, err) {
+			$(".frameLoding").fadeOut()
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		},
+		complete : function(response) {
+			return -1
+		}
+	})
+}

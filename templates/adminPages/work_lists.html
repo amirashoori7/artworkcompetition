@@ -58,8 +58,8 @@ function changeView(select){
 	<tbody>
 		{% for work in works %}
 		<tr class="row-hover">
-			<td><button class="btn {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}" type="button"
-					onclick="flagit(this, {{ work.id }})">
+			<td><button class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}" type="button"
+					onclick="flagit(this, {{ work.id }})" id="flag-btn-{{ work.id }}">
 					<i class="fa fa-font-awesome-flag"></i>
 				</button></td>
 			<td>{{ forloop.counter }}</td>

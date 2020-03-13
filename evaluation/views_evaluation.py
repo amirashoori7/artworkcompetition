@@ -3,7 +3,6 @@ from django.http.response import HttpResponse
 import json
 from artwork.artwork_models import Artwork
 from django.contrib.auth.decorators import login_required
-from account.models_account import ProjectUser
 from evaluation.models import D1A, D2, D1B, D3
 from evaluation.forms_evaluation import FormD1A, FormD2, FormD1B, FormD3
 import artwork

@@ -8,6 +8,7 @@ urlpatterns = [
     # re_path(r'^index/$', views.index, name='index'),
     path('rest_list', rest_views.worklists),
     path('get_school', rest_views.get_school),
+    path('flag_work', rest_views.flag_work),
     path('', artwork_view.index, name='index'),
     path('entry_form/', artwork_view.entry_form, name='entry_form'),
     path('entry_form_view/', artwork_view.entry_form_view, name='entry_form_view'),
