@@ -20,6 +20,12 @@ source bin/activate
 
 ## install django and other required packages using pip
 all the required packages are included in the requirements.txt file and you can install all of them at once
+pinning down the installed packages and application dependencies, and to install them in other environments
+```bash
+pip freeze > requirements.txt
+pip install -r requirements.txt
+```
+to manually install packages
 ```bash
 pip install django
 pip install djangorestframework
@@ -38,19 +44,29 @@ django-admin startapp myapp
 ```
 ## create db, db user and password and add the db settings in project's settings.py file
 
-#server connections info
-Hostname: mathart-nc1.mandela.ac.za
-IP address:  10.103.122.80
-Username: *********
-Password: *********
+## crontab for auto db and media backups
+backing up db every day at midnight to a folder
+```bash
+sudo crontab -e
+0 0 * * * sudo PGPASSWORD="PASSWORD" pg_dump -U USERNAME -h HOST NAME_OF_DB > LOCATION_AND_NAME_OF_BACKUP_FILE
+```
+to automate rclone first we make a shell script and make it executable
+for our purpose we have 2 rclone shells, one for media folder and another for database dumps
+```bash
+nano rclone-cron.sh
+chmod a+x rclone-cron.sh
+
+crontab -e
+0 0 * * * /path/rclone-cron.sh >/dev/null 2>&1
+```
 
 
 ##Update:
-1- to login as root: 
+1- to login as root:
 	sudo -s
 2- go to the production folder and activate the virtual environment:
 	source bin/activate
-	
+
 3- to remove the migration folders:
 	a) cd artworkcompetition
 	b) rm -r account/migrations
@@ -80,8 +96,8 @@ grant all on database mathart to mathartuser;
 	a. systemctl restart gunicorn.socket
 	b. systemctl restart gunicorn.service
 	c. service nginx restart
-	
-	
+
+
 To make a backup:
 ./manage.py dbbackup
 ./manage.py mediabackup
