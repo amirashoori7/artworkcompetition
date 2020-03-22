@@ -229,9 +229,14 @@ def entry_form(request):
         userModel = ProjectUser.objects.get(username=request.user)
         user_form = UserForm(instance=request.user)
     if request.method == 'POST':
-        old_data = get_object_or_404(Artwork, id=request.POST["id"])
-        artwork_form = EntryForm(data=request.POST, files=request.FILES, instance=old_data)
         response_data = {}
+        try:
+            old_data = get_object_or_404(Artwork, id=request.POST["id"])
+        except:
+            response_data['errorResults'] = "No access to entry form update."
+            return HttpResponse(json.dumps(response_data),
+                    content_type="application/json")
+        artwork_form = EntryForm(data=request.POST, files=request.FILES, instance=old_data)
         if artwork_form.is_valid():
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user

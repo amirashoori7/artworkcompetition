@@ -148,28 +148,55 @@ function checkValidation() {
 
 										})
 					})
-	validateQuestions()
-	setTimeout(
-			function() {
-				$("#buttonSubmit").html(
-						"<i class='fa fa-save'>&nbsp;&nbsp;&nbsp;</i>Saved "
-								+ filledFields + "/" + totalFields)
-				if (filledFields == totalFields
-						&& questionsValidated == questionsValidationCriteria.length) {
-					$("#buttonSubmit").removeClass(
-							"btn-outline-secondary disabled")
-					$("#buttonSubmit").addClass("btn-success")
-					$("#buttonSaveContinue").addClass("disabled")
-					$("#buttonSubmit")
-							.html(
-									"<i class='fa fa-telegram-plane'>&nbsp;&nbsp;&nbsp;</i> Submit The Entry")
+//	validateQuestions()
+	questionsValidated = 0
+	$(questionsValidationCriteria).each(
+			function(i, j) {
+				var ctr = $.trim($("#" + j.id).val()).split(" ").length
+				if (ctr < j.min || ctr > j.max) {
+					$(".word-counter." + j.id).addClass("text-danger")
+					if (!$("#" + j.id).hasClass("is-invalid"))
+						$("#" + j.id).addClass("is-invalid")
+					$(".word-counter." + j.id).addClass("text-success")
+					populateDangerMessageField(j.id, "Answer in between "
+							+ j.min + " and " + j.max + " words")
+					$(".questions-card").addClass(
+							"border-warning exteded-class")
+					$(".questions-card").find(".col-md-1 i").addClass(
+							"fa-thumbs-down text-warning exteded-class")
+					$(".questions-card").find(".card-title").addClass(
+							"text-warning exteded-class")
 				} else {
-					$("#buttonSubmit").addClass("disabled")
-					$("#buttonSaveContinue").removeClass("disabled")
+					$(".word-counter." + j.id).removeClass("text-danger")
+					$("#" + j.id).removeClass("is-invalid")
+					$(".word-counter." + j.id).addClass("text-success")
+					questionsValidated++
+					$("small." + j.id).remove()
 				}
-				checkValidProcess.resolve()
-			}, 500)
+				$(".word-counter." + j.id).html(
+						"Word Count (" + ctr + " out of [" + j.min + " - "
+								+ j.max + "] words)")
+				if(i + 1 == questionsValidationCriteria.length)
+					checkValidProcess.resolve()
+				console.log(questionsValidated)
+			})
 	return $.when(checkValidProcess).done(function() {
+		$("#buttonSubmit").html(
+				"<i class='fa fa-save'>&nbsp;&nbsp;&nbsp;</i>Saved "
+						+ filledFields + "/" + totalFields)
+		if (filledFields == totalFields
+				&& questionsValidated == questionsValidationCriteria.length) {
+			$("#buttonSubmit").removeClass(
+					"btn-outline-secondary disabled")
+			$("#buttonSubmit").addClass("btn-success")
+			$("#buttonSaveContinue").addClass("disabled")
+			$("#buttonSubmit")
+					.html(
+							"<i class='fa fa-telegram-plane'>&nbsp;&nbsp;&nbsp;</i> Submit The Entry")
+		} else {
+			$("#buttonSubmit").addClass("disabled")
+			$("#buttonSaveContinue").removeClass("disabled")
+		}
 	}).promise()
 }
 
@@ -270,6 +297,7 @@ function validateQuestions() {
 				$(".word-counter." + j.id).html(
 						"Word Count (" + ctr + " out of [" + j.min + " - "
 								+ j.max + "] words)")
+				console.log(questionsValidated)
 			})
 }
 
@@ -282,7 +310,6 @@ function submitEntryForm(url) {
 				'<input type="hidden" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
-	console.log("submitEntryForm")
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)
 	var data = new FormData(form);
 	$.ajax({

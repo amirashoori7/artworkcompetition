@@ -3,6 +3,7 @@ from artwork.artwork_models import Artwork
 from account.models_account import ProjectUser
 
 class EntryForm(forms.ModelForm):
+    teacheremail = forms.EmailField(error_messages={'required': 'Please enter a valid email address'})
     class Meta:
         model = Artwork
         fields = ['worktitle', 'id', 'workfile', 'workfileCropped',
