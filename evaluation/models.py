@@ -105,19 +105,19 @@ class D2(models.Model):
 #         {q: "q3", w: 20},
 #         {q: "q4", w: 25},
 #         {q: "q5", w: 15}]
-# class D3(models.Model):
-#     artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
-#     q1 = models.IntegerField(blank=True, null=True, default=0)
-#     q2 = models.IntegerField(blank=True, null=True, default=0)
-#     q3 = models.IntegerField(blank=True, null=True, default=0)
-#     q4 = models.IntegerField(blank=True, null=True, default=0)
-#     q5 = models.IntegerField(blank=True, null=True, default=0)
-#     comment = models.TextField(blank=True)
-#     score = models.FloatField(null=True, blank=True)
-#     author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#  
-#     def save(self, *args, **kwargs):
-#         self.score = (self.q1 * 10/4) + (self.q2 * 30/4) + (self.q3 * 20/4) + (self.q4 * 25/4) + (self.q5 * 15/4)
-#         super(D3, self).save(*args, **kwargs)
+class D3(models.Model):
+    artwork = models.ForeignKey(Artwork, blank=False, null=False, on_delete=models.CASCADE)
+    q1 = models.IntegerField(blank=True, null=True, default=0)
+    q2 = models.IntegerField(blank=True, null=True, default=0)
+    q3 = models.IntegerField(blank=True, null=True, default=0)
+    q4 = models.IntegerField(blank=True, null=True, default=0)
+    q5 = models.IntegerField(blank=True, null=True, default=0)
+    comment = models.TextField(blank=True)
+    score = models.FloatField(null=True, blank=True)
+    author = models.ForeignKey(ProjectUser, blank=False, null=False, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+ 
+    def save(self, *args, **kwargs):
+        self.score = (self.q1 * 10/4) + (self.q2 * 30/4) + (self.q3 * 20/4) + (self.q4 * 25/4) + (self.q5 * 15/4)
+        super(D3, self).save(*args, **kwargs)
