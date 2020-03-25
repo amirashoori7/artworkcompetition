@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'dbbackup'
 ]
+
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
 # DBBACKUP_STORAGE_OPTIONS = {'location': 'c:\backups'}
