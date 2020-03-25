@@ -101,3 +101,25 @@ grant all on database mathart to mathartuser;
 To make a backup:
 ./manage.py dbbackup
 ./manage.py mediabackup
+
+
+
+Postgres Commands>>>
+
+psql mathartuser -h 127.0.0.1 -d mathart
+
+SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';
+
+SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'evaluation_d3';
+
+DROP TABLE films, distributors;
+
+CREATE TABLE account(
+   id serial PRIMARY KEY,
+   username VARCHAR (50) UNIQUE NOT NULL,
+   password VARCHAR (50) NOT NULL,
+   email VARCHAR (355) UNIQUE NOT NULL,
+   created_on TIMESTAMP NOT NULL,
+   last_login TIMESTAMP
+);
+

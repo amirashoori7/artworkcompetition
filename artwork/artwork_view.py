@@ -12,7 +12,7 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
-from evaluation.models import D1A, D1B, D3, D2
+from evaluation.models import D1A, D1B, D2
 
 
 def index(request):
@@ -184,8 +184,7 @@ def eval_forms_artwork(request):
     d1as = D1A.objects.filter(artwork=work)
     d1bs = D1B.objects.filter(artwork=work)
     d2 = D2.objects.filter(artwork=work)
-    d3 = D3.objects.filter(artwork=work)
-    context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3 }
+    context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2}
     return render(request, 'evaluationForms/eval_forms.html', context)
 
 
