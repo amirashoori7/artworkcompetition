@@ -1,3 +1,8 @@
+<style>
+.centered {
+	text-align: center;
+}
+</style>
 <div class="page-title">
 	<h2>Artwork List</h2>
 </div>
@@ -24,12 +29,8 @@
 			<option value="12">Winner</option>
 		</select>
 	</div>
-	<div class="col-md-3">
-	Number of learners: {{numberoflearners}}
-	</div>
-	<div class="col-md-3">
-	Submitted works: {{numberofartworks}}
-	</div>
+	<div class="col-md-3">Number of learners: {{numberoflearners}}</div>
+	<div class="col-md-3">Submitted works: {{numberofartworks}}</div>
 </div>
 {%endif%}
 <script type="text/javascript">
@@ -44,24 +45,37 @@ function changeView(select){
 <table class="table table-general-style">
 	<thead>
 		<tr>
-			<th scope="col">Flag</th>
-			<th scope="col"></th>
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<th scope="col">Flag</th> {%endif%}
+			<th scope="col">#</th>
 			<th scope="col">Full Name</th>
 			<th scope="col">Status</th>
 			<th scope="col">Work Title</th>
 			<th scope="col">School</th>
 			<th scope="col">Grade</th>
-			<th scope="col">View</th>
-			<th scope="col">Evaluate</th>
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<th scope="col" class="centered">View</th>
+					{% endif %}
+			<th scope="col" class="centered">Evaluate</th>
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<th scope="col" class="centered">Edit</th>
+			<th scope="col" class="centered">Remove</th>
+					{% endif %}
 		</tr>
 	</thead>
 	<tbody>
 		{% for work in works %}
 		<tr class="row-hover">
-			<td><button class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}" type="button"
-					onclick="flagit(this, {{ work.id }})" id="flag-btn-{{ work.id }}">
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<td><button
+					class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}"
+					type="button" 
+					{% if user.user_type == 6 %}
+					onclick="flagit(this, {{ work.id }})"
+					{% endif %}
+					id="flag-btn-{{ work.id }}">
 					<i class="fa fa-font-awesome-flag"></i>
-				</button></td>
+				</button></td> {% endif %}
 			<td>{{ forloop.counter }}</td>
 			<td>{{ work.owner.last_name }}, {{ work.owner.first_name }}</td>
 			<td>{{ work.get_status_display }}</td>
@@ -72,14 +86,26 @@ function changeView(select){
 			</td>
 			<td>{{ work.school.name }}</td>
 			<td>{{ work.learnergrade }}</td>
-			<td><button class="btn btn-outline-info" type="button"
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<td class="centered"><button class="btn btn-outline-info" type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 1 %}')">
 					<i class="fa fa-eye"></i>
 				</button></td>
-			<td><button class="btn btn-outline-secondary" type="button"
+					{% endif %}
+			<td class="centered"><button class="btn btn-outline-secondary" type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 0 %}')">
 					<i class="fa fa-gavel"></i>
 				</button></td>
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<td class="centered"><button class="btn btn-outline-success" type="button"
+					onclick="toggleMessageBox('Not a valid action',true)">
+					<i class="fa fa-edit"></i>
+				</button></td>
+				<td class="centered"><button class="btn btn-outline-danger" type="button"
+					onclick="toggleMessageBox('Not a valid action',true)">
+					<i class="fa fa-trash-alt"></i>
+				</button></td>
+					{% endif %}
 		</tr>
 		{% endfor %}
 	</tbody>

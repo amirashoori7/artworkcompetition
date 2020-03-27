@@ -4,11 +4,11 @@
 }
 </style>
 <div class="page-title">
-	<h2>Evaluation Form Stage 2</h2>
+	<h2>Evaluation Form Stage 2 {{form.instance.author.id}}</h2>
 </div>
 <hr>
 <form method="post" action="{% url 'evaluation:formd3' %}"
-	class="needs-validation form-general-style" id="formd3Id"
+	class="needs-validation form-general-style" id="formd3Id{{form.instance.author.id}}"
 	enctype="multipart/form-data" novalidate>
 	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
 	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
@@ -178,7 +178,7 @@
 		<div class="col-md-6">
 			<label>Comment</label>
 			<textarea class="form-control form-input" id="comment"
-				placeholder="Dear judge, please add any comments, if there are some..."
+				placeholder="Please add any comments, if there are some..."
 				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
@@ -187,7 +187,7 @@
 		<div class="col-md-6 text-center">
 			<button class="btn btn-block btn-success" type="button"
 				id="buttonSubmitD3Form"
-				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd3' %}','formd3Id','buttonSubmitD3Form', null)">
+				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd3' %}','formd3Id{{form.instance.author.id}}','buttonSubmitD3Form', null)">
 				<i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Submit
 			</button>
 		</div>
@@ -208,36 +208,36 @@
 		{q: "q5", w: 15}]
 	$(document).ready(
 			function() {
-				$("input[type='radio']").each(function() {
+				$("#formd3Id{{form.instance.author.id}}").find("input[type='radio']").each(function() {
 					var qu = $(this).attr("name").replace('radio','')
 					var weight = 0
 					for(var i = 0; i < weights.length; i++) {
 						if(qu == weights[i].q)
 							weight = weights[i].w / 4
 					}
-					$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * weight) + "%")
+					$("#formd3Id{{form.instance.author.id}}").find("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * weight) + "%")
 					$(this).change(function() {
 						$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * weight)+ "%")
 						$("input[name='"+qu+"']").val($(this).val())
 						calculateTotal()
 					})
 			})
-			$(".question-value").each(
+			$("#formd3Id{{form.instance.author.id}}").find(".question-value").each(
 					function() {
 						$("input[type='radio'][name='" + $(this).attr("name") + "radio'][value='"+$(this).val()+"']").prop("checked", true)
 					})
-				calculateTotal()
+				calculateTotalD3()
 			})
-	function calculateTotal() {
+	function calculateTotalD3() {
 		var val = 0
-		$(".question-value").each(function(){
+		$("#formd3Id{{form.instance.author.id}}").find(".question-value").each(function(){
 			var weight = 0
 			for(var i = 0; i < weights.length; i++) {
 				if($(this).attr("name") == weights[i].q)
 					weight = weights[i].w / 4
 			}
 			val += parseInt($(this).val() * weight)
-			$("#scorediv").html(val + "%")
+			$("#formd3Id{{form.instance.author.id}}").find("#scorediv").html(val + "%")
 		})
 	}
 </script>

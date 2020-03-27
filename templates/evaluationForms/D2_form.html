@@ -169,7 +169,7 @@
 		<label>Comment</label>
 				<textarea class="
 			form-control form-input" id="comment"
-			placeholder="Dear judge, please add any comments, if there are some..."
+			placeholder="Please add any comments, if there are some..."
 			name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
@@ -188,27 +188,26 @@
 <script>
 	$(document).ready(
 			function() {
-				$("input[type='radio']").each(function() {
-					$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * 6.25) + "%")
+				$("#formd2Id").find("input[type='radio']").each(function() {
+					$("#formd2Id").find("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * 6.25) + "%")
 					$(this).change(function() {
 						$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * 6.25)+ "%")
 						var q = $(this).attr("name").replace('radio','')
-						console.log(q)
 						$("input[name='"+q+"']").val($(this).val())
 						calculateTotal()
 					})
 			})
-			$(".question-value").each(
+			$("#formd2Id").find(".question-value").each(
 					function() {
 						$("input[type='radio'][name='" + $(this).attr("name") + "radio'][value='"+$(this).val()+"']").prop("checked", true)
 					})
-			calculateTotal()
+			calculateTotalD2()
 			})
-	function calculateTotal() {
+	function calculateTotalD2() {
 		var val = 0
-		$(".question-value").each(function(){
+		$("#formd2Id").find(".question-value").each(function(){
 			val += parseInt($(this).val() * 6.25)
-			$("#scorediv").html(val + "%")
+			$("#formd2Id").find("#scorediv").html(val + "%")
 		})
 	}
 </script>

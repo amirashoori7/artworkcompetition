@@ -111,11 +111,11 @@
 					'/evaluation/formd3?work_id=' + $("#work_id").val(),function(){
 						$("#eval-form-3-{{ forloop.counter }}").find(".buttons-holder-div").remove()
 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("action","")
-						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("id","")
-						$("#eval-form-3-{{ forloop.counter }}").find("input[type='hidden']").remove()
-						$("#eval-form-3-{{ forloop.counter }}").find("input[type='radio']").each(function(){
-							$(this).attr("disabled","disabled")
-						})
+// 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("id","")
+// 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='hidden']").remove()
+// 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='radio']").each(function(){
+// 							$(this).attr("disabled","disabled")
+// 						})
 						$("#eval-form-3-{{ forloop.counter }}").find("textarea").attr("disabled","disabled")
 						$("#eval-form-3-{{ forloop.counter }}").find(".page-title").remove()
 					})

@@ -173,7 +173,10 @@ def create_d3(request):
     elif request.method == 'GET':
         artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         try:
-            formd3_model = get_object_or_404(D3, author=request.user, artwork=artwork)
+            if request.user.user_type == 6 or request.user.user_type == 7:
+                formd3_model = get_object_or_404(D3, artwork=artwork)
+            else:    
+                formd3_model = get_object_or_404(D3, author=request.user, artwork=artwork)
             formd3_form = FormD3(instance=formd3_model)
         except:
             formd3_form, formd3_obj = D3.objects.get_or_create(author=request.user, artwork=artwork)
