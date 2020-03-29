@@ -8,56 +8,63 @@
 	class="needs-validation form-general-style" id="formd1aId"
 	enctype="multipart/form-data" novalidate>
 	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
-	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
-		name="id" id="id">
+	<input type="hidden" value="{{ form.id|default:'0' }}" name="id"
+		id="id">
 	<div class="row">
 		<div class="col-md-4">
-			<label for="ImageQuality{{ form.instance.id }}">Image Quality</label> <select
-				class="custom-select" name="imgq" id="ImageQuality{{ form.instance.id }}">
+			<label for="ImageQuality{{ form.id }}">Image Quality</label>
+			<select class="custom-select" name="imgq"
+				id="ImageQuality{{ form.id }}">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
-			</select> <input type="hidden" value="{{ form.instance.imgq|default:'0' }}"
-				id="imgqid{{ form.instance.id }}">
+			</select> <input type="hidden" value="{{ form.imgq|default:'0' }}"
+				id="imgqid{{ form.id }}">
 		</div>
 		<div class="col-md-4">
-			<label for="AnswersScore{{ form.instance.id }}">Answers to the questions</label> <select
-				class="custom-select" name="answersq" id="AnswersScore{{ form.instance.id }}">
+			<label for="AnswersScore{{ form.id }}">Answers to
+				the questions</label> <select class="custom-select" name="answersq"
+				id="AnswersScore{{ form.id }}">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
 			</select> <input type="hidden"
-				value="{{ form.instance.answersq|default:'0' }}" id="answerqid{{ form.instance.id }}">
+				value="{{ form.answersq|default:'0' }}"
+				id="answerqid{{ form.id }}">
 		</div>
 		<div class="col-md-4">
-			<label for="OriginQuality{{ form.instance.id }}">Originiality of the work</label> <select
-				class="custom-select" name="originq" id="OriginQuality{{ form.instance.id }}">
+			<label for="OriginQuality{{ form.id }}">Originiality
+				of the work</label> <select class="custom-select" name="originq"
+				id="OriginQuality{{ form.id }}">
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
-			</select> <input type="hidden" value="{{ form.instance.originq|default:'0' }}"
-				id="originq{{ form.instance.id }}">
+			</select> <input type="hidden" value="{{ form.originq|default:'0' }}"
+				id="originq{{ form.id }}">
 		</div>
 		<br>
 		<div class="col-md-12">
 			<label for="comment">Comments</label>
 			<textarea class="form-control form-input" id="comment"
 				placeholder="Please add any comments, if there are some..."
-				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
+				name="comment" rows="5">{{ form.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
 	<hr>
 	<div class="row buttons-holder-div">
 		<div class="col-md-6 text-center">
-<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
-			<button class="btn btn-block btn-success" type="button" id="buttonSubmitD1AForm"
-				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)"><i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Submit</button>
+			<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
+			<button class="btn btn-block btn-success" type="button"
+				id="buttonSubmitD1AForm"
+				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)">
+				<i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Submit
+			</button>
 		</div>
 		<div class="col-md-6 text-center">
 			<button class="btn btn-block btn-outline-warning" type="button"
@@ -68,16 +75,17 @@
 	</div>
 	{% csrf_token %}
 </form>
+
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#OriginQuality{{ form.instance.id }} option[value="
-			+ $("#originq{{ form.instance.id }}").val() + "]").attr(
+	$("#OriginQuality{{ form.id }} option[value="
+			+ $("#originq{{ form.id }}").val() + "]").attr(
 	'selected','selected')
-	$("#AnswersScore{{ form.instance.id }} option[value="
-					+ $("#answerqid{{ form.instance.id }}").val() + "]").attr(
+	$("#AnswersScore{{ form.id }} option[value="
+					+ $("#answerqid{{ form.id }}").val() + "]").attr(
 			'selected','selected')
-	$("#ImageQuality{{ form.instance.id }} option[value="
-					+ $("#imgqid{{ form.instance.id }}").val() + "]").attr(
+	$("#ImageQuality{{ form.id }} option[value="
+					+ $("#imgqid{{ form.id }}").val() + "]").attr(
 			'selected','selected')
 })
 </script>

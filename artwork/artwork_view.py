@@ -84,6 +84,7 @@ def work_lists(request):
         works = Artwork.objects.all()
     else:
         works = Artwork.objects.filter(status=status)
+    works = works.order_by('-id')
     numberofartworks = Artwork.objects.filter(status__gte=0).count()
     numberoflearners = ProjectUser.objects.filter(user_type=1).count()
     context = {'works': works, 'numberofartworks': numberofartworks, 'numberoflearners':numberoflearners}

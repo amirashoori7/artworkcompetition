@@ -22,21 +22,38 @@
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="collapse card-body" id="eval-form-1-{{ forloop.counter }}" >
+			<div class="row collapse card-body" id="eval-form-1-{{ forloop.counter }}" >
+				<div class="col-md-4"><strong>Image Quality </strong>({% widthratio d1a.imgq 1 25 %}%)</div>
+				<div class="col-md-4"><strong>Answers to the questions </strong>({% widthratio d1a.answersq 1 25 %}%)</div>
+				<div class="col-md-4"><strong>Originiality of the work </strong>({% widthratio d1a.originq 1 25 %}%)</div>
+				<div class="col-md-12"><strong>Comment </strong>{{ d1a.comment }}</div>
 			</div>
 			<script type="text/javascript">
-			var url = '/evaluation/formd1a?form_id={{ d1a.id }}' 
-				$("#eval-form-1-{{ forloop.counter }}").load(
-						url,
-						function() {
-							$("#eval-form-1-{{ forloop.counter }}").find("form").removeAttr("action")
-// 							$("#eval-form-1-{{ forloop.counter }}").find("form").attr("id","")
-							$("#eval-form-1-{{ forloop.counter }}").find(".buttons-holder-div").remove()
-// 							$("#eval-form-1-{{ forloop.counter }}").find("input[type='hidden']").remove()
-							$("#eval-form-1-{{ forloop.counter }}").find("textarea").attr("disabled", "disabled")
-							$("#eval-form-1-{{ forloop.counter }}").find("select").attr("disabled", "disabled")
-							$("#eval-form-1-{{ forloop.counter }}").find(".page-title").remove()
-						})
+			
+				function getRadioValue(cnt) {
+					if (cnt == 0)
+						return 'None'
+					else if (cnt == 1)
+						return 'Minimal'
+					else if (cnt == 2)
+						return 'Average'
+					else if (cnt == 3)
+						return 'Good'
+					else if (cnt == 4)
+						return 'Excellent'
+				}
+				// 			var url = '/evaluation/formd1a?form_id={{ d1a.id }}' 
+				// 				$("#eval-form-1-{{ forloop.counter }}").load(
+				// 						url,
+				// 						function() {
+				// 							$("#eval-form-1-{{ forloop.counter }}").find("form").removeAttr("action")
+				// // 							$("#eval-form-1-{{ forloop.counter }}").find("form").attr("id","")
+				// 							$("#eval-form-1-{{ forloop.counter }}").find(".buttons-holder-div").remove()
+				// // 							$("#eval-form-1-{{ forloop.counter }}").find("input[type='hidden']").remove()
+				// 							$("#eval-form-1-{{ forloop.counter }}").find("textarea").attr("disabled", "disabled")
+				// 							$("#eval-form-1-{{ forloop.counter }}").find("select").attr("disabled", "disabled")
+				// 							$("#eval-form-1-{{ forloop.counter }}").find(".page-title").remove()
+				// 						})
 			</script>
 			{% endif %}{% endfor %}<hr> {% endif %}
 			
