@@ -17,7 +17,7 @@
 				aria-expanded="false" href="#eval-form-1-{{ forloop.counter }}" data-id="d1a{{ d1a.id }}">
 				<div class="col-md-11">
 					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
-						<!-- 					CARD HEADING --> 
+						<!-- 					CARD HEADING -->
 						Judge 1 ({{ d1a.author.last_name }}, {{ d1a.author.first_name }})</a>
 				</div>
 				<div class="col-md-1"></div>
@@ -25,14 +25,14 @@
 			<div class="collapse card-body" id="eval-form-1-{{ forloop.counter }}" >
 			</div>
 			<script type="text/javascript">
-			var url = '/evaluation/formd1a?formid={{ d1a.id }}' 
+			var url = '/evaluation/formd1a?form_id={{ d1a.id }}' 
 				$("#eval-form-1-{{ forloop.counter }}").load(
 						url,
 						function() {
-							$("#eval-form-1-{{ forloop.counter }}").find("form").attr("action","")
-							$("#eval-form-1-{{ forloop.counter }}").find("form").attr("id","")
+							$("#eval-form-1-{{ forloop.counter }}").find("form").removeAttr("action")
+// 							$("#eval-form-1-{{ forloop.counter }}").find("form").attr("id","")
 							$("#eval-form-1-{{ forloop.counter }}").find(".buttons-holder-div").remove()
-							$("#eval-form-1-{{ forloop.counter }}").find("input[type='hidden']").remove()
+// 							$("#eval-form-1-{{ forloop.counter }}").find("input[type='hidden']").remove()
 							$("#eval-form-1-{{ forloop.counter }}").find("textarea").attr("disabled", "disabled")
 							$("#eval-form-1-{{ forloop.counter }}").find("select").attr("disabled", "disabled")
 							$("#eval-form-1-{{ forloop.counter }}").find(".page-title").remove()
@@ -53,11 +53,11 @@
 			<div class="collapse card-body" id="eval-form-dm-{{ forloop.counter }}"></div>
 			<script type="text/javascript">
 			$("#eval-form-dm-{{ forloop.counter }}").load(
-					'/evaluation/formd1b?work_id=' + $("#work_id").val() + '&author_id={{ d1b.author.id }}',function(){
+					'/evaluation/formd1b?form_id={{ d1b.id }}', function(){
 						$("#eval-form-dm-{{ forloop.counter }}").find("form").attr("action","")
-						$("#eval-form-dm-{{ forloop.counter }}").find("form").attr("id","")
+// 						$("#eval-form-dm-{{ forloop.counter }}").find("form").attr("id","")
 						$("#eval-form-dm-{{ forloop.counter }}").find(".buttons-holder-div").remove()
-						$("#eval-form-dm-{{ forloop.counter }}").find("input[type='hidden']").remove()
+// 						$("#eval-form-dm-{{ forloop.counter }}").find("input[type='hidden']").remove()
 						$("#eval-form-dm-{{ forloop.counter }}").find("textarea").attr("disabled","disabled")
 						$("#eval-form-dm-{{ forloop.counter }}").find(".page-title").remove()
 					})
@@ -68,6 +68,7 @@
 				aria-expanded="false" href="#eval-form-2-{{ forloop.counter }}">
 				<div class="col-md-11">
 					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
+					{% widthratio evalform2.score 1 6.25 %}%,&nbsp;
 						<!-- 					CARD HEADING --> 
 						Judge 2 ({{ evalform2.author.last_name }}, {{ evalform2.author.first_name }})</a>
 				</div>
@@ -77,11 +78,11 @@
 			</div>
 			<script type="text/javascript">
 			$("#eval-form-2-{{ forloop.counter }}").load(
-					'/evaluation/formd2?work_id=' + $("#work_id").val() + '&author_id={{ evalform2.author.id }}',function(){
+					'/evaluation/formd2?form_id={{ evalform2.id }}', function(){
 						$("#eval-form-2-{{ forloop.counter }}").find(".buttons-holder-div").remove()
-						$("#eval-form-2-{{ forloop.counter }}").find("form").attr("action","")
-						$("#eval-form-2-{{ forloop.counter }}").find("form").attr("id","")
-						$("#eval-form-2-{{ forloop.counter }}").find("input[type='hidden']").remove()
+						$("#eval-form-2-{{ forloop.counter }}").find("form").removeAttr("action")
+// 						$("#eval-form-2-{{ forloop.counter }}").find("form").attr("id","")
+// 						$("#eval-form-2-{{ forloop.counter }}").find("input[type='hidden']").remove()
 						$("#eval-form-2-{{ forloop.counter }}").find("input[type='radio']").each(function(){
 							$(this).attr("disabled","disabled")
 						})
@@ -100,7 +101,9 @@
 			<div class="card-header collapsed row" data-toggle="collapse" data-id="evalform3{{ evalform3.id }}"
 				aria-expanded="false" href="#eval-form-3-{{ forloop.counter }}">
 				<div class="col-md-11">
-					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
+					<a class="card-title"><i class="fa fa-gavel"></i>
+					&nbsp;&nbsp;&nbsp;
+					{{ evalform3.score }}%,&nbsp;
 						<!-- 					CARD HEADING --> 
 						Judge 3 ({{ evalform3.author.last_name }}, {{ evalform3.author.first_name }})</a>
 				</div>
@@ -109,16 +112,17 @@
 			<div class="collapse card-body" id="eval-form-3-{{ forloop.counter }}"></div>
 			<script type="text/javascript">
 			$("#eval-form-3-{{ forloop.counter }}").load(
-					'/evaluation/formd3?work_id=' + $("#work_id").val() + '&author_id={{ evalform3.author.id }}',function(){
+					'/evaluation/formd3?form_id={{ evalform3.id }}',function(){
 						$("#eval-form-3-{{ forloop.counter }}").find(".buttons-holder-div").remove()
-						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("action","")
-// 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("id","")
-// 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='hidden']").remove()
-// 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='radio']").each(function(){
-// 							$(this).attr("disabled","disabled")
-// 						})
+						$("#eval-form-3-{{ forloop.counter }}").find("form").removeAttr("action")
 						$("#eval-form-3-{{ forloop.counter }}").find("textarea").attr("disabled","disabled")
 						$("#eval-form-3-{{ forloop.counter }}").find(".page-title").remove()
+// 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("id","")
+// 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='hidden']").remove()
+						$("#eval-form-3-{{ forloop.counter }}").find("input[type='radio']").each(function(){
+							$(this).attr("disabled","disabled")
+						})
+
 					})
 			</script>
 			{% endfor%}<hr> {%endif%}
