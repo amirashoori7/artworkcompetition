@@ -3,8 +3,11 @@
 	text-align: center;
 }
 </style>
-<div class="page-title">
-	<h2>Artwork List</h2>
+<div class="row">
+	<div class="col-md-10 page-title">
+		<h2>Artwork List</h2>
+	</div>
+	<div class="col-md-2"></div>
 </div>
 <div class="photo-viewer"></div>
 {% if user.user_type == 6 or user.user_type == 7 %}
@@ -52,15 +55,11 @@ function changeView(select){
 			<th scope="col">Status</th>
 			<th scope="col">Work Title</th>
 			<th scope="col">School</th>
-			<th scope="col">Grade</th>
-			{% if user.user_type == 6 or user.user_type == 7 %}
-			<th scope="col" class="centered">View</th>
-					{% endif %}
-			<th scope="col" class="centered">Evaluate</th>
-			{% if user.user_type == 6 or user.user_type == 7 %}
+			<th scope="col">Grade</th> {% if user.user_type == 6 or user.user_type == 7 %}
+			<th scope="col" class="centered">View</th> {% endif %}
+			<th scope="col" class="centered">Evaluate</th> {% if user.user_type == 6 %}
 			<th scope="col" class="centered">Edit</th>
-			<th scope="col" class="centered">Remove</th>
-					{% endif %}
+			<th scope="col" class="centered">Remove</th> {% endif %}
 		</tr>
 	</thead>
 	<tbody>
@@ -69,8 +68,7 @@ function changeView(select){
 			{% if user.user_type == 6 or user.user_type == 7 %}
 			<td><button
 					class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}"
-					type="button" 
-					{% if user.user_type == 6 %}
+					type="button" {% if user.user_type == 6 %}
 					onclick="flagit(this, {{ work.id }})"
 					{% endif %}
 					id="flag-btn-{{ work.id }}">
@@ -85,27 +83,27 @@ function changeView(select){
 				</div> {%endif%}
 			</td>
 			<td>{{ work.school.name }}</td>
-			<td>{{ work.learnergrade }}</td>
-			{% if user.user_type == 6 or user.user_type == 7 %}
-			<td class="centered"><button class="btn btn-outline-info" type="button"
+			<td>{{ work.learnergrade }}</td> {% if user.user_type == 6 or user.user_type == 7 %}
+			<td class="centered"><button class="btn btn-outline-info"
+					type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 1 %}')">
 					<i class="fa fa-eye"></i>
-				</button></td>
-					{% endif %}
-			<td class="centered"><button class="btn btn-outline-secondary" type="button"
+				</button></td> {% endif %}
+			<td class="centered"><button class="btn btn-outline-secondary"
+					type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 0 %}')">
 					<i class="fa fa-gavel"></i>
-				</button></td>
-			{% if user.user_type == 6 or user.user_type == 7 %}
-			<td class="centered"><button class="btn btn-outline-success" type="button"
+				</button></td> {% if user.user_type == 6 %}
+			<td class="centered"><button
+					class="btn btn-outline-success disabled" type="button"
 					onclick="toggleMessageBox('Not a valid action',true)">
 					<i class="fa fa-edit"></i>
 				</button></td>
-				<td class="centered"><button class="btn btn-outline-danger" type="button"
+			<td class="centered"><button
+					class="btn btn-outline-danger disabled" type="button"
 					onclick="toggleMessageBox('Not a valid action',true)">
 					<i class="fa fa-trash-alt"></i>
-				</button></td>
-					{% endif %}
+				</button></td> {% endif %}
 		</tr>
 		{% endfor %}
 	</tbody>

@@ -1,11 +1,13 @@
-<div class="col-md-10 page-title">
-	<h2>User List</h2>
-</div>
-<div class="col-md-2">
-	<button class="btn btn-sm btn-success"
-		onclick="showDialogPage(this, '{% url 'account:registerJudge' %}')">
-		<i class="fa fa-plus"></i>&nbsp;
-	</button>
+<div class="row">
+	<div class="col-md-10 page-title">
+		<h2>User List</h2>
+	</div>
+	<div class="col-md-2">
+		<button class="btn btn-sm btn-success btn-block"
+			onclick="showDialogPage(this, '{% url 'account:registerJudge' %}')">
+			<i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;New User
+		</button>
+	</div>
 </div>
 <div class="col-md-12" id="judge-list">
 	<table class="table table-general-style">
@@ -32,8 +34,8 @@
 						onclick="showDialogPage(this, '/account/register_judge?username={{ user.username }}')">
 						<i class="fa fa-edit"></i>
 					</button></td>
-				<td><button class="btn btn-outline-danger" type="button"
-						onclick="toggleMessageBox('This option is not activated yet',true)">
+				<td><button class="btn btn-outline-danger disabled" type="button"
+						onclick="toggleMessageBox('Not a valid action',true)">
 						<i class="fa fa-trash-alt"></i>
 					</button></td> {% endfor %}
 			</tr>

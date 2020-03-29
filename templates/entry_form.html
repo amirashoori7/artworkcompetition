@@ -218,8 +218,7 @@
 	{% if form.instance.status == 1 %}
 	<div class="col-sm-12 card" style="border-color: #dc3545 !important;">
 		<h6 class="text-danger">
-			<strong style="font-style: italic;">Comment: </strong>{{
-			form.instance.comment }}
+			<strong style="font-style: italic;">Comment: </strong>{{ form.instance.comment }}
 		</h6>
 		{% if form.instance.bioapproved == False %}
 		<h6 class="text-danger">Bio Requires Revision</h6>
