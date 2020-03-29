@@ -3,12 +3,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 import json
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView
 from account.forms_account import AdvancedUserRegistrationForm
 from account.models_account import ProjectUser
-from datetime import date
 from django.contrib import messages
-from django.core.mail import EmailMessage, send_mail, send_mass_mail
+from django.core.mail import send_mail
 
 class CustomPasswordChangeView(PasswordChangeView):
     def form_valid(self, form):
@@ -68,7 +67,6 @@ def registration(request):
             lname = request.POST.get('last_name')
             subject = "MathArt Portal - Registration Successful"
             message = "Dear {0} {1}, you have successfully registered in MathArt competition.\n\n Please go on and finish your artwork submission".format(fname, lname)
-            mailmsg1 = (subject, message, 'mathart.co.za@gmail.com', [username])
             send_mail(subject, message, 'mathart.co.za@gmail.com', [username])
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
@@ -86,7 +84,7 @@ def registerJudge(request):
     response_data = {}
     if request.method == 'POST':
         form = AdvancedUserRegistrationForm(request.POST)
-        if int(request.POST.get("id", 0)) > 0:
+        if int(request.POST.get("id", 0)) > 0 :
             old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
             form = AdvancedUserRegistrationForm(request.POST, request.FILES, instance=old_data)
 

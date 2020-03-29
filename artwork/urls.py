@@ -27,5 +27,4 @@ urlpatterns = [
     path('importfile/', artwork_view.importfile, name='importfile'),
     path('work_detail_update/', artwork_view.work_detail_update, name='work_detail_update'),
     path('<int:id>/<int:view>/', artwork_view.work_details, name='work_details'),
-    path('eval_forms_artwork/', artwork_view.eval_forms_artwork, name='eval_forms_artwork'),
 ]

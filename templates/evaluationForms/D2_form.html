@@ -10,7 +10,7 @@
 <form method="post" action="{% url 'evaluation:formd2' %}"
 	class="needs-validation form-general-style" id="formd2Id"
 	enctype="multipart/form-data" novalidate>
-	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
+{{ form.as_p }}	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
 	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
 		name="id" id="id">
 	<div class="row form-section" id="math">
@@ -194,7 +194,7 @@
 						$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * 6.25)+ "%")
 						var q = $(this).attr("name").replace('radio','')
 						$("input[name='"+q+"']").val($(this).val())
-						calculateTotal()
+						calculateTotalD2()
 					})
 			})
 			$("#formd2Id").find(".question-value").each(

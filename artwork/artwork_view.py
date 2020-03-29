@@ -174,20 +174,9 @@ def importfile(request):
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
 
+
 def isNaN(string):
     return string != string
-    
-@login_required
-def eval_forms_artwork(request):
-    id = request.GET.get('work_id')
-    work = get_object_or_404(Artwork, id=id)
-    d1as = D1A.objects.filter(artwork=work)
-    d1bs = D1B.objects.filter(artwork=work)
-    d2 = D2.objects.filter(artwork=work)
-    d3 = D3.objects.filter(artwork=work)
-    context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3}
-    return render(request, 'evaluationForms/eval_forms.html', context)
-
 
 @login_required
 def work_details(request, id, view):

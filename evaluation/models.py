@@ -4,11 +4,11 @@ from artwork.artwork_models import Artwork
 from account.models_account import ProjectUser
 
 WEIGHT = (
-    ('5', 'Excellent'),
-    ('4', 'Good'),
-    ('3', 'Average'),
-    ('2', 'Minimal'),
-    ('1', 'None')
+    ('4', 'Excellent'),
+    ('3', 'Good'),
+    ('2', 'Average'),
+    ('1', 'Minimal'),
+    ('0', 'None')
 )
 MATH = (
     ('1', '2 Dimensional Geometric Relationships'),

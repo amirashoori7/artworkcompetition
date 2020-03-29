@@ -1,20 +1,26 @@
 <hr>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-9" data-toggle="buttons">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn btn-outline-info"> <input type="radio"
+				name="options" id="option1" autocomplete="off" checked
+				onclick="$('#admin-console-content').load('/work_lists?status=-2')">
+				<i class="fa fa-palette"></i>&nbsp;&nbsp;&nbsp;Artwork Management
+			</label> {% if user.is_authenticated and user.user_type == 6%} <label
+				class="btn btn-outline-info"> <input type="radio"
+				onclick="$('#admin-console-content').load('/account/userlist/')"
+				name="options" id="option2" autocomplete="off"> <i
+				class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;User Management
+			</label> {% endif %}
+		</div>
+
+
+	</div>
+	<div class="col-md-1"></div>
+	<div class="col-md-2">
 		<ul class="nav nav-pills nav-fill">
-			<li class="nav-item">
-				<button class="btn btn-block btn-outline-dark btn-sm"
-					onclick="$('#admin-console-content').load('/work_lists?status=-2')">
-					<i class="fa fa-palette"></i>&nbsp;&nbsp;&nbsp;Artwork Management
-				</button>
-			</li> {% if user.is_authenticated and user.user_type == 6%}
-			<li class="nav-item">
-				<button class="btn btn-block btn-outline-dark btn-sm" type="button"
-					onclick="$('#admin-console-content').load('/account/userlist/')">
-					<i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Judge Management
-				</button>
-			</li>
+			{% if user.is_authenticated and user.user_type == 6%}
 			<li class="nav-item"><a
 				class="btn btn-block btn-outline-success btn-sm" href="/getfile/"
 				target="_blank" role="button"> <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Export

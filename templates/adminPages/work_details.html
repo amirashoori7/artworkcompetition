@@ -19,7 +19,6 @@
 				<div class="col-md-1"></div>
 			</div>
 			<div class="collapse card-body" id="artwork-section">
-
 				<div class="row report-section">
 					{% if work.workfile %}
 					<div class="col-md-12">
@@ -266,7 +265,7 @@
 							$("#buttonSubmitD2Form").click(function(ev) {
 								ev.preventDefault()
 							})
-							$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
+							$(".evaluation-forms-div").load("/evaluation/eval_forms_artwork?work_id=" + $("#work_id").val())
 						})
 						{% endif %}
 					{% elif work.status == 6 %}
@@ -298,7 +297,7 @@
 				})
 				{%if view == 1 %}
 					{%if user.user_type == 3 or user.user_type == 6 or user.user_type == 7 %}	
-					$(".evaluation-forms-div").load("/eval_forms_artwork?work_id=" + $("#work_id").val())
+					$(".evaluation-forms-div").load("/evaluation/eval_forms_artwork?work_id=" + $("#work_id").val())
 					{% endif %}
 				{% endif %}
 			})

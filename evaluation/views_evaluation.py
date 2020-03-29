@@ -7,6 +7,7 @@ from evaluation.models import D1A, D2, D1B, D3
 from evaluation.forms_evaluation import FormD1A, FormD2, FormD1B, FormD3
 import artwork
 from artwork.artwork_forms import EntryForm
+from account.models_account import ProjectUser
 
 
 @login_required
@@ -21,10 +22,6 @@ def create_d1a(request):
         old_data = get_object_or_404(D1A, id=request.POST["id"])
         formd1A_form = FormD1A(request.POST, instance=old_data)
         if formd1A_form.is_valid():
-#             d1as = D1A.objects.filter(artwork=artwork)
-#             judges = ProjectUser.objects.filter(user_type=2)
-#             if len(d1as) == len(judges):
-#                 update_worklist(int(request.POST['work_id']), 5)
             if artwork.status != 5:
                 update_worklist(int(request.POST['work_id']), 5)
             formd1A_form = formd1A_form.save(commit=False)
@@ -85,11 +82,15 @@ def create_d1b(request):
                 content_type="application/json")
     elif request.method == 'GET':
         artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
+        if int(request.GET.get("author_id", 0)) > 0:
+            user = get_object_or_404(ProjectUser, id=int(request.GET.get("author_id", 0)))
+        else: 
+            user = request.user
         try:
-            formd1B_model = get_object_or_404(D1B, author=request.user, artwork=artwork)
+            formd1B_model = get_object_or_404(D1B, author=user, artwork=artwork)
             formd1B_form = FormD1B(instance=formd1B_model)
         except:
-            formd1B_form, formd1B_obj = D1B.objects.get_or_create(author=request.user, artwork=artwork)
+            formd1B_form, formd1B_obj = D1B.objects.get_or_create(author=user, artwork=artwork)
         context = {'form': formd1B_form}
         return render(request, 'evaluationForms/D1B_form.html', context)
     else:
@@ -134,11 +135,15 @@ def create_d2(request):
                 content_type="application/json")
     elif request.method == 'GET':
         artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
+        if int(request.GET.get("author_id", 0)) > 0:
+            user = ProjectUser.objects.filter(id=int(request.GET.get("author_id", 0)))
+        else: 
+            user = request.user
         try:
-            formd2_model = get_object_or_404(D2, author=request.user, artwork=artwork)
+            formd2_model = get_object_or_404(D2, author=user, artwork=artwork)
             formd2_form = FormD2(instance=formd2_model)
         except:
-            formd2_form, formd2_obj = D2.objects.get_or_create(author=request.user, artwork=artwork)
+            formd2_form, formd2_obj = D2.objects.get_or_create(author=user, artwork=artwork)
         context = {'form': formd2_form}
         return render(request, 'evaluationForms/D2_form.html', context)
     else:
@@ -172,20 +177,35 @@ def create_d3(request):
                 content_type="application/json")
     elif request.method == 'GET':
         artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
+        if int(request.GET.get("author_id", 0)) > 0:
+            user = get_object_or_404(ProjectUser, id=int(request.GET.get("author_id", 0)))
+        else: 
+            user = request.user
         try:
-            if request.user.user_type == 6 or request.user.user_type == 7:
-                formd3_model = get_object_or_404(D3, artwork=artwork)
-            else:    
-                formd3_model = get_object_or_404(D3, author=request.user, artwork=artwork)
+#             if request.user.user_type == 6 or request.user.user_type == 7:
+#                 formd3_model = get_object_or_404(D3, artwork=artwork)
+#             else:    
+            formd3_model = get_object_or_404(D3, author=user, artwork=artwork)
             formd3_form = FormD3(instance=formd3_model)
         except:
-            formd3_form, formd3_obj = D3.objects.get_or_create(author=request.user, artwork=artwork)
+            formd3_form, formd3_obj = D3.objects.get_or_create(author=user, artwork=artwork)
         context = {'form': formd3_form}
         return render(request, 'evaluationForms/D3_form.html', context)
     else:
         response_data['errorResult'] = "Illegal access to the form"
         return HttpResponse(json.dumps(response_data),
             content_type="application/json")
+
+
+@login_required
+def eval_forms_artwork(request):
+    work = get_object_or_404(Artwork, id=request.GET.get('work_id'))
+    d1as = D1A.objects.filter(artwork=work)
+    d1bs = D1B.objects.filter(artwork=work)
+    d2 = D2.objects.filter(artwork=work)
+    d3 = D3.objects.filter(artwork=work)
+    context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3}
+    return render(request, 'evaluationForms/eval_forms.html', context)
 
 '''
 def create_evald1b(request, id):

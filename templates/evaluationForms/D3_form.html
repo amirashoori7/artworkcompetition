@@ -219,7 +219,7 @@
 					$(this).change(function() {
 						$("input[name='" + $(this).attr("name") + "score']").val(parseInt($(this).val() * weight)+ "%")
 						$("input[name='"+qu+"']").val($(this).val())
-						calculateTotal()
+						calculateTotalD3()
 					})
 			})
 			$("#formd3Id{{form.instance.author.id}}").find(".question-value").each(

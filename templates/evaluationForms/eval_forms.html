@@ -22,7 +22,8 @@
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="collapse card-body" id="eval-form-1-{{ forloop.counter }}" ></div>
+			<div class="collapse card-body" id="eval-form-1-{{ forloop.counter }}" >
+			</div>
 			<script type="text/javascript">
 			var url = '/evaluation/formd1a?formid={{ d1a.id }}' 
 				$("#eval-form-1-{{ forloop.counter }}").load(
@@ -52,7 +53,7 @@
 			<div class="collapse card-body" id="eval-form-dm-{{ forloop.counter }}"></div>
 			<script type="text/javascript">
 			$("#eval-form-dm-{{ forloop.counter }}").load(
-					'/evaluation/formd1b?work_id=' + $("#work_id").val(),function(){
+					'/evaluation/formd1b?work_id=' + $("#work_id").val() + '&author_id={{ d1b.author.id }}',function(){
 						$("#eval-form-dm-{{ forloop.counter }}").find("form").attr("action","")
 						$("#eval-form-dm-{{ forloop.counter }}").find("form").attr("id","")
 						$("#eval-form-dm-{{ forloop.counter }}").find(".buttons-holder-div").remove()
@@ -76,7 +77,7 @@
 			</div>
 			<script type="text/javascript">
 			$("#eval-form-2-{{ forloop.counter }}").load(
-					'/evaluation/formd2?work_id=' + $("#work_id").val(),function(){
+					'/evaluation/formd2?work_id=' + $("#work_id").val() + '&author_id={{ evalform2.author.id }}',function(){
 						$("#eval-form-2-{{ forloop.counter }}").find(".buttons-holder-div").remove()
 						$("#eval-form-2-{{ forloop.counter }}").find("form").attr("action","")
 						$("#eval-form-2-{{ forloop.counter }}").find("form").attr("id","")
@@ -108,7 +109,7 @@
 			<div class="collapse card-body" id="eval-form-3-{{ forloop.counter }}"></div>
 			<script type="text/javascript">
 			$("#eval-form-3-{{ forloop.counter }}").load(
-					'/evaluation/formd3?work_id=' + $("#work_id").val(),function(){
+					'/evaluation/formd3?work_id=' + $("#work_id").val() + '&author_id={{ evalform3.author.id }}',function(){
 						$("#eval-form-3-{{ forloop.counter }}").find(".buttons-holder-div").remove()
 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("action","")
 // 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("id","")
