@@ -228,7 +228,6 @@
 
 		{% endif %} {% elif work.status == 6 %}
 		<!-- 		IF ADMIN OR JUDGE 2 -->
-
 		{%if user.user_type == 4 or user.user_type == 6%}
 		<div class="row">
 			<div class="col-md-12" id="form-d2"></div>
@@ -269,11 +268,9 @@
 						})
 						{% endif %}
 					{% elif work.status == 6 %}
-
 				$("#form-d2").load(
 						'/evaluation/formd2?work_id=' + $("#work_id").val())
 					{% elif work.status == 10 %}
-
 				$("#form-d3").load(
 						'/evaluation/formd3?work_id=' + $("#work_id").val(),
 						function() {

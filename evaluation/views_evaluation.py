@@ -12,8 +12,8 @@ from account.models_account import ProjectUser
 
 @login_required
 def create_d1a(request):
+    response_data = {}
     if request.method == 'POST':
-        response_data = {}
         if request.POST['work_id'] is None or request.POST['work_id'] == '':
             response_data['errorResult'] = "Illegal access to the form, the work id is null."
             return HttpResponse(json.dumps(response_data),
@@ -134,21 +134,12 @@ def create_d2(request):
         workid = int(request.GET.get("work_id", 0))
         if workid > 0:
             artwork = get_object_or_404(Artwork, id=workid)
-#         if int(request.GET.get("author_id", 0)) > 0:
-#             user = ProjectUser.objects.filter(id=int(request.GET.get("author_id", 0)))
-#         else: 
-#             user = request.user
-#         try:
-#             formd2_model = get_object_or_404(D2, author=user, artwork=artwork)
-#             formd2_form = FormD2(instance=formd2_model)
-#         except:
-#             formd2_form, formd2_obj = D2.objects.get_or_create(author=user, artwork=artwork)
         formid = int(request.GET.get("form_id", 0))
         if formid > 0 :
             formd2_model = D2.objects.get(id=formid)
             artwork = formd2_model.artwork
         else:
-            formd2_model = get_object_or_404(D2, author=request.user, artwork=artwork)
+            formd2_model, form2_obj = D2.objects.get_or_create(author=request.user, artwork=artwork)
         formd2_form = FormD2(instance=formd2_model)
         context = {'form': formd2_form}
         return render(request, 'evaluationForms/D2_form.html', context)

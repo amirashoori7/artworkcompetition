@@ -15,12 +15,58 @@
 		name="id" id="id">
 	<div class="row form-section" id="math">
 		{% for x, y in form.fields.math.base_field.choices %} {% if x != '' %}
-		<div class="form-check col-md-4">
-			<input class="form-check-input" type="checkbox"
-				id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}> <label
-				class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
+		{%if forloop.counter < 7%}
+		{%if forloop.counter == 0 %}
+			<div class="card-header collapsed row" data-toggle="collapse"
+				href="#algebra">
+				<div class="col-md-11">
+					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Algebra</a>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		<div class="collapse card-body" id="algebra">
+		{% endif %}
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox"
+					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
+				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label></div>
+		{% elif forloop.counter < 10 %}
+		{%if forloop.counter == 10 %}
 		</div>
-		{% endif %} {% endfor %}
+		<div class="card-header collapsed row" data-toggle="collapse"
+			href="#rf">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Relations & Functions</a>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="collapse card-body" id="rf">
+		{% endif %}
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox"
+					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
+				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label></div>
+		{% elif forloop.counter < 19 %}
+		{%if forloop.counter == 19 %}
+		</div>
+		<div class="card-header collapsed row" data-toggle="collapse"
+			href="#geometry">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Geometry</a>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="collapse card-body" id="geometry">
+		{% endif %}
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox"
+					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
+				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label></div>
+		{% endif %}
+		{% endif %}
+		
+		 {% endfor %}
+		 </div>
 		<div class="col-md-12">
 	</div>
 	</div>

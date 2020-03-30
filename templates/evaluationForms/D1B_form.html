@@ -1,6 +1,6 @@
 <div class="row page-title">
 	<div class="col-md-4">
-		<strong>User:</strong>&nbsp; {{ form.instance.author }}
+		<strong>User:</strong>&nbsp; {{ form.author }}
 	</div>
 	<div class="col-md-8">
 		<h5>Evaluation Form, Decision Making</h5>
@@ -11,7 +11,7 @@
 	class="needs-validation form-general-style" id="formd1bId"
 	enctype="multipart/form-data" novalidate>
 	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
-	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
+	<input type="hidden" value="{{ form.id|default:'0' }}"
 		name="id" id="id">
 	<input type="hidden" name="status" value="0" id="statusfield">
 	<div class="row">
@@ -19,7 +19,7 @@
 			<label for="comment">Comments</label>
 			<textarea class="form-control form-input" id="comment"
 				placeholder="Please add any comments, if there are some..."
-				name="comment" rows="5">{{ form.instance.comment|default_if_none:'' }}</textarea>
+				name="comment" rows="5">{{ form.comment|default_if_none:'' }}</textarea>
 		</div>
 	</div>
 	<hr>
