@@ -43,9 +43,9 @@
 				id="eval-form-dm-{{ forloop.counter }}">
 				<div class="col-md-12">
 					<strong>
-					{%if work.status < 7 %}
+					{%if work.status < 6 or work.status == 7%}
 					Waiting for the GMMDC decision
-					{%if work.status > 7 %}
+					{% elif work.status > 7 or work.status == 6 %}
 					Accepted by the GMMDC
 					{% elif work.status == 7 %}
 					Rejected by the GMMDC
@@ -58,21 +58,53 @@
 			</div>
 			{% endif %}
 			{% endfor %}<hr> {% endif %}
-			{% if d2 %} {% for evalform2 in d2 %}
-			<div class="card-header collapsed row" data-toggle="collapse"  data-id="evalform2{{ evalform2.id }}"
-				aria-expanded="false" href="#eval-form-2-{{ forloop.counter }}">
+			{% if d2 %} 
+			<div class="card-header collapsed row" data-toggle="collapse"  data-id="evalform2{{ d2.id }}"
+				aria-expanded="false" href="#eval-form-2-">
 				<div class="col-md-11">
 					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;
-					{% widthratio evalform2.score 1 6.25 %}%,&nbsp;
+					{% widthratio d2.instance.score 1 6.25 %}%,&nbsp;
 						<!-- 					CARD HEADING --> 
-						Judge 2 ({{ evalform2.author.last_name }}, {{ evalform2.author.first_name }})</a>
+						Judge 2 ({{ d2.instance.author.last_name }}, {{ d2.instance.author.first_name }})</a>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="row collapse card-body" id="eval-form-2-{{ forloop.counter }}">
-			{{ evalform2.q1 }}
+			<div class="row collapse card-body" id="eval-form-2-">
+				<div class="col-md-12 form-section">
+				<div class="row">
+					{% for x, y in d2.fields.math.base_field.choices %} {% if x != '' and x in d2.instance.math %}
+						<div class="form-check col-md-6">
+							<input class="form-check-input disabled" type="checkbox"
+								id="inlineCheckbox{{ x }}" value="{{ x }}" name="math"  checked><label
+								class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
+						</div>
+					{% endif %} {% endfor %}
+				</div>
+				<hr>
+					<div class="col-md-12">
+						<strong>Was the mathematics correctly applied? </strong>
+						<span class="qanswer">{{ d2.instance.q1 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>How well was the connection between mathematics and the artwork explained in the paragraph?</strong>
+						<span class="qanswer">{{ d2.instance.q2 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>How creative/original/clever is the connection with mathematics?</strong>
+						<span class="qanswer">{{ d2.instance.q3 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>How clear is the Mathematics visually portrayed in the artwork?</strong>
+						<span class="qanswer">{{ d2.instance.q4 }}</span>
+					</div>
+				<hr>
+					<div class="col-md-12">
+						<strong>Comment</strong>
+						{{ d2.instance.comment }}
+					</div>
+				</div>
 			</div>
-			{% endfor %} <hr>{% endif %}
+			 <hr>{% endif %}
 			{% if d3 %} {% for evalform3 in d3 %}
 			<div class="card-header collapsed row" data-toggle="collapse" data-id="evalform3{{ evalform3.id }}"
 				aria-expanded="false" href="#eval-form-3-{{ forloop.counter }}">
@@ -85,33 +117,52 @@
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-			<div class="collapse card-body" id="eval-form-3-{{ forloop.counter }}"></div>
-			<script type="text/javascript">
-// 			$("#eval-form-3-{{ forloop.counter }}").load(
-// 					'/evaluation/formd3?form_id={{ evalform3.id }}',function(){
-// 						$("#eval-form-3-{{ forloop.counter }}").find(".buttons-holder-div").remove()
-// 						$("#eval-form-3-{{ forloop.counter }}").find("form").removeAttr("action")
-// 						$("#eval-form-3-{{ forloop.counter }}").find("textarea").attr("disabled","disabled")
-// 						$("#eval-form-3-{{ forloop.counter }}").find(".page-title").remove()
-// // 						$("#eval-form-3-{{ forloop.counter }}").find("form").attr("id","")
-// // 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='hidden']").remove()
-// 						$("#eval-form-3-{{ forloop.counter }}").find("input[type='radio']").each(function(){
-// 							$(this).attr("disabled","disabled")
-// 						})
-
-// 					})
-			</script>
+			<div class="row collapse card-body" id="eval-form-2-">
+				<div class="col-md-12 form-section">
+					<div class="col-md-12">
+						<strong>The Explanation given of the use of Mathematics in the paragraph </strong> <span
+							class="qanswer">{{ d3.q1 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>The creative connection of the artwork to Mathematics </strong> <span class="qanswer">{{ d3.q2 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>How clearly the maths is depicted in the artwork? </strong> <span class="qanswer">{{ d3.q3 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>Originality</strong> <span class="qanswer">{{ d3.q4 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>Quality of artistic composition and design </strong> <span class="qanswer">{{ d3.q5 }}</span>
+					</div>
+					<div class="col-md-12">
+						<strong>Comment</strong> {{ d3.comment }}
+					</div>
+				</div>
+			</div>
 			{% endfor%}<hr> {%endif%}
-		</div>
 		{%endif%}
-
 	</div>
 </div>
 <div class="col-md-2"></div>
 </div>
 
 <script type="text/javascript">
-	// function addCard(cardName) {
-	// 	$(".col-md-8.card.eval-form").html()
-	// }
+$(document).ready(function(){
+	$(".qanswer").each(function(){
+		$(this).html(getTitle($(this).html()))
+	})
+})
+function getTitle(intval){
+	if(intval== 0)
+		return "None"
+	else if (intval == 1)
+		return "Minimal"
+	else if (intval == 2)
+		return "Average"
+	else if (intval == 3)
+		return "Good"
+	else if (intval == 4)
+		return "Excellent"
+}
 </script>

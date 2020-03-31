@@ -209,7 +209,8 @@ def eval_forms_artwork(request):
     work = get_object_or_404(Artwork, id=request.GET.get('work_id'))
     d1as = D1A.objects.filter(artwork=work)
     d1bs = D1B.objects.filter(artwork=work)
-    d2 = D2.objects.filter(artwork=work)
+    d2 = D2.objects.get(artwork=work)
+    d2 = FormD2(instance = d2)
     d3 = D3.objects.filter(artwork=work)
     context = {'work': work, 'd1as': d1as, 'd1bs': d1bs, 'd2': d2, 'd3': d3}
     return render(request, 'evaluationForms/eval_forms.html', context)

@@ -15,28 +15,30 @@
 		name="id" id="id">
 	<div class="row form-section" id="math">
 		{% for x, y in form.fields.math.base_field.choices %} {% if x != '' %}
-		{%if forloop.counter < 7%}
-		{%if forloop.counter == 0 %}
-			<div class="card-header collapsed row" data-toggle="collapse"
+		{%if forloop.counter < 9 %}
+			{%if forloop.counter == 2 %}
+		<div class="card col-md-6 text-white bg-primary"><div class="card-header collapsed row" data-toggle="collapse"
 				href="#algebra">
 				<div class="col-md-11">
-					<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Algebra</a>
+					<a class="card-title"><i class="fa fa-divide"></i>&nbsp;&nbsp;&nbsp;Algebra</a>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
-		<div class="collapse card-body" id="algebra">
-		{% endif %}
+			<div class="collapse card-body" id="algebra">
+			{% endif %}
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox"
 					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
-				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label></div>
-		{% elif forloop.counter < 10 %}
-		{%if forloop.counter == 10 %}
-		</div>
+				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
+			</div>
+		{% elif forloop.counter < 12 %}
+		{%if forloop.counter == 9 %}
+		</div></div>
+		<div class="card col-md-6 text-white bg-secondary">
 		<div class="card-header collapsed row" data-toggle="collapse"
 			href="#rf">
 			<div class="col-md-11">
-				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Relations & Functions</a>
+				<a class="card-title"><i class="fa fa-bezier-curve"></i>&nbsp;&nbsp;&nbsp;Relations & Functions</a>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -46,13 +48,14 @@
 				<input class="form-check-input" type="checkbox"
 					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
 				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label></div>
-		{% elif forloop.counter < 19 %}
-		{%if forloop.counter == 19 %}
-		</div>
+		{% elif forloop.counter < 21 %}
+		{%if forloop.counter == 12 %}
+		</div></div>
+		<div class="card col-md-6 text-white bg-success">
 		<div class="card-header collapsed row" data-toggle="collapse"
 			href="#geometry">
 			<div class="col-md-11">
-				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Geometry</a>
+				<a class="card-title"><i class="fa fa-shapes"></i>&nbsp;&nbsp;&nbsp;Geometry</a>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -63,34 +66,54 @@
 					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
 				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
 			</div>
-		{% elif forloop.counter < 19 %}
-		{%if forloop.counter == 19 %}
-		</div>
+		{% elif forloop.counter < 25 %}
+		{%if forloop.counter == 21 %}
+		</div></div>
+		<div class="card col-md-6 text-white bg-danger">
 		<div class="card-header collapsed row" data-toggle="collapse"
-			href="#geometry">
+			href="#measurement">
 			<div class="col-md-11">
-				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Geometry</a>
+				<a class="card-title"><i class="fa fa-ruler-combined"></i>&nbsp;&nbsp;&nbsp;Measurement</a>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<div class="collapse card-body" id="geometry">
+		<div class="collapse card-body" id="measurement">
 		{% endif %}
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox"
 					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
 				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
 			</div>
-		{% elif forloop.counter < 19 %}
-		{%if forloop.counter == 19 %}
-		</div>
+		{% elif forloop.counter < 28 %}
+		{% if forloop.counter == 25 %}
+		</div></div>
+		<div class="card col-md-6 text-white bg-warning">
 		<div class="card-header collapsed row" data-toggle="collapse"
-			href="#geometry">
+			href="#Trigonometry">
 			<div class="col-md-11">
-				<a class="card-title"><i class="fa fa-gavel"></i>&nbsp;&nbsp;&nbsp;Geometry</a>
+				<a class="card-title"><i class="fa fa-percent"></i>&nbsp;&nbsp;&nbsp;Trigonometry</a>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<div class="collapse card-body" id="geometry">
+		<div class="collapse card-body" id="Trigonometry">
+		{% endif %}
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox"
+					id="inlineCheckbox{{ x }}" value="{{ x }}" name="math" {% if x in form.instance.math %} checked {% endif %}>
+				<label class="form-check-label" for="inlineCheckbox{{ x }}">{{ y }}</label>
+			</div>
+			{% elif forloop.counter > 27 %}
+		{%if forloop.counter == 28 %}
+		</div></div>
+		<div class="card col-md-6 text-white bg-info">
+		<div class="card-header collapsed row" data-toggle="collapse"
+			href="#Statistics">
+			<div class="col-md-11">
+				<a class="card-title"><i class="fa fa-chart-bar"></i>&nbsp;&nbsp;&nbsp;Statistics</a>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="collapse card-body" id="Statistics">
 		{% endif %}
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox"
@@ -101,12 +124,12 @@
 		{% endif %}
 		
 		 {% endfor %}
-		 </div>
+		 </div></div>
 		<div class="col-md-12">
 	</div>
 	</div>
 	<div class="row form-section" id="q1"
-		data-title="Was the Mathematics correctly applied?">
+		data-title="Was the mathematics correctly applied?">
 		<br>
 		<div class="col-md-2">
 			<label>Excellent</label> <input type="hidden"
