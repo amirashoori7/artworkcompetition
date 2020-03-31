@@ -13,6 +13,7 @@ from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
 from evaluation.models import D1A, D1B, D2, D3
+from artwork import artwork_forms
 
 
 def index(request):
@@ -179,6 +180,7 @@ def importfile(request):
 def isNaN(string):
     return string != string
 
+
 @login_required
 def work_details(request, id, view):
     work = get_object_or_404(Artwork, id=id)
@@ -200,6 +202,11 @@ def work_detail_update(request):
         comment = request.POST.get('comment', '')
         Artwork.objects.filter(id=request.POST['id']).update(status=request.POST['status'], workapproved=workapproved,
                                                      bioapproved=bioapproved, qapproved=qapproved, comment=comment)
+        artwork = Artwork.objects.get(id=request.POST['id'])
+        if request.POST.get('status', '1') == '1':
+            subject = "MathArt Portal - Artwork requires revision"
+            message = "Dear {0} {1}, the artwork you have submitted for the MathArt competition requires revision. Please login to the portal http://mathart.co.za and modify the work. ".format(request.user.last_name, request.user.first_name)
+            send_mail(subject, message, 'mathart.co.za@gmail.com', [artwork.owner.email])
         response_data['successResult'] = 'Successful.'
     return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
@@ -231,6 +238,8 @@ def entry_form(request):
             artwork_form = artwork_form.save(commit=False)
             artwork_form.owner = request.user
             if request.POST.get('status', '-1') != '-1':
+                artwork_form.status = int(request.POST.get("status"))
+            if request.POST.get('status', '1') != '-1':
                 artwork_form.status = int(request.POST.get("status"))
             if int(request.POST.get("school", 0)) > 0:
                 school = get_object_or_404(School, id=request.POST["school"])
