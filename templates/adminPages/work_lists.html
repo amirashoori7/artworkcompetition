@@ -48,14 +48,14 @@ function changeView(select){
 <table class="table table-general-style">
 	<thead>
 		<tr>
-			{% if user.user_type == 6 or user.user_type == 7 %}
-			<th scope="col">Flag</th> {%endif%}
 			<th scope="col">#</th>
 			<th scope="col">Full Name</th>
 			<th scope="col">Status</th>
 			<th scope="col">Work Title</th>
 			<th scope="col">School</th>
 			<th scope="col">Grade</th> {% if user.user_type == 6 or user.user_type == 7 %}
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<th scope="col" class="centered">Flag</th> {%endif%}
 			<th scope="col" class="centered">View</th> {% endif %}
 			<th scope="col" class="centered">Evaluate</th> {% if user.user_type == 6 %}
 			<th scope="col" class="centered">Edit</th>
@@ -65,15 +65,6 @@ function changeView(select){
 	<tbody>
 		{% for work in works %}
 		<tr class="row-hover">
-			{% if user.user_type == 6 or user.user_type == 7 %}
-			<td><button
-					class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}"
-					type="button" {% if user.user_type == 6 %}
-					onclick="flagit(this, {{ work.id }})"
-					{% endif %}
-					id="flag-btn-{{ work.id }}">
-					<i class="fa fa-font-awesome-flag"></i>
-				</button></td> {% endif %}
 			<td>{{ forloop.counter }}</td>
 			<td>{{ work.owner.last_name }}, {{ work.owner.first_name }}</td>
 			<td>{{ work.get_status_display }}</td>
@@ -83,7 +74,17 @@ function changeView(select){
 				</div> {%endif%}
 			</td>
 			<td>{{ work.school.name }}</td>
-			<td>{{ work.learnergrade }}</td> {% if user.user_type == 6 or user.user_type == 7 %}
+			<td>{{ work.learnergrade }}</td> 
+			{% if user.user_type == 6 or user.user_type == 7 %}
+			<td><button
+					class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}"
+					type="button" {% if user.user_type == 6 %}
+					onclick="flagit(this, {{ work.id }})"
+					{% endif %}
+					id="flag-btn-{{ work.id }}">
+					<i class="fa fa-font-awesome-flag"></i>
+				</button></td> {% endif %}
+			{% if user.user_type == 6 or user.user_type == 7 %}
 			<td class="centered"><button class="btn btn-outline-info"
 					type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 1 %}')">
