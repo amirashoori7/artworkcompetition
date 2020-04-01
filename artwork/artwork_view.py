@@ -239,8 +239,8 @@ def entry_form(request):
             artwork_form.owner = request.user
             if request.POST.get('status', '-1') != '-1':
                 artwork_form.status = int(request.POST.get("status"))
-            if request.POST.get('status', '1') != '-1':
-                artwork_form.status = int(request.POST.get("status"))
+#             if request.POST.get('status', '1') != '1':
+#                 artwork_form.status = int(request.POST.get("status"))
             if int(request.POST.get("school", 0)) > 0:
                 school = get_object_or_404(School, id=request.POST["school"])
                 artwork_form.school = school
