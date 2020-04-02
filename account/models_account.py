@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from artwork.artwork_models import Artwork
-from cms.utils.conf import default
 
 class ProjectUser(AbstractUser):
     USER_TYPE_CHOICES = (
@@ -21,4 +19,4 @@ class ProjectUser(AbstractUser):
     parentname = models.CharField(blank=True, null=True, max_length=200)
     parentphone = models.CharField(blank=True, null=True, max_length=100)
     parentemail = models.CharField(blank=True, null=True, max_length=100)
-#     grade = models.CharField(blank=True, null=True, max_length=100, default='')
+    grade = models.CharField(blank=True, null=True, max_length=100, default='')

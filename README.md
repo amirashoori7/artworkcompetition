@@ -110,7 +110,7 @@ psql mathartuser -h 127.0.0.1 -d mathart
 
 SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';
 
-SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'evaluation_d3';
+SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = 'account_projectuser';
 
 DROP TABLE films, distributors;
 
