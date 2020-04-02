@@ -93,12 +93,66 @@
 					</div>
 					<select name="user_type" class="form-control form-input"
 						data-title="Select Gender" data-style="btn-default btn-block"
-						data-menu-style="dropdown-blue"> {% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
-						<option value="{{ x }}" {% if form.instance.user_type.value == x %} selected {% endif %}>
-							{% endif %} {{ y }}</option> {% endfor %}
+						data-menu-style="dropdown-blue"><option value="0" {% if form.instance.user_type == 0 %} selected {% endif %}>User type</option> 
+						{% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
+						<option value="{{ x }}" {% if form.instance.user_type == x %} selected {% endif %}>
+							{% endif %} {{ y }} </option> {% endfor %}
 					</select>
 				</div>
 			</div>
+			<hr class="gradeSelect">
+			<div class="row gradeSelect">
+				<div class="col-md-12">Judge for grade:</div>
+				<input type="hidden" data-required="1"
+						class="form-control form-input" id="currentlearnergrade"
+						value="{{ form.instance.learnergrade|default:'' }}" required
+						name="learnergrade">
+					<!-- 						RADIOS -->
+					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+						data-toggle="buttons">
+						<label class="btn btn-outline-secondary btn-group btn-group-sm">
+							<input type="radio" name="learnergradeRadio" value="Grade 7"
+							onclick="gradeChose(this)">Grade 7
+						</label>
+					</div>
+					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+						data-toggle="buttons">
+						<label class="btn btn-outline-secondary btn-group btn-group-sm">
+							<input type="radio" name="learnergradeRadio" value="Grade 8"
+							onclick="gradeChose(this)"> Grade 8
+						</label>
+					</div>
+					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+						data-toggle="buttons">
+						<label class="btn btn-outline-secondary btn-group btn-group-sm">
+							<input type="radio" name="learnergradeRadio" value="Grade 9"
+							onclick="gradeChose(this)"> Grade 9
+						</label>
+					</div>
+					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+						data-toggle="buttons">
+						<label class="btn btn-outline-secondary btn-group btn-group-sm">
+							<input type="radio" name="learnergradeRadio" value="Grade 10"
+							onclick="gradeChose(this)"> Grade 10
+						</label>
+					</div>
+					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+						data-toggle="buttons">
+						<label class="btn btn-outline-secondary btn-group btn-group-sm">
+							<input type="radio" name="learnergradeRadio" value="Grade 11"
+							onclick="gradeChose(this)"> Grade 11
+						</label>
+					</div>
+					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+						data-toggle="buttons">
+						<label class="btn btn-outline-secondary btn-group btn-group-sm">
+							<input type="radio" name="learnergradeRadio" value="Grade 12"
+							onclick="gradeChose(this)"> Grade 12
+						</label>
+					</div>
+				<hr>
+			</div>
+			<hr class="gradeSelect">
 			<div class="row form-group">
 
 				<div class="input-group col-sm-6">
@@ -161,8 +215,7 @@ function submitRegistryForm(url) {
 					.test(settings.url))) {
 				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
 			}
-		},
-		success : function(response) {
+		}, success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
 				$(".form-signin.form-general-style").find("input#inputEmail")
@@ -180,17 +233,21 @@ function submitRegistryForm(url) {
 						true)
 
 			}
-		},
-		error : function(xhr, errmsg, err) {
+		}, error : function(xhr, errmsg, err) {
 			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)
 			$(".frameLoding").fadeOut()
-		},
-		complete : function(response) {
+		}, complete : function(response) {
 			$(".frameLoding").fadeOut()
 			$("#register-btn").prop("disabled", false);
 			return false
 		}
 	})
+}
+$(document).ready(function(){
+	$("select[name='user_type']").val({{form.instance.usertype | default_if_none:0}})
+})
+function showgroup() {
+	
 }
 </script>
