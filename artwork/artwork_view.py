@@ -95,7 +95,7 @@ def work_lists_checkbox(request):
     works = Artwork.objects.filter(learnergrade=grade)
     works = works.order_by('-id')
     context = {'works': works}
-    return render(request, 'adminPages/work_lists.html', context)
+    return render(request, 'adminPages/work_lists_checkbox.html', context)
 
 
 def getfile(request):  

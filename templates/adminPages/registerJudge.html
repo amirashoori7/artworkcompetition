@@ -184,7 +184,7 @@
 					</div>
 					<input type="password" class="form-control" id="password1"
 						name="password1" placeholder="Password" required
-						value="{{ form.instance.password|default_if_none:'' }}">
+						value="">
 				</div>
 
 				<div class="input-group col-sm-6">
@@ -193,7 +193,7 @@
 					</div>
 					<input type="password" class="form-control" id="password2"
 						name="password2" placeholder="Repeat Password"
-						value="{{ form.instance.password|default_if_none:'' }}" required>
+						value="" required>
 				</div>
 			</div>
 			{% csrf_token %}
@@ -286,7 +286,11 @@ function showgroup() {
 			})
 }
 
-function openArtworkList(item){
-	showDialogPage(item, "/work_lists_checkbox?grade="+$("input[name='learnergradeRadio']").val())
+function openArtworkList(item) {
+	if($("input[name='learnergradeRadio']:checked").length<=0){
+		toggleMessageBox("Please select a grade first.", true)
+	} else
+		showDialogPage(item, "/work_lists_checkbox?judge="+$("#username").val()+"&grade="+
+				$("input[name='learnergradeRadio']:checked").val().replace(" ","%20"))
 }
 </script>

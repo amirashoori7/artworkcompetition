@@ -27,12 +27,10 @@ function fetchEntryForm(url) {
 				$("#schoolDIV").fadeOut()
 			}
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$(
-						"input[name='learnergradeRadio'][value='"
+				$("input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']").prop(
 						'checked', true)
-				$(
-						"input[name='learnergradeRadio'][value='"
+				$("input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']")
 						.parent().addClass("active")
 			})
@@ -88,12 +86,10 @@ function gradeChose(radioBTN) {
 											"col").html("<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"+j[3]).attr("onclick",
 											"alert(1)"))
 						})
-			},
-			error : function(request, status, error) {
+			}, error : function(request, status, error) {
 				console.log(request.responseText);
 				$(".frameLoding").fadeOut()
-			},
-			complete : function() {
+			}, complete : function() {
 				$(".frameLoding").fadeOut()
 			}
 		})
