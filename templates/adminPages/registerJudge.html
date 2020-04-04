@@ -1,7 +1,8 @@
 
 <div class="page-title">
-	<h4>Register a Judge</h4>
+	<h4>User</h4>
 </div>
+
 <div class="row">
 	<div class="col-md-2"></div>
 	<label for="content-judge"></label>
@@ -9,12 +10,90 @@
 		<form method="post" class="needs-validation form-general-style"
 			id="registry-form" action="{% url 'account:registerJudge' %}"
 			enctype="multipart/form-data" novalidate>
-			<div class="form-group row" >
-
+			<div class="form-group row">
 
 				<!-- 					EMAIL -->
-
-
+				<div class="input-group col-md-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					</div>
+					<select name="user_type" class="form-control form-input"
+						data-title="Select Gender" data-style="btn-default btn-block"
+						data-menu-style="dropdown-blue"><option value="0" {% if form.instance.user_type == 0 %} selected {% endif %}>User type</option> 
+						{% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
+						<option value="{{ x }}" {% if form.instance.user_type == x %} selected {% endif %}>
+							{% endif %} {{ y }}</option> {% endfor %}
+					</select>
+				</div>
+				<div class="input-group col-md-6"></div>
+				<div class="input-group col-md-12">
+					<br>
+				</div>
+			</div>
+			<hr class="gradeSelect">
+			<div class="row gradeSelect">
+				<div class="col-md-12">Judges for the grade:</div>
+				<input type="hidden" class="form-control form-input"
+					id="currentlearnergrade"
+					value="{{ form.instance.grade|default:'' }}" required name="grade">
+				<!-- 						RADIOS -->
+				<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+					data-toggle="buttons">
+					<label class="btn btn-outline-secondary btn-group btn-group-sm">
+						<input type="radio" name="learnergradeRadio" value="Grade 7"
+						onclick="gradeChose(this)">Grade 7
+					</label>
+				</div>
+				<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+					data-toggle="buttons">
+					<label class="btn btn-outline-secondary btn-group btn-group-sm">
+						<input type="radio" name="learnergradeRadio" value="Grade 8"
+						onclick="gradeChose(this)"> Grade 8
+					</label>
+				</div>
+				<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+					data-toggle="buttons">
+					<label class="btn btn-outline-secondary btn-group btn-group-sm">
+						<input type="radio" name="learnergradeRadio" value="Grade 9"
+						onclick="gradeChose(this)"> Grade 9
+					</label>
+				</div>
+				<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+					data-toggle="buttons">
+					<label class="btn btn-outline-secondary btn-group btn-group-sm">
+						<input type="radio" name="learnergradeRadio" value="Grade 10"
+						onclick="gradeChose(this)"> Grade 10
+					</label>
+				</div>
+				<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+					data-toggle="buttons">
+					<label class="btn btn-outline-secondary btn-group btn-group-sm">
+						<input type="radio" name="learnergradeRadio" value="Grade 11"
+						onclick="gradeChose(this)"> Grade 11
+					</label>
+				</div>
+				<div class="col-md-2 btn-group btn-group-toggle btn-sm"
+					data-toggle="buttons">
+					<label class="btn btn-outline-secondary btn-group btn-group-sm">
+						<input type="radio" name="learnergradeRadio" value="Grade 12"
+						onclick="gradeChose(this)"> Grade 12
+					</label>
+				</div>
+				<hr>
+			</div>
+			<hr>
+			<div class="row gradeSelect form-group artwork-container-div">
+				<div class="col-md-12">
+					<button class="btn btn-info btn-sm" type="button"
+						onclick="openArtworkList(this)">
+						<i class="fa fa-palette">&nbsp;&nbsp;&nbsp;</i>Allocate
+						Artwork
+					</button>
+				</div>
+				<hr>
+			</div>
+			<hr class="gradeSelect">
+			<div class="row gradeSelect form-group">
 				<div class="input-group col-sm-6">
 					<div class="input-group-prepend">
 						<span class="input-group-addon"><i class="fa fa-at"></i></span>
@@ -23,9 +102,9 @@
 						required autocomplete="off" id="username" name="username"
 						value="{{ form.instance.username|default:'' }}">
 				</div>
-				<input type="hidden" class="form-control" 
-						required autocomplete="off" name="id"
-						value="{{ form.instance.id|default:'0' }}">
+				<input type="hidden" class="form-control" required
+					autocomplete="off" name="id"
+					value="{{ form.instance.id|default:'0' }}">
 
 				<!-- 				CELLPHONE -->
 
@@ -39,7 +118,6 @@
 						placeholder="Cellphone Number">
 				</div>
 			</div>
-
 
 			<div class="row form-group">
 
@@ -86,80 +164,8 @@
 						name="dob" value="{{ form.instance.dob|default:'2013-01-08' }}">
 				</div>
 
-				<div class="input-group col-sm-6">
-					<div class="input-group-prepend">
-						<span class="input-group-addon"><i
-							class="fa fa-user"></i></span>
-					</div>
-					<select name="user_type" class="form-control form-input"
-						data-title="Select Gender" data-style="btn-default btn-block"
-						data-menu-style="dropdown-blue"><option value="0" {% if form.instance.user_type == 0 %} selected {% endif %}>User type</option> 
-						{% for x, y in form.fields.user_type.choices %} {% if x != 1 %}
-						<option value="{{ x }}" {% if form.instance.user_type == x %} selected {% endif %}>
-							{% endif %} {{ y }} </option> {% endfor %}
-					</select>
-				</div>
+				<div class="col-sm-6"></div>
 			</div>
-			<hr class="gradeSelect">
-			<div class="row gradeSelect">
-				<div class="col-md-12">Judges for the grade:</div>
-				<input type="hidden" class="form-control form-input"
-					id="currentlearnergrade"
-					value="{{ form.instance.grade|default:'' }}" required
-					name="grade">
-				<!-- 						RADIOS -->
-					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
-						data-toggle="buttons">
-						<label class="btn btn-outline-secondary btn-group btn-group-sm">
-							<input type="radio" name="learnergradeRadio" value="Grade 7"
-							onclick="gradeChose(this)">Grade 7
-						</label>
-					</div>
-					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
-						data-toggle="buttons">
-						<label class="btn btn-outline-secondary btn-group btn-group-sm">
-							<input type="radio" name="learnergradeRadio" value="Grade 8"
-							onclick="gradeChose(this)"> Grade 8
-						</label>
-					</div>
-					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
-						data-toggle="buttons">
-						<label class="btn btn-outline-secondary btn-group btn-group-sm">
-							<input type="radio" name="learnergradeRadio" value="Grade 9"
-							onclick="gradeChose(this)"> Grade 9
-						</label>
-					</div>
-					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
-						data-toggle="buttons">
-						<label class="btn btn-outline-secondary btn-group btn-group-sm">
-							<input type="radio" name="learnergradeRadio" value="Grade 10"
-							onclick="gradeChose(this)"> Grade 10
-						</label>
-					</div>
-					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
-						data-toggle="buttons">
-						<label class="btn btn-outline-secondary btn-group btn-group-sm">
-							<input type="radio" name="learnergradeRadio" value="Grade 11"
-							onclick="gradeChose(this)"> Grade 11
-						</label>
-					</div>
-					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
-						data-toggle="buttons">
-						<label class="btn btn-outline-secondary btn-group btn-group-sm">
-							<input type="radio" name="learnergradeRadio" value="Grade 12"
-							onclick="gradeChose(this)"> Grade 12
-						</label>
-					</div>
-				<hr>
-			</div>
-				<hr>
-			<div class="row gradeSelect form-group artwork-container-div">
-				<div class="col-md-12">
-					Allocated Artwork
-				</div>
-				<hr>
-			</div>
-			<hr class="gradeSelect">
 			<div class="row form-group">
 
 				<div class="input-group col-sm-6">
@@ -192,17 +198,23 @@
 			</div>
 			{% csrf_token %}
 			<div class="row form-group">
-				<div class="input-group col-sm-2"></div>
-				<div class="input-group col-sm-8">
-					<button class="btn btn-primary btn-success col-sm-12" type="button"
+				<div class="col-md-6 text-center">
+					<button class="btn btn-primary btn-success btn-block" type="button"
 						id="register-btn"
-						onclick="submitRegistryForm('{% url 'account:registerJudge' %}')">Save</button>
+						onclick="submitRegistryForm('{% url 'account:registerJudge' %}')">
+						<i class="fa fa-save">&nbsp;&nbsp;&nbsp;</i>Save
+					</button>
+				</div>
+				<div class="col-md-6 text-center">
+					<button class="btn btn-outline-warning btn-block" type="button"
+						id="register-btn" onclick="closeFullScreenDiv()">
+						<i class="fa fa-times-circle">&nbsp;&nbsp;&nbsp;</i>Close
+					</button>
 				</div>
 			</div>
+		</form>
 	</div>
-	</form>
-</div>
-<script>
+	<script>
 function submitRegistryForm(url) {
 	$(".frameLoding").fadeIn()
 	var form = $('#registry-form')[0]
@@ -257,6 +269,7 @@ $(document).ready(function(){
 	})
 	$("select[name='user_type']").val({{form.instance.usertype | default_if_none:0}})
 	showgroup()
+	gradeChose(null)
 })
 function showgroup() {
 	if($("select[name='user_type']").val()=='4')
@@ -264,14 +277,16 @@ function showgroup() {
 	else
 		$(".gradeSelect").hide()
 	$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$(
-						"input[name='learnergradeRadio'][value='"
+				$("input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']").prop(
 						'checked', true)
-				$(
-						"input[name='learnergradeRadio'][value='"
+				$("input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']")
 						.parent().addClass("active")
 			})
+}
+
+function openArtworkList(item){
+	showDialogPage(item, "/work_lists_checkbox?grade="+$("input[name='learnergradeRadio']").val())
 }
 </script>

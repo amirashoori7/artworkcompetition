@@ -12,8 +12,6 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
-from evaluation.models import D1A, D1B, D2, D3
-from artwork import artwork_forms
 
 
 def index(request):
@@ -93,12 +91,10 @@ def work_lists(request):
 
 @login_required
 def work_lists_checkbox(request):
-    grade = request.GET.get('grade', -2)
+    grade = request.GET.get('grade', '')
     works = Artwork.objects.filter(learnergrade=grade)
     works = works.order_by('-id')
-    numberofartworks = Artwork.objects.filter(status__gte=0).count()
-    numberoflearners = ProjectUser.objects.filter(user_type=1).count()
-    context = {'works': works, 'numberofartworks': numberofartworks, 'numberoflearners':numberoflearners}
+    context = {'works': works}
     return render(request, 'adminPages/work_lists.html', context)
 
 

@@ -70,7 +70,8 @@ function fetchEntryForm(url) {
 
 function gradeChose(radioBTN) {
 	$('.btn-outline-secondary.btn-group').removeClass('active');
-	$('#currentlearnergrade').val($(radioBTN).val())
+	if(radioBTN != null)
+		$('#currentlearnergrade').val($(radioBTN).val())
 	if ($(".gradeSelect").length) {
 		$.ajax({
 			url : 'rest_work_list_judge?judge=' + $('#username').val(),
@@ -79,6 +80,7 @@ function gradeChose(radioBTN) {
 				$(".frameLoding").fadeIn()
 			},
 			success : function(response) {
+				$(".artwork-container-div").find("div.col").remove()
 				$(response).each(
 						function(i, j) {
 							$(".artwork-container-div").append(
