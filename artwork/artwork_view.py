@@ -12,6 +12,7 @@ import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.mail import send_mail
 from zipfile import ZipFile
+from evaluation.models import D2
 
 
 def index(request):
@@ -92,7 +93,10 @@ def work_lists(request):
 @login_required
 def work_lists_checkbox(request):
     grade = request.GET.get('grade', '')
-    works = Artwork.objects.filter(learnergrade=grade)
+    judge = request.GET.get('judge', '')
+    judgeuser = ProjectUser.objects.get(username=judge)
+    d2s = list(D2.objects.filter(author=judgeuser).values_list('id', flat=True))
+    works = Artwork.objects.filter(learnergrade=grade, status=6).exclude(Q(id__in=d2s))
     works = works.order_by('-id')
     context = {'works': works}
     return render(request, 'adminPages/work_lists_checkbox.html', context)
@@ -211,7 +215,7 @@ def work_detail_update(request):
         artwork = Artwork.objects.get(id=request.POST['id'])
         if request.POST.get('status', '1') == '1':
             subject = "MathArt Portal - Artwork requires revision"
-            message = "Dear {0} {1}, the artwork you have submitted for the MathArt competition requires revision. Please login to the portal http://mathart.co.za and modify the work. ".format(request.user.last_name, request.user.first_name)
+            message = "Dear {0} {1}, the artwork you have submitted for the MathArt competition requires revision. Please login to the portal http://mathart.co.za and modify the work. ".format(artwork.owner.last_name, artwork.owner.first_name)
             send_mail(subject, message, 'mathart.co.za@gmail.com', [artwork.owner.email])
         response_data['successResult'] = 'Successful.'
     return HttpResponse(json.dumps(response_data),

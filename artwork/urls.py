@@ -10,6 +10,7 @@ urlpatterns = [
     path('rest_work_list_judge', rest_views.rest_work_list_judge),
     path('get_school', rest_views.get_school),
     path('flag_work', rest_views.flag_work),
+    path('allocate_form', rest_views.allocate_form),
     path('', artwork_view.index, name='index'),
     path('entry_form/', artwork_view.entry_form, name='entry_form'),
     path('entry_form_view/', artwork_view.entry_form_view, name='entry_form_view'),

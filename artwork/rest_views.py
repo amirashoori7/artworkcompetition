@@ -37,7 +37,6 @@ def get_school(request):
     return HttpResponse(json.dumps(data),
                 content_type="application/json")
 
-
 def flag_work(request):
     wid = int(request.GET.get("work_id", 0))
     flag = int(request.GET.get("flag", -1))
@@ -49,6 +48,29 @@ def flag_work(request):
         if flag == 0 :
             artwork_form.flagged = False
         elif flag == 1:
+            artwork_form.flagged = True
+        else:
+            response_data['errorResult'] = "Illegal flag value"
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json")
+        artwork_form = artwork_form.save()
+    else:
+        response_data['errorResult'] = "Illegal access to the artwork"
+        return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
+    response_data['successResult'] = "Successful"
+    return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
+    
+def allocate_form(request):
+    wid = int(request.GET.get("work_id", 0))
+    judge = int(request.GET.get("judge", 0))
+    response_data = {}
+    if wid > 0:
+        artwork = get_object_or_404(Artwork, id=wid)
+        artwork_form = EntryForm(instance=artwork)
+        artwork_form = artwork_form.save(commit=False)
+        if flag == 1:
             artwork_form.flagged = True
         else:
             response_data['errorResult'] = "Illegal flag value"

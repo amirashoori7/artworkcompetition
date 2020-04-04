@@ -2,7 +2,6 @@
 <div class="page-title">
 	<h4>User</h4>
 </div>
-
 <div class="row">
 	<div class="col-md-2"></div>
 	<label for="content-judge"></label>
@@ -10,6 +9,9 @@
 		<form method="post" class="needs-validation form-general-style"
 			id="registry-form" action="{% url 'account:registerJudge' %}"
 			enctype="multipart/form-data" novalidate>
+			<input type="hidden" class="form-control" required
+					autocomplete="off" name="id"
+					value="{{ form.instance.id|default:'0' }}">
 			<div class="form-group row">
 
 				<!-- 					EMAIL -->
@@ -102,9 +104,6 @@
 						required autocomplete="off" id="username" name="username"
 						value="{{ form.instance.username|default:'' }}">
 				</div>
-				<input type="hidden" class="form-control" required
-					autocomplete="off" name="id"
-					value="{{ form.instance.id|default:'0' }}">
 
 				<!-- 				CELLPHONE -->
 
