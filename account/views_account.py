@@ -87,7 +87,6 @@ def registerJudge(request):
         if int(request.POST.get("id", 0)) > 0 :
             old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
             form = AdvancedUserRegistrationForm(request.POST, request.FILES, instance=old_data)
-
         if form.is_valid():
             form = form.save()
 #             CREATE OR UPDATE

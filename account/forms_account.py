@@ -42,7 +42,7 @@ class AdvancedUserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = ProjectUser
-        fields = ('username', 'first_name', 'last_name', 'dob', 'user_type', 'organisation', 'password1', 'password2', 'cellphone')
+        fields = ('username', 'first_name', 'last_name', 'dob', 'user_type', 'organisation', 'password1', 'password2', 'cellphone', 'grade')
 
     def save(self, commit=True):
         user = super().save(False)

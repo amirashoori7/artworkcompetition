@@ -1,28 +1,42 @@
-from django.http import JsonResponse
-from .serializer import ArtworkSerializer
 from artwork.artwork_models import Artwork
 from artwork.artwork_models import School
 import json
 from django.http.response import HttpResponse
-from django.db.models.functions.text import Lower
 from django.shortcuts import get_object_or_404
 from artwork.artwork_forms import EntryForm
+from account.models_account import ProjectUser
+from evaluation.models import D2
+
 
 def worklists(request):
-    works = Artwork.objects.all()
-    serializer = ArtworkSerializer(works, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    grade = request.GET.get("grade", '')
+    if grade != '':
+        works = Artwork.objects.filter(learnergrade=grade, status=6).values_list('id', 'worktitle', 'learnergrade', 'thumbnail')
+    else :
+        works = Artwork.objects.all().values_list('id', 'worktitle', 'learnergrade', 'thumbnail')
+    return HttpResponse(json.dumps(works),
+                content_type="application/json")
+
+
+def rest_work_list_judge(request):
+    judge = request.GET.get("judge", '')
+    if judge != '':
+        judgeuser = ProjectUser.objects.get(username=judge)
+        works = list(D2.objects.filter(author=judgeuser).values_list('id', 'score', 'artwork__id', 'artwork__worktitle', 'artwork__learnergrade', 'artwork__thumbnail'))
+    return HttpResponse(json.dumps(works),
+                content_type="application/json") 
 
 
 def get_school(request):
-    if request.GET['reason'] == '1':#gets all the provinces
+    if request.GET['reason'] == '1':  # gets all the provinces
         data = list(School.objects.order_by().values_list("province").distinct("province"))
-    elif request.GET['reason'] == '2':#gets all the schools
-        data = list(School.objects.filter(province=request.GET['prov'],name__icontains=request.GET['schooltxt']).order_by().values_list())
+    elif request.GET['reason'] == '2':  # gets all the schools
+        data = list(School.objects.filter(province=request.GET['prov'], name__icontains=request.GET['schooltxt']).order_by().values_list())
     else:
         data = list(School.objects.all())
     return HttpResponse(json.dumps(data),
                 content_type="application/json")
+
 
 def flag_work(request):
     wid = int(request.GET.get("work_id", 0))

@@ -258,7 +258,6 @@ function filterSchool(schoolTXT){
 					}
 				},
 				success : function(response) {
-					console.log(response)
 						$(response).each(
 								function(i, j) {
 									$("#school-dropdown").append(

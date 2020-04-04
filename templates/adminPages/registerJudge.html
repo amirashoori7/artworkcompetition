@@ -102,12 +102,12 @@
 			</div>
 			<hr class="gradeSelect">
 			<div class="row gradeSelect">
-				<div class="col-md-12">Judge for grade:</div>
-				<input type="hidden" data-required="1"
-						class="form-control form-input" id="currentlearnergrade"
-						value="{{ form.instance.learnergrade|default:'' }}" required
-						name="learnergrade">
-					<!-- 						RADIOS -->
+				<div class="col-md-12">Judges for the grade:</div>
+				<input type="hidden" class="form-control form-input"
+					id="currentlearnergrade"
+					value="{{ form.instance.grade|default:'' }}" required
+					name="grade">
+				<!-- 						RADIOS -->
 					<div class="col-md-2 btn-group btn-group-toggle btn-sm"
 						data-toggle="buttons">
 						<label class="btn btn-outline-secondary btn-group btn-group-sm">
@@ -152,6 +152,13 @@
 					</div>
 				<hr>
 			</div>
+				<hr>
+			<div class="row gradeSelect form-group artwork-container-div">
+				<div class="col-md-12">
+					Allocated Artwork
+				</div>
+				<hr>
+			</div>
 			<hr class="gradeSelect">
 			<div class="row form-group">
 
@@ -171,7 +178,7 @@
 					</div>
 					<input type="password" class="form-control" id="password1"
 						name="password1" placeholder="Password" required
-						value="">
+						value="{{ form.instance.password|default_if_none:'' }}">
 				</div>
 
 				<div class="input-group col-sm-6">
@@ -180,7 +187,7 @@
 					</div>
 					<input type="password" class="form-control" id="password2"
 						name="password2" placeholder="Repeat Password"
-						value="" required>
+						value="{{ form.instance.password|default_if_none:'' }}" required>
 				</div>
 			</div>
 			{% csrf_token %}
@@ -245,9 +252,26 @@ function submitRegistryForm(url) {
 	})
 }
 $(document).ready(function(){
+	$("select[name='user_type']").change(function(){
+		showgroup()
+	})
 	$("select[name='user_type']").val({{form.instance.usertype | default_if_none:0}})
+	showgroup()
 })
 function showgroup() {
-	
+	if($("select[name='user_type']").val()=='4')
+		$(".gradeSelect").show()
+	else
+		$(".gradeSelect").hide()
+	$.each($("input[name='learnergradeRadio']"), function(i, val) {
+				$(
+						"input[name='learnergradeRadio'][value='"
+								+ $("#currentlearnergrade").val() + "']").prop(
+						'checked', true)
+				$(
+						"input[name='learnergradeRadio'][value='"
+								+ $("#currentlearnergrade").val() + "']")
+						.parent().addClass("active")
+			})
 }
 </script>

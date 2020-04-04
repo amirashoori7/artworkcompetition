@@ -6,7 +6,8 @@ app_name = 'artwork'
 
 urlpatterns = [
     # re_path(r'^index/$', views.index, name='index'),
-    path('rest_list', rest_views.worklists),
+    path('rest_work_list', rest_views.worklists),
+    path('rest_work_list_judge', rest_views.rest_work_list_judge),
     path('get_school', rest_views.get_school),
     path('flag_work', rest_views.flag_work),
     path('', artwork_view.index, name='index'),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('home/', artwork_view.home, name='home'),
     path('gallery/', artwork_view.gallery, name='gallery'),
     path('work_lists/', artwork_view.work_lists, name='work_lists'),
+    path('work_lists_checkbox/', artwork_view.work_lists_checkbox, name='work_lists'),
     path('getfile/', artwork_view.getfile, name='getfile'),
     path('importfile/', artwork_view.importfile, name='importfile'),
     path('work_detail_update/', artwork_view.work_detail_update, name='work_detail_update'),

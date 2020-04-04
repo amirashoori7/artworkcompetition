@@ -91,6 +91,16 @@ def work_lists(request):
     context = {'works': works, 'numberofartworks': numberofartworks, 'numberoflearners':numberoflearners}
     return render(request, 'adminPages/work_lists.html', context)
 
+@login_required
+def work_lists_checkbox(request):
+    grade = request.GET.get('grade', -2)
+    works = Artwork.objects.filter(learnergrade=grade)
+    works = works.order_by('-id')
+    numberofartworks = Artwork.objects.filter(status__gte=0).count()
+    numberoflearners = ProjectUser.objects.filter(user_type=1).count()
+    context = {'works': works, 'numberofartworks': numberofartworks, 'numberoflearners':numberoflearners}
+    return render(request, 'adminPages/work_lists.html', context)
+
 
 def getfile(request):  
     artworks = Artwork.objects.all()  # status__gte=0

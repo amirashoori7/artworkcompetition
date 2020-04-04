@@ -71,6 +71,31 @@ function fetchEntryForm(url) {
 function gradeChose(radioBTN) {
 	$('.btn-outline-secondary.btn-group').removeClass('active');
 	$('#currentlearnergrade').val($(radioBTN).val())
+	if ($(".gradeSelect").length) {
+		$.ajax({
+			url : 'rest_work_list_judge?judge=' + $('#username').val(),
+			async : true,
+			beforeSend : function() {
+				$(".frameLoding").fadeIn()
+			},
+			success : function(response) {
+				$(response).each(
+						function(i, j) {
+							$(".artwork-container-div").append(
+									$("<div/>").attr("id", j[0]).attr("class",
+											"col").html("<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"+j[3]).attr("onclick",
+											"alert(1)"))
+						})
+			},
+			error : function(request, status, error) {
+				console.log(request.responseText);
+				$(".frameLoding").fadeOut()
+			},
+			complete : function() {
+				$(".frameLoding").fadeOut()
+			}
+		})
+	}
 }
 
 var totalFields = 0
@@ -148,7 +173,7 @@ function checkValidation() {
 
 										})
 					})
-//	validateQuestions()
+	// validateQuestions()
 	questionsValidated = 0
 	$(questionsValidationCriteria).each(
 			function(i, j) {
@@ -176,28 +201,31 @@ function checkValidation() {
 				$(".word-counter." + j.id).html(
 						"Word Count (" + ctr + " out of [" + j.min + " - "
 								+ j.max + "] words)")
-				if(i + 1 == questionsValidationCriteria.length)
+				if (i + 1 == questionsValidationCriteria.length)
 					checkValidProcess.resolve()
 				console.log(questionsValidated)
 			})
-	return $.when(checkValidProcess).done(function() {
-		$("#buttonSubmit").html(
-				"<i class='fa fa-save'>&nbsp;&nbsp;&nbsp;</i>Saved "
-						+ filledFields + "/" + totalFields)
-		if (filledFields == totalFields
-				&& questionsValidated == questionsValidationCriteria.length) {
-			$("#buttonSubmit").removeClass(
-					"btn-outline-secondary disabled")
-			$("#buttonSubmit").addClass("btn-success")
-			$("#buttonSaveContinue").addClass("disabled")
-			$("#buttonSubmit")
-					.html(
-							"<i class='fa fa-telegram-plane'>&nbsp;&nbsp;&nbsp;</i> Submit The Entry")
-		} else {
-			$("#buttonSubmit").addClass("disabled")
-			$("#buttonSaveContinue").removeClass("disabled")
-		}
-	}).promise()
+	return $
+			.when(checkValidProcess)
+			.done(
+					function() {
+						$("#buttonSubmit").html(
+								"<i class='fa fa-save'>&nbsp;&nbsp;&nbsp;</i>Saved "
+										+ filledFields + "/" + totalFields)
+						if (filledFields == totalFields
+								&& questionsValidated == questionsValidationCriteria.length) {
+							$("#buttonSubmit").removeClass(
+									"btn-outline-secondary disabled")
+							$("#buttonSubmit").addClass("btn-success")
+							$("#buttonSaveContinue").addClass("disabled")
+							$("#buttonSubmit")
+									.html(
+											"<i class='fa fa-telegram-plane'>&nbsp;&nbsp;&nbsp;</i> Submit The Entry")
+						} else {
+							$("#buttonSubmit").addClass("disabled")
+							$("#buttonSaveContinue").removeClass("disabled")
+						}
+					}).promise()
 }
 
 var phoneno = /^\d{10}$/;

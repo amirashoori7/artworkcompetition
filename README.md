@@ -123,3 +123,6 @@ CREATE TABLE account(
    last_login TIMESTAMP
 );
 
+
+ALTER TABLE account_projectuser
+ADD COLUMN grade VARCHAR DEFAULT '';
