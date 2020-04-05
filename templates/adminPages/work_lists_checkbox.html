@@ -8,7 +8,10 @@
 </style>
 <div class="row">
 	<div class="col-md-10 page-title">
-		<h2>Allocate Artwork to {{ request.GET.judge }}</h2>
+		<h2>Allocate Artwork to {{ request.GET.judge }} ({{request.GET.grade}}) 
+		<input type="hidden" id="gradeValue" value="{{request.GET.grade}}">
+		<input type="hidden" id="username" value="{{ request.GET.judge }}">
+		</h2>
 	</div>
 	<div class="col-md-2"></div>
 </div>

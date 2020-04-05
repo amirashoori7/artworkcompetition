@@ -173,7 +173,8 @@ function toggleConfirmationBox(callback) {
 	$(".confirmation-message-content").html(arguments[1])
 	$("#confirmation-box-modal").modal("show")
 	var args = [].slice.call(arguments)
-	$("#confirmation-box-btn").on("click",function(){
+	$("#confirmation-box-btn").on("click",function(ev){
+		ev.preventDefault()
 		callback(args)
 		$("#confirmation-box-modal").modal("hide")
 	})

@@ -157,23 +157,28 @@ function flagit(btn, workid){
 
 
 function allocateArtworkToJudge(judge, artwork, addRemove){
+	console.log(11111)
 	if(addRemove){
-		toggleConfirmationBox(updateD2Form,"Allocate the work?", judge, artwork)
+		toggleConfirmationBox(updateD2Form,"Allocate the work?", judge, artwork, addRemove)
 	}else
-		toggleConfirmationBox(updateD2Form,"Are you sure you want to delete the form?", judge, artwork)
+		toggleConfirmationBox(updateD2Form,"Are you sure you want to delete the form?", judge, artwork, addRemove)
 }
 
+var reqs = false
 function updateD2Form(){
-	var judge = arguments[0][2], artwork = arguments[0][3]
+	if(reqs){
+		return
+	} 
+	var judge = arguments[0][2], artwork = arguments[0][3], addRemove = arguments[0][4]
 	$.ajax({
-		type : "POST",
 		url : "/allocate_form?work_id=" + artwork + "&judge=" + judge,
 		beforeSend : function(xhr, settings) {
-			if (!(/^http:.*/.test(settings.url) || /^https:.*/
-					.test(settings.url))) {
-				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
-			}
+//			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+//					.test(settings.url))) {
+//				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
+//			}
 			$(".frameLoding").fadeIn()
+			reqs = true
 		}, success : function(response) {
 			$(".frameLoding").fadeOut()
 			if (response.successResult != null) {
@@ -181,16 +186,20 @@ function updateD2Form(){
 			} else if (response.errorResult != null)
 				toggleMessageBox("<span>" + response.errorResult
 						+ "</span>", true)
-			showDialogPage(null, "/work_lists_checkbox?judge="+$("#username").val()+"&grade="+
-				$("input[name='learnergradeRadio']:checked").val().replace(" ","%20"))
+			reqs = false
+			if(addRemove)
+				showDialogPage(null, "/work_lists_checkbox?judge=" + $("#username").val()+"&grade="+
+						$("#gradeValue").val().replace(" ", "%20"))	
+			else
+				showDialogPage(null, "/account/register_judge?username="+$("#username").val())
 		},
 		error : function(xhr, errmsg, err) {
 			$(".frameLoding").fadeOut()
 			console.log(xhr.status + ": " + xhr.responseText)
-			toggleMessageBox(xhr.responseText, true)
 		},
 		complete : function(response) {
-			return -1
+			reqs = false
+			return false
 		}
 	})
 }

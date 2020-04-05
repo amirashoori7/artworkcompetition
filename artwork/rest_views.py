@@ -66,6 +66,7 @@ def flag_work(request):
 def allocate_form(request):
     wid = int(request.GET.get("work_id", 0))
     judge = request.GET.get("judge", '')
+#     addRemove = request.GET.get("addRemove", '')
     judge = ProjectUser.objects.get(username = judge)
     response_data = {}
     if wid > 0:
@@ -76,14 +77,24 @@ def allocate_form(request):
             content_type="application/json")
     if judge != '' :
         try:
-            d2_model = get_object_or_404(D2, artwork=artwork, author=judge)
+            d2_model = get_object_or_404(D2, author=judge, artwork=artwork)
             d2_model.delete()
             response_data['errorResult'] = "Successfully removed"
-        except :
+            return HttpResponse(json.dumps(response_data),
+                                content_type="application/json")
+        except:
             d2_model, d2_obj = D2.objects.get_or_create(author=judge, artwork=artwork)
             response_data['successResult'] = "Successfully allocated"
-        return HttpResponse(json.dumps(response_data),
+            return HttpResponse(json.dumps(response_data),
                                 content_type="application/json")
+#         d2_model, d2_obj = D2.objects.get_or_create(author=judge, artwork=artwork)
+#         if d2_obj:
+#             response_data['successResult'] = "Successfully allocated"
+#         else :
+#             d2_model.delete()
+#             response_data['errorResult'] = "Successfully removed"
+#         return HttpResponse(json.dumps(response_data),
+#                                 content_type="application/json")
     else :
         response_data['errorResult'] = "Illegal access to the judge"
         return HttpResponse(json.dumps(response_data),

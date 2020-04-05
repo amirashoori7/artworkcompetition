@@ -95,7 +95,7 @@ def work_lists_checkbox(request):
     grade = request.GET.get('grade', '')
     judge = request.GET.get('judge', '')
     judgeuser = ProjectUser.objects.get(username=judge)
-    d2s = list(D2.objects.filter(author=judgeuser).values_list('id', flat=True))
+    d2s = list(D2.objects.filter(author=judgeuser).values_list('artwork__id', flat=True))
     works = Artwork.objects.filter(learnergrade=grade, status=6).exclude(Q(id__in=d2s))
     works = works.order_by('-id')
     context = {'works': works}

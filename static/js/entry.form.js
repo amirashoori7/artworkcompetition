@@ -80,21 +80,19 @@ function gradeChose(radioBTN) {
 				$(".frameLoding").fadeIn()
 			},
 			success : function(response) {
-				$(".artwork-container-div").find("div.col").remove()
+				$(".artwork-container-div").find("div.allocated-works").remove()
 				$(response).each(
 						function(i, j) {
 							$(".artwork-container-div").append(
 									$("<button/>").attr("id", j[0]).attr(
-											"class", "btn btn-outline-danger")
-											.attr(
-											"type", "button")
-											.html(
-													"<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"
+											"class", "btn btn-outline-danger allocated-works")
+											.attr("type", "button")
+											.html("<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"
 															+ j[3]).attr("onclick",
 													"allocateArtworkToJudge('"
 															+ $("#username")
 																	.val()
-															+ "','"+j[0]+"',false)"))
+															+ "','"+j[2]+"',false)"))
 						})
 			},
 			error : function(request, status, error) {
