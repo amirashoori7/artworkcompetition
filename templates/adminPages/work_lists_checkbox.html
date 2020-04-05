@@ -34,7 +34,7 @@
 	</thead>
 	<tbody>
 		{% for work in works %}
-		<tr class="row-hover" onclick="allocateArtworkToJudge('{{ request.GET.judge }}','{{ work.id }}')">
+		<tr class="row-hover" onclick="allocateArtworkToJudge('{{ request.GET.judge }}','{{ work.id }}',true)">
 			<td>{{ forloop.counter }}</td>
 			<td>{{ work.owner.last_name }}, {{ work.owner.first_name }}</td>
 			<td>{{ work.get_status_display }}</td>
@@ -82,7 +82,5 @@ setTimeout(function(){
 		})
 	})
 }, 200)
-function allocateArtworkToJudge(judge, artwork){
-	alert(judge + work_id)
-}
+
 </script>

@@ -27,10 +27,12 @@ function fetchEntryForm(url) {
 				$("#schoolDIV").fadeOut()
 			}
 			$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$("input[name='learnergradeRadio'][value='"
+				$(
+						"input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']").prop(
 						'checked', true)
-				$("input[name='learnergradeRadio'][value='"
+				$(
+						"input[name='learnergradeRadio'][value='"
 								+ $("#currentlearnergrade").val() + "']")
 						.parent().addClass("active")
 			})
@@ -68,7 +70,7 @@ function fetchEntryForm(url) {
 
 function gradeChose(radioBTN) {
 	$('.btn-outline-secondary.btn-group').removeClass('active');
-	if(radioBTN != null)
+	if (radioBTN != null)
 		$('#currentlearnergrade').val($(radioBTN).val())
 	if ($(".gradeSelect").length) {
 		$.ajax({
@@ -82,14 +84,23 @@ function gradeChose(radioBTN) {
 				$(response).each(
 						function(i, j) {
 							$(".artwork-container-div").append(
-									$("<div/>").attr("id", j[0]).attr("class",
-											"col").html("<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"+j[3]).attr("onclick",
-											"alert(1)"))
+									$("<button/>").attr("id", j[0]).attr(
+											"class", "btn btn-outline-danger")
+											.attr(
+											"type", "button")
+											.html(
+													"<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"
+															+ j[3]).attr("onclick",
+													"allocateArtworkToJudge('"
+															+ $("#username")
+																	.val()
+															+ "','"+j[0]+"',false)"))
 						})
-			}, error : function(request, status, error) {
-				console.log(request.responseText);
+			},
+			error : function(request, status, error) {
 				$(".frameLoding").fadeOut()
-			}, complete : function() {
+			},
+			complete : function() {
 				$(".frameLoding").fadeOut()
 			}
 		})
@@ -310,7 +321,7 @@ function validateQuestions() {
 					$(".questions-card").addClass(
 							"border-warning exteded-class")
 					$(".questions-card").find(".col-md-1 i").addClass(
-							"fa-thumbs-down text-warning exteded-class")
+							"fa-	thumbs-down text-warning exteded-class")
 					$(".questions-card").find(".card-title").addClass(
 							"text-warning exteded-class")
 				} else {
@@ -347,22 +358,22 @@ function submitEntryForm(url) {
 		cache : false,
 		url : url,
 		xhr : function() {
-			var xhr = new window.XMLHttpRequest();
+			var xhr = new window.XMLHttpRequest()
 			xhr.upload.addEventListener("progress", function(evt) {
 				if (evt.lengthComputable) {
 					var percentComplete = ((evt.loaded / evt.total) * 100)
 					$('.progress-bar').css('width', percentComplete + '%')
-							.attr('aria-valuenow', percentComplete);
+							.attr('aria-valuenow', percentComplete)
 					$('.progress-bar').html(percentComplete + '%')
 				}
-			}, false);
-			return xhr;
+			}, false)
+			return xhr
 		},
 		beforeSend : function(xhr, settings) {
 			$(".frameLoding").fadeIn()
 			if (!(/^http:.*/.test(settings.url) || /^https:.*/
 					.test(settings.url))) {
-				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
 			}
 		},
 		success : function(response) {

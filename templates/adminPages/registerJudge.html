@@ -1,4 +1,13 @@
-
+<style type="text/css">
+.d2forms {
+	border: 1px solid #aadde5;
+	border-radius: 7px;
+	padding: 3px 7px;
+	margin-right: 7px;
+	margin-top: 7px;
+	cursor: pointer;
+}
+</style>
 <div class="page-title">
 	<h4>User</h4>
 </div>
@@ -83,7 +92,7 @@
 				</div>
 				<hr>
 			</div>
-			<hr>
+			<hr class="gradeSelect">
 			<div class="row gradeSelect form-group artwork-container-div">
 				<div class="col-md-12">
 					<button class="btn btn-info btn-sm" type="button"
@@ -162,11 +171,6 @@
 					<input type="date" class="form-control" required id="dob"
 						name="dob" value="{{ form.instance.dob|default:'2013-01-08' }}">
 				</div>
-
-				<div class="col-sm-6"></div>
-			</div>
-			<div class="row form-group">
-
 				<div class="input-group col-sm-6">
 					<div class="input-group-prepend">
 						<span class="input-group-text">Organisation</span>
@@ -176,25 +180,25 @@
 						value="{{ form.instance.organisation|default:'' }}" required>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="input-group col-sm-6">
-					<div class="input-group-prepend">
-						<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					</div>
-					<input type="password" class="form-control" id="password1"
-						name="password1" placeholder="Password" required
-						value="">
-				</div>
+<!-- 			<div class="row form-group"> -->
+<!-- 				<div class="input-group col-sm-6"> -->
+<!-- 					<div class="input-group-prepend"> -->
+<!-- 						<span class="input-group-addon"><i class="fa fa-key"></i></span> -->
+<!-- 					</div> -->
+<!-- 					<input type="password" class="form-control" id="password1" -->
+<!-- 						name="password1" placeholder="Password" required -->
+<!-- 						value=""> -->
+<!-- 				</div> -->
 
-				<div class="input-group col-sm-6">
-					<div class="input-group-prepend">
-						<span class="input-group-addon"><i class="fa fa-key"></i></span>
-					</div>
-					<input type="password" class="form-control" id="password2"
-						name="password2" placeholder="Repeat Password"
-						value="" required>
-				</div>
-			</div>
+<!-- 				<div class="input-group col-sm-6"> -->
+<!-- 					<div class="input-group-prepend"> -->
+<!-- 						<span class="input-group-addon"><i class="fa fa-key"></i></span> -->
+<!-- 					</div> -->
+<!-- 					<input type="password" class="form-control" id="password2" -->
+<!-- 						name="password2" placeholder="Repeat Password" -->
+<!-- 						value="" required> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			{% csrf_token %}
 			<div class="row form-group">
 				<div class="col-md-6 text-center">
@@ -249,10 +253,8 @@ function submitRegistryForm(url) {
 				populateErrorMessageFields(response.errorResults)
 				toggleMessageBox("<span>Registration unsuccessful.</span>",
 						true)
-
 			}
 		}, error : function(xhr, errmsg, err) {
-			console.log(xhr.status + ": " + xhr.responseText)
 			toggleMessageBox(xhr.responseText, true)
 			$(".frameLoding").fadeOut()
 		}, complete : function(response) {
@@ -267,29 +269,31 @@ $(document).ready(function(){
 		showgroup()
 	})
 	$("select[name='user_type']").val({{form.instance.usertype | default_if_none:0}})
-	showgroup()
 	gradeChose(null)
+	showgroup()
+	$.each($("input[name='learnergradeRadio']"), function(i, val) {
+		$("input[name='learnergradeRadio'][value='"
+						+ $("#currentlearnergrade").val() + "']").prop(
+				'checked', true)
+		$("input[name='learnergradeRadio'][value='"
+						+ $("#currentlearnergrade").val() + "']")
+				.parent().addClass("active")
+	})
 })
+
 function showgroup() {
 	if($("select[name='user_type']").val()=='4')
 		$(".gradeSelect").show()
 	else
 		$(".gradeSelect").hide()
-	$.each($("input[name='learnergradeRadio']"), function(i, val) {
-				$("input[name='learnergradeRadio'][value='"
-								+ $("#currentlearnergrade").val() + "']").prop(
-						'checked', true)
-				$("input[name='learnergradeRadio'][value='"
-								+ $("#currentlearnergrade").val() + "']")
-						.parent().addClass("active")
-			})
 }
 
 function openArtworkList(item) {
-	if($("input[name='learnergradeRadio']:checked").length<=0){
+	if($("input[name='learnergradeRadio']:checked").length <= 0){
 		toggleMessageBox("Please select a grade first.", true)
 	} else
 		showDialogPage(item, "/work_lists_checkbox?judge="+$("#username").val()+"&grade="+
 				$("input[name='learnergradeRadio']:checked").val().replace(" ","%20"))
 }
+
 </script>

@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from artwork.artwork_forms import EntryForm
 from account.models_account import ProjectUser
 from evaluation.models import D2
+import artwork
 
 
 def worklists(request):
@@ -64,23 +65,26 @@ def flag_work(request):
     
 def allocate_form(request):
     wid = int(request.GET.get("work_id", 0))
-    judge = int(request.GET.get("judge", 0))
+    judge = request.GET.get("judge", '')
+    judge = ProjectUser.objects.get(username = judge)
     response_data = {}
     if wid > 0:
         artwork = get_object_or_404(Artwork, id=wid)
-        artwork_form = EntryForm(instance=artwork)
-        artwork_form = artwork_form.save(commit=False)
-        if flag == 1:
-            artwork_form.flagged = True
-        else:
-            response_data['errorResult'] = "Illegal flag value"
-            return HttpResponse(json.dumps(response_data),
-                content_type="application/json")
-        artwork_form = artwork_form.save()
     else:
         response_data['errorResult'] = "Illegal access to the artwork"
         return HttpResponse(json.dumps(response_data),
             content_type="application/json")
-    response_data['successResult'] = "Successful"
-    return HttpResponse(json.dumps(response_data),
+    if judge != '' :
+        try:
+            d2_model = get_object_or_404(D2, artwork=artwork, author=judge)
+            d2_model.delete()
+            response_data['errorResult'] = "Successfully removed"
+        except :
+            d2_model, d2_obj = D2.objects.get_or_create(author=judge, artwork=artwork)
+            response_data['successResult'] = "Successfully allocated"
+        return HttpResponse(json.dumps(response_data),
+                                content_type="application/json")
+    else :
+        response_data['errorResult'] = "Illegal access to the judge"
+        return HttpResponse(json.dumps(response_data),
             content_type="application/json")

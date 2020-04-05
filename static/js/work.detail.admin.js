@@ -154,3 +154,43 @@ function flagit(btn, workid){
 		}
 	})
 }
+
+
+function allocateArtworkToJudge(judge, artwork, addRemove){
+	if(addRemove){
+		toggleConfirmationBox(updateD2Form,"Allocate the work?", judge, artwork)
+	}else
+		toggleConfirmationBox(updateD2Form,"Are you sure you want to delete the form?", judge, artwork)
+}
+
+function updateD2Form(){
+	var judge = arguments[0][2], artwork = arguments[0][3]
+	$.ajax({
+		type : "POST",
+		url : "/allocate_form?work_id=" + artwork + "&judge=" + judge,
+		beforeSend : function(xhr, settings) {
+			if (!(/^http:.*/.test(settings.url) || /^https:.*/
+					.test(settings.url))) {
+				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
+			}
+			$(".frameLoding").fadeIn()
+		}, success : function(response) {
+			$(".frameLoding").fadeOut()
+			if (response.successResult != null) {
+				toggleMessageBox(response.successResult, false)
+			} else if (response.errorResult != null)
+				toggleMessageBox("<span>" + response.errorResult
+						+ "</span>", true)
+			showDialogPage(null, "/work_lists_checkbox?judge="+$("#username").val()+"&grade="+
+				$("input[name='learnergradeRadio']:checked").val().replace(" ","%20"))
+		},
+		error : function(xhr, errmsg, err) {
+			$(".frameLoding").fadeOut()
+			console.log(xhr.status + ": " + xhr.responseText)
+			toggleMessageBox(xhr.responseText, true)
+		},
+		complete : function(response) {
+			return -1
+		}
+	})
+}

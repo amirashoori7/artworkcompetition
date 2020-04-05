@@ -130,7 +130,6 @@ def create_d2(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif request.method == 'GET':
-#         artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         workid = int(request.GET.get("work_id", 0))
         if workid > 0:
             artwork = get_object_or_404(Artwork, id=workid)
