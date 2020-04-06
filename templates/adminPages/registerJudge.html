@@ -182,25 +182,25 @@
 						value="{{ form.instance.organisation|default:'' }}" required>
 				</div>
 			</div>
-<!-- 			<div class="row form-group"> -->
-<!-- 				<div class="input-group col-sm-6"> -->
-<!-- 					<div class="input-group-prepend"> -->
-<!-- 						<span class="input-group-addon"><i class="fa fa-key"></i></span> -->
-<!-- 					</div> -->
-<!-- 					<input type="password" class="form-control" id="password1" -->
-<!-- 						name="password1" placeholder="Password" required -->
-<!-- 						value=""> -->
-<!-- 				</div> -->
+			<div class="row form-group">
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					</div>
+					<input type="password" class="form-control" id="password1"
+						name="password1" placeholder="Password" required
+						value="">
+				</div>
 
-<!-- 				<div class="input-group col-sm-6"> -->
-<!-- 					<div class="input-group-prepend"> -->
-<!-- 						<span class="input-group-addon"><i class="fa fa-key"></i></span> -->
-<!-- 					</div> -->
-<!-- 					<input type="password" class="form-control" id="password2" -->
-<!-- 						name="password2" placeholder="Repeat Password" -->
-<!-- 						value="" required> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+				<div class="input-group col-sm-6">
+					<div class="input-group-prepend">
+						<span class="input-group-addon"><i class="fa fa-key"></i></span>
+					</div>
+					<input type="password" class="form-control" id="password2"
+						name="password2" placeholder="Repeat Password"
+						value="" required>
+				</div>
+			</div>
 			{% csrf_token %}
 			<div class="row form-group">
 				<div class="col-md-6 text-center">
@@ -242,12 +242,6 @@ function submitRegistryForm(url) {
 		}, success : function(response) {
 			if (response.successResult != null) {
 				toggleMessageBox(response.successResult, false)
-				$(".form-signin.form-general-style").find("input#inputEmail")
-						.val($("#registry-form").find("input#username").val())
-				$(".form-signin.form-general-style")
-						.find("input#inputPassword").val($("#registry-form").find("input#password1")
-										.val())
-				$(".form-signin.form-general-style").submit()
 				$('#admin-console-content').load('/account/userlist/')
 				closeFullScreenDiv()
 		} else if (response.errorResults != null) {
