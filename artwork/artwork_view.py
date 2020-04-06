@@ -77,7 +77,9 @@ def work_lists(request):
     elif request.user.user_type == 3:  # decision maker
         works = Artwork.objects.filter(Q (status=5))
     elif request.user.user_type == 4:  # Judge 2
-        works = Artwork.objects.filter(Q (status=6))
+        d2s = list(D2.objects.filter(author=request.user).values_list('artwork__id', flat=True))
+        works = Artwork.objects.filter(Q (status=6, id__in=d2s))
+#         .exclude(Q(id__in=d2s))
     elif request.user.user_type == 5:  # judge 3
         works = Artwork.objects.filter(Q (status=10))
     elif status == '-2':

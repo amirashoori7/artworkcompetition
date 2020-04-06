@@ -63,6 +63,7 @@ def flag_work(request):
     return HttpResponse(json.dumps(response_data),
             content_type="application/json")
     
+    
 def allocate_form(request):
     wid = int(request.GET.get("work_id", 0))
     judge = request.GET.get("judge", '')
