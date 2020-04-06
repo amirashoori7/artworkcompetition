@@ -157,7 +157,6 @@ function flagit(btn, workid){
 
 
 function allocateArtworkToJudge(judge, artwork, addRemove){
-	console.log(11111)
 	if(addRemove){
 		toggleConfirmationBox(updateD2Form,"Allocate the work?", judge, artwork, addRemove)
 	}else
