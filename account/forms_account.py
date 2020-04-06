@@ -39,6 +39,7 @@ class AdvancedUserRegistrationForm(UserCreationForm):
     organisation = forms.CharField(error_messages={'required': 'Please enter the organisation name'})
     username = forms.EmailField(error_messages={'required': 'Please enter a valid email address'}, validators=default_validators)
     dob = forms.DateField(error_messages={'required': 'Please enter your birth date'})
+    password = None
 
     class Meta:
         model = ProjectUser
@@ -47,6 +48,10 @@ class AdvancedUserRegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(False)
         user.email = user.username
+        if int(self.id) > 0 :
+            user.password = self.cleaned_data["password"]
+        else:
+            user.password = "abcdefg12345"
         user = super().save()
 # 1- learner phone (compulsory)
 # 2- learner email  (compulsory)
