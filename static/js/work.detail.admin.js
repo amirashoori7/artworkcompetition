@@ -157,9 +157,9 @@ function flagit(btn, workid){
 
 
 function allocateArtworkToJudge(judge, artwork, addRemove){
-	if(addRemove){
+	if(addRemove) {
 		toggleConfirmationBox(updateD2Form,"Allocate the work?", judge, artwork, addRemove)
-	}else
+	} else
 		toggleConfirmationBox(updateD2Form,"Are you sure you want to delete the form?", judge, artwork, addRemove)
 }
 
@@ -172,10 +172,6 @@ function updateD2Form(){
 	$.ajax({
 		url : "/allocate_form?work_id=" + artwork + "&judge=" + judge,
 		beforeSend : function(xhr, settings) {
-//			if (!(/^http:.*/.test(settings.url) || /^https:.*/
-//					.test(settings.url))) {
-//				xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'))
-//			}
 			$(".frameLoding").fadeIn()
 			reqs = true
 		}, success : function(response) {

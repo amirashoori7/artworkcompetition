@@ -84,7 +84,7 @@ function gradeChose(radioBTN) {
 				$(response).each(
 						function(i, j) {
 							$(".artwork-container-div").append(
-									$("<button/>").attr("id", j[0]).attr(
+									$("<button/>").attr(
 											"class", "btn btn-outline-danger allocated-works")
 											.attr("type", "button")
 											.html("<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"

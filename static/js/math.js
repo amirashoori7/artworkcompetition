@@ -172,9 +172,9 @@ function toggleMessageBox(messageText, isError) {
 function toggleConfirmationBox(callback) {
 	$(".confirmation-message-content").html(arguments[1])
 	$("#confirmation-box-modal").modal("show")
-	var args = [].slice.call(arguments)
-	$("#confirmation-box-btn").on("click",function(ev){
-		ev.preventDefault()
+	const args = [].slice.call(arguments)
+	$("#confirmation-box-btn").unbind( "click" );
+	$("#confirmation-box-btn").on("click",function() {
 		callback(args)
 		$("#confirmation-box-modal").modal("hide")
 	})
