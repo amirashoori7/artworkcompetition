@@ -24,6 +24,28 @@
 <link href="{% static 'css/home.style.css' %}?ver={{ version }}" rel="stylesheet">
 <link href="{% static 'css/content.style.css' %}?ver={{ version }}" rel="stylesheet">
 <link href="{% static 'css/style.css' %}?ver={{ version }}" rel="stylesheet">
+<script async=""
+	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
+	<script type="text/javascript">
+	function isIE() {
+		  ua = navigator.userAgent;
+		  var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+		  return is_ie; 
+		}
+		if (isIE()){
+			alert("This web-application is not accessible from the Internet Explorer. For the best performance, please use other browsers, like Google Chrome, Microsoft Edge or Mozilla Fire Fox.");
+			toggleMessageBox("This web-application is not accessible from the Internet Explorer. For the best performance, use these links to download a browser"+
+					"For the best performance, use these links to download a browser<br> "+
+					"<a href='https://www.google.com/chrome/?brand=CHBD'>Google Chrome</a> | <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a>", false)
+		}
+	var version = {{ version }}
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+		gtag('config', 'UA-156942839-1');
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -236,28 +258,9 @@
 	type="text/javascript"></script>
 <script type="text/javascript"
 	src="static/js/entry.form.js?ver={{ version }}"></script>
-<script type="text/javascript" src="static/js/work.detail.admin.js?ver={{ version }}">
-<script async=""
-	src="https://www.googletagmanager.com/gtag/js?id=UA-156942839-1"></script>
+<script type="text/javascript"
+	src="static/js/work.detail.admin.js?ver={{ version }}"></script>
 <script type="text/javascript">
-function isIE() {
-	  ua = navigator.userAgent;
-	  var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
-	  return is_ie; 
-	}
-	if (isIE()){
-		alert("This web-application is not accessible from the Internet Explorer. For the best performance, please use other browsers, like Google Chrome, Microsoft Edge or Mozilla Fire Fox.");
-		toggleMessageBox("This web-application is not accessible from the Internet Explorer. For the best performance, use these links to download a browser"+
-				"For the best performance, use these links to download a browser<br> "+
-				"<a href='https://www.google.com/chrome/?brand=CHBD'>Google Chrome</a> | <a href='https://www.microsoft.com/en-us/edge'>Microsoft Edge</a>", false)
-	}
-var version = {{ version }}
-	window.dataLayer = window.dataLayer || [];
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-	gtag('js', new Date());
-	gtag('config', 'UA-156942839-1');
 	$(window).on("load", function() {
 		$(".frameLoding").fadeOut()
 		$(".frameLoding").css("background-color","rgba(255,255,255,.3)")

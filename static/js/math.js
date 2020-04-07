@@ -423,7 +423,7 @@ function forgotMyPSW(url, formId, submitBTNId) {
 		return
 	}
 	if($("#inputPassword2").val().length < 8){
-		toggleMessageBox("The password should be at least 8 charachters.", true)
+		toggleMessageBox("The password must be at least 8 charachters.", true)
 		return
 	}
 	if(!$("#inputPassword2").val().match(alphaNumeric)){
