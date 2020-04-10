@@ -175,7 +175,7 @@
 						class="nav-link" href="#"><img class="svg"
 							src="static/img/icons/Rules.svg"><span>Rules</span></a></li>
 
-					{% if user.is_authenticated != false or user.user_type == 1 %}
+					{% if user.is_authenticated != true or user.user_type == 1 %}
 					<li class="nav-item menu-item" data-href-html="signup_page.html"
 						data-href="/signup_page"><a
 						class="nav-link" href="#"><img class="svg"
@@ -186,7 +186,7 @@
 					<li class="menu-item" data-href-html="signup_page.html" id="admin-page-btn"
 						data-href="/manager_console?ver={{ version }}"><a
 						class="nav-link" href="#"><img class="svg"
-							src="static/img/icons/Enter.svg"><span>Admin</span></a></li> 
+							src="static/img/icons/user.svg"><span>Admin</span></a></li> 
 					{% endif %}
 					<li class="nav-item menu-item" data-href-html="history.html"
 						data-color="--main-color-pink" data-href="/history/"><a

@@ -308,7 +308,7 @@ function getProvince(str) {
 		return "Western Cape"
 	}
 }
-var countDownDate = new Date("Apr 30, 2020 17:00:00").getTime();
+var countDownDate = new Date("May 31, 2020 17:00:00").getTime();
 function runTimer() {
 	var x = setInterval(function() {
 		var now = new Date().getTime();
