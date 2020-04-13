@@ -111,7 +111,7 @@ $(document).ready(function() {
 	runTimer()
 	convertImg2SVG("svg")
 	$("#login-div").load('/account/login/')
-	TweenLite.to(".full-screen-div", 1, {
+	TweenLite.to(".full-screen-div", .333, {
 		scale : 0,
 		transformOrigin : "center"
 	})

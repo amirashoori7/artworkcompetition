@@ -1,7 +1,23 @@
 <hr>
+<style type="text/css">
+/* .custom-file-label::after { */
+/* 	display: none; */
+/* } */
 
+.progress {
+	display: none;
+}
+</style>
+<script type="text/javascript">
+	$("#customFile").change(function() {
+		$(".progress").css("display", "flex")
+			$("#importFile").submit()
+	})
+	{%if message != '' %}
+	{%endif%}
+</script>
 <div class="row">
-	<div class="col-md-9" data-toggle="buttons">
+	<div class="col-md-7" data-toggle="buttons">
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-outline-info"> <input type="radio"
 				name="options" id="option1" autocomplete="off" checked
@@ -17,15 +33,33 @@
 	</div>
 	<div class="col-md-1"></div>
 	<div class="col-md-2">
-		<ul class="nav nav-pills nav-fill">
-			{% if user.is_authenticated and user.user_type == 6%}
-			<li class="nav-item"><a
-				class="btn btn-block btn-outline-success btn-sm" href="/getfile/"
-				target="_blank" role="button"> <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Export
-			</a></li>{% endif %}
-
-		</ul>
+		{% if user.is_authenticated and user.user_type == 6%}
+		<form action="/importfile/" id="importFile" method="post" enctype="multipart/form-data" >
+			<!-- 			<a class="btn btn-block btn-outline-success btn-sm" -->
+			<!-- 				href="/importfile/" target="_blank" role="button">Import </a> -->
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" id="customFile"
+					name="fileimport"> <label
+					class="custom-file-label btn btn-block btn-outline-success" for="customFile">
+					<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Import
+				</label>
+			</div>
+			{% csrf_token %}
+		</form>
+		<div class="col-md-12 progress">
+			<div class="progress-bar progress-bar-striped progress-bar-animated"
+				role="progressbar" aria-valuenow="0" aria-valuemin="0"
+				aria-valuemax="100"></div>
+		</div>
+		{% endif %}
+	</div>
+	<div class="col-md-2">
+		{% if user.is_authenticated and user.user_type == 6%} <a
+			class="btn btn-block btn-outline-secondary" href="/getfile/"
+			target="_blank" role="button"> <i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Export
+		</a> {% endif %}
 	</div>
 	<hr>
-	<div class="col-md-12" id="admin-console-content" style="overflow: auto;"></div>
+	<div class="col-md-12" id="admin-console-content"
+		style="overflow: auto;"></div>
 </div>

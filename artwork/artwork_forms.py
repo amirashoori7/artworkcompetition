@@ -18,3 +18,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'first_name', 'last_name',
                   'dob', 'cellphone', 'parentname', 'parentemail',
                   'parentphone')
+        
+class UploadFileForm(forms.Form):
+    fileimport = forms.FileField()
+    fields = ['fileimport']
