@@ -3,7 +3,6 @@
 /* .custom-file-label::after { */
 /* 	display: none; */
 /* } */
-
 .progress {
 	display: none;
 }
@@ -11,10 +10,71 @@
 <script type="text/javascript">
 	$("#customFile").change(function() {
 		$(".progress").css("display", "flex")
-			$("#importFile").submit()
+		var form = $('#importFile')[0]
+		var data = new FormData(form)
+		$
+			.ajax({
+				type : "POST",
+				enctype : 'multipart/form-data',
+				data : data,
+				processData : false,
+				contentType : false,
+				cache : false,
+				timeout : 60000,
+				url : "/importfile/",
+				beforeSend : function(xhr, settings) {
+					$(".frameLoding").fadeIn()
+					if (!(/^http:.*/.test(settings.url) || /^https:.*/
+							.test(settings.url))) {
+						xhr.setRequestHeader("X-CSRFToken",
+								getCookie('csrftoken'))
+					}
+				},
+				success : function(response) {
+					if (response.successResult != null) {
+						toggleMessageBox(response.successResult, false)
+// 						$(".form-signin.form-general-style").find(
+// 								"input#inputEmail").val(
+// 								$("#registry-form").find("input#username")
+// 										.val())
+// 						$(".form-signin.form-general-style").find(
+// 								"input#inputPassword").val(
+// 								$("#registry-form").find("input#password1")
+// 										.val())
+// 						$(".form-signin.form-general-style").submit()
+// 						loadContent($("<li/>").attr({
+// 							"data-href" : "/signup_page/"
+// 						}))
+// 						$("#login-div").load('/account/login/')
+// 						$("input[name='req']").remove()
+// 						$(".nav-item menu-item.active").trigger("click")
+					} else if (response.errorResults != null) {
+// 						$("#registry-form").find("small").remove()
+// 						$(".tel-no")
+// 								.each(
+// 										function() {
+// 											if ($(this).val().length > 0
+// 													&& !$(this).val().match(
+// 															phoneno))
+														toggleMessageBox(response.errorResults, true)
+// 										})
+// 						populateErrorMessageFields(response.errorResults, true)
+					}
+				},
+				error : function(xhr, errmsg, err) {
+					console.log(xhr.status + ": " + xhr.responseText)
+					$(".frameLoding").fadeOut()
+					toggleMessageBox(xhr.responseText, true)
+				},
+				complete : function(response) {
+					$(".frameLoding").fadeOut()
+					return -1
+				}
+			})
 	})
 	{%if message != '' %}
 	{%endif%}
+	
 </script>
 <div class="row">
 	<div class="col-md-7" data-toggle="buttons">
@@ -34,14 +94,14 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2">
 		{% if user.is_authenticated and user.user_type == 6%}
-		<form action="/importfile/" id="importFile" method="post" enctype="multipart/form-data" >
+		<form id="importFile" method="post" enctype="multipart/form-data">
 			<!-- 			<a class="btn btn-block btn-outline-success btn-sm" -->
 			<!-- 				href="/importfile/" target="_blank" role="button">Import </a> -->
 			<div class="custom-file">
 				<input type="file" class="custom-file-input" id="customFile"
 					name="fileimport"> <label
-					class="custom-file-label btn btn-block btn-outline-success" for="customFile">
-					<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Import
+					class="custom-file-label btn btn-block btn-outline-success"
+					for="customFile"> <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Import
 				</label>
 			</div>
 			{% csrf_token %}

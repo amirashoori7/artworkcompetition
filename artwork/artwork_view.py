@@ -12,6 +12,9 @@ from django.core.mail import send_mail
 from zipfile import ZipFile
 from evaluation.models import D2
 from django.http.response import HttpResponseRedirect
+from django.core.files.storage import FileSystemStorage
+import zipfile
+import shutil
 
 
 def index(request):
@@ -134,11 +137,53 @@ def getfile(request):
 
 def importfile(request): 
     response_data = {} 
+    response_data['errorResults'] = 'Under the test.' 
+    return HttpResponse(json.dumps(response_data),
+                content_type="application/json") 
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['fileimport'])
-        return HttpResponseRedirect('/manager_console/')
+            f = request.FILES['fileimport']
+            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+            BULK_ROOT = os.path.join(MEDIA_ROOT, 'bulkartwork')
+            cleanFiles(BULK_ROOT)
+            cleanFiles(os.path.join(BULK_ROOT, 'works'))
+            cleanFiles(os.path.join(BULK_ROOT, 'formulas'))
+#                 except Exception as e:
+#                     response_data['errorResults'] = 'Failed to delete %s. Reason: %s' % (file_path, e)
+#                     return HttpResponse(json.dumps(response_data),
+#                                         content_type="application/json")  
+            fileaddr = os.path.join(BULK_ROOT, f.name)
+#             try:
+#                 file = open(fileaddr)
+#                 response_data['errorResults'] = 'The file already exists.'
+#                 file.close()
+#                 return HttpResponse(json.dumps(response_data),
+#                     content_type="application/json")                
+#             except IOError:
+            fs = FileSystemStorage()
+            filename = fs.save(fileaddr, f)
+            uploaded_file_url = fs.url(filename)
+#                 with open(filename, 'wb+') as destination:
+#                     for chunk in f.chunks():
+#                         destination.write(chunk)
+            fullpathhandle = open(filename, 'rb') 
+            zfobj = zipfile.ZipFile(fullpathhandle)
+            for name in zfobj.namelist():
+                if name.endswith('/'):
+                    try: 
+                        os.mkdir(os.path.join(BULK_ROOT, name))
+                    except:
+                        pass
+                else:
+                    outfile = open(os.path.join(BULK_ROOT, name), 'wb')
+                    outfile.write(zfobj.read(name))
+                    outfile.close()
+            fullpathhandle.close()            
+            response_data['sucessResult'] = 'The file is successfully uploaded.'
+            return HttpResponse(json.dumps(response_data),
+                content_type="application/json") 
         
 #             fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
 #                   'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
@@ -193,19 +238,16 @@ def importfile(request):
 #             return HttpResponse(json.dumps(response_data),
 #                     content_type="application/json")
 
+def cleanFiles(folder):
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+#         if os.path.isdir(file_path):
+#             os.unlink(file_path)
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            shutil.rmtree(file_path)
 
 def isNaN(string):
     return string != string
-
-
-def handle_uploaded_file(f):
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    BULK_ROOT = os.path.join(MEDIA_ROOT, 'bulkartwork')
-    filename = os.path.join(BULK_ROOT, f.name)
-    with open(filename, 'x') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 
 @login_required
