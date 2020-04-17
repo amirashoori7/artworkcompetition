@@ -238,6 +238,7 @@ def importfile(request):
 #             return HttpResponse(json.dumps(response_data),
 #                     content_type="application/json")
 
+
 def cleanFiles(folder):
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
@@ -246,9 +247,9 @@ def cleanFiles(folder):
         if os.path.isfile(file_path) or os.path.islink(file_path):
             shutil.rmtree(file_path)
 
+
 def isNaN(string):
     return string != string
-
 
 @login_required
 def work_details(request, id, view):
@@ -260,7 +261,6 @@ def work_details(request, id, view):
     fname_lname = work.owner.last_name + ", " + work.owner.first_name
     context = {'work': work, 'sno':sno, 'fname_lname': fname_lname, 'view':view}
     return render(request, 'adminPages/work_details.html', context)
-
 
 def work_detail_update(request):
     response_data = {}
@@ -274,7 +274,7 @@ def work_detail_update(request):
         artwork = Artwork.objects.get(id=request.POST['id'])
         if request.POST.get('status', '1') == '1':
             subject = "MathArt Portal - Artwork requires revision"
-            message = "Dear {0} {1}, the artwork you have submitted for the MathArt competition requires revision. Please login to the portal http://mathart.co.za and modify the work. ".format(artwork.owner.last_name, artwork.owner.first_name)
+            message = "Dear {0} {1}, the artwork you have submitted for the MathArt competition requires revision. Please login to the portal http://mathart.co.za and modify the work. ".format(artwork.owner.first_name, artwork.owner.last_name)
             send_mail(subject, message, 'mathart.co.za@gmail.com', [artwork.owner.email])
         response_data['successResult'] = 'Successful.'
     return HttpResponse(json.dumps(response_data),
@@ -324,7 +324,7 @@ def entry_form(request):
             if artwork_form.status == 0:
                 try:
                     subject = "MathArt Portal - Entry Submission Successful"
-                    message = "Dear {0} {1}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
+                    message = "Dear {1} {0}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
                     send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
                 except:
                     response_data['errorResults'] = "The entry is saved successfully. The system failed to send you the confirmation email, please contact us to ensure that the artwork is received."

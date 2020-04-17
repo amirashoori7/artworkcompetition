@@ -259,13 +259,19 @@ function filterSchool(schoolTXT){
 					}
 				},
 				success : function(response) {
+					console.log(response.length)
 						$(response).each(
 								function(i, j) {
 									$("#school-dropdown").append(
 											$("<option/>").attr("value",j[0]).text(
-													j[3]).attr("onclick","selectSchool(this)"))
+													j[3]))
+//													.attr("onclick", function(){selectSchool(this)}))
+									if(i == (response.length - 1))
+										$("#school-dropdown").selectpicker("refresh")
 								})
-								$("#school-dropdown").selectpicker("refresh")
+								$("#school-dropdown").on("select",selectSchool($('#school-dropdown').val()))
+//								onchange="$('#school-id-val').val($('#school-dropdown').val())"
+				
 				},
 				error : function(xhr, errmsg, err) {
 					console.log(xhr.status + ": " + xhr.responseText)
@@ -277,11 +283,12 @@ function filterSchool(schoolTXT){
 			})
 }
 
-function selectSchool(schoolAnchor){
+function selectSchool(id){
 	$("small.school-dropdown").remove()
-	$("#school-dropdown").val($(schoolAnchor).val())
-	$("#school-id-val").val($(schoolAnchor).val())
+	$("#school-dropdown").val(id)
+	$("#school-id-val").val(id)
 	$("#school-dropdown").selectpicker("refresh")
+	console.log($('#school-dropdown').val())
 	checkValidation().done(function() {
 				})
 }
