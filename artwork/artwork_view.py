@@ -15,6 +15,8 @@ from django.http.response import HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 import zipfile
 import shutil
+import pandas
+from account.forms_account import UserRegistrationForm
 
 
 def index(request):
@@ -137,9 +139,9 @@ def getfile(request):
 
 def importfile(request): 
     response_data = {} 
-    response_data['errorResults'] = 'Under the test.' 
-    return HttpResponse(json.dumps(response_data),
-                content_type="application/json") 
+#     response_data['errorResults'] = 'Under the test.' 
+#     return HttpResponse(json.dumps(response_data),
+#                 content_type="application/json") 
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -148,7 +150,7 @@ def importfile(request):
             MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
             BULK_ROOT = os.path.join(MEDIA_ROOT, 'bulkartwork')
             cleanFiles(BULK_ROOT)
-            cleanFiles(os.path.join(BULK_ROOT, 'works'))
+            cleanFiles(os.path.join(BULK_ROOT, 'artworks'))
             cleanFiles(os.path.join(BULK_ROOT, 'formulas'))
 #                 except Exception as e:
 #                     response_data['errorResults'] = 'Failed to delete %s. Reason: %s' % (file_path, e)
@@ -181,62 +183,70 @@ def importfile(request):
                     outfile.write(zfobj.read(name))
                     outfile.close()
             fullpathhandle.close()            
-            response_data['sucessResult'] = 'The file is successfully uploaded.'
-            return HttpResponse(json.dumps(response_data),
-                content_type="application/json") 
+#             response_data['sucessResult'] = 'The file is successfully uploaded.'
+#             
+#             return HttpResponse(json.dumps(response_data),
+#                 content_type="application/json") 
         
+            fields = ['Learner email', 'Learner First Name', 'Learner Surname', 'Learner Cellphone',
+                  'Learner Date of Birth', 'Parent / Guardian Name & Surname', 'Parent / Guardian Email', 'Parent / Guardian Cellphone',
+                  'Title of Artwork', 'Artwork Image Filename', 'EMIS Number',
+                      'Learner Grade ', 'Filename of Mathematics', 'Teacher Name',
+                      'Teacher email', 'Teacher Phone ', 'Answer to Question 1',
+                      'Answer to Question 2', 'Answer to Question 3']
 #             fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
 #                   'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
 #                   'worktitle', 'workfile', 'school',
 #                       'learnergrade', 'workformulafile', 'teachername',
 #                       'teacheremail', 'teacherphone', 'question1',
 #                       'question2', 'question3']
-#             filename = 'media/bulkartwork/artwork.xlsx'
-#             pd = pandas.read_excel(filename, usecols=fields, header=0, converters={'owner__cellphone':str, 'owner__parentphone':str, 'teacherphone':str, 'workformulafile':str})
-#             response_data = []
-#             for index, row in pd.iterrows():
-#                 user_data_dict = {}
-#                 user_data_dict['username'] = row['owner__username']
-#                 user_data_dict['first_name'] = row['owner__first_name']
-#                 user_data_dict['last_name'] = row['owner__last_name']
-#                 user_data_dict['cellphone'] = row['owner__cellphone']
-#                 user_data_dict['dob'] = row['owner__dob']
-#                 user_data_dict['parentname'] = row['owner__parentname']
-#                 user_data_dict['parentemail'] = row['owner__parentemail']
-#                 user_data_dict['parentphone'] = row['owner__parentphone']
-#                 user_data_dict['password1'] = "abcdefg12345!@#$%"
-#                 user_data_dict['password2'] = "abcdefg12345!@#$%"
-#                 user_form = UserRegistrationForm(user_data_dict)
-#                 if user_form.is_valid():
-#                     artwork_data_dict = {}
-#                     artwork_data_dict['worktitle'] = row['worktitle']
-#                     artwork_data_dict['workfile'] = 'c:/backups/works/' + row['workfile']
-#                     artwork_data_dict['learnergrade'] = row['learnergrade']
-#                     artwork_data_dict['teacheremail'] = row['teacheremail']
-#                     artwork_data_dict['teacherphone'] = row['teacherphone']
-#                     artwork_data_dict['question1'] = row['question1']
-#                     artwork_data_dict['teachername'] = row['teachername']
-#                     artwork_data_dict['question2'] = row['question2']
-#                     artwork_data_dict['question3'] = row['question3']
-#                     if isNaN(row['workformulafile']) != True and len(str(row['workformulafile'])) > 0:
-#                         artwork_data_dict['workformulafile'] = 'c:/backups/works/' + row['workformulafile']
-#                     artwork_form = EntryForm(artwork_data_dict)
-#                     school = School.objects.get(natemis=int(row['school']))
-#                     if artwork_form.is_valid():
-#                         user_form.save()
-#                         created_user = ProjectUser.objects.get(username=user_data_dict['username'])
-#                         artwork_form = artwork_form.save(commit=False)
-#                         artwork_form.school = school
-#                         artwork_form.status = 0
-#                         artwork_form.owner = created_user
-#                         artwork_form.save()
-#                 else:
-#                     response_error = {}
-#                     response_error['errorResults'] = user_form.errors.as_json(True)
-#                     response_error['index'] = index
-#                     response_data.append(response_error)
-#             return HttpResponse(json.dumps(response_data),
-#                     content_type="application/json")
+            filename = os.path.join(BULK_ROOT, 'participants.xlsx')
+#             pd = pandas.read_excel(filename, usecols=fields, header=5, converters={'owner__cellphone':str, 'owner__parentphone':str, 'teacherphone':str, 'workformulafile':str})
+            pd = pandas.read_excel(filename, cols=fields, header=5, converters={'Parent / Guardian Cellphone':str, 'Learner Cellphone':str, 'Teacher Phone ':str, 'Filename of Mathematics':str, 'Learner Grade ':str})
+            response_data = []
+            for index, row in pd.iterrows():
+                user_data_dict = {}
+                user_data_dict['username'] = row['Learner email']
+                user_data_dict['first_name'] = row['Learner First Name']
+                user_data_dict['last_name'] = row['Learner Surname']
+                user_data_dict['cellphone'] = "0" + row['Learner Cellphone']
+                user_data_dict['dob'] = row['Learner Date of Birth']
+                user_data_dict['parentname'] = row['Parent / Guardian Name & Surname']
+                user_data_dict['parentemail'] = row['Parent / Guardian Email']
+                user_data_dict['parentphone'] = "0" + row['Parent / Guardian Cellphone']
+                user_data_dict['password1'] = "abcdefg12345!@#$%"
+                user_data_dict['password2'] = "abcdefg12345!@#$%"
+                user_form = UserRegistrationForm(user_data_dict)
+                if user_form.is_valid():
+                    artwork_data_dict = {}
+                    artwork_data_dict['worktitle'] = row['Title of Artwork']
+                    artwork_data_dict['workfile'] = os.path.join(os.path.join(BULK_ROOT, 'artworks'), row['Artwork Image Filename'])
+                    artwork_data_dict['learnergrade'] = "Grade " + row['Learner Grade ']
+                    artwork_data_dict['teacheremail'] = row['Teacher email']
+                    artwork_data_dict['teacherphone'] = "0" + row['Teacher Phone ']
+                    artwork_data_dict['question1'] = row['Answer to Question 1']
+                    artwork_data_dict['teachername'] = row['Teacher Name']
+                    artwork_data_dict['question2'] = row['Answer to Question 2']
+                    artwork_data_dict['question3'] = row['Answer to Question 3']
+                    if isNaN(row['Filename of Mathematics']) != True and len(str(row['Filename of Mathematics'])) > 0:
+                        artwork_data_dict['workformulafile'] = os.path.join(os.path.join(BULK_ROOT, 'formulas'), row['Filename of Mathematics'])
+                    artwork_form = EntryForm(artwork_data_dict)
+                    school = School.objects.get(natemis=int(row['EMIS Number']))
+                    if artwork_form.is_valid():
+                        user_form.save()
+                        created_user = ProjectUser.objects.get(username=user_data_dict['username'])
+                        artwork_form = artwork_form.save(commit=False)
+                        artwork_form.school = school
+                        artwork_form.status = 0
+                        artwork_form.owner = created_user
+                        artwork_form.save()
+                else:
+                    response_error = {}
+                    response_error['errorResults'] = user_form.errors.as_json(True)
+                    response_error['index'] = index
+                    response_data.append(response_error)
+            return HttpResponse(json.dumps(response_data),
+                    content_type="application/json")
 
 
 def cleanFiles(folder):
@@ -245,11 +255,12 @@ def cleanFiles(folder):
 #         if os.path.isdir(file_path):
 #             os.unlink(file_path)
         if os.path.isfile(file_path) or os.path.islink(file_path):
-            shutil.rmtree(file_path)
+            os.remove(file_path)
 
 
 def isNaN(string):
     return string != string
+
 
 @login_required
 def work_details(request, id, view):
@@ -261,6 +272,7 @@ def work_details(request, id, view):
     fname_lname = work.owner.last_name + ", " + work.owner.first_name
     context = {'work': work, 'sno':sno, 'fname_lname': fname_lname, 'view':view}
     return render(request, 'adminPages/work_details.html', context)
+
 
 def work_detail_update(request):
     response_data = {}

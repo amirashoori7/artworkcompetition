@@ -259,18 +259,16 @@ function filterSchool(schoolTXT){
 					}
 				},
 				success : function(response) {
-					console.log(response.length)
 						$(response).each(
 								function(i, j) {
 									$("#school-dropdown").append(
-											$("<option/>").attr("value",j[0]).text(
-													j[3]))
-//													.attr("onclick", function(){selectSchool(this)}))
+											$("<option/>").attr("value",j[0]).text(j[3]))
+// .attr("onclick", function(){selectSchool(this)}))
 									if(i == (response.length - 1))
 										$("#school-dropdown").selectpicker("refresh")
 								})
-								$("#school-dropdown").on("select",selectSchool($('#school-dropdown').val()))
-//								onchange="$('#school-id-val').val($('#school-dropdown').val())"
+								$("#school-dropdown").on("select", selectSchool($('#school-dropdown').val()))
+// onchange="$('#school-id-val').val($('#school-dropdown').val())"
 				
 				},
 				error : function(xhr, errmsg, err) {
