@@ -115,7 +115,7 @@
 		{% endif %}
 	</div>
 	<div class="col-md-2">
-		{% if user.is_authenticated and user.user_type == 6%} <a
+		{% if user.user_type == 6 or user.user_type == 7 %} <a
 			class="btn btn-block btn-outline-secondary" href="/getfile/"
 			target="_blank" role="button"> <i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Export
 		</a> {% endif %}

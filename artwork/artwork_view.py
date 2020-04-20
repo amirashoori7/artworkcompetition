@@ -17,6 +17,8 @@ import zipfile
 import shutil
 import pandas
 from account.forms_account import UserRegistrationForm
+from artwork import artwork_forms
+from django.core.files.base import File
 
 
 def index(request):
@@ -203,9 +205,11 @@ def importfile(request):
             filename = os.path.join(BULK_ROOT, 'participants.xlsx')
 #             pd = pandas.read_excel(filename, usecols=fields, header=5, converters={'owner__cellphone':str, 'owner__parentphone':str, 'teacherphone':str, 'workformulafile':str})
             pd = pandas.read_excel(filename, cols=fields, header=5, converters={'Parent / Guardian Cellphone':str, 'Learner Cellphone':str, 'Teacher Phone ':str, 'Filename of Mathematics':str, 'Learner Grade ':str})
-            response_data = []
+            response_data = {}
             for index, row in pd.iterrows():
                 user_data_dict = {}
+                if len(str(row['Learner email'])) <= 3:
+                    continue
                 user_data_dict['username'] = row['Learner email']
                 user_data_dict['first_name'] = row['Learner First Name']
                 user_data_dict['last_name'] = row['Learner Surname']
@@ -239,12 +243,16 @@ def importfile(request):
                         artwork_form.school = school
                         artwork_form.status = 0
                         artwork_form.owner = created_user
+                        f = open(artwork_data_dict['workfile'], 'r')
+                        artwork_form.workfile = File(f)
                         artwork_form.save()
+                        f.close()
                 else:
-                    response_error = {}
-                    response_error['errorResults'] = user_form.errors.as_json(True)
-                    response_error['index'] = index
-                    response_data.append(response_error)
+                    response_data['errorResults'] = user_form.errors.as_json(True)
+                    response_data['index'] = index
+                    return HttpResponse(json.dumps(response_data),
+                                        content_type="application/json")
+            response_data['successResult'] = "Successfully imported"        
             return HttpResponse(json.dumps(response_data),
                     content_type="application/json")
 
