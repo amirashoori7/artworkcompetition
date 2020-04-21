@@ -93,9 +93,9 @@ class Artwork(models.Model):
     def make_thumbnail(self):
         if self.workfile.name is None or len(self.workfile.name) <= 0:
             return False
-        if self.workfile.name.split(".")[0] in self.thumbnail.name :
+        if self.thumbnail.name != None and self.workfile.name.split(".")[0] in self.thumbnail.name :
             return False
-        image = open(self.workfile)
+        image = open(self.workfile, 'r')
         ratio = image.width / 200
         THUMB_SIZE = (200, image.height / ratio)
         image.thumbnail(THUMB_SIZE, LANCZOS)
@@ -104,6 +104,8 @@ class Artwork(models.Model):
         thumb_filename = thumb_name + '_thumb' + thumb_extension
         if thumb_extension in ['.jpg', '.jpeg']:
             FTYPE = 'JPEG'
+        elif thumb_extension in ['.png']:
+            FTYPE = 'PNG'
         else:
             return False 
         temp_thumb = BytesIO()
@@ -112,6 +114,7 @@ class Artwork(models.Model):
         self.thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
         temp_thumb.close()
         return True
+
 
 def get_model_field_names(model, ignore_fields=['content_object']):
 #     model_fields = model.owner._meta.get_fields()
@@ -135,9 +138,11 @@ def get_lookup_fields(model, fields=None):
         lookup_fields = model_field_names
     return lookup_fields
 
+
 def qs_to_dataset(qs, fields=None):
     lookup_fields = get_lookup_fields(qs.model, fields=fields)
     return list(qs.values(*lookup_fields))
+
 
 def convert_to_df(qs, fields=None, index=None):
     lookup_fields = get_lookup_fields(qs.model, fields=fields)

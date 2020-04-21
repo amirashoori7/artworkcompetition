@@ -11,13 +11,10 @@ import os
 from django.core.mail import send_mail
 from zipfile import ZipFile
 from evaluation.models import D2
-from django.http.response import HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 import zipfile
-import shutil
 import pandas
 from account.forms_account import UserRegistrationForm
-from artwork import artwork_forms
 from django.core.files.base import File
 
 
@@ -154,24 +151,10 @@ def importfile(request):
             cleanFiles(BULK_ROOT)
             cleanFiles(os.path.join(BULK_ROOT, 'artworks'))
             cleanFiles(os.path.join(BULK_ROOT, 'formulas'))
-#                 except Exception as e:
-#                     response_data['errorResults'] = 'Failed to delete %s. Reason: %s' % (file_path, e)
-#                     return HttpResponse(json.dumps(response_data),
-#                                         content_type="application/json")  
             fileaddr = os.path.join(BULK_ROOT, f.name)
-#             try:
-#                 file = open(fileaddr)
-#                 response_data['errorResults'] = 'The file already exists.'
-#                 file.close()
-#                 return HttpResponse(json.dumps(response_data),
-#                     content_type="application/json")                
-#             except IOError:
             fs = FileSystemStorage()
             filename = fs.save(fileaddr, f)
             uploaded_file_url = fs.url(filename)
-#                 with open(filename, 'wb+') as destination:
-#                     for chunk in f.chunks():
-#                         destination.write(chunk)
             fullpathhandle = open(filename, 'rb') 
             zfobj = zipfile.ZipFile(fullpathhandle)
             for name in zfobj.namelist():
@@ -185,11 +168,6 @@ def importfile(request):
                     outfile.write(zfobj.read(name))
                     outfile.close()
             fullpathhandle.close()            
-#             response_data['sucessResult'] = 'The file is successfully uploaded.'
-#             
-#             return HttpResponse(json.dumps(response_data),
-#                 content_type="application/json") 
-        
             fields = ['Learner email', 'Learner First Name', 'Learner Surname', 'Learner Cellphone',
                   'Learner Date of Birth', 'Parent / Guardian Name & Surname', 'Parent / Guardian Email', 'Parent / Guardian Cellphone',
                   'Title of Artwork', 'Artwork Image Filename', 'EMIS Number',
@@ -232,8 +210,6 @@ def importfile(request):
                     artwork_data_dict['teachername'] = row['Teacher Name']
                     artwork_data_dict['question2'] = row['Answer to Question 2']
                     artwork_data_dict['question3'] = row['Answer to Question 3']
-                    if isNaN(row['Filename of Mathematics']) != True and len(str(row['Filename of Mathematics'])) > 0:
-                        artwork_data_dict['workformulafile'] = os.path.join(os.path.join(BULK_ROOT, 'formulas'), row['Filename of Mathematics'])
                     artwork_form = EntryForm(artwork_data_dict)
                     school = School.objects.get(natemis=int(row['EMIS Number']))
                     if artwork_form.is_valid():
@@ -243,10 +219,19 @@ def importfile(request):
                         artwork_form.school = school
                         artwork_form.status = 0
                         artwork_form.owner = created_user
-                        f = open(artwork_data_dict['workfile'], 'r')
-                        artwork_form.workfile = File(f)
+                        if os.path.exists(artwork_data_dict['workfile']):
+                            with open(artwork_data_dict['workfile'], 'rb') as img_file:
+                                artwork_form.workfile.save(row['Artwork Image Filename'], File(img_file), save=True)
+                        else:
+                            response_data['errorResult'] = "Work file " + artwork_data_dict['worktitle'] + " doesn't exist."        
+                            return HttpResponse(json.dumps(response_data),
+                                    content_type="application/json")
+                        artwork_data_dict['workformulafile'] = os.path.join(os.path.join(BULK_ROOT, 'formulas'), row['Filename of Mathematics'])
+                        if os.path.exists(artwork_data_dict['workformulafile']):
+                            if isNaN(row['Filename of Mathematics']) != True and len(str(row['Filename of Mathematics'])) > 0:
+                                with open(artwork_data_dict['workformulafile'], 'rb') as formula_file:
+                                    artwork_form.workformulafile.save(row['Filename of Mathematics'], File(formula_file), save=True)
                         artwork_form.save()
-                        f.close()
                 else:
                     response_data['errorResults'] = user_form.errors.as_json(True)
                     response_data['index'] = index
