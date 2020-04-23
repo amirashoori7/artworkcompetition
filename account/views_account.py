@@ -84,12 +84,12 @@ def registerJudge(request):
     response_data = {}
     if request.method == 'POST':
         form = AdvancedUserRegistrationForm(request.POST)
-        if int(request.POST.get("id", 0)) > 0 :
-            old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
-            form = AdvancedUserRegistrationForm(request.POST, instance=old_data)
-        else:
-            form.cleaned_data["password1"] = "abcdefg12345!@#$%"
-            form.cleaned_data["password2"] = "abcdefg12345!@#$%"
+#         if int(request.POST.get("id", 0)) > 0 :
+#             old_data = get_object_or_404(ProjectUser, id=request.POST["id"])
+#             form = AdvancedUserRegistrationForm(request.POST, instance=old_data)
+#         else:
+#             form.cleaned_data["password1"] = "abcdefg12345!@#$%"
+#             form.cleaned_data["password2"] = "abcdefg12345!@#$%"
         if form.is_valid():
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
