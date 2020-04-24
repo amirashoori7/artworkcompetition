@@ -65,7 +65,7 @@ def registration(request):
             login(request, user)
             fname = request.POST.get('first_name')
             lname = request.POST.get('last_name')
-            subject = "MathArt Portal - Registration Successful"
+            subject = "<No-Reply> MathArt Portal - Registration Successful"
             message = "Dear {0} {1}, you have successfully registered in MathArt competition.\n\n Please go on and finish your artwork submission".format(fname, lname)
             send_mail(subject, message, 'mathart.co.za@gmail.com', [username])
             return HttpResponse(json.dumps(response_data),

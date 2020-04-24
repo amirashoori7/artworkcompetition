@@ -40,6 +40,7 @@
 					</div>
 				</div>
 			</div>
+			{% if user.user_type != 4 and user.user_type != 5 %}
 			<div class="card-header collapsed row" data-toggle="collapse"
 				aria-expanded="false" href="#artist-section">
 				<div class="col-md-11">
@@ -86,6 +87,7 @@
 					</div>
 				</div>
 			</div>
+			{%endif%}
 			<div class="card-header collapsed row" data-toggle="collapse"
 				aria-expanded="false" href="#questions-section">
 				<div class="col-md-11">

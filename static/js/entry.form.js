@@ -73,35 +73,49 @@ function gradeChose(radioBTN) {
 	if (radioBTN != null)
 		$('#currentlearnergrade').val($(radioBTN).val())
 	if ($(".gradeSelect").length) {
-		$.ajax({
-			url : 'rest_work_list_judge?judge=' + $('#username').val(),
-			async : true,
-			beforeSend : function() {
-				$(".frameLoding").fadeIn()
-			},
-			success : function(response) {
-				$(".artwork-container-div").find("div.allocated-works").remove()
-				$(response).each(
-						function(i, j) {
-							$(".artwork-container-div").append(
-									$("<button/>").attr(
-											"class", "btn btn-outline-danger allocated-works")
-											.attr("type", "button")
-											.html("<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"
-															+ j[3]).attr("onclick",
-													"allocateArtworkToJudge('"
-															+ $("#username")
-																	.val()
-															+ "','"+j[2]+"',false)"))
-						})
-			},
-			error : function(request, status, error) {
-				$(".frameLoding").fadeOut()
-			},
-			complete : function() {
-				$(".frameLoding").fadeOut()
-			}
-		})
+		$
+				.ajax({
+					url : 'rest_work_list_judge?judge=' + $('#username').val(),
+					async : true,
+					beforeSend : function() {
+						$(".frameLoding").fadeIn()
+					},
+					success : function(response) {
+						$(".artwork-container-div").find("div.allocated-works")
+								.remove()
+						$(response)
+								.each(
+										function(i, j) {
+											$(".artwork-container-div")
+													.append(
+															$("<button/>")
+																	.attr(
+																			"class",
+																			"btn btn-outline-danger allocated-works")
+																	.attr(
+																			"type",
+																			"button")
+																	.html(
+																			"<i class='fa fa-times'>&nbsp;&nbsp;&nbsp;</i>"
+																					+ j[3])
+																	.attr(
+																			"onclick",
+																			"allocateArtworkToJudge('"
+																					+ $(
+																							"#username")
+																							.val()
+																					+ "','"
+																					+ j[2]
+																					+ "',false)"))
+										})
+					},
+					error : function(request, status, error) {
+						$(".frameLoding").fadeOut()
+					},
+					complete : function() {
+						$(".frameLoding").fadeOut()
+					}
+				})
 	}
 }
 
@@ -341,8 +355,12 @@ function submitEntryForm(url) {
 	$("input[name='status']").remove()
 	if (totalFields == filledFields
 			&& questionsValidated == questionsValidationCriteria.length) {
-		$('#entry-form-id').append(
-				'<input type="hidden" name="status" value="0">')
+		if($("#revisionForm").length)
+			$('#entry-form-id').append(
+					'<input type="hidden" name="status" value="2">')
+		else
+			$('#entry-form-id').append(
+			'<input type="hidden" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)

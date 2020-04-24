@@ -16,6 +16,7 @@ import zipfile
 import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.files.base import File
+from artwork import artwork_forms
 
 
 def index(request):
@@ -278,7 +279,7 @@ def work_detail_update(request):
                                                      bioapproved=bioapproved, qapproved=qapproved, comment=comment)
         artwork = Artwork.objects.get(id=request.POST['id'])
         if request.POST.get('status', '1') == '1':
-            subject = "MathArt Portal - Artwork requires revision"
+            subject = "<No-Reply>  MathArt Portal - Artwork requires revision"
             message = "Dear {0} {1}, the artwork you have submitted for the MathArt competition requires revision. Please login to the portal http://mathart.co.za and modify the work. ".format(artwork.owner.first_name, artwork.owner.last_name)
             send_mail(subject, message, 'mathart.co.za@gmail.com', [artwork.owner.email])
         response_data['successResult'] = 'Successful.'
@@ -320,6 +321,8 @@ def entry_form(request):
                 artwork_form.school = school
                 artwork_form.school_id = int(request.POST["school"])
             try:
+#                 if artwork_form.status == 1:
+#                     artwork_form.status = 2
                 artwork_form.save()
             except:
                 response_data['errorResults'] = "Error in saving the artwork. Try again now. If this error occurred again, please contact us."
@@ -328,8 +331,8 @@ def entry_form(request):
             response_data['id'] = artwork_form.id
             if artwork_form.status == 0:
                 try:
-                    subject = "MathArt Portal - Entry Submission Successful"
-                    message = "Dear {1} {0}, you have successfully Submitted in MathArt competition.\n\n Please go on and finish your artwork submission".format(request.user.last_name, request.user.first_name)
+                    subject = "<No-Reply> MathArt Portal - Entry Submission Successful"
+                    message = "Dear {1} {0}, you have successfully Submitted in MathArt competition.\n\n Thank you for completing the submission of your artwork in the MathArt competition.".format(request.user.last_name, request.user.first_name)
                     send_mail(subject, message, 'mathart.co.za@gmail.com', [request.user.username])
                 except:
                     response_data['errorResults'] = "The entry is saved successfully. The system failed to send you the confirmation email, please contact us to ensure that the artwork is received."
