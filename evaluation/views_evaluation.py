@@ -7,6 +7,7 @@ from evaluation.models import D1A, D2, D1B, D3
 from evaluation.forms_evaluation import FormD1A, FormD2, FormD1B, FormD3
 import artwork
 from artwork.artwork_forms import EntryForm
+from account.models_account import ProjectUser
 
 
 @login_required
@@ -21,7 +22,9 @@ def create_d1a(request):
         old_data = get_object_or_404(D1A, id=request.POST["id"])
         formd1A_form = FormD1A(request.POST, instance=old_data)
         if formd1A_form.is_valid():
-            if artwork.status != 5:
+            d1as = D1A.objects.filter(artwork=artwork)
+            judges = ProjectUser.objects.filter(user_type=2)
+            if len(d1as) == len(judges) and artwork.status != 5:
                 update_worklist(int(request.POST['work_id']), 5)
             formd1A_form = formd1A_form.save(commit=False)
             formd1A_form.author = request.user

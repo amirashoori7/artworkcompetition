@@ -16,7 +16,6 @@ import zipfile
 import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.files.base import File
-from artwork import artwork_forms
 
 
 def index(request):
@@ -78,7 +77,7 @@ def gallery(request):
 def work_lists(request):
     status = request.GET.get('status', -2)
     if request.user.user_type == 2:  # judge 1
-        works = Artwork.objects.filter(Q (status=4) | Q (status=5))
+        works = Artwork.objects.filter(Q (status=4))
     elif request.user.user_type == 3:  # decision maker
         works = Artwork.objects.filter(Q (status=5))
     elif request.user.user_type == 4:  # Judge 2
