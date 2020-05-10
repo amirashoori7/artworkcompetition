@@ -261,11 +261,25 @@ def work_details(request, id, view):
     if work.school is None:
         sno = 'XX_XXXXX_XXXXX'
     else:
-        sno = work.school.province + "_" + str(work.school.natemis) + "_" + str(work.id)
+        sno = get_province(work.school.province) + "_" + str(work.learnergrade.split(" ")[1]) + "_" + str(work.id)
     fname_lname = work.owner.last_name + ", " + work.owner.first_name
     context = {'work': work, 'sno':sno, 'fname_lname': fname_lname, 'view':view}
     return render(request, 'adminPages/work_details.html', context)
 
+def get_province(provinceVal):
+    switcher={
+                'WC':'C',
+                'EC':'D',
+                'FS':'F',
+                'KZN':'B',
+                'LP':'A',
+                'MP':'H',
+                'NC':'G',
+                'NW':'E',
+                'GP':'I',
+                'GT':'K'
+             }
+    return switcher.get(provinceVal,"J")
 
 def work_detail_update(request):
     response_data = {}
