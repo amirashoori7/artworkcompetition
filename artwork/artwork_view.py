@@ -16,6 +16,7 @@ import zipfile
 import pandas
 from account.forms_account import UserRegistrationForm
 from django.core.files.base import File
+from artwork import utils
 
 
 def index(request):
@@ -108,16 +109,24 @@ def work_lists_checkbox(request):
     context = {'works': works}
     return render(request, 'adminPages/work_lists_checkbox.html', context)
 
+def getStatusDisplay(status):
+    strt = str(utils.Status(status))
+    strt = strt.replace("Status.", "")
+    strt = strt.replace("_"," ")
+    return strt
 
 def getfile(request):  
     artworks = Artwork.objects.all()  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-              'school__province', 'school__name', 'school__natemis', 'worktitle', 'workfile',
+              'school__province', 'school__name', 'school__natemis', 'status', 'worktitle', 'workfile',
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
+
     df = convert_to_df(artworks, fields=fields)
+    df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']),axis=1)
+    df = df.drop(columns=['status'])
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
     csvfilename = os.path.join(SITE_ROOT, "artworklist.csv")
@@ -174,14 +183,7 @@ def importfile(request):
                       'Learner Grade ', 'Filename of Mathematics', 'Teacher Name',
                       'Teacher email', 'Teacher Phone ', 'Answer to Question 1',
                       'Answer to Question 2', 'Answer to Question 3']
-#             fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
-#                   'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-#                   'worktitle', 'workfile', 'school',
-#                       'learnergrade', 'workformulafile', 'teachername',
-#                       'teacheremail', 'teacherphone', 'question1',
-#                       'question2', 'question3']
             filename = os.path.join(BULK_ROOT, 'participants.xlsx')
-#             pd = pandas.read_excel(filename, usecols=fields, header=5, converters={'owner__cellphone':str, 'owner__parentphone':str, 'teacherphone':str, 'workformulafile':str})
             pd = pandas.read_excel(filename, cols=fields, header=5, converters={'Parent / Guardian Cellphone':str, 'Learner Cellphone':str, 'Teacher Phone ':str, 'Filename of Mathematics':str, 'Learner Grade ':str})
             response_data = {}
             for index, row in pd.iterrows():

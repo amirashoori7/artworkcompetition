@@ -12,7 +12,6 @@ class LoginForm(forms.Form):
 class UserRegistrationForm(UserCreationForm):
     username_validator = UnicodeUsernameValidator()
     default_validators = [username_validator]
-
     first_name = forms.CharField(error_messages={'required': 'Please enter your name'})
     last_name = forms.CharField(error_messages={'required': 'Please enter your last name'})
     parentname = forms.CharField(error_messages={'required': 'Please enter your parent\'s full-name'})

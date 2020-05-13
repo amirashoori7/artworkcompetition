@@ -57,6 +57,9 @@ def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+#             form = form.save(commit=False)
+#             if len(request.POST['parentemail'])>0:
+#                 form.parentemail = request.POST['parentemail']
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
             username = request.POST['username']
