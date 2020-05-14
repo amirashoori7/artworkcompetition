@@ -9,10 +9,13 @@ from account.models_account import ProjectUser
 from django.contrib import messages
 from django.core.mail import send_mail
 
+
 class CustomPasswordChangeView(PasswordChangeView):
+
     def form_valid(self, form):
         messages.success(self.request, 'Your password has been changed.')
         return super().form_valid(form)
+
 
 def projectUserList(request):
     userList = ProjectUser.objects.exclude(user_type=1)
@@ -34,6 +37,7 @@ def login_form(request):
                 content_type="application/json")
     return render(request, 'login.html')
 
+
 def forgot_psw(request):
     response_data = {}
     if request.method == 'POST':
@@ -52,19 +56,20 @@ def forgot_psw(request):
     return HttpResponse(json.dumps(response_data),
         content_type="application/json")
 
+
 def registration(request):
     response_data = {}
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
 #             form = form.save(commit=False)
-#             if len(request.POST['parentemail'])>0:
-#                 form.parentemail = request.POST['parentemail']
+            if len(request.POST['parentemail']) > 0:
+                form.parentemail = request.POST['parentemail']
             form = form.save()
             response_data['successResult'] = 'Registration succeed'
             username = request.POST['username']
             password = request.POST['password1']
-            user = authenticate(username = username, password=password)
+            user = authenticate(username=username, password=password)
             login(request, user)
             fname = request.POST.get('first_name')
             lname = request.POST.get('last_name')

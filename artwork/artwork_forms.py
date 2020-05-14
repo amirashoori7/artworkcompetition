@@ -15,7 +15,7 @@ class EntryForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = ProjectUser
-        fields = ('username', 'email', 'first_name', 'last_name',
+        fields = ('email', 'first_name', 'last_name',
                   'dob', 'cellphone', 'parentname', 'parentemail',
                   'parentphone')
         

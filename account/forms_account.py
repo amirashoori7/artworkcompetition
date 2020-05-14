@@ -18,11 +18,11 @@ class UserRegistrationForm(UserCreationForm):
     parentphone = forms.CharField(error_messages={'required': 'Please enter your parent\'s phone number'})
     username = forms.EmailField(error_messages={'required': 'Please enter a valid email address'}, validators=default_validators)
     dob = forms.DateField(error_messages={'required': 'Please enter your birth date'})
-    cellphone = forms.CharField(error_messages={'required': 'Please enter a 10-digits cell phone number'}, max_length = 10, min_length=10)
+    cellphone = forms.CharField(error_messages={'required': 'Please enter a 10-digits cell phone number'}, max_length=10, min_length=10)
 
     class Meta:
         model = ProjectUser
-        fields = ('username', 'first_name', 'last_name', 'parentname', 'dob', 'parentphone', 'password1', 'password2', 'cellphone')
+        fields = ('username', 'first_name', 'last_name', 'parentname', 'dob', 'parentphone', 'parentemail', 'password1', 'password2', 'cellphone')
 
     def save(self, commit=True):
         user = super().save(False)

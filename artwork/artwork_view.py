@@ -317,6 +317,15 @@ def entry_form(request):
         user_form = UserForm(instance=request.user)
     if request.method == 'POST':
         response_data = {}
+        user_form = UserForm(data=request.POST, instance=userModel)
+        if user_form.has_changed(): 
+            if user_form.is_valid():
+                user_form.save()
+                response_data['successResult'] = "Saved successfully!"
+            else:
+                response_data['errorResults'] = user_form.errors.as_json(True)
+                return HttpResponse(json.dumps(response_data),
+                    content_type="application/json")
         try:
             old_data = get_object_or_404(Artwork, id=request.POST["id"])
         except:
