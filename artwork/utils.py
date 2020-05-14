@@ -10,7 +10,8 @@ class Province(Enum):
     North_West = "NW"
     Northern_Cape = "NC"
     Western_Cape = "WC"
-
+    Swaziland_and_Lesotho = "Other"
+    
     @classmethod
     def provincelist(cls):
         return((key.value, key.name.replace('_', ' ')) for key in cls)

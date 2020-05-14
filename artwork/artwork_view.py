@@ -109,24 +109,28 @@ def work_lists_checkbox(request):
     context = {'works': works}
     return render(request, 'adminPages/work_lists_checkbox.html', context)
 
+
 def getStatusDisplay(status):
     strt = str(utils.Status(status))
     strt = strt.replace("Status.", "")
-    strt = strt.replace("_"," ")
+    strt = strt.replace("_", " ")
     return strt
+
 
 def getfile(request):  
     artworks = Artwork.objects.all().order_by("-id")  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
-              'school__province', 'school__name', 'school__natemis', 'status', 'worktitle', 'workfile',
+              'school__province', 'school__name', 'school__natemis', 'id', 'status', 'worktitle', 'workfile',
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
 
     df = convert_to_df(artworks, fields=fields)
-    df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']),axis=1)
+    df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']), axis=1)
+#     df['Unique Id'] = df.apply(lambda x: calc_uid(int(x['id'])), axis=1)
     df = df.drop(columns=['status'])
+#     df = df.drop(columns=['id'])
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
     csvfilename = os.path.join(SITE_ROOT, "artworklist.csv")
@@ -268,20 +272,28 @@ def work_details(request, id, view):
     context = {'work': work, 'sno':sno, 'fname_lname': fname_lname, 'view':view}
     return render(request, 'adminPages/work_details.html', context)
 
+
+def calc_uid(workid):
+    work = get_object_or_404(Artwork, id=workid)
+    return get_province(work.school.province) + "_" + str(work.learnergrade.split(" ")[1]) + "_" + str(work.id)
+
+
 def get_province(provinceVal):
-    switcher={
+    switcher = {
+                'LP':'A',
+                'KZN':'B',
                 'WC':'C',
                 'EC':'D',
-                'FS':'F',
-                'KZN':'B',
-                'LP':'A',
-                'MP':'H',
-                'NC':'G',
                 'NW':'E',
+                'FS':'F',
+                'NC':'G',
+                'MP':'H',
                 'GP':'I',
+                'Other':'J',
                 'GT':'K'
              }
-    return switcher.get(provinceVal,"J")
+    return switcher.get(provinceVal, "L")
+
 
 def work_detail_update(request):
     response_data = {}

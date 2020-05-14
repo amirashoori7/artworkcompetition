@@ -10,4 +10,5 @@ urlpatterns = [
     path('formd2/', views_evaluation.create_d2, name='formd2'),
     path('formd3/', views_evaluation.create_d3, name='formd3'),
     path('eval_forms_artwork/', views_evaluation.eval_forms_artwork, name='eval_forms_artwork'),
+    path('updateAllD2s/', views_evaluation.updateWorkJudge2to3, name='updateAllD2s'),
 ]

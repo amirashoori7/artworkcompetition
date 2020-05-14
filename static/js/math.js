@@ -1,6 +1,6 @@
 var tweenMenuShow
 var isHorizontal = false
-var provinces = ["EC", "FS", "GT", "KZN", "LP", "MP", "NW", "NC", "WC"]
+var provinces = ["EC", "FS", "GT", "KZN", "LP", "MP", "NW", "NC", "WC", "Other"]
 
 function populateWarningMessageField(fieldId, text) {
 	var errorSection = $("<small/>").addClass("text-warning")
@@ -311,6 +311,8 @@ function getProvince(str) {
 		return "Northern Cape"
 	case "WC":
 		return "Western Cape"
+	case "Other":
+		return "Other (Lesotho & Swaziland)"
 	}
 }
 var countDownDate = new Date("May 31, 2020 17:00:00").getTime();

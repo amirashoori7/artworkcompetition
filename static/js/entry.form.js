@@ -356,11 +356,9 @@ function submitEntryForm(url) {
 	if (totalFields == filledFields
 			&& questionsValidated == questionsValidationCriteria.length) {
 		if($("#revisionForm").length)
-			$('#entry-form-id').append(
-					'<input type="hidden" name="status" value="2">')
+			$('#entry-form-id').append('<input type="hidden" name="status" value="2">')
 		else
-			$('#entry-form-id').append(
-			'<input type="hidden" name="status" value="0">')
+			$('#entry-form-id').append('<input type="hidden" name="status" value="0">')
 	}
 	var form = $('#entry-form-id')[0]
 	$("#buttonSubmit, buttonSaveContinue").prop("disabled", true)

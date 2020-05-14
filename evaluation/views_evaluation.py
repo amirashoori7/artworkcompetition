@@ -9,7 +9,7 @@ import artwork
 from artwork.artwork_forms import EntryForm
 from account.models_account import ProjectUser
 
-
+topNumbers = 7
 @login_required
 def create_d1a(request):
     response_data = {}
@@ -96,6 +96,15 @@ def create_d1b(request):
         return HttpResponse(json.dumps(response_data),
             content_type="application/json")
 
+def updateWorkJudge2to3(request):
+    d2s = D2.objects.all().order_by("score")
+    cnt = 0;
+    for d2 in d2s:
+        if cnt < topNumbers:
+            update_worklist(d2.artwork.id, 8)
+            cnt += 1
+        else:
+            update_worklist(d2.artwork.id, 9)
 
 def update_worklist(workid, status):
     artwork = get_object_or_404(Artwork, id=workid)
