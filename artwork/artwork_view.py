@@ -116,7 +116,7 @@ def getStatusDisplay(status):
     return strt
 
 def getfile(request):  
-    artworks = Artwork.objects.all()  # status__gte=0
+    artworks = Artwork.objects.all().order_by("-id")  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
               'school__province', 'school__name', 'school__natemis', 'status', 'worktitle', 'workfile',
