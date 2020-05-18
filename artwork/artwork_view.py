@@ -118,7 +118,8 @@ def getStatusDisplay(status):
 
 
 def getfile(request):  
-    artworks = Artwork.objects.all().order_by("-id")  # status__gte=0
+    artworks = Artwork.objects.all()
+#     .order_by("-id")  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
               'school__province', 'school__name', 'school__natemis', 'id', 'status', 'worktitle', 'workfile',
@@ -126,11 +127,11 @@ def getfile(request):
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
 
-    df = convert_to_df(artworks, fields=fields)
+    df = convert_to_df(artworks, fields)
     df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']), axis=1)
-#     df['Unique Id'] = df.apply(lambda x: calc_uid(int(x['id'])), axis=1)
+    df['Unique Id'] = df.apply(lambda x: calc_uid(int(x['id'])), axis=1)
     df = df.drop(columns=['status'])
-#     df = df.drop(columns=['id'])
+    df = df.drop(columns=['id'])
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
     csvfilename = os.path.join(SITE_ROOT, "artworklist.csv")
@@ -275,7 +276,10 @@ def work_details(request, id, view):
 
 def calc_uid(workid):
     work = get_object_or_404(Artwork, id=workid)
-    return get_province(work.school.province) + "_" + str(work.learnergrade.split(" ")[1]) + "_" + str(work.id)
+    if work.school != None and work.learnergrade != None:
+        return get_province(work.school.province) + "_" + str(work.learnergrade.split(" ")[1]) + "_" + str(work.id)
+    else:
+        return "XX_XXXXX_XXXXX"
 
 
 def get_province(provinceVal):
@@ -350,6 +354,8 @@ def entry_form(request):
             artwork_form.owner = request.user
             if request.POST.get('status', '-1') != '-1':
                 artwork_form.status = int(request.POST.get("status"))
+            if request.POST.get('teacherphone', '-1') != '-1' and len(request.POST.get('teacherphone')) > 1:
+                artwork_form.teacherphone = request.POST.get("teacherphone")
 #             if request.POST.get('status', '1') != '1':
 #                 artwork_form.status = int(request.POST.get("status"))
             if int(request.POST.get("school", 0)) > 0:

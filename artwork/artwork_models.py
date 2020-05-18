@@ -152,5 +152,5 @@ def convert_to_df(qs, fields=None, index=None):
     elif "id" in lookup_fields:
         index_col = 'id'
     values = qs_to_dataset(qs, fields=fields)
-    df = pd.DataFrame.from_records(values, columns=lookup_fields, index=index_col)
+    df = pd.DataFrame.from_records(values, columns=lookup_fields)
     return df

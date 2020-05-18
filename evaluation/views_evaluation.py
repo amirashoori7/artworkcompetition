@@ -8,6 +8,7 @@ from evaluation.forms_evaluation import FormD1A, FormD2, FormD1B, FormD3
 import artwork
 from artwork.artwork_forms import EntryForm
 from account.models_account import ProjectUser
+from django.core.mail import send_mail
 
 topNumbers = 7
 @login_required
@@ -102,6 +103,9 @@ def updateWorkJudge2to3(request):
     for d2 in d2s:
         if cnt < topNumbers:
             update_worklist(d2.artwork.id, 8)
+            subject = "MathArt Portal - Your artwork has been accepted"
+            message = "Dear {0} {1}, Congratulations, your submission has made it through to the final round of the National MathArt Competition 2020. The next round of judging will require your physical artwork to be sent to our offices in Port Elizabeth. We will be contacting you shortly with details of how and when to get it to us. Please reply to this message with 'received' to confirm this email address is the best way to contact you. ".format(d2.artwork.owner.first_name, d2.artwork.owner.last_name)
+            send_mail(subject, message, 'mathart.co.za@gmail.com', [d2.artwork.owner.email])
             cnt += 1
         else:
             update_worklist(d2.artwork.id, 9)

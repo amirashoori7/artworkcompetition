@@ -9,7 +9,7 @@ class EntryForm(forms.ModelForm):
         fields = ['worktitle', 'id', 'workfile', 'workfileCropped',
                   'learnergrade', 'workformulafile','teachername',
                   'teacheremail', 'question1',
-                  'question2', 'question3']
+                  'question2', 'question3', 'teacherphone']
 
 
 class UserForm(forms.ModelForm):
