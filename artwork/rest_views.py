@@ -7,6 +7,7 @@ from artwork.artwork_forms import EntryForm
 from account.models_account import ProjectUser
 from evaluation.models import D2
 import artwork
+from evaluation.views_evaluation import update_worklist
 
 
 def worklists(request):
@@ -55,6 +56,20 @@ def flag_work(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
         artwork_form = artwork_form.save()
+    else:
+        response_data['errorResult'] = "Illegal access to the artwork"
+        return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
+    response_data['successResult'] = "Successful"
+    return HttpResponse(json.dumps(response_data),
+            content_type="application/json")
+
+def update_work_status(request):
+    wid = int(request.GET.get("work_id", 0))
+    status = int(request.GET.get("status", -3))
+    response_data = {}
+    if wid > 0:
+        update_worklist(wid,status)
     else:
         response_data['errorResult'] = "Illegal access to the artwork"
         return HttpResponse(json.dumps(response_data),

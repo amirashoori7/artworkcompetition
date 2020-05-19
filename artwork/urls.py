@@ -30,4 +30,5 @@ urlpatterns = [
     path('importfile/', artwork_view.importfile, name='importfile'),
     path('work_detail_update/', artwork_view.work_detail_update, name='work_detail_update'),
     path('<int:id>/<int:view>/', artwork_view.work_details, name='work_details'),
+    path('update_work_status', rest_views.update_work_status),
 ]

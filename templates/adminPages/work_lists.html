@@ -38,9 +38,9 @@
 {%endif%}
 <script type="text/javascript">
 $("#statuses").val({{request.GET.status}})
-function changeView(select){
+function changeView(select) {
 	$(".frameLoding").fadeIn()
-	$('#admin-console-content').load("/work_lists?status="+$(select).val(),function(){
+	$('#admin-console-content').load("/work_lists?status="+$("#statuses").val(),function() {
 		$(".frameLoding").fadeOut()
 	})
 }
@@ -59,7 +59,10 @@ function changeView(select){
 			<th scope="col" class="centered">Evaluate</th> 
 			{% if user.user_type == 6 %}
 			<th scope="col" class="centered">Edit</th>
-			<th scope="col" class="centered">Remove</th> {% endif %}
+			<th scope="col" class="centered">Learner</th>
+<!-- 			<th scope="col" class="centered">Remove</th> -->
+			<th scope="col" class="centered" id="receivedCol">Received</th>
+			 {% endif %}
 		</tr>
 	</thead>
 	<tbody>
@@ -77,7 +80,7 @@ function changeView(select){
 			<td>{{ work.school.name }}</td>
 			<td>{{ work.learnergrade }}</td> 
 			<td><button
-					class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {%endif%}"
+					class="btn flag-icon {% if work.flagged %} btn-warning {% else %} btn-outline-warning {% endif %}"
 					type="button" {% if user.user_type == 6 %}
 					onclick="flagit(this, {{ work.id }})"
 					{% endif %}
@@ -96,14 +99,24 @@ function changeView(select){
 				</button></td> {% if user.user_type == 6 %}
 			<td class="centered"><button
 					class="btn btn-outline-success disabled" type="button"
-					onclick="toggleMessageBox('Not a valid action',true)">
+					onclick="window.open('/admin/artwork/artwork/{{work.id}}/change/')">
 					<i class="fa fa-edit"></i>
 				</button></td>
 			<td class="centered"><button
+					class="btn btn-outline-link disabled" type="button"
+					onclick="window.open('/admin/account/projectuser/{{work.owner.id}}/change/')">
+					<i class="fa fa-user"></i>
+				</button></td>
+<!-- 			<td class="centered"><button -->
+<!-- 					class="btn btn-outline-danger disabled" type="button" -->
+<!-- 					onclick="toggleMessageBox('Not a valid action',true)"> -->
+<!-- 					<i class="fa fa-trash-alt"></i> -->
+<!-- 				</button></td> -->
+			<td class="centered receivedCol">{%if work.status == 8%} <button
 					class="btn btn-outline-danger disabled" type="button"
-					onclick="toggleMessageBox('Not a valid action',true)">
-					<i class="fa fa-trash-alt"></i>
-				</button></td> {% endif %}
+					onclick="updateStatus(10,{{ work.id }})">
+					<i class="fa fa-download"></i>
+				</button> {%else%}-{% endif %}</td>{% endif %}
 		</tr>
 		{% endfor %}
 	</tbody>

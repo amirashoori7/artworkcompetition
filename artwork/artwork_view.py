@@ -4,13 +4,13 @@ from django.http import HttpResponse
 import json
 from artwork.artwork_forms import EntryForm, UserForm, UploadFileForm
 from django.contrib.auth.decorators import login_required
-from django.db import transaction
+from django.db import transaction, connection
 from django.db.models import Q
 from account.models_account import ProjectUser
 import os
 from django.core.mail import send_mail
 from zipfile import ZipFile
-from evaluation.models import D2
+from evaluation.models import D2, D1A, D1B
 from django.core.files.storage import FileSystemStorage
 import zipfile
 import pandas
@@ -118,15 +118,14 @@ def getStatusDisplay(status):
 
 
 def getfile(request):  
-    artworks = Artwork.objects.all()
-#     .order_by("-id")  # status__gte=0
+    artworks = Artwork.objects.all().order_by("-id")  # status__gte=0
     fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
               'school__province', 'school__name', 'school__natemis', 'id', 'status', 'worktitle', 'workfile',
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
-
+  
     df = convert_to_df(artworks, fields)
     df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']), axis=1)
     df['Unique Id'] = df.apply(lambda x: calc_uid(int(x['id'])), axis=1)
@@ -148,6 +147,16 @@ def getfile(request):
         response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zipfilename)
     return response
+
+#     sql, params = ProjectUser.objects.exclude(Q (user_type=6)).order_by("-id").query.sql_with_params()
+#     sql = f"COPY ({sql}) TO STDOUT WITH (FORMAT CSV, HEADER, DELIMITER E',')"
+#     filename = 'f.csv'
+#     response = HttpResponse(content_type='text/csv')
+#     response['Content-Disposition'] = f'attachment; filename={filename}'
+#     with connection.cursor() as cur:
+#         sql = cur.mogrify(sql, params)
+#         cur.copy_expert(sql, response)
+#     return response
 
 
 def importfile(request): 

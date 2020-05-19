@@ -187,28 +187,15 @@ def create_d3(request):
             return HttpResponse(json.dumps(response_data),
                 content_type="application/json")
     elif request.method == 'GET':
-#         artwork = get_object_or_404(Artwork, id=int(request.GET['work_id']))
         workid = int(request.GET.get("work_id", 0))
         if workid > 0:
             artwork = get_object_or_404(Artwork, id=workid)
-#         if int(request.GET.get("author_id", 0)) > 0:
-#             user = get_object_or_404(ProjectUser, id=int(request.GET.get("author_id", 0)))
-#         else: 
-#             user = request.user
-#         try:
-#             if request.user.user_type == 6 or request.user.user_type == 7:
-#                 formd3_model = get_object_or_404(D3, artwork=artwork)
-#             else:    
-#             formd3_model = get_object_or_404(D3, author=user, artwork=artwork)
-#             formd3_form = FormD3(instance=formd3_model)
-#         except:
-#             formd3_form, formd3_obj = D3.objects.get_or_create(author=user, artwork=artwork)
         formid = int(request.GET.get("form_id", 0))
         if formid > 0 :
             formd3_model = D3.objects.get(id=formid)
             artwork = formd3_model.artwork
         else:
-            formd3_model = get_object_or_404(D3, author=request.user, artwork=artwork)
+            formd3_model, form3_obj = D3.objects.get_or_create(author=request.user, artwork=artwork)
         formd3_form = FormD3(instance=formd3_model)
         context = {'form': formd3_form}
         return render(request, 'evaluationForms/D3_form.html', context)
