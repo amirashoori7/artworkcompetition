@@ -92,18 +92,18 @@ function changeView(select) {
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 1 %}')">
 					<i class="fa fa-eye"></i>
 				</button></td> {% endif %}
-			<td class="centered"><button class="btn btn-outline-secondary"
+			<td class="centered"><button class="btn btn-outline-info"
 					type="button"
 					onclick="showDialogPage(this, '{% url 'artwork:work_details' work.id 0 %}')">
 					<i class="fa fa-gavel"></i>
 				</button></td> {% if user.user_type == 6 %}
 			<td class="centered"><button
-					class="btn btn-outline-success disabled" type="button"
+					class="btn btn-outline-info" type="button"
 					onclick="window.open('/admin/artwork/artwork/{{work.id}}/change/')">
 					<i class="fa fa-edit"></i>
 				</button></td>
 			<td class="centered"><button
-					class="btn btn-outline-link disabled" type="button"
+					class="btn btn-outline-info" type="button"
 					onclick="window.open('/admin/account/projectuser/{{work.owner.id}}/change/')">
 					<i class="fa fa-user"></i>
 				</button></td>
@@ -113,7 +113,7 @@ function changeView(select) {
 <!-- 					<i class="fa fa-trash-alt"></i> -->
 <!-- 				</button></td> -->
 			<td class="centered receivedCol">{%if work.status == 8%} <button
-					class="btn btn-outline-danger disabled" type="button"
+					class="btn btn-outline-info" type="button"
 					onclick="updateStatus(10,{{ work.id }})">
 					<i class="fa fa-download"></i>
 				</button> {%else%}-{% endif %}</td>{% endif %}
