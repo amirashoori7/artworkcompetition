@@ -4,7 +4,7 @@ from django.http import HttpResponse
 import json
 from artwork.artwork_forms import EntryForm, UserForm, UploadFileForm
 from django.contrib.auth.decorators import login_required
-from django.db import transaction, connection
+from django.db import transaction
 from django.db.models import Q
 from account.models_account import ProjectUser
 import os

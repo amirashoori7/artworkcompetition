@@ -61,7 +61,6 @@ function changeView(select) {
 			<th scope="col" class="centered">Edit</th>
 			<th scope="col" class="centered">Learner</th>
 <!-- 			<th scope="col" class="centered">Remove</th> -->
-			<th scope="col" class="centered" id="receivedCol">Received</th>
 			 {% endif %}
 		</tr>
 	</thead>
@@ -112,11 +111,7 @@ function changeView(select) {
 <!-- 					onclick="toggleMessageBox('Not a valid action',true)"> -->
 <!-- 					<i class="fa fa-trash-alt"></i> -->
 <!-- 				</button></td> -->
-			<td class="centered receivedCol">{%if work.status == 8%} <button
-					class="btn btn-outline-info" type="button"
-					onclick="updateStatus(10,{{ work.id }})">
-					<i class="fa fa-download"></i>
-				</button> {%else%}-{% endif %}</td>{% endif %}
+				{% endif %}
 		</tr>
 		{% endfor %}
 	</tbody>
