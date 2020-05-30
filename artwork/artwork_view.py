@@ -10,7 +10,7 @@ from account.models_account import ProjectUser
 import os
 from django.core.mail import send_mail
 from zipfile import ZipFile
-from evaluation.models import D2, D1A, D1B
+from evaluation.models import D2, D1A, D1B, D3
 from django.core.files.storage import FileSystemStorage
 import zipfile
 import pandas
@@ -119,23 +119,41 @@ def getStatusDisplay(status):
 
 def getfile(request):  
     artworks = Artwork.objects.all().order_by("-id")  # status__gte=0
-    fields = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
+    d2s = D2.objects.all().order_by("-id")  # status__gte=0
+    d3s = D3.objects.all().order_by("-id")  # status__gte=0
+    users = ProjectUser.objects.all()
+    fieldsArtwork = ['owner__username', 'owner__first_name', 'owner__last_name', 'owner__cellphone',
               'owner__dob', 'owner__parentname', 'owner__parentemail', 'owner__parentphone',
               'school__province', 'school__name', 'school__natemis', 'id', 'status', 'worktitle', 'workfile',
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
-  
-    df = convert_to_df(artworks, fields)
+    fieldsUser = ['username', 'dob', 'user_type', 'cellphone',
+              'organisation', 'parentname', 'grade', 'parentphone',
+              'parentmail', 'id']
+    df = convert_to_df(artworks, fieldsArtwork)
+    users = convert_to_df(users, fieldsUser)
+    d2s = convert_to_df(d2s, None)
+    d3s = convert_to_df(d3s, None)
     df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']), axis=1)
     df['Unique Id'] = df.apply(lambda x: calc_uid(int(x['id'])), axis=1)
     df = df.drop(columns=['status'])
     df = df.drop(columns=['id'])
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     SITE_ROOT = os.path.join(BASE_DIR, 'media')
-    csvfilename = os.path.join(SITE_ROOT, "artworklist.csv")
+    csvfilename = os.path.join(SITE_ROOT, "artworklist.xlsx")
     zipfilename = os.path.join(SITE_ROOT, "backupFile.zip")
-    df.to_csv(csvfilename, mode='w')
+    df.to_excel(csvfilename,
+             sheet_name='artwork')
+    with pandas.ExcelWriter(csvfilename,
+                    mode='a') as writer:  
+        d2s.to_excel(writer, sheet_name='Judge 2')
+    with pandas.ExcelWriter(csvfilename,
+                    mode='a') as writer2:  
+        d3s.to_excel(writer2, sheet_name='Judge 3')
+    with pandas.ExcelWriter(csvfilename,
+                    mode='a') as writer3:  
+        users.to_excel(writer3, sheet_name='Users')
     with ZipFile(zipfilename, 'w') as zipObj:
         for folderName, subfolders, filenames in os.walk(SITE_ROOT):
             if "gallery" not in folderName:

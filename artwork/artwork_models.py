@@ -126,7 +126,8 @@ def get_model_field_names(model, ignore_fields=['content_object']):
 
 
 def get_lookup_fields(model, fields=None):
-    model_field_names = get_model_field_names(model)
+    model_field_names = get_model_field_names(model, ['created_at', 'updated_at', 'date_joined', 'last_login'])
+    print(model_field_names)
     if fields is not None:
         lookup_fields = []
         for x in fields:
