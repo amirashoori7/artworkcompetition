@@ -128,7 +128,7 @@ def getfile(request):
                   'learnergrade', 'workformulafile', 'teachername',
                   'teacheremail', 'teacherphone', 'question1',
                   'question2', 'question3']
-    fieldsUser = ['username', 'dob', 'user_type', 'cellphone',
+    fieldsUser = ['username', 'dob', 'user_type', 'cellphone', 'first_name', 'last_name',
               'organisation', 'parentname', 'grade', 'parentphone',
               'parentmail', 'id']
     df = convert_to_df(artworks, fieldsArtwork)
