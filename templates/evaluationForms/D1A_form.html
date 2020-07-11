@@ -12,9 +12,9 @@
 		id="id">
 	<div class="row">
 		<div class="col-md-4">
-			<label for="ImageQuality{{ form.id }}">Image Quality</label>
-			<select class="custom-select" name="imgq"
-				id="ImageQuality{{ form.id }}">
+			<label for="ImageQuality{{ form.id }}">Image Quality</label> <select
+				class="custom-select" name="imgq" id="ImageQuality{{ form.id }}">
+				<option value="">--</option>
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
@@ -24,22 +24,23 @@
 				id="imgqid{{ form.id }}">
 		</div>
 		<div class="col-md-4">
-			<label for="AnswersScore{{ form.id }}">Answers to
-				the questions</label> <select class="custom-select" name="answersq"
+			<label for="AnswersScore{{ form.id }}">Answers to the
+				questions</label> <select class="custom-select" name="answersq"
 				id="AnswersScore{{ form.id }}">
+				<option value="">--</option>
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
 				<option value="3">Good</option>
 				<option value="4">Excellent</option>
-			</select> <input type="hidden"
-				value="{{ form.answersq|default:'0' }}"
+			</select> <input type="hidden" value="{{ form.answersq|default:'0' }}"
 				id="answerqid{{ form.id }}">
 		</div>
 		<div class="col-md-4">
-			<label for="OriginQuality{{ form.id }}">Originiality
-				of the work</label> <select class="custom-select" name="originq"
+			<label for="OriginQuality{{ form.id }}">Originiality of the
+				work</label> <select class="custom-select" name="originq"
 				id="OriginQuality{{ form.id }}">
+				<option value="">--</option>
 				<option value="0">None</option>
 				<option value="1">Minimal</option>
 				<option value="2">Average</option>
@@ -61,8 +62,7 @@
 		<div class="col-md-6 text-center">
 			<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
 			<button class="btn btn-block btn-success" type="button"
-				id="buttonSubmitD1AForm"
-				onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)">
+				id="buttonSubmitD1AForm" onclick="submitD1">
 				<i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Submit
 			</button>
 		</div>
@@ -77,6 +77,13 @@
 </form>
 
 <script type="text/javascript">
+function submitD1(){
+	if($("#ImageQuality{{ form.id }}").val() == "" || $("#AnswersScore{{ form.id }}").val() == "" || $("#OriginQuality{{ form.id }}").val() == ""){
+		alert("Please select a value for all 3 drop downs.")
+		return
+	}
+	toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)
+}
 $(document).ready(function(){
 	$("#OriginQuality{{ form.id }} option[value="
 			+ $("#originq{{ form.id }}").val() + "]").attr(
