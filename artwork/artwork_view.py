@@ -119,6 +119,8 @@ def getStatusDisplay(status):
 
 def getfile(request):  
     artworks = Artwork.objects.all().order_by("-id")  # status__gte=0
+    d1as = D1A.objects.all().order_by("-id")
+    d1bs = D1B.objects.all().order_by("-id")
     d2s = D2.objects.all().order_by("-id")  # status__gte=0
     d3s = D3.objects.all().order_by("-id")  # status__gte=0
     users = ProjectUser.objects.all()
@@ -133,6 +135,8 @@ def getfile(request):
               'parentmail', 'id']
     df = convert_to_df(artworks, fieldsArtwork)
     users = convert_to_df(users, fieldsUser)
+    d1as = convert_to_df(d1as, None)
+    d1bs = convert_to_df(d1bs, None)
     d2s = convert_to_df(d2s, None)
     d3s = convert_to_df(d3s, None)
     df['work status'] = df.apply(lambda x: getStatusDisplay(x['status']), axis=1)
@@ -145,6 +149,12 @@ def getfile(request):
     zipfilename = os.path.join(SITE_ROOT, "backupFile.zip")
     df.to_excel(csvfilename,
              sheet_name='artwork')
+    with pandas.ExcelWriter(csvfilename,
+                    mode='a') as writer:  
+        d1as.to_excel(writer, sheet_name='Judge 1')
+    with pandas.ExcelWriter(csvfilename,
+                    mode='a') as writer:  
+        d1bs.to_excel(writer, sheet_name='Decision Maker')
     with pandas.ExcelWriter(csvfilename,
                     mode='a') as writer:  
         d2s.to_excel(writer, sheet_name='Judge 2')
