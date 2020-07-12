@@ -62,7 +62,7 @@
 		<div class="col-md-6 text-center">
 			<!-- 		THE FUNCTION TO SUBMIT A FORM TAKES AN ACTION URL, THE FORM ID AND THE SUBMIT BUTTON ID -->
 			<button class="btn btn-block btn-success" type="button"
-				id="buttonSubmitD1AForm" onclick="submitD1">
+				id="buttonSubmitD1AForm" onclick="toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)">
 				<i class="fa fa-check-circle">&nbsp;&nbsp;&nbsp;</i>Submit
 			</button>
 		</div>
@@ -77,13 +77,6 @@
 </form>
 
 <script type="text/javascript">
-function submitD1(){
-	if($("#ImageQuality{{ form.id }}").val() == "" || $("#AnswersScore{{ form.id }}").val() == "" || $("#OriginQuality{{ form.id }}").val() == ""){
-		alert("Please select a value for all 3 drop downs.")
-		return
-	}
-	toggleConfirmationBox(submitAnEvaluationForm,'Do you want to submit the evaluation form?','{% url 'evaluation:formd1a' %}','formd1aId','buttonSubmitD1AForm', null)
-}
 $(document).ready(function(){
 	$("#OriginQuality{{ form.id }} option[value="
 			+ $("#originq{{ form.id }}").val() + "]").attr(
