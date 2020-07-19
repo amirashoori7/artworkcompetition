@@ -13,6 +13,9 @@
 <input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
 	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
 		name="id" id="id">
+	<div class="row">
+		<div class="col-md-12">"What mathematics was used? (Please select one or more checkboxes)"</div>
+	</div>
 	<div class="row form-section" id="math">
 		{% for x, y in form.fields.math.base_field.choices %} {% if x != '' %}
 		{%if forloop.counter < 9 %}
