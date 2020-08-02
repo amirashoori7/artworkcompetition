@@ -8,17 +8,20 @@
 </div>
 <hr>
 <form method="post" action="{% url 'evaluation:formd3' %}"
-	class="needs-validation form-general-style" id="formd3Id{{form.instance.author.id}}"
-	enctype="multipart/form-data" novalidate>
+	class="needs-validation form-general-style"
+	id="formd3Id{{form.instance.author.id}}" enctype="multipart/form-data"
+	novalidate>
 	<input type="hidden" value="{{ request.GET.work_id }}" name="work_id">
 	<input type="hidden" value="{{ form.instance.id|default:'0' }}"
 		name="id" id="id">
+	<div class="row">
+		<div class="col-md-12" style="text-align: left">please rate the following:</div>
+	</div>
 	<div class="row form-section" id="q1"
 		data-title="The explanation given of the mathematics in the answers to the questions">
 		<div class="col-md-2">
-			<label>Excellent</label>
-			<input type="radio" class="form-control form-input" name="q1radio"
-				value="4">
+			<label>Excellent</label> <input type="radio"
+				class="form-control form-input" name="q1radio" value="4">
 		</div>
 		<div class="col-md-2">
 			<label>Good</label> <input type="radio"
