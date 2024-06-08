@@ -1,6 +1,9 @@
 # artworkcompetition
 Artwork Competition web application built with django
 
+## This is the business workflow 
+![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/proposal 1.jpg)
+
 ## Demo screenshots
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/login.png)
 ![alt text](https://raw.githubusercontent.com/amirashoori7/artworkcompetition/master/demo/dashboard.png)
